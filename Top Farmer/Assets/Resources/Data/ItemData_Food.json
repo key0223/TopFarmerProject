@@ -1,0 +1,40 @@
+﻿{
+	"array": 
+		[
+			{
+				"itemId": 5000,
+				"name": "타버린 무언가",
+				"maxStack": 1,
+				"iconPath": "Textures/Object/Food/Somthing_Burned",
+				"sellable": false,
+				"eatable": false
+			},
+			{
+				"itemId": 5304,
+				"name": "군옥수수",
+				"maxStack": 99,
+				"iconPath": "Textures/Object/Food/Grilled_Corn",
+				"sellable": true,
+				"eatable": true,
+				"time": 30
+			},
+			{
+				"itemId": 5307,
+				"name": "군감자",
+				"maxStack": 99,
+				"iconPath": "Textures/Object/Food/Grilled_Potato",
+				"sellable": true,
+				"eatable": true,
+				"time": 30
+			},
+			{
+				"itemId": 5309,
+				"name": "군고구마",
+				"maxStack": 99,
+				"iconPath": "Textures/Object/Food/Grilled_Sweet_Potato",
+				"sellable": true,
+				"eatable": true,
+				"time": 30
+			}
+		]
+}

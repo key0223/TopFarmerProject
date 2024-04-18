@@ -1,0 +1,5 @@
+{
+  "dataPath": "../../Top Farmer/Assets/Resources/Data",
+  "connectionString": "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=GameDB;",
+  "redisConnectionString": "localhost:6379"
+}

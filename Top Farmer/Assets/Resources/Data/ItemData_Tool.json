@@ -1,0 +1,149 @@
+﻿{
+	"array": 
+		[
+			{
+				"itemId": 101,
+				"name": "곡괭이",
+				"maxStack": 1,
+				"toolType": "TOOL_TYPE_PICKAXE",
+				"range": 1,
+				"durability": 40,
+				"iconPath": "Textures/Object/Tool/Pickaxe"
+			},
+			{
+				"itemId": 102,
+				"name": "구리 곡괭이",
+				"maxStack": 1,
+				"toolType": "TOOL_TYPE_PICKAXE",
+				"range": 2,
+				"durability": 60,
+				"iconPath": "Textures/Object/Tool/Copper Pickaxe"
+			},
+			{
+				"itemId": 103,
+				"name": "강철 곡괭이",
+				"maxStack": 1,
+				"toolType": "TOOL_TYPE_PICKAXE",
+				"range": 3,
+				"durability": 80,
+				"iconPath": "Textures/Object/Tool/Steel Pickaxe"
+			},
+			{
+				"itemId": 104,
+				"name": "황금 곡괭이",
+				"maxStack": 1,
+				"toolType": "TOOL_TYPE_PICKAXE",
+				"range": 4,
+				"durability": 100,
+				"iconPath": "Textures/Object/Tool/Gold Pickaxe"
+			},
+			{
+				"itemId": 105,
+				"name": "도끼",
+				"maxStack": 1,
+				"toolType": "TOOL_TYPE_AXE",
+				"range": 1,
+				"durability": 40,
+				"iconPath": "Textures/Object/Tool/Axe"
+			},
+			{
+				"itemId": 106,
+				"name": "구리 도끼",
+				"maxStack": 1,
+				"toolType": "TOOL_TYPE_AXE",
+				"range": 1,
+				"durability": 60,
+				"iconPath": "Textures/Object/Tool/Copper Axe"
+			},
+			{
+				"itemId": 107,
+				"name": "강철 도끼",
+				"maxStack": 1,
+				"toolType": "TOOL_TYPE_AXE",
+				"range": 1,
+				"durability": 80,
+				"iconPath": "Textures/Object/Tool/Steel Axe"
+			},
+			{
+				"itemId": 108,
+				"name": "황금 도끼",
+				"maxStack": 1,
+				"toolType": "TOOL_TYPE_AXE",
+				"range": 1,
+				"durability": 100,
+				"iconPath": "Textures/Object/Tool/Gold Axe"
+			},
+			{
+				"itemId": 109,
+				"name": "호미",
+				"maxStack": 1,
+				"toolType": "TOOL_TYPE_HOE",
+				"range": 1,
+				"durability": 40,
+				"iconPath": "Textures/Object/Tool/Hoe"
+			},
+			{
+				"itemId": 110,
+				"name": "구리 호미",
+				"maxStack": 1,
+				"toolType": "TOOL_TYPE_HOE",
+				"range": 3,
+				"durability": 60,
+				"iconPath": "Textures/Object/Tool/Copper Hoe"
+			},
+			{
+				"itemId": 111,
+				"name": "강철 호미",
+				"maxStack": 1,
+				"toolType": "TOOL_TYPE_HOE",
+				"range": 5,
+				"durability": 80,
+				"iconPath": "Textures/Object/Tool/Steel Hoe"
+			},
+			{
+				"itemId": 112,
+				"name": "황금 호미",
+				"maxStack": 1,
+				"toolType": "TOOL_TYPE_HOE",
+				"range": 5,
+				"durability": 100,
+				"iconPath": "Textures/Object/Tool/Gold Hoe"
+			},
+			{
+				"itemId": 113,
+				"name": "물뿌리개",
+				"maxStack": 1,
+				"toolType": "TOOL_TYPE_WATERINGCAN",
+				"range": 1,
+				"durability": 40,
+				"iconPath": "Textures/Object/Tool/Watering Can"
+			},
+			{
+				"itemId": 114,
+				"name": "구리 물뿌리개",
+				"maxStack": 1,
+				"toolType": "TOOL_TYPE_WATERINGCAN",
+				"range": 3,
+				"durability": 60,
+				"iconPath": "Textures/Object/Tool/Copper Watering Can"
+			},
+			{
+				"itemId": 115,
+				"name": "강철 물뿌리개",
+				"maxStack": 1,
+				"toolType": "TOOL_TYPE_WATERINGCAN",
+				"range": 5,
+				"durability": 80,
+				"iconPath": "Textures/Object/Tool/Steel Watering Can"
+			},
+			{
+				"itemId": 116,
+				"name": "황금 물뿌리개",
+				"maxStack": 1,
+				"toolType": "TOOL_TYPE_WATERINGCAN",
+				"range": 5,
+				"durability": 100,
+				"iconPath": "Textures/Object/Tool/Gold Watering Can"
+			}
+		]
+}

@@ -1,0 +1,75 @@
+﻿{
+	"array": 
+		[
+			{
+				"itemId": 301,
+				"name": "당근",
+				"maxStack": 99,
+				"iconPath": "Textures/Object/Crop/Carrot",
+				"sellingPrice": 35
+			},
+			{
+				"itemId": 302,
+				"name": "순무",
+				"maxStack": 99,
+				"iconPath": "Textures/Object/Crop/Turnip",
+				"sellingPrice": 90
+			},
+			{
+				"itemId": 303,
+				"name": "양배추",
+				"maxStack": 99,
+				"iconPath": "Textures/Object/Crop/Cabbage",
+				"sellingPrice": 260
+			},
+			{
+				"itemId": 304,
+				"name": "옥수수",
+				"maxStack": 99,
+				"iconPath": "Textures/Object/Crop/Corn",
+				"sellingPrice": 50
+			},
+			{
+				"itemId": 305,
+				"name": "가지",
+				"maxStack": 99,
+				"iconPath": "Textures/Object/Crop/Eggplant",
+				"sellingPrice": 60
+			},
+			{
+				"itemId": 306,
+				"name": "양파",
+				"maxStack": 99,
+				"iconPath": "Textures/Object/Crop/Onion",
+				"sellingPrice": 60
+			},
+			{
+				"itemId": 307,
+				"name": "감자",
+				"maxStack": 99,
+				"iconPath": "Textures/Object/Crop/Potato",
+				"sellingPrice": 80
+			},
+			{
+				"itemId": 308,
+				"name": "딸기",
+				"maxStack": 99,
+				"iconPath": "Textures/Object/Crop/Strawberry",
+				"sellingPrice": 120
+			},
+			{
+				"itemId": 309,
+				"name": "고구마",
+				"maxStack": 99,
+				"iconPath": "Textures/Object/Crop/Sweet_potato",
+				"sellingPrice": 80
+			},
+			{
+				"itemId": 310,
+				"name": "토마토",
+				"maxStack": 99,
+				"iconPath": "Textures/Object/Crop/Tomato",
+				"sellingPrice": 60
+			}
+		]
+}

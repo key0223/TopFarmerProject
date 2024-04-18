@@ -1,0 +1,379 @@
+﻿{
+	"array": 
+		[
+			{
+				"stringId": "itemName(101)",
+				"ko": "곡괭이",
+				"en": "Pickaxe"
+			},
+			{
+				"stringId": "itemName(102)",
+				"ko": "구리 곡괭이",
+				"en": "Copper Pickaxe"
+			},
+			{
+				"stringId": "itemName(103)",
+				"ko": "강철 곡괭이",
+				"en": "Steel Pickaxe"
+			},
+			{
+				"stringId": "itemName(104)",
+				"ko": "황금 곡괭이",
+				"en": "Gold Pickaxe"
+			},
+			{
+				"stringId": "itemName(105)",
+				"ko": "도끼",
+				"en": "Axe"
+			},
+			{
+				"stringId": "itemName(106)",
+				"ko": "구리 도끼",
+				"en": "Copper Axe"
+			},
+			{
+				"stringId": "itemName(107)",
+				"ko": "강철 도끼",
+				"en": "Steel Axe"
+			},
+			{
+				"stringId": "itemName(108)",
+				"ko": "황금 도끼",
+				"en": "Gold Axe"
+			},
+			{
+				"stringId": "itemName(109)",
+				"ko": "호미",
+				"en": "Hoe"
+			},
+			{
+				"stringId": "itemName(110)",
+				"ko": "구리 호미",
+				"en": "Copper Hoe"
+			},
+			{
+				"stringId": "itemName(111)",
+				"ko": "강철 호미",
+				"en": "Steel Hoe"
+			},
+			{
+				"stringId": "itemName(112)",
+				"ko": "황금 호미",
+				"en": "Gold Hoe"
+			},
+			{
+				"stringId": "itemName(113)",
+				"ko": "물뿌리개",
+				"en": "Watering Can"
+			},
+			{
+				"stringId": "itemName(114)",
+				"ko": "구리 물뿌리개",
+				"en": "Copper Watering Can"
+			},
+			{
+				"stringId": "itemName(115)",
+				"ko": "강철 물뿌리개",
+				"en": "Steel Watering Can"
+			},
+			{
+				"stringId": "itemName(116)",
+				"ko": "황금 물뿌리개",
+				"en": "Gold Watering Can"
+			},
+			{
+				"stringId": "itemName(201)",
+				"ko": "당근 씨앗",
+				"en": "Carrot Seeds"
+			},
+			{
+				"stringId": "itemName(202)",
+				"ko": "순무 씨앗",
+				"en": "Turnip Seeds"
+			},
+			{
+				"stringId": "itemName(203)",
+				"ko": "양배추 씨앗",
+				"en": "Cabbage Seeds"
+			},
+			{
+				"stringId": "itemName(204)",
+				"ko": "옥수수 씨앗",
+				"en": "Corn Seeds"
+			},
+			{
+				"stringId": "itemName(205)",
+				"ko": "가지 씨앗",
+				"en": "Eggplant Seeds"
+			},
+			{
+				"stringId": "itemName(206)",
+				"ko": "양파 씨앗",
+				"en": "Onion Seeds"
+			},
+			{
+				"stringId": "itemName(207)",
+				"ko": "감자 씨앗",
+				"en": "Potato Seeds"
+			},
+			{
+				"stringId": "itemName(208)",
+				"ko": "딸기 씨앗",
+				"en": "Strawberry Seeds"
+			},
+			{
+				"stringId": "itemName(209)",
+				"ko": "고구마 씨앗",
+				"en": "Sweet Potato Seeds"
+			},
+			{
+				"stringId": "itemName(210)",
+				"ko": "토마토 씨앗",
+				"en": "Tomato Seeds"
+			},
+			{
+				"stringId": "itemName(301)",
+				"ko": "당근",
+				"en": "Carrot"
+			},
+			{
+				"stringId": "itemName(302)",
+				"ko": "순무",
+				"en": "Turnip"
+			},
+			{
+				"stringId": "itemName(303)",
+				"ko": "양배추",
+				"en": "Cabbage"
+			},
+			{
+				"stringId": "itemName(304)",
+				"ko": "옥수수",
+				"en": "Corn"
+			},
+			{
+				"stringId": "itemName(305)",
+				"ko": "가지",
+				"en": "Eggplant"
+			},
+			{
+				"stringId": "itemName(306)",
+				"ko": "양파",
+				"en": "Onion"
+			},
+			{
+				"stringId": "itemName(307)",
+				"ko": "감자",
+				"en": "Potato"
+			},
+			{
+				"stringId": "itemName(308)",
+				"ko": "딸기",
+				"en": "Strawberry"
+			},
+			{
+				"stringId": "itemName(309)",
+				"ko": "고구마",
+				"en": "Sweet Potato"
+			},
+			{
+				"stringId": "itemName(310)",
+				"ko": "토마토",
+				"en": "Tomato"
+			},
+			{
+				"stringId": "itemName(401)",
+				"ko": "오븐",
+				"en": "Oven"
+			},
+			{
+				"stringId": "itemName(402)",
+				"ko": "테이블",
+				"en": "Table"
+			},
+			{
+				"stringId": "itemName(5000)",
+				"ko": "타버린 무언가"
+			},
+			{
+				"stringId": "itemName(5304)",
+				"ko": "군옥수수"
+			},
+			{
+				"stringId": "itemName(5307)",
+				"ko": "군감자"
+			},
+			{
+				"stringId": "itemName(5309)",
+				"ko": "군고구마"
+			},
+			{
+				"stringId": "itemDesc(101)",
+				"ko": "광산에 있는 바위나 아무 곳에 있는 돌을 부술 수 있습니다."
+			},
+			{
+				"stringId": "itemDesc(102)",
+				"ko": "광산에 있는 바위나 아무 곳에 있는 돌을 부술 수 있습니다."
+			},
+			{
+				"stringId": "itemDesc(103)",
+				"ko": "농장에 있는 바위를 부술 수 있습니다."
+			},
+			{
+				"stringId": "itemDesc(104)",
+				"ko": "운석을 부술 수 있습니다."
+			},
+			{
+				"stringId": "itemDesc(105)",
+				"ko": "다 자란 나무는 10번, 작은 그루터기는 5번 도끼질을 해야합니다."
+			},
+			{
+				"stringId": "itemDesc(106)",
+				"ko": "큰 그루터기를 벨 수 있습니다. 다 자란 나무는 8번, 작은 그루터기는 4번 도끼질을 해야합니다."
+			},
+			{
+				"stringId": "itemDesc(107)",
+				"ko": "큰 통나무를 벨 수 있습니다. 다 자란 나무는 6번, 작은 그루터기는 3번 도끼질을 해야합니다."
+			},
+			{
+				"stringId": "itemDesc(108)",
+				"ko": "다 자란 나무는 4번, 작은 그루터기는 2번 도끼질을 해야합니다. 4단계 나무는 2번, 3단계 나무는 1번 도끼질을 해야합니다."
+			},
+			{
+				"stringId": "itemDesc(109)",
+				"ko": "주로 농사를 위해 토양을 경작할 때 쓰입니다. 호미를 업그레이드하면 마우스 왼쪽 버튼을 길게 눌러 여러 칸을 한번에 경작할 수 있습니다."
+			},
+			{
+				"stringId": "itemDesc(110)",
+				"ko": "한 번에 경작 가능한 칸이 앞으로 한 줄로 3칸 증가합니다."
+			},
+			{
+				"stringId": "itemDesc(111)",
+				"ko": "한 번에 경작 가능한 칸이 앞으로 한 줄로 5칸 증가합니다."
+			},
+			{
+				"stringId": "itemDesc(112)",
+				"ko": "한 번에 경작 가능한 칸이 3x3칸으로 증가합니다."
+			},
+			{
+				"stringId": "itemDesc(113)",
+				"ko": "한 번 채우면 40회까지 물을 줄 수 있습니다."
+			},
+			{
+				"stringId": "itemDesc(114)",
+				"ko": "용량이 55회로 증가합니다."
+			},
+			{
+				"stringId": "itemDesc(115)",
+				"ko": "용량이 70회로 증가합니다."
+			},
+			{
+				"stringId": "itemDesc(116)",
+				"ko": "용량이 85회로 증가합니다."
+			},
+			{
+				"stringId": "itemDesc(201)",
+				"ko": "다 자라면 당근을 수확할 수 있습니다."
+			},
+			{
+				"stringId": "itemDesc(202)",
+				"ko": "다 자라면 순무를 수확할 수 있습니다."
+			},
+			{
+				"stringId": "itemDesc(203)",
+				"ko": "다 자라면 양배추를 수확할 수 있습니다."
+			},
+			{
+				"stringId": "itemDesc(204)",
+				"ko": "다 자라면 옥수수를 수확할 수 있습니다."
+			},
+			{
+				"stringId": "itemDesc(205)",
+				"ko": "다 자라면 가지를 수확할 수 있습니다."
+			},
+			{
+				"stringId": "itemDesc(206)",
+				"ko": "다 자라면 양파를 수확할 수 있습니다."
+			},
+			{
+				"stringId": "itemDesc(207)",
+				"ko": "다 자라면 감자를 수확할 수 있습니다."
+			},
+			{
+				"stringId": "itemDesc(208)",
+				"ko": "다 자라면 딸기를 수확할 수 있습니다."
+			},
+			{
+				"stringId": "itemDesc(209)",
+				"ko": "다 자라면 고구마를 수확할 수 있습니다."
+			},
+			{
+				"stringId": "itemDesc(210)",
+				"ko": "다 자라면 토마토를 수확할  수 있습니다."
+			},
+			{
+				"stringId": "itemDesc(301)",
+				"ko": "대지의 맛이 나고 영양분이 듬뿍 들어있습니다."
+			},
+			{
+				"stringId": "itemDesc(302)",
+				"ko": "무 특유의 시원한 맛이 있어 시원하고 맑은 국물을 낼 때 선택되는 재료."
+			},
+			{
+				"stringId": "itemDesc(303)",
+				"ko": "샐러드나 코울슬로를 만들 때 자주 쓰이는 채소. 토양 환경에 따라 색이 보라색, 푸른색, 연두색으로 다양합니다."
+			},
+			{
+				"stringId": "itemDesc(304)",
+				"ko": "제일 인기가 많은 곡물 중 하나입니다."
+			},
+			{
+				"stringId": "itemDesc(305)",
+				"ko": "맛이 깊고 몸에 좋은 토마토의 사촌. 튀김이나 스튜가 정말 맛있습니다."
+			},
+			{
+				"stringId": "itemDesc(306)",
+				"ko": "단맛이 있고 풍미가 좋은 식재료 입니다."
+			},
+			{
+				"stringId": "itemDesc(307)",
+				"ko": "널리 재배되는 덩이줄기 식물. 한칸에 1개의 감자가 나오고 20%의 확률로 더 나올 수도 있습니다."
+			},
+			{
+				"stringId": "itemDesc(308)",
+				"ko": "많은 사람들이 좋아하는 달콤하고 과즙이 많은 매력적인 붉은색 과일."
+			},
+			{
+				"stringId": "itemDesc(309)",
+				"ko": "탑 안에서 자란 고구마로 영양을 충분히 섭취해 맛있습니다. 섭취 시 힘이 10분간 0.5 상승합니다."
+			},
+			{
+				"stringId": "itemDesc(310)",
+				"ko": "탑 안에서 자란 방울토마토로 영양을 충분히 섭취해 맛있습니다. 섭취 시 몸 안의 지방 10g을 분해해 10분간 마력을 0.1 상승 시킵니다. 한 시간 안에 최대 10개까지 효과가 중복 적용됩니다. 섭취시 지방 10g을 분해해 몸에 활력을 줍니다."
+			},
+			{
+				"stringId": "itemDesc(401)",
+				"ko": "요리할 때 사용됩니다."
+			},
+			{
+				"stringId": "itemDesc(402)",
+				"ko": "테이블입니다."
+			},
+			{
+				"stringId": "itemDesc(5000)",
+				"ko": "실수로 타버려 그 원래의 모습을 알 수 없는 물건입니다."
+			},
+			{
+				"stringId": "itemDesc(5304)",
+				"ko": "열기 가득한 직화 그릴에서 한 알 한 알 정성스레 구운 옥수수입니다. 외부는 바삭하고 내부는 부드러운 완벽한 식감을 자랑합니다."
+			},
+			{
+				"stringId": "itemDesc(5307)",
+				"ko": "천천히 구워내어 겉은 바삭하고 속은 부드러운 군감자입니다. 자연의 맛을 그대로 담은 이 감자는 소금을 살짝 뿌려 먹으면 그 맛이 더욱 살아납니다."
+			},
+			{
+				"stringId": "itemDesc(5309)",
+				"ko": "천천히 구워내 고구마 본연의 단맛을 극대화한 군고구마입니다. 겉은 바삭하고 속은 달콤하고 부드러워, 추운 날씨에 특히 좋습니다."
+			}
+		]
+}

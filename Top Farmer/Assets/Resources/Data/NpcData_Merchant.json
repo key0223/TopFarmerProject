@@ -1,0 +1,14 @@
+﻿{
+	"array": 
+		[
+			{
+				"npcId": 1,
+				"name": "고양이 상인 니니",
+				"npcType": "NPC_TYPE_MERCHANT",
+				"prefabPath": "Creature/Merchant",
+				"dayOffPeriod": 1,
+				"workingInPeriod": 2,
+				"workingOutPeriod": 2
+			}
+		]
+}
