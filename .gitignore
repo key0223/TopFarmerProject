@@ -75,12 +75,12 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 # Except
-!/Program/Server/AtelierMirageServer/*.csproj
-!/Program/Server/AtelierMirageServer/*.user
-!/Program/Server/AtelierMirageServer/*.sln
+!/TopFarmerWebServer/TopFarmerWebServer/TopFarmerWebServer/*.csproj
+!/TopFarmerWebServer/TopFarmerWebServer/TopFarmerWebServer/*.user
+!/TopFarmerWebServer/TopFarmerWebServer/TopFarmerWebServer/*.sln
 
 # Server
 !/TopFarmerWebServer/TopFarmerWebServer/TopFarmerWebServer/bin
-/TopFarmerWebServer/TopFarmerWebServer/TopFarmerWebServer/obj
+!/TopFarmerWebServer/TopFarmerWebServer/TopFarmerWebServer/obj
 
 # End of https://www.toptal.com/developers/gitignore/api/unity
