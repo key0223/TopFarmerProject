@@ -80,7 +80,7 @@ crashlytics-build.properties
 !/Program/Server/AtelierMirageServer/*.sln
 
 # Server
-!/TopFarmerWebServer/TopFarmerWebServer//bin
-/TopFarmerWebServer/TopFarmerWebServer//obj
+!/TopFarmerWebServer/TopFarmerWebServer/TopFarmerWebServer/bin
+/TopFarmerWebServer/TopFarmerWebServer/TopFarmerWebServer/obj
 
 # End of https://www.toptal.com/developers/gitignore/api/unity
