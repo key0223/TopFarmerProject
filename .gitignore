@@ -75,6 +75,7 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 # Except
+!/Top Farmer/Sheets
 !/TopFarmerWebServer/TopFarmerWebServer/TopFarmerWebServer/*.csproj
 !/TopFarmerWebServer/TopFarmerWebServer/TopFarmerWebServer/*.user
 !/TopFarmerWebServer/TopFarmerWebServer/TopFarmerWebServer/*.sln
