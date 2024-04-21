@@ -25,8 +25,8 @@ namespace TopFarmerWebServer.Data
             Dictionary<int, Data.ItemData> seedDict = LoadJson<Data.SeedItemLoader, int, Data.ItemData>("ItemData_Seed").MakeDict();
             Dictionary<int, Data.ItemData> craftableDict = LoadJson<Data.CraftableItemLoader, int, Data.ItemData>("ItemData_Craftable").MakeDict();
             Dictionary<int, Data.ItemData> foodDict = LoadJson<Data.FoodItemLoader, int, Data.ItemData>("ItemData_Food").MakeDict();
-            Dictionary<int, Data.ItemData> modernDict = LoadJson<Data.ModernItemLoader, int, Data.ItemData>("ItemData_Modern").MakeDict();
-            ItemDict = CombinedDict<int, Data.ItemData>(toolDict, cropDict, seedDict, craftableDict, foodDict, modernDict);
+            //Dictionary<int, Data.ItemData> modernDict = LoadJson<Data.ModernItemLoader, int, Data.ItemData>("ItemData_Modern").MakeDict();
+            ItemDict = CombinedDict<int, Data.ItemData>(toolDict, cropDict, seedDict, craftableDict, foodDict);
             #endregion
 
             Dictionary<int, Data.NpcData> merchantDict = LoadJson<Data.MerchantNpcLoader, int, Data.NpcData>("NpcData_Merchant").MakeDict();

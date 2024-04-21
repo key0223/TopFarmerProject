@@ -2,12 +2,11 @@
 using System.Diagnostics.Metrics;
 using System;
 using TopFarmerWebServer.Data;
-using static System.Net.Mime.MediaTypeNames;
 using static TopFarmerWebServer.DB.DataModel;
 
 namespace TopFarmerWebServer.DB
 {
-    public class AppDbContext :DbContext
+    public class AppDbContext : DbContext
     {
         public DbSet<AccountDb> Accounts { get; set; }
         public DbSet<PlayerDb> Players { get; set; }
@@ -22,18 +21,18 @@ namespace TopFarmerWebServer.DB
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
             options
-                //.UseLoggerFactory(_logger)
+               //.UseLoggerFactory(_logger)
                .UseSqlServer(ConfigManager.Config == null ? _connectionString : ConfigManager.Config.connectionString);
 
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<AccountDb>()
-                .HasIndex(a=>a.AccountName)
+                .HasIndex(a => a.AccountName)
                 .IsUnique();
 
             builder.Entity<PlayerDb>()
-                .HasIndex(a=>a.PlayerName)
+                .HasIndex(a => a.PlayerName)
                 .IsUnique();
         }
 

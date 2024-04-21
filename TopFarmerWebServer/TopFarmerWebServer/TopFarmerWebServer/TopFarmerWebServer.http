@@ -1,6 +1,0 @@
-@TopFarmerWebServer_HostAddress = http://localhost:5038
-
-GET {{TopFarmerWebServer_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
