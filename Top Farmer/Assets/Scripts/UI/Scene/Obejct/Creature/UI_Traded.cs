@@ -43,7 +43,7 @@ public class UI_Traded : UI_Base
         GameObject itemList = GetObject((int)GameObjects.TradedItemList);
         foreach (InteractItem interactItem in interactItems)
         {
-            GameObject go = Managers.Resource.Instantiate("UI/Scene/UI_Traded_Item", itemList.transform);
+            GameObject go = Managers.Resource.Instantiate("UI/Scene/Object/Creature/UI_Traded_Item", itemList.transform);
             UI_Traded_Item item = Util.GetOrAddComponent<UI_Traded_Item>(go);
             item.SetUI(interactItem);
             _totalCoin += item.Coin;

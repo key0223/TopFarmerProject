@@ -52,7 +52,7 @@ public class SeedController : ItemController
         Managers.Time.DayPassedRegistered -= OnDayPassed;
         Managers.Time.DayPassedRegistered += OnDayPassed;
         Seed = Item as Seed;
-        currentGrowthDay = 8;
+        currentGrowthDay = 0;
         State = SeedState.Progressing;
 
 

@@ -1,0 +1,743 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="NpcInfo" Collapsed="true">
+    <Position X="56" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAMAAAABAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Contents\Creature\Npc.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Npc" Collapsed="true">
+    <Position X="8.5" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAABAAAAAQAAAAABAAAAAACAEAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Contents\Creature\Npc.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Merchant" Collapsed="true">
+    <Position X="8.5" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAgAAAAAAAAAAAAACAAIAAAA=</HashCode>
+      <FileName>Assets\Scripts\Contents\Creature\Npc.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InteractableObject" Collapsed="true">
+    <Position X="61.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Contents\InteractableObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ItemInfo" Collapsed="true">
+    <Position X="56" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgBBAAAAAAAAAIAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Contents\Item.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Item" Collapsed="true">
+    <Position X="10" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAEAAAAAAAAAAACAAAAAAAQQAAAAAAAgAAAAAGAAAgA=</HashCode>
+      <FileName>Assets\Scripts\Contents\Item.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tool" Collapsed="true">
+    <Position X="6.75" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAACABAAEAA=</HashCode>
+      <FileName>Assets\Scripts\Contents\Item.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crop" Collapsed="true">
+    <Position X="9" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Contents\Item.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Seed" Collapsed="true">
+    <Position X="11.25" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAAAABAAAAEAIADAAAIAAACAAAEAAA=</HashCode>
+      <FileName>Assets\Scripts\Contents\Item.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Food" Collapsed="true">
+    <Position X="13.5" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAABAACAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Contents\Item.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ItemGetEffect" Collapsed="true">
+    <Position X="14.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEBAAAAAAAAAAAAAhAQIAAAAAAAQAAABAACAAAAAEg=</HashCode>
+      <FileName>Assets\Scripts\Contents\ItemGetEffect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CreatureController" Collapsed="true">
+    <Position X="3.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQEAAABACgAAAAhACAACAAAAAIAAAAAJABiDAAAMAA=</HashCode>
+      <FileName>Assets\Scripts\Controllers\Base\Creatures\CreatureController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MonsterController" Collapsed="true">
+    <Position X="1.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAABAAAAAAAAAAAAAAAAAAACCAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Controllers\Base\Creatures\MonsterController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MerchantController" Collapsed="true">
+    <Position X="3.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAASAAAAAAAQABABEEACACAAAAgQAAAAAiAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Controllers\Base\Creatures\Npcs\MerchantController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NpcController" Collapsed="true">
+    <Position X="3.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAABAAEAAAAAAAAAAAAAAAACAAAAEAA=</HashCode>
+      <FileName>Assets\Scripts\Controllers\Base\Creatures\Npcs\NpcController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerController" Collapsed="true">
+    <Position X="5.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAgQABAAQAAABIABAIQAAABIAhAAAAQIGAEAABAE=</HashCode>
+      <FileName>Assets\Scripts\Controllers\Base\Creatures\PlayerController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CropController" Collapsed="true">
+    <Position X="8" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQQAAAAAAAAAAAAAAAAAAAAAAAgAAAAACAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Controllers\Base\Items\CropController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ItemController" Collapsed="true">
+    <Position X="10.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Controllers\Base\Items\ItemController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlowedLandController" Collapsed="true">
+    <Position X="10.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Controllers\Base\Items\PlowedLandController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SeedController" Collapsed="true">
+    <Position X="12.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAARBQAQCEAACAIAAAAAAAAAAAACBAAACAA=</HashCode>
+      <FileName>Assets\Scripts\Controllers\Base\Items\SeedController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ObjectController" Collapsed="true">
+    <Position X="9" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAIAAAIECAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Controllers\Base\ObjectController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OvenController" Collapsed="true">
+    <Position X="17" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAACAAAAAAAgIAAACAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Controllers\Base\Objects\OvenController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StoveController" Collapsed="true">
+    <Position X="63" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Controllers\Base\Objects\StoveController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InteractableObjectManager" Collapsed="true">
+    <Position X="63" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAAACEAAAAAAAABAAAAAAAAAABAAQA=</HashCode>
+      <FileName>Assets\Scripts\Managers\Contents\InteractableObjectManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InventoryManager" Collapsed="true">
+    <Position X="54.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAoAAAAAACABAAAAABAAAAAQIAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Assets\Scripts\Managers\Contents\InventoryManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapManager" Collapsed="true">
+    <Position X="63" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>MAAAAiAwASAAAAAAAAAAAAEAgAAAAIggAAAABRADwAA=</HashCode>
+      <FileName>Assets\Scripts\Managers\Contents\MapManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NpcManager" Collapsed="true">
+    <Position X="59.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Managers\Contents\NpcManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ObjectManager" Collapsed="true">
+    <Position X="61.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAACAQACARAAAAAABAAAABAIAAAAAAAAAQBAQAA=</HashCode>
+      <FileName>Assets\Scripts\Managers\Contents\ObjectManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TimeManager" Collapsed="true">
+    <Position X="56" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQQAAAAAEAABAAACAAgACQAAAAAAAAQAAAACJAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Managers\Contents\TimeManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebManager" Collapsed="true">
+    <Position X="56" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAIAAAA=</HashCode>
+      <FileName>Assets\Scripts\Managers\Contents\WebManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataManager" Collapsed="true">
+    <Position X="63" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAgAAACAAAAAACAAAQAAAACAAAAAAAACABAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Managers\Core\DataManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Poolable" Collapsed="true">
+    <Position X="52.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Managers\Core\Poolable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PoolManager" Collapsed="true">
+    <Position X="54.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAQAAAAAAAAAAAAAACEAIAAAAACAABACAA=</HashCode>
+      <FileName>Assets\Scripts\Managers\Core\PoolManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ResourceManager" Collapsed="true">
+    <Position X="57.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAQAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Managers\Core\ResourceManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SceneManagerEx" Collapsed="true">
+    <Position X="59.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAICAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Assets\Scripts\Managers\Core\SceneManagerEx.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UIManager" Collapsed="true">
+    <Position X="61.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAECAAIAACAAAAAAAAAAAIAACAAAAAAAAABBACA=</HashCode>
+      <FileName>Assets\Scripts\Managers\Core\UIManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Managers" Collapsed="true">
+    <Position X="61.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAQAAAAAJDAkQAAggAAAEIAAAUBACBAAQEICAARAUQA=</HashCode>
+      <FileName>Assets\Scripts\Managers\Managers.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseScene" Collapsed="true">
+    <Position X="1.75" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQACAABAAEA=</HashCode>
+      <FileName>Assets\Scripts\Scenes\BaseScene.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameScene" Collapsed="true">
+    <Position X="0.5" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgACAABAAAA=</HashCode>
+      <FileName>Assets\Scripts\Scenes\GameScene.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LoginScene" Collapsed="true">
+    <Position X="2.75" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgACAABAAAA=</HashCode>
+      <FileName>Assets\Scripts\Scenes\LoginScene.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI_Popup" Collapsed="true">
+    <Position X="47.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\Popup\UI_Popup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI_SystemPopup" Collapsed="true">
+    <Position X="47.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAACAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\Popup\UI_SystemPopup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI_Merchant" Collapsed="true">
+    <Position X="5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAACIBAAAgANAAAAAQIACBAIAACAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\Scene\Obejct\Creature\UI_Merchant.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI_Traded" Collapsed="true">
+    <Position X="9.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACIBAAAAAAAAAAAAAACAAAAACAARAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\Scene\Obejct\Creature\UI_Traded.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI_Traded_Item" Collapsed="true">
+    <Position X="16.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAAAAAABAQAAAAAAIAAAAACAAAAAQA=</HashCode>
+      <FileName>Assets\Scripts\UI\Scene\Obejct\Creature\UI_Traded_Item.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI_Oven" Collapsed="true">
+    <Position X="20.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\Scene\Obejct\UI_Oven.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI_Pan" Collapsed="true">
+    <Position X="23" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAgABAAAAQAAAAAAABAAAAAAAADAIAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\Scene\Obejct\UI_Pan.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI_Stove" Collapsed="true">
+    <Position X="27.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAQAAAAAAAAAAAAEAACAIAAABAAAAAAACCBACADAA=</HashCode>
+      <FileName>Assets\Scripts\UI\Scene\Obejct\UI_Stove.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI_Day" Collapsed="true">
+    <Position X="36.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQQAAAAAAAggAAAAAIAAAAAAEIgAAAAIBAGAAAAACA=</HashCode>
+      <FileName>Assets\Scripts\UI\Scene\UI_Day.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI_GameScene" Collapsed="true">
+    <Position X="34.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIEAAAEAAACAAAAgAAQKAAIAAAAgAAADAAEAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\Scene\UI_GameScene.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI_Inventory" Collapsed="true">
+    <Position X="43.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAOAAAAAAAACAAAAACBAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\Scene\UI_Inventory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI_Inventory_Item" Collapsed="true">
+    <Position X="50" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CIAEQCAAAwgBBIAAAEBAGEQQAAAAACCgAAASAAFACAA=</HashCode>
+      <FileName>Assets\Scripts\UI\Scene\UI_Inventory_Item.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI_Inventory_Slot" Collapsed="true">
+    <Position X="2.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAACAAAAABgACAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\Scene\UI_Inventory_Slot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI_ItemInfoPopup" Collapsed="true">
+    <Position X="29.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAgIAAAAAAAAAAEACABIAAAAAAACAACCAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\Scene\UI_ItemInfoPopup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI_Light" Collapsed="true">
+    <Position X="11.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEACAEACAAAACAQAAAAgAAAAAAAAAIAgASAAAAAAg=</HashCode>
+      <FileName>Assets\Scripts\UI\Scene\UI_Light.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI_LoginScene" Collapsed="true">
+    <Position X="32" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAABABAAQACAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\Scene\UI_LoginScene.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InteractItem" Collapsed="true">
+    <Position X="52.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgBAAAAAAAAAAIAAAAIAACAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\Scene\UI_Merchant_Item.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI_Merchant_Item" Collapsed="true">
+    <Position X="25.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAkQCAAAwAAAAAAAAAACAQQAAAAAACgAAACAAEAAQA=</HashCode>
+      <FileName>Assets\Scripts\UI\Scene\UI_Merchant_Item.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI_Scene" Collapsed="true">
+    <Position X="32" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\Scene\UI_Scene.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI_SeedStore" Collapsed="true">
+    <Position X="38.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAEQgAAAAAAAECAAAAEAAAgAEABACAQAAACA=</HashCode>
+      <FileName>Assets\Scripts\UI\Scene\UI_SeedStore.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI_SeedStore_Item" Collapsed="true">
+    <Position X="41" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAEAAAAAAABAAAgAAACBQAAIAAAAEAQAACAAAAgAI=</HashCode>
+      <FileName>Assets\Scripts\UI\Scene\UI_SeedStore_Item.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI_ToolBar" Collapsed="true">
+    <Position X="45.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAMAAAAAAAACAAAAACAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\Scene\UI_ToolBar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI_Base" Collapsed="true">
+    <Position X="26.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAQAAIABIAAIAAAAQAAAAAAAAAAACAAAAQEA=</HashCode>
+      <FileName>Assets\Scripts\UI\UI_Base.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI_EventHandler" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="59.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAACAAADAEAAAEAAAACgAAAAQAQACCAA=</HashCode>
+      <FileName>Assets\Scripts\UI\UI_EventHandler.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="UI_Interaction" Collapsed="true">
+    <Position X="7.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\WorldSpace\UI_Interaction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI_StateMark" Collapsed="true">
+    <Position X="14" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\WorldSpace\UI_StateMark.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI_TextBox" Collapsed="true">
+    <Position X="18.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAiAAAACAA=</HashCode>
+      <FileName>Assets\Scripts\UI\WorldSpace\UI_TextBox.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Define" Collapsed="true">
+    <Position X="52.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Utils\Define.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Extension" Collapsed="true">
+    <Position X="54.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAAAAoAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Utils\Extension.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PriorityQueue&lt;T&gt;" Collapsed="true">
+    <Position X="56" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAACAAAAAABAAAAAACAA=</HashCode>
+      <FileName>Assets\Utils\PriorityQueue.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Util" Collapsed="true">
+    <Position X="54.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Utils\Util.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CreateAccountPacketReq" Collapsed="true">
+    <Position X="57.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAQAAAAAAAA=</HashCode>
+      <FileName>Assets\Web\WebPacket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CreateAccountPacketRes" Collapsed="true">
+    <Position X="59.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Web\WebPacket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LoginAccountPacketReq" Collapsed="true">
+    <Position X="57.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAQAAAAAAAA=</HashCode>
+      <FileName>Assets\Web\WebPacket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LoginAccountPacketRes" Collapsed="true">
+    <Position X="59.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAgAAAAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Web\WebPacket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GetPlayerDataPacketReq" Collapsed="true">
+    <Position X="57.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Web\WebPacket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GetPlayerDataPacketRes" Collapsed="true">
+    <Position X="59.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Web\WebPacket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AddItemPacketReq" Collapsed="true">
+    <Position X="52.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAQAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Web\WebPacket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AddItemPacketRes" Collapsed="true">
+    <Position X="54.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Web\WebPacket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UpdateRedisItemsPacketReq" Collapsed="true">
+    <Position X="63" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Assets\Web\WebPacket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UpdateRedisItemsPacketRes" Collapsed="true">
+    <Position X="52.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Web\WebPacket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.Scripts.Contents.Object.PlayerInfo" Collapsed="true">
+    <Position X="63" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAQAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Contents\Object\PlayerInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data.StringData" Collapsed="true">
+    <Position X="52.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAAAAAAAEAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Data\Data.Contents.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data.StringLoader" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="54.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Data\Data.Contents.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Data.ItemData" Collapsed="true">
+    <Position X="6.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAgAAAAAAEABAAAAACAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Data\Data.Contents.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data.ToolData" Collapsed="true">
+    <Position X="1" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAEAAQAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Data\Data.Contents.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data.ToolItemLoader" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="57.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Data\Data.Contents.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Data.CropData" Collapsed="true">
+    <Position X="3.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Data\Data.Contents.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data.CropItemLoader" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="61.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Data\Data.Contents.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Data.SeedData" Collapsed="true">
+    <Position X="5.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AwQAAAAAAAAAAEAIAAQAAAAAAAAAAAAAAAAAAoAAAIA=</HashCode>
+      <FileName>Assets\Scripts\Data\Data.Contents.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data.SeedItemLoader" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="61.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Data\Data.Contents.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Data.CraftingData" Collapsed="true">
+    <Position X="7.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAABAAAAAAAAAAAAAAAAAAAAAAAMACAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Data\Data.Contents.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data.CraftableItemLoader" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="56" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Data\Data.Contents.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Data.FoodData" Collapsed="true">
+    <Position X="10" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQBAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Data\Data.Contents.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data.FoodItemLoader" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="56" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Data\Data.Contents.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Data.ModernData" Collapsed="true">
+    <Position X="12.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Data\Data.Contents.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data.ModernItemLoader" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="54.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Data\Data.Contents.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Data.NpcData" Collapsed="true">
+    <Position X="5.5" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AASAAAAAAAAAAABAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Data\Data.Contents.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data.NpcLoader" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="57.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Data\Data.Contents.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Data.MerchantData" Collapsed="true">
+    <Position X="5.5" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAgAAAgAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Data\Data.Contents.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data.MerchantNpcLoader" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="52.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Data\Data.Contents.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Struct Name="Pos" Collapsed="true">
+    <Position X="52.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>Assets\Scripts\Managers\Contents\MapManager.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="PQNode" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="54.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAGAAAYAA=</HashCode>
+      <FileName>Assets\Scripts\Managers\Contents\MapManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Struct>
+  <Interface Name="ILoader&lt;Key, Value&gt;" Collapsed="true">
+    <Position X="52.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Managers\Core\DataManager.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="맑은 고딕" Size="9" />
+</ClassDiagram>

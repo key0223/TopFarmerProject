@@ -136,8 +136,4 @@ public class UI_Stove : UI_Base
     }
     #endregion
 
-
-
-
-
 }

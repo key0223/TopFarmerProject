@@ -48,7 +48,7 @@ public class DataManager
         #endregion
 
         #region Sprites
-        Sprite[] sprites = Resources.LoadAll<Sprite>("Textures/Seed/Seeds");
+        Sprite[] sprites = Resources.LoadAll<Sprite>("Textures/Object/Seed/Seeds");
         foreach (Sprite sprite in sprites)
         {
             CropSpriteDict.Add(sprite.name, sprite);

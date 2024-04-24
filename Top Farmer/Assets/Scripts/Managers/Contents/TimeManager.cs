@@ -21,7 +21,7 @@ public class TimeManager
     private const float _timeRatio = 0.3f; // 인게임 10분 = 실제 시간 7초
 
     private float _currentMinutes = 0;
-    public int CurrentHours { get; private set; } = 18;
+    public int CurrentHours { get; private set; } = 6;
 
     private float _realTime = 0.0f;
     //UI_GameScene gameSceneUI;

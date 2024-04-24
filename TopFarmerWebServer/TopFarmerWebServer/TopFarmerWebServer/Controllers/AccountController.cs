@@ -35,7 +35,6 @@ namespace TopFarmerWebServer.Controllers
                                     .Where(a => a.AccountName == req.AccountName)
                                     .FirstOrDefault();
 
-
             if (account == null)
             {
                 // Create Account
