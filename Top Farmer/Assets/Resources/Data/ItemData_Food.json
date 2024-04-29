@@ -7,7 +7,8 @@
 				"maxStack": 1,
 				"iconPath": "Textures/Object/Food/Somthing_Burned",
 				"sellable": false,
-				"eatable": false
+				"eatable": false,
+				"sellingPrice": 10
 			},
 			{
 				"itemId": 5304,
@@ -16,7 +17,8 @@
 				"iconPath": "Textures/Object/Food/Grilled_Corn",
 				"sellable": true,
 				"eatable": true,
-				"time": 30
+				"time": 30,
+				"sellingPrice": 250
 			},
 			{
 				"itemId": 5307,
@@ -25,7 +27,8 @@
 				"iconPath": "Textures/Object/Food/Grilled_Potato",
 				"sellable": true,
 				"eatable": true,
-				"time": 30
+				"time": 30,
+				"sellingPrice": 250
 			},
 			{
 				"itemId": 5309,
@@ -34,7 +37,8 @@
 				"iconPath": "Textures/Object/Food/Grilled_Sweet_Potato",
 				"sellable": true,
 				"eatable": true,
-				"time": 30
+				"time": 30,
+				"sellingPrice": 260
 			}
 		]
 }
