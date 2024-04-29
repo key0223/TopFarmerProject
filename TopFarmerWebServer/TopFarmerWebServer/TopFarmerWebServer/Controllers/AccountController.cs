@@ -115,13 +115,67 @@ namespace TopFarmerWebServer.Controllers
                         // 초기 지급 아이템
                         ItemDb itemDb = new ItemDb()
                         {
-                            TemplatedId = 105,
+                            TemplatedId = 109,
                             Count = 1,
                             Slot = 0,
                             Equipped = false,
                             OwnerDbId = newPlayerDb.PlayerDbId,
                         };
+                        ItemDb itemDb1 = new ItemDb()
+                        {
+                            TemplatedId = 204,
+                            Count = 1,
+                            Slot = 1,
+                            Equipped = false,
+                            OwnerDbId = newPlayerDb.PlayerDbId,
+                        };
+                        ItemDb itemDb2 = new ItemDb()
+                        {
+                            TemplatedId = 207,
+                            Count = 1,
+                            Slot = 2,
+                            Equipped = false,
+                            OwnerDbId = newPlayerDb.PlayerDbId,
+                        };
+                        ItemDb itemDb3 = new ItemDb()
+                        {
+                            TemplatedId = 209,
+                            Count = 1,
+                            Slot = 3,
+                            Equipped = false,
+                            OwnerDbId = newPlayerDb.PlayerDbId,
+                        };
+                        ItemDb itemDb4 = new ItemDb()
+                        {
+                            TemplatedId = 304,
+                            Count = 4,
+                            Slot = 4,
+                            Equipped = false,
+                            OwnerDbId = newPlayerDb.PlayerDbId,
+                        };
+                        ItemDb itemDb5 = new ItemDb()
+                        {
+                            TemplatedId = 307,
+                            Count = 4,
+                            Slot = 5,
+                            Equipped = false,
+                            OwnerDbId = newPlayerDb.PlayerDbId,
+                        };
+                        ItemDb itemDb6 = new ItemDb()
+                        {
+                            TemplatedId = 309,
+                            Count = 4,
+                            Slot = 6,
+                            Equipped = false,
+                            OwnerDbId = newPlayerDb.PlayerDbId,
+                        };
                         _context.Items.Add(itemDb);
+                        _context.Items.Add(itemDb1);
+                        _context.Items.Add(itemDb2);
+                        _context.Items.Add(itemDb3);
+                        _context.Items.Add(itemDb4);
+                        _context.Items.Add(itemDb5);
+                        _context.Items.Add(itemDb6);
                         _context.SaveChangesEx();
                         res.Players.Add(newPlayer);
 
