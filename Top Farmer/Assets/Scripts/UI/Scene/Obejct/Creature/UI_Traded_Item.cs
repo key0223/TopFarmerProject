@@ -69,6 +69,12 @@ public class UI_Traded_Item : UI_Base
                     sellingPrice = seedData.sellingPrice;
                 }
                 break;
+            case ItemType.ITEM_TYPE_FOOD:
+                {
+                    FoodData foodData = (FoodData)itemData;
+                    sellingPrice = foodData.sellingPrice;
+                }
+                break;
         }
 
         int total = Count * sellingPrice;
