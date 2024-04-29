@@ -200,7 +200,7 @@ public class Food : Item
 {
     public bool Sellable { get;private set; }
     public bool Eatable { get;private set; }
-
+    public int SellingPrice { get;private set; } 
     public Food(int templatedId) : base(ItemType.ITEM_TYPE_FOOD)
     {
         Init(templatedId);
@@ -221,6 +221,7 @@ public class Food : Item
             Stackable = (data.maxStack > 1);
             Sellable = data.sellable;
             Eatable = data.eatable;
+            SellingPrice = data.sellingPrice;
         }
     }
 }

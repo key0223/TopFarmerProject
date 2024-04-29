@@ -150,6 +150,7 @@ namespace Data
         public bool sellable;
         public bool eatable;
         public int time;
+        public int sellingPrice;
     }
     [Serializable]
     public class FoodItemLoader : ILoader<int, ItemData>
