@@ -214,7 +214,9 @@ public class PlayerController : CreatureController
         }
         else if(Input.GetKey(KeyCode.P))
         {
-            Managers.Map.SaveMap("Assets/Resources/Map");
+            // Managers.Map.SaveMap("Assets/Resources/Map");
+            Managers.SaveLoad.SaveGameData();
+            Debug.Log("SaveFile saved");
         }
        
     }

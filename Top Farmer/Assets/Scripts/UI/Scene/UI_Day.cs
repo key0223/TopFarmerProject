@@ -22,16 +22,16 @@ public class UI_Day : UI_Base
     }
 
     string[] monthAbbreviations = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
-    string[] dayOfWeekAbbreviations = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
+    string[] dayOfWeekAbbreviations = { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
 
-    int currentDay;
-    int currentMonth;
-    int currentYear;
-    int currentDayOfWeek;
+    public int currentDay { get; private set; }
+    public int currentMonth { get; private set; }
+    public int currentYear { get; private set; }
+    public int currentDayOfWeek { get; private set; }
+    public int currentDayOfSurvival { get; private set; }  
 
     int lastDayOfMonth;
 
-    int currentDayOfSurvival;
 
     private Animator _animator;
 
@@ -40,7 +40,7 @@ public class UI_Day : UI_Base
         Bind<Text>(typeof(Texts));
         Bind<GameObject>(typeof(GameObjects));
         _animator = GetObject((int)GameObjects.Weather).gameObject.GetComponent<Animator>();
-        SetPlayerData();
+        //SetPlayerData();
 
         Managers.Time.DayPassedRegistered -= OnNextDay;
         Managers.Time.DayPassedRegistered += OnNextDay;
@@ -49,13 +49,13 @@ public class UI_Day : UI_Base
 
     public void SetPlayerData()
     {
-        currentDayOfWeek = 0;
-        currentDay = 11;
-        currentMonth = 1;
-        currentYear = 2024;
+        currentDayOfWeek = Managers.Time.CurrentDayOfWeek;
+        currentDay = Managers.Time.CurrentDay;
+        currentMonth = Managers.Time.CurrentMonth;
+        currentYear = Managers.Time.CurrentYear;
         lastDayOfMonth = DateTime.DaysInMonth(currentYear, currentMonth);
 
-        currentDayOfSurvival = 1;
+        currentDayOfSurvival = Managers.Time.CurrentDayOfSurvival;
 
         UpdateUI();
     }
@@ -67,14 +67,14 @@ public class UI_Day : UI_Base
         currentDayOfWeek++;
         currentDayOfSurvival++;
 
-        if (currentDayOfWeek > 6)
+        if (currentDayOfWeek > 6 || currentDayOfWeek == -1)
             currentDayOfWeek = 0;
 
         if (currentDay > lastDayOfMonth)
         {
             currentDay = 1;
             currentMonth++;
-            if (currentMonth > 11)
+            if (currentMonth > 11 || currentMonth == -1)
             {
                 currentMonth = 0;
                 currentYear++;

@@ -241,7 +241,28 @@ namespace Data
             return dict;
         }
     }
-  
+
+    #endregion
+
+    #region File System SavsFiles
+    [Serializable]
+    public class GameTime
+    {
+        public DayState dayState;
+        public int dayOfSurvival;
+        public float minute;
+        public int hour;
+        public int day;
+        public int week;
+        public int month;
+        public int year;
+    }
+
+    [Serializable]
+    public class GameData
+    {
+        public GameTime gameTime;
+    }
     #endregion
 }
 

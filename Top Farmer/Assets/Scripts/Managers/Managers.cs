@@ -29,12 +29,14 @@ public class Managers : MonoBehaviour
 
     #region Core
     DataManager _data = new DataManager();
+    SaveLoadManager _saveLoad = new SaveLoadManager();
     ResourceManager _resource = new ResourceManager();
     PoolManager _pool = new PoolManager();
     SceneManagerEx _scene = new SceneManagerEx();
     UIManager _ui = new UIManager();
 
     public static DataManager Data { get{ return  Instance._data; } }
+    public static SaveLoadManager SaveLoad {  get { return Instance._saveLoad; } }  
     public static ResourceManager Resource { get { return Instance._resource; } }
     public static PoolManager Pool { get { return Instance._pool; } }
     public static SceneManagerEx Scene { get { return Instance._scene; } }
@@ -71,6 +73,7 @@ public class Managers : MonoBehaviour
 
             instance._data.Init();
             instance._pool.Init();
+            instance._saveLoad.Init();
             //instance._time.Init();
             //instance._npc.Init();
         }
