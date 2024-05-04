@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class InventoryManager
 {
@@ -23,7 +24,6 @@ public class InventoryManager
         if(findItem != null)
         {
             Items[findItem.ItemDbId].Count += item.Count;
-
         }
         else
         {
@@ -90,6 +90,7 @@ public class InventoryManager
         }
     }
 
+    /*
     public void UpdateRedisItems()
     {
         List<ItemInfo> items = new List<ItemInfo>();
@@ -107,6 +108,27 @@ public class InventoryManager
         {
             if(res.UpdatedOk)
                 Debug.Log("Redis Items Updated");
+        });
+    }
+    */
+    public void UpdateInventoryDatabase()
+    {
+        List<ItemInfo> items = new List<ItemInfo>();
+        foreach(Item item in Items.Values)
+        {
+            items.Add(item.Info);
+        }
+
+        UpdateDatabaseItemsReq packet = new UpdateDatabaseItemsReq()
+        {
+            PlayerDbId = Managers.Object.Player.Info.PlayerDbId,
+            ItemInfos = items,
+        };
+
+        Managers.Web.SendPostRequest<UpdateDatabaseItemsRes>("item/updateItems", packet, (res) =>
+        {
+            if (res.UpdatedOk)
+                Debug.Log("Database Items Updated");
         });
     }
 }

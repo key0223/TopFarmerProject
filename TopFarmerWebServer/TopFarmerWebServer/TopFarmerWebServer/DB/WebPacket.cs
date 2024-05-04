@@ -40,23 +40,34 @@ public class AddItemPacketReq
     public int PlayerDbId { get; set; }
     public int TemplatedId { get; set; }
     public int Count { get; set; }
+    public int Slot { get; set; } 
 }
 public class AddItemPacketRes
 {
     public ItemInfo Item { get; set; }
 }
+public class UpdateDatabaseItemsReq
+{
+    public int PlayerDbId;
+    public List<ItemInfo> ItemInfos;
+}
+public class UpdateDatabaseItemsRes
+{
+    public bool UpdatedOk;
+}
 
+/*
 public class UpdateRedisItemsPacketReq
 {
     public int PlayerDbId { get; set; }
     public List<ItemInfo> ItemInfos { get; set; }
 
 }
-
 public class UpdateRedisItemsPacketRes
 {
     public bool UpdatedOk { get; set; }
 }
+*/
 #endregion
 
 

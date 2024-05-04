@@ -124,12 +124,13 @@ public class SeedController : ItemController
         {
             cropCount *= 2;
         }
-
+        int? findSlot = Managers.Inven.GetEmptySlot();
         AddItemPacketReq packet = new AddItemPacketReq()
         {
             PlayerDbId = Managers.Object.PlayerInfo.PlayerDbId,
             TemplatedId = _seedData.resultCrop,
             Count = cropCount,
+            Slot = (int)findSlot,
         };
 
         Managers.Web.SendPostRequest<AddItemPacketRes>("item/addItem", packet, (res) =>

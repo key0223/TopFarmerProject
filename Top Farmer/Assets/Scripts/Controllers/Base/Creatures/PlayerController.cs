@@ -392,7 +392,7 @@ public class PlayerController : CreatureController
             invenUI.RefreshUI();
             toolbarUI.RefreshUI();
 
-            Managers.Inven.UpdateRedisItems();
+            Managers.Inven.UpdateInventoryDatabase();
         }
 
         yield return new WaitForSeconds(0.3f);

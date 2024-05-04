@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using StackExchange.Redis;
 using TopFarmerWebServer.DB;
 using TopFarmerWebServer.Game;
 using TopFarmerWebServer.Utils;
@@ -16,12 +15,12 @@ namespace TopFarmerWebServer.Controllers
     {
         AppDbContext _context;
         IConfiguration _configuration;
-        IDatabase _redis;
-        public AccountController(AppDbContext context, IConfiguration configuration ,IDatabase redis)
+        //IDatabase _redis;
+        public AccountController(AppDbContext context, IConfiguration configuration /*,IDatabase redis*/)
         {
             _context = context;
             _configuration = configuration;
-            _redis = redis;
+            //_redis = redis;
         }
 
         [HttpPost]
@@ -176,9 +175,11 @@ namespace TopFarmerWebServer.Controllers
                         _context.Items.Add(itemDb4);
                         _context.Items.Add(itemDb5);
                         _context.Items.Add(itemDb6);
-                        _context.SaveChangesEx();
                         res.Players.Add(newPlayer);
 
+                        _context.SaveChangesEx();
+
+                        /*
                         // Save to Redis
                         // [key],[field],[value]
                         for (int slot = 0; slot < 18; slot++)
@@ -200,6 +201,7 @@ namespace TopFarmerWebServer.Controllers
 
                         string infoJson = JsonConvert.SerializeObject(itemInfo);
                         _redis.HashSet($"{newPlayerDb.PlayerDbId}", slotStr, infoJson);
+                        */
                     }
 
                     res.AccountId = account.AccountDbId;
@@ -302,6 +304,7 @@ namespace TopFarmerWebServer.Controllers
             List<ItemDb> findItems = _context.Items
                    .Where(i => i.OwnerDbId == req.PlayerDbId).ToList();
 
+            /*
             // Initialize Redis
             // [key],[field],[value]
             for (int slot = 0; slot < 18; slot++)
@@ -312,6 +315,7 @@ namespace TopFarmerWebServer.Controllers
                 _redis.HashSet($"{req.PlayerDbId}", slotString, infoStr);
 
             }
+            */
             if (findItems.Count >0)
             {
                 res.Items = new List<ItemInfo>();
@@ -328,12 +332,15 @@ namespace TopFarmerWebServer.Controllers
 
                     res.Items.Add(info);
 
+                    /*
                     // Redis Update
-
                     string slotStr = itemDb.Slot.ToString();
                     string infoJson = JsonConvert.SerializeObject(info);
                     _redis.HashSet($"{itemDb.OwnerDbId}", slotStr, infoJson);
+                    */
                 }
+                _context.SaveChangesEx();
+
             }
             return res;
         }

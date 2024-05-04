@@ -6,7 +6,6 @@ namespace TopFarmerWebServer.Controllers
 {
     public partial class ItemController
     {
-
         public void RedisClear(int playerDbId)
         {
             // Initialize Redis
@@ -16,16 +15,18 @@ namespace TopFarmerWebServer.Controllers
                 string slotString = slot.ToString();
                 ItemInfo info = new ItemInfo();
                 string infoStr = JsonConvert.SerializeObject(info);
-                _redis.HashSet($"{playerDbId}", slotString, infoStr);
+                //_redis.HashSet($"{playerDbId}", slotString, infoStr);
 
             }
         }
+
         public void RedisItemInfoUpdate(int playerId, int slot, ItemInfo itemInfo)
         {
             string slotStr = slot.ToString();
             string infoJson = JsonConvert.SerializeObject(itemInfo);
-            _redis.HashSet($"{playerId}", slotStr, infoJson);
+            //_redis.HashSet($"{playerId}", slotStr, infoJson);
         }
+        /*
         public ItemInfo RedisFindItem(Func<ItemInfo, bool> condition, int playerDbId)
         {
             HashEntry[] slots = _redis.HashGetAll($"{playerDbId}");
@@ -53,5 +54,7 @@ namespace TopFarmerWebServer.Controllers
             }
             return null;
         }
+
+        */
     }
 }

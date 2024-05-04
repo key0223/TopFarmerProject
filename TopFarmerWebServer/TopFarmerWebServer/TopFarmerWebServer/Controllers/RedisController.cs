@@ -33,16 +33,17 @@ namespace TopFarmerWebServer.Controllers
             return JsonConvert.DeserializeObject<PlayerInfo>(playerJson);
 
         }
-        //public void AddItem(int playerDbId, Item item)
-        //{
-        //    Player player = GetPlayer(playerDbId);
-        //    if(player != null)
-        //    {
-        //        //player.Inven.Add(item);
-        //    }
-        //}
 
+        /*
+        public void AddItem(int playerDbId, Item item)
+        {
+            Player player = GetPlayer(playerDbId);
+            if (player != null)
+            {
+                //player.Inven.Add(item);
+            }
+        }
 
+        */
     }
-
     }

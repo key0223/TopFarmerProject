@@ -149,7 +149,7 @@ public class UI_Merchant : UI_Base
 
         invenUI.State = Define.InventoryState.Inventory;
 
-        Managers.Inven.UpdateRedisItems();
+        Managers.Inven.UpdateInventoryDatabase();
     }
 
     #endregion

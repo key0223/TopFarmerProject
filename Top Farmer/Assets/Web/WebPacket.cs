@@ -43,11 +43,23 @@ public class AddItemPacketReq
     public int PlayerDbId;
     public int TemplatedId;
     public int Count;
+    public int Slot;
 }
 public class AddItemPacketRes
 {
     public ItemInfo Item;
 }
+
+public class UpdateDatabaseItemsReq
+{
+    public int PlayerDbId;
+    public List<ItemInfo> ItemInfos;
+}
+public class UpdateDatabaseItemsRes
+{
+    public bool UpdatedOk;
+}
+/*
 public class UpdateRedisItemsPacketReq
 {
     public int PlayerDbId;
@@ -58,5 +70,6 @@ public class UpdateRedisItemsPacketRes
 {
     public bool UpdatedOk;
 }
+*/
 #endregion
 

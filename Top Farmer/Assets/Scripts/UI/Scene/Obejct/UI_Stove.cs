@@ -75,11 +75,13 @@ public class UI_Stove : UI_Base
     /// </summary>
     private void AddInven()
     {
+        int? findSlot = Managers.Inven.GetEmptySlot();
         AddItemPacketReq packet = new AddItemPacketReq()
         {
             PlayerDbId = Managers.Object.PlayerInfo.PlayerDbId,
             TemplatedId = _resultFood,
             Count = _count,
+            Slot = (int)findSlot,
         };
 
         Managers.Web.SendPostRequest<AddItemPacketRes>("item/addItem", packet, (res) =>

@@ -139,7 +139,7 @@ public class UI_Inventory : UI_Base
            
         }
 
-        Managers.Inven.UpdateRedisItems();
+        Managers.Inven.UpdateInventoryDatabase();
     }
 
     private void SetAlphaZero()
