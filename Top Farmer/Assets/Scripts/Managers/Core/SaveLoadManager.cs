@@ -31,12 +31,15 @@ public class SaveLoadManager
                     month = initTime.Month-1,
                     year = initTime.Year,
                 },
+                landList = new List<SaveLand>(),
+                seedList = new List<SaveSeed>(),
             };
         }
     }
 
     public void SaveGameData()
     {
+
         GameTime saveTime = new GameTime()
         {
             dayState = Managers.Time.State,
@@ -48,9 +51,10 @@ public class SaveLoadManager
             month = Managers.Time.CurrentMonth,
             year = Managers.Time.CurrentYear,
         };
-
+        GetSaveObject();
         CurrentGameData.gameTime = saveTime;
 
+        Managers.Inven.UpdateInventoryDatabase();
         string json = Newtonsoft.Json.JsonConvert.SerializeObject(CurrentGameData);
         File.WriteAllText(Application.persistentDataPath + "/gameData.json", json);
     }
@@ -62,6 +66,58 @@ public class SaveLoadManager
         {
             string json = File.ReadAllText(dataPath);
             CurrentGameData = Newtonsoft.Json.JsonConvert.DeserializeObject<GameData>(json);
+        }
+    }
+
+    public void GetSaveObject()
+    {
+        List<GameObject> currentObjects = Managers.Object.GetGameObjects();
+
+        foreach (GameObject gameObject in currentObjects)
+        {
+            ItemController ic = gameObject.GetComponent<ItemController>();
+            if (ic == null)
+                continue;
+
+            if (ic.ObjectType == ObjectType.OBJECT_TYPE_NONE)
+            {
+                PlowedLandController pc = (PlowedLandController)ic;
+
+                SaveLand sl = new SaveLand()
+                {
+                    objectType = pc.ObjectType,
+                    cellPos = pc.CellPos,
+                    isUsing = pc.IsUsing,
+                };
+
+                CurrentGameData.landList.Add(sl);
+            }
+            else if(ic.ObjectType == ObjectType.OBJECT_TYPE_ITEM)
+            {
+                switch(ic.Item.ItemType)
+                {
+                    case ItemType.ITEM_TYPE_SEED:
+                        {
+                            SeedController sc = (SeedController)ic;
+
+                            SaveSeed ss = new SaveSeed()
+                            {
+                                objectType = sc.ObjectType,
+                                cellPos = sc.CellPos,
+                                itemType = sc.Item.ItemType,
+                                seedState = sc.State,
+                                itemDbId = sc.Item.ItemDbId,
+                                templatedId = sc.Item.TemplatedId,
+                                currentGrowthDay = sc.currentGrowthDay,
+                            };
+                            CurrentGameData.seedList.Add(ss);
+                        }
+                        break;
+                    case ItemType.ITEM_TYPE_CRAFTING:
+                        break;
+
+                }    
+            }
         }
     }
 }

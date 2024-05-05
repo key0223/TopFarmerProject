@@ -97,6 +97,13 @@ namespace TopFarmerWebServer.Controllers
             {
                 foreach (ItemInfo item in req.ItemInfos)
                 {
+                    //if (item.count == 0)
+                    //{
+                    //    ItemDb itemDb = findItems.FirstOrDefault(i => i.ItemDbId == item.itemDbId);
+                    //    _context.Items.Remove(itemDb);
+                    //    continue;
+                    //}
+
                     // 스택이 가능한가
                     if (CheckStackableItem((item.templatedId)))
                     {

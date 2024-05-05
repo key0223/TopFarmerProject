@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
+using UnityEditor.Sprites;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -113,17 +115,17 @@ public class InventoryManager
     */
     public void UpdateInventoryDatabase()
     {
-        List<ItemInfo> items = new List<ItemInfo>();
-        foreach(Item item in Items.Values)
-        {
-            items.Add(item.Info);
-        }
-
         UpdateDatabaseItemsReq packet = new UpdateDatabaseItemsReq()
         {
             PlayerDbId = Managers.Object.Player.Info.PlayerDbId,
-            ItemInfos = items,
+            ItemInfos = new List<ItemInfo>(),
+           
         };
+        foreach (Item item in Items.Values)
+        {
+            packet.ItemInfos.Add(item.Info);
+        }
+
 
         Managers.Web.SendPostRequest<UpdateDatabaseItemsRes>("item/updateItems", packet, (res) =>
         {

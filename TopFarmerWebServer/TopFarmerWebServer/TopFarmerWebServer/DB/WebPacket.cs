@@ -48,12 +48,12 @@ public class AddItemPacketRes
 }
 public class UpdateDatabaseItemsReq
 {
-    public int PlayerDbId;
-    public List<ItemInfo> ItemInfos;
+    public int PlayerDbId { get;set; }
+    public List<ItemInfo> ItemInfos { get; set; } = new List<ItemInfo>();
 }
 public class UpdateDatabaseItemsRes
 {
-    public bool UpdatedOk;
+    public bool UpdatedOk { get; set; }
 }
 
 /*

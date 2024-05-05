@@ -6,7 +6,7 @@ using static Define;
 
 public class ObjectManager 
 {
-    Dictionary<int, GameObject> _items = new Dictionary<int, GameObject>();
+    //Dictionary<int, GameObject> _items = new Dictionary<int, GameObject>();
     List<GameObject> _objects = new List<GameObject>();
     public PlayerInfo PlayerInfo { get; set; }
     public PlayerController Player { get; set; }
@@ -74,8 +74,10 @@ public class ObjectManager
         return null;
     }
     
-
-
+    public List<GameObject> GetGameObjects()
+    {
+        return _objects;
+    }
     public void Clear(GameObject go)
     {
         _objects.Clear();
@@ -87,8 +89,8 @@ public class ObjectManager
 
     public void Add(Item item)
     {
-        if (_items.ContainsKey(item.Info.itemDbId))
-            return;
+        //if (_items.ContainsKey(item.Info.itemDbId))
+        //    return;
 
         ItemType itemType = GetObjectTypeByItemType(item.TemplatedId);
 

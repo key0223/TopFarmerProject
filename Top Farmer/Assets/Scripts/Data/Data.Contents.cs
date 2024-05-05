@@ -257,11 +257,33 @@ namespace Data
         public int month;
         public int year;
     }
+    [Serializable]
+    public class SaveObject
+    {
+        public ObjectType objectType;
+        public Vector3Int cellPos;
+    }
+    public class SaveLand : SaveObject
+    {
+        public bool isUsing;
+    }
+
+    public class SaveSeed: SaveObject
+    {
+        public ItemType itemType;
+        public SeedState seedState;
+        public int itemDbId;
+        public int templatedId;
+        public int currentGrowthDay;
+    }
+
 
     [Serializable]
     public class GameData
     {
         public GameTime gameTime;
+        public List<SaveLand> landList;
+        public List<SaveSeed> seedList;
     }
     #endregion
 }
