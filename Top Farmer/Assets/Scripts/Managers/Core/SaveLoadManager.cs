@@ -54,7 +54,6 @@ public class SaveLoadManager
         GetSaveObject();
         CurrentGameData.gameTime = saveTime;
 
-        Managers.Inven.UpdateInventoryDatabase();
         string json = Newtonsoft.Json.JsonConvert.SerializeObject(CurrentGameData);
         File.WriteAllText(Application.persistentDataPath + "/gameData.json", json);
     }

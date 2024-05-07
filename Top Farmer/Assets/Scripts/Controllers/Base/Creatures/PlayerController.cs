@@ -212,7 +212,7 @@ public class PlayerController : CreatureController
             }
 
         }
-        else if(Input.GetKey(KeyCode.P))
+        else if(Input.GetKeyDown(KeyCode.P))
         {
             // Managers.Map.SaveMap("Assets/Resources/Map");
             Managers.SaveLoad.SaveGameData();

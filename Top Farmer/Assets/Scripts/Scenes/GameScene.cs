@@ -20,18 +20,6 @@ public class GameScene : BaseScene
         player.name = "Player";
         Managers.Object.Add(player,player:true);
 
-
-        /*
-        GameObject merchant = Managers.Resource.Instantiate("Creature/Merchant");
-        merchant.name = "Merchant";
-        MerchantController mc = merchant.GetComponent<MerchantController>();
-        mc.ObjectType = ObjectType.OBJECT_TYPE_INTERACTABLE_OBJECT;
-        mc.SetNpc(1);
-
-        Managers.Object.Add(merchant);
-        Managers.Npc.Init();
-        */
-
         // Npc
         NpcData npcData = null;
         Managers.Data.NpcDict.TryGetValue(1, out npcData);
