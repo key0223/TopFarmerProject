@@ -1353,6 +1353,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7656358516571400107}
     m_Modifications:
+    - target: {fileID: 6913269273783637560, guid: e29a5aabe7319b842ab97bbec484cfdf, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6913269273783637564, guid: e29a5aabe7319b842ab97bbec484cfdf, type: 3}
       propertyPath: m_Name
       value: UI_Light
@@ -1439,6 +1443,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6913269273783637565, guid: e29a5aabe7319b842ab97bbec484cfdf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6913269273783637566, guid: e29a5aabe7319b842ab97bbec484cfdf, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

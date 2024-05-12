@@ -1,37 +1,50 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 using static Define;
 
 public class UI_Light : UI_Base
 {
-    enum Images
-    {
-        UI_Light,
-    }
     enum Texts
     {
         MessageText,
     }
+    enum GameObjects
+    {
+        GlobalLight
+    }
+
+    Light2D light;
 
     Coroutine _coUpdateAlpha = null;
 
-    float _dawnAlpha  = 0.3f;
-    float _dayAlpha  = 0f;
-    float _noonAlpha  = 0.3f;
-    float _nightAlpha = 1f;
-    //public float _nightAlpha = 0.85f;
+    float _dawnIntensity = 5f;
+    Color _dawnColor = new Color(0.1f, 0.08f, 0.15f);
+    float _dayIntensity = 1.0f;
+    Color _dayColor = Color.white;
+    float _noonIntensity = 1.28f;
+    Color _noonColor = new Color(0.83f, 0.57f, 0.31f);
+    float _nightIntensity = 1.3f;
+    Color _nightColor = new Color(0.05f, 0.057f, 0.11f);
+   
 
-    float transitionDuration = 1f;
-    float _currentAlpha;
-    float _targetAlpha;
+    float transitionDuration = 3f;
+    float _currentIntensity;
+    float _targetIntensity;
+    Color _currentColor;
+    Color _targetColor;
 
     public override void Init()
     {
-        Bind<Image>(typeof(Images));
         Bind<Text>(typeof(Texts));
+        Bind<GameObject>(typeof(GameObjects));
         GetText((int)Texts.MessageText).gameObject.SetActive(false);
+        light =  GetObject((int)GameObjects.GlobalLight).GetComponent<Light2D>();
+        
     }
 
     public void Start()
@@ -44,8 +57,10 @@ public class UI_Light : UI_Base
         switch (Managers.Time.State)
         {
             case DayState.Dawn:
-                _currentAlpha = _nightAlpha;
-                _targetAlpha = _dawnAlpha;
+                _currentIntensity = _nightIntensity;
+                _targetIntensity = _dawnIntensity;
+                _currentColor = _nightColor;
+                _targetColor = _dawnColor;
 
                 if (_coUpdateAlpha != null)
                     return;
@@ -53,22 +68,32 @@ public class UI_Light : UI_Base
                 _coUpdateAlpha = StartCoroutine("CoUpdateAlpha");
                 break;
             case DayState.Day:
-                _currentAlpha = _dawnAlpha;
-                _targetAlpha = _dayAlpha;
+                _currentIntensity = _dawnIntensity;
+                _targetIntensity = _dayIntensity;
+                _currentColor = _dawnColor;
+                _targetColor = _dayColor;
+
                 if (_coUpdateAlpha != null)
                     return;
                 _coUpdateAlpha = StartCoroutine("CoUpdateAlpha");
                 break;
             case DayState.Noon:
-                _currentAlpha = _dayAlpha;
-                _targetAlpha = _noonAlpha;
+                _currentIntensity = _dayIntensity;
+                _targetIntensity = _noonIntensity;
+                _currentColor = _dayColor;
+                _targetColor = _noonColor;
+
                 if (_coUpdateAlpha != null)
                     return;
                 _coUpdateAlpha = StartCoroutine("CoUpdateAlpha");
                 break;
             case DayState.Night:
-                _currentAlpha = _noonAlpha;
-                _targetAlpha = _nightAlpha;
+
+                _currentIntensity = _noonIntensity;
+                _targetIntensity = _nightIntensity;
+                _currentColor = _noonColor;
+                _targetColor = _nightColor;
+              
                 if (_coUpdateAlpha != null)
                     return;
                 GetText((int)Texts.MessageText).gameObject.SetActive(true);
@@ -79,17 +104,18 @@ public class UI_Light : UI_Base
 
    IEnumerator CoUpdateAlpha()
     {
-        Color color = GetImage((int)Images.UI_Light).color;
+        Color color = GetObject((int)GameObjects.GlobalLight).GetComponent<Light2D>().color;
 
         float elapsedTime = 0f;
         while (elapsedTime < transitionDuration)
         {
             elapsedTime += Time.deltaTime;
             float t = elapsedTime / transitionDuration;
-            float alpha = Mathf.Lerp(_currentAlpha, _targetAlpha, t);
-            
-            color.a = alpha;
-            GetImage((int)Images.UI_Light).color = color;
+            float intensity = Mathf.Lerp(_currentIntensity, _targetIntensity, t);
+
+            light.intensity = intensity;
+            color = Color.Lerp(_currentColor, _targetColor, t);
+            GetObject((int)GameObjects.GlobalLight).GetComponent<Light2D>().color = color;
 
             yield return null;
         }
