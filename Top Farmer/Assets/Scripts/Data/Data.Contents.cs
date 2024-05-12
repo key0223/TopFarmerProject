@@ -282,8 +282,8 @@ namespace Data
     public class GameData
     {
         public GameTime gameTime;
-        public List<SaveLand> landList;
-        public List<SaveSeed> seedList;
+        //public List<SaveLand> landList;
+        //public List<SaveSeed> seedList;
     }
     #endregion
 }

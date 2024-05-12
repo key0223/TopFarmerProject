@@ -31,8 +31,8 @@ public class SaveLoadManager
                     month = initTime.Month-1,
                     year = initTime.Year,
                 },
-                landList = new List<SaveLand>(),
-                seedList = new List<SaveSeed>(),
+                //landList = new List<SaveLand>(),
+                //seedList = new List<SaveSeed>(),
             };
         }
     }
@@ -51,7 +51,7 @@ public class SaveLoadManager
             month = Managers.Time.CurrentMonth,
             year = Managers.Time.CurrentYear,
         };
-        GetSaveObject();
+        //GetSaveObject();
         CurrentGameData.gameTime = saveTime;
 
         string json = Newtonsoft.Json.JsonConvert.SerializeObject(CurrentGameData);
@@ -89,7 +89,7 @@ public class SaveLoadManager
                     isUsing = pc.IsUsing,
                 };
 
-                CurrentGameData.landList.Add(sl);
+               // CurrentGameData.landList.Add(sl);
             }
             else if(ic.ObjectType == ObjectType.OBJECT_TYPE_ITEM)
             {
@@ -109,7 +109,7 @@ public class SaveLoadManager
                                 templatedId = sc.Item.TemplatedId,
                                 currentGrowthDay = sc.currentGrowthDay,
                             };
-                            CurrentGameData.seedList.Add(ss);
+                            //CurrentGameData.seedList.Add(ss);
                         }
                         break;
                     case ItemType.ITEM_TYPE_CRAFTING:
