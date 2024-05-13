@@ -4,6 +4,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.U2D;
 using static Define;
 
 namespace Data
@@ -99,6 +101,7 @@ namespace Data
         public int resultCrop;
         public int cropQuantity;
         public string seedSprite;
+        public string prefabPath;
         public string growthSprite1;
         public string growthSprite2;
         public string growthSprite3;
@@ -127,6 +130,7 @@ namespace Data
         public bool destroyable;
         public int sizeX;
         public int sizeY;
+        public string prefabPath;
     }
     [Serializable]
     public class CraftableItemLoader : ILoader<int, ItemData>
@@ -191,6 +195,28 @@ namespace Data
     }
     #endregion
 
+    [Serializable]
+    public class SpriteLoader:ILoader<string, Sprite>
+    {
+        Sprite[] sprites;
+        
+        public SpriteLoader(string atlasPath)
+        {
+            sprites = Resources.LoadAll<Sprite>($"Textures/Object/{atlasPath}");
+        }
+
+        public Dictionary<string, Sprite> MakeDict()
+        {
+            Dictionary<string, Sprite> spriteDict = new Dictionary<string, Sprite>();
+            foreach(Sprite sprite in sprites)
+            {
+                spriteDict.Add(sprite.name, sprite);
+            }
+
+            return spriteDict;
+        }
+
+    }
     #region Npc
 
     [Serializable]
@@ -244,6 +270,7 @@ namespace Data
 
     #endregion
 
+  
     #region File System SavsFiles
     [Serializable]
     public class GameTime

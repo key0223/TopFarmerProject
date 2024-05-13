@@ -1,0 +1,40 @@
+﻿{
+	"array": 
+		[
+			{
+				"itemId": 401,
+				"name": "오븐",
+				"maxStack": 1,
+				"iconPath": "Textures/Object/Craftable/neko-cafe-furnitures_2",
+				"craftingType": "CRAFTING_TYPE_KITCHEN",
+				"sellable": true,
+				"destroyable": true,
+				"sizeX": 2,
+				"sizeY": 2,
+				"prefabPath": "Object/Craftable/Interactable/Oven"
+			},
+			{
+				"itemId": 402,
+				"name": "테이블",
+				"maxStack": 1,
+				"iconPath": "Textures/Object/Craftable/neko-cafe-furnitures_0",
+				"craftingType": "CRAFTING_TYPE_DECORATION",
+				"sellable": true,
+				"destroyable": true,
+				"sizeX": 2,
+				"sizeY": 2
+			},
+			{
+				"itemId": 403,
+				"name": "장작불",
+				"maxStack": 10,
+				"iconPath": "Textures/Object/Craftable/CampFire_4",
+				"craftingType": "CRAFTING_TYPE_DECORATION",
+				"sellable": true,
+				"destroyable": true,
+				"sizeX": 1,
+				"sizeY": 1,
+				"prefabPath": "Object/Craftable/Campfire"
+			}
+		]
+}

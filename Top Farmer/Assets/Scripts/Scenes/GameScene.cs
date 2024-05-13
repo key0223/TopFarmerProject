@@ -51,9 +51,9 @@ public class GameScene : BaseScene
         Managers.Object.Add(oven);
 
 
-        GameObject fire = Managers.Resource.Instantiate("Object/Craftable/Campfire");
-        CampfireController cc = oven.GetComponent<CampfireController>();
-        Managers.Object.Add(fire);
+        //GameObject fire = Managers.Resource.Instantiate("Object/Craftable/Campfire");
+        //CampfireController cc = fire.GetComponent<CampfireController>();
+        //Managers.Object.Add(fire);
 
 
 

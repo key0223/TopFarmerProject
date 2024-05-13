@@ -1,3 +1,4 @@
+using Data;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -5,8 +6,12 @@ using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using static Define;
 
-public class CampfireController : ObjectController
+public class CampfireController : ItemController
 {
+    public Crafting Crafting { get; private set; }
+    private CraftingData _crafingData = null;
+
+
     Light2D light;
 
     float _dayIntensity = 0.3f;
@@ -31,7 +36,7 @@ public class CampfireController : ObjectController
     float _targetRadiusOut;
     float _targetStrength;
 
-    private DayState _state;
+    private DayState _state = DayState.Dawn;
     public DayState State
     {
         get { return _state; }
@@ -47,10 +52,24 @@ public class CampfireController : ObjectController
     protected override void Init()
     {
         base.Init();
+        SetItem();
         light = gameObject.GetComponentInChildren<Light2D>();
         Managers.Time.HourPassedRegistered -= UpdateState;
         Managers.Time.HourPassedRegistered += UpdateState;
         _state = Managers.Time.State;
+
+    }
+    protected  void SetItem()
+    {
+        ItemData itemData = null;
+        Managers.Data.ItemDict.TryGetValue(Item.TemplatedId, out itemData);
+        _crafingData = (CraftingData)itemData;
+        //_sprite.sprite = Managers.Resource.Load<Sprite>($"{_crafingData.iconPath}");
+
+        transform.position = Managers.Map.CurrentGrid.CellToWorld(CellPos) + new Vector3(0.5f, 0.5f);
+        ObjectType = ObjectType.OBJECT_TYPE_INTERACTABLE_OBJECT;
+        InteractableObject interactableObject = Util.GetOrAddComponent<InteractableObject>(gameObject);
+        interactableObject.InteractableId = InteractableObjectType.INTERACTABLE_OBJECT_NONE;
     }
 
     void UpdateState()

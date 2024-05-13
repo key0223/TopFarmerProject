@@ -36,6 +36,11 @@ public class InteractableObjectManager
 
 
     }
+
+    void NoneHandler(InteractableObject obj)
+    {
+
+    }
     void StorageBoxHandler(InteractableObject obj)
     {
         Debug.Log("Storage Box");

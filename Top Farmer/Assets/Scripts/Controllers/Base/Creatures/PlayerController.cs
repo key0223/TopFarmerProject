@@ -326,7 +326,16 @@ public class PlayerController : CreatureController
         }
         else if (item.ItemType == ItemType.ITEM_TYPE_CRAFTING)
         {
-
+            Crafting crafting = (Crafting)item;
+            bool interactable = Managers.Map.CanInteract(GetFrontCellPos());
+            if (interactable)
+            {
+                if (Managers.Object.FindLandObject(GetFrontCellPos()) == null)
+                {
+                    State = CreatureState.UsingItem;
+                    _coUsingItem = StartCoroutine("CoPlaceItem",crafting);
+                }
+            }
         }
     }
 
@@ -376,7 +385,10 @@ public class PlayerController : CreatureController
     {
         if(item.Count > 0 )
         {
-            GameObject seed = Managers.Resource.Instantiate($"Object/Land/Seed");
+            Data.ItemData itemData = null;
+            Managers.Data.ItemDict.TryGetValue(HoldingItem.TemplatedId, out itemData);
+            SeedData seedData = (SeedData)itemData;
+            GameObject seed = Managers.Resource.Instantiate($"{seedData.prefabPath}");
             SeedController sc = seed.GetComponent<SeedController>();
             sc.Item = item;
             sc.ObjectType = ObjectType.OBJECT_TYPE_ITEM;
@@ -384,6 +396,37 @@ public class PlayerController : CreatureController
 
             Managers.Object.Add(seed);
             sc.OnPlant();
+
+            item.Count--;
+
+            UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
+            UI_Inventory invenUI = gameSceneUI.InvenUI;
+            UI_ToolBar toolbarUI = gameSceneUI.ToolBarUI;
+
+            invenUI.RefreshUI();
+            toolbarUI.RefreshUI();
+
+            Managers.Inven.UpdateInventoryDatabase();
+        }
+
+        yield return new WaitForSeconds(0.3f);
+        State = CreatureState.Idle;
+        _coUsingItem = null;
+    }
+
+    IEnumerator CoPlaceItem(Item item)
+    {
+        if (item.Count > 0)
+        {
+            Data.ItemData itemData = null;
+            Managers.Data.ItemDict.TryGetValue(HoldingItem.TemplatedId, out itemData);
+            CraftingData craftingData = (CraftingData)itemData;
+            GameObject crafting = Managers.Resource.Instantiate($"{craftingData.prefabPath}");
+            CampfireController cc = crafting.GetComponent<CampfireController>();
+            cc.Item = item;
+            cc.CellPos = GetFrontCellPos();
+
+            Managers.Object.Add(crafting);
 
             item.Count--;
 

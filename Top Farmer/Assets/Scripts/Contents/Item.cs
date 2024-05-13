@@ -78,6 +78,7 @@ public class Item
                 item = new Seed(itemInfo.templatedId);
                 break;
             case ItemType.ITEM_TYPE_CRAFTING:
+                item = new Crafting(itemInfo.templatedId);
                 break;
             case ItemType.ITEM_TYPE_FOOD:
                 item = new Food(itemInfo.templatedId);
@@ -196,6 +197,44 @@ public class Seed : Item
     }
 }
 
+public class Crafting :Item
+{
+    public CraftingType CraftingType { get; private set; }
+    public bool Sellable { get; private set; }
+    public bool Destroyable { get;private set; }
+    public int SizeX { get; private set; }
+    public int SizeY {  get; private set; }
+    public string PrefabPath { get; private set; }
+
+
+    public Crafting(int templatedId) : base(ItemType.ITEM_TYPE_CRAFTING)
+    {
+        Init(templatedId);
+    }
+
+    void Init(int templatedId)
+    {
+        ItemData itemData = null;
+        Managers.Data.ItemDict.TryGetValue(templatedId, out itemData);
+        if (itemData.itemType != ItemType.ITEM_TYPE_CRAFTING)
+            return;
+
+        CraftingData data = (CraftingData)itemData;
+        {
+            TemplatedId = data.itemId;
+            Count = 1;
+            MaxStack = data.maxStack;
+            Stackable = (data.maxStack > 1);
+            CraftingType = data.craftingType;
+            Sellable = data.sellable;
+            Destroyable = data.destroyable;
+            SizeX = data.sizeX;
+            SizeY = data.sizeY;
+            PrefabPath = data.prefabPath;
+            
+        }
+    }
+}
 public class Food : Item
 {
     public bool Sellable { get;private set; }

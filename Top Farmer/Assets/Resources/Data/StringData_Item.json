@@ -177,19 +177,12 @@
 				"en": "Sweet Potato"
 			},
 			{
-				"stringId": "itemName(310)",
-				"ko": "토마토",
-				"en": "Tomato"
-			},
-			{
 				"stringId": "itemName(401)",
-				"ko": "오븐",
-				"en": "Oven"
+				"ko": "오븐"
 			},
 			{
-				"stringId": "itemName(402)",
-				"ko": "테이블",
-				"en": "Table"
+				"stringId": "itemName(403)",
+				"ko": "장작불"
 			},
 			{
 				"stringId": "itemName(5000)",
@@ -206,6 +199,11 @@
 			{
 				"stringId": "itemName(5309)",
 				"ko": "군고구마"
+			},
+			{
+				"stringId": "itemName(310)",
+				"ko": "토마토",
+				"en": "Tomato"
 			},
 			{
 				"stringId": "itemDesc(101)",
@@ -240,8 +238,7 @@
 				"ko": "다 자란 나무는 4번, 작은 그루터기는 2번 도끼질을 해야합니다. 4단계 나무는 2번, 3단계 나무는 1번 도끼질을 해야합니다."
 			},
 			{
-				"stringId": "itemDesc(109)",
-				"ko": "주로 농사를 위해 토양을 경작할 때 쓰입니다. 호미를 업그레이드하면 마우스 왼쪽 버튼을 길게 눌러 여러 칸을 한번에 경작할 수 있습니다."
+				"stringId": "itemDesc(109)"
 			},
 			{
 				"stringId": "itemDesc(110)",
@@ -353,11 +350,11 @@
 			},
 			{
 				"stringId": "itemDesc(401)",
-				"ko": "요리할 때 사용됩니다."
+				"ko": "다양한 요리를 할 수 있습니다."
 			},
 			{
-				"stringId": "itemDesc(402)",
-				"ko": "테이블입니다."
+				"stringId": "itemDesc(403)",
+				"ko": "주변을 환하게 만들어줍니다. "
 			},
 			{
 				"stringId": "itemDesc(5000)",

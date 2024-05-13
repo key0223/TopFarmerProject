@@ -97,42 +97,54 @@ namespace TopFarmerWebServer.Controllers
             {
                 foreach (ItemInfo item in req.ItemInfos)
                 {
-                    //if (item.count == 0)
+                    if (item.count == 0)
+                    {
+                        ItemDb itemDb = findItems.FirstOrDefault(i => i.ItemDbId == item.itemDbId);
+                        _context.Items.Remove(itemDb);
+                        continue;
+                    }
+                    ItemDb findDbItem = findItems.FirstOrDefault(i => i.TemplatedId == item.templatedId);
+
+                    ItemData itemData = null;
+                    DataManager.ItemDict.TryGetValue(item.templatedId, out itemData);
+
+                    // Db에 아이템이 있고, 가진 아이템 갯수가 최대치를 넘지 않았다면
+                    if (findDbItem != null && item.count < itemData.maxStack)
+                    {
+                        findDbItem.Count = item.count;
+                    }
+
+                    _context.SaveChangesEx();
+
+                    //// 스택이 가능한가
+                    //if (CheckStackableItem((item.templatedId)))
                     //{
-                    //    ItemDb itemDb = findItems.FirstOrDefault(i => i.ItemDbId == item.itemDbId);
-                    //    _context.Items.Remove(itemDb);
-                    //    continue;
+                    //    ItemDb findDbItem = findItems.FirstOrDefault(i => i.TemplatedId == item.templatedId);
+
+                    //    ItemData itemData = null;
+                    //    DataManager.ItemDict.TryGetValue(item.templatedId, out itemData);
+
+                    //    // Db에 아이템이 있고, 가진 아이템 갯수가 최대치를 넘지 않았다면
+                    //    if (findDbItem != null && item.count < itemData.maxStack)
+                    //    {
+                    //        findDbItem.Count = item.count;
+                    //    }
+                    //    _context.SaveChangesEx();
                     //}
+                    //else
+                    //{
+                    //    ItemDb newItemDb = new ItemDb()
+                    //    {
+                    //        TemplatedId = item.templatedId,
+                    //        Slot = item.slot,
+                    //        Count = item.count,
+                    //        OwnerDbId = req.PlayerDbId,
+                    //    };
 
-                    // 스택이 가능한가
-                    if (CheckStackableItem((item.templatedId)))
-                    {
-                        ItemDb findDbItem = findItems.FirstOrDefault(i => i.TemplatedId == item.templatedId);
+                    //    _context.Items.Add(newItemDb);
+                    //    _context.SaveChangesEx();
 
-                        ItemData itemData = null;
-                        DataManager.ItemDict.TryGetValue(item.templatedId, out itemData);
-
-                        // Db에 아이템이 있고, 가진 아이템 갯수가 최대치를 넘지 않았다면
-                        if (findDbItem != null && item.count < itemData.maxStack)
-                        {
-                            findDbItem.Count += item.count;
-                        }
-                        _context.SaveChangesEx();
-                    }
-                    else
-                    {
-                        ItemDb newItemDb = new ItemDb()
-                        {
-                            TemplatedId = item.templatedId,
-                            Slot = item.slot,
-                            Count = item.count,
-                            OwnerDbId = req.PlayerDbId,
-                        };
-
-                        _context.Items.Add(newItemDb);
-                        _context.SaveChangesEx();
-
-                    }
+                    //}
                     res.UpdatedOk = true;
                 }
             }

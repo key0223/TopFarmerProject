@@ -93,6 +93,7 @@ namespace TopFarmerWebServer.Data
         public int resultCrop;
         public int cropQuantity;
         public string seedSprite;
+        public string prefabPath;
         public string growthSprite1;
         public string growthSprite2;
         public string growthSprite3;
@@ -121,6 +122,7 @@ namespace TopFarmerWebServer.Data
         public bool destroyable;
         public int sizeX;
         public int sizeY;
+        public string prefabPath;
     }
     [Serializable]
     public class CraftableItemLoader : ILoader<int, ItemData>

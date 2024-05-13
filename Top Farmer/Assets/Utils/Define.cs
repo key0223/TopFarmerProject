@@ -94,6 +94,7 @@ public class Define
     #region Type
     public enum InteractableObjectType
     {
+       INTERACTABLE_OBJECT_NONE,
        INTERACTABLE_OBEJCT_TYPE_STORAGE,
        INTERACTABLE_OBEJCT_TYPE_NPC,
        INTERACTABLE_OBEJCT_TYPE_KITCHEN,

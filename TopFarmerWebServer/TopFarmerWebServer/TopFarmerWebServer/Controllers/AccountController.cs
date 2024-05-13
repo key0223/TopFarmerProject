@@ -168,6 +168,15 @@ namespace TopFarmerWebServer.Controllers
                             Equipped = false,
                             OwnerDbId = newPlayerDb.PlayerDbId,
                         };
+                        ItemDb itemDb7 = new ItemDb()
+                        {
+                            TemplatedId = 403,
+                            Count = 4,
+                            Slot = 7,
+                            Equipped = false,
+                            OwnerDbId = newPlayerDb.PlayerDbId,
+                        };
+
                         _context.Items.Add(itemDb);
                         _context.Items.Add(itemDb1);
                         _context.Items.Add(itemDb2);
@@ -175,6 +184,7 @@ namespace TopFarmerWebServer.Controllers
                         _context.Items.Add(itemDb4);
                         _context.Items.Add(itemDb5);
                         _context.Items.Add(itemDb6);
+                        _context.Items.Add(itemDb7);
                         res.Players.Add(newPlayer);
 
                         _context.SaveChangesEx();
