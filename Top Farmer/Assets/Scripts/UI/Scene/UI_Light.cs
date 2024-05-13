@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
@@ -111,7 +109,7 @@ public class UI_Light : UI_Base
         {
             elapsedTime += Time.deltaTime;
             float t = elapsedTime / transitionDuration;
-            float intensity = Mathf.Lerp(_currentIntensity, _targetIntensity, t);
+            float intensity = Mathf.Lerp(_currentIntensity, _targetIntensity, 2);
 
             light.intensity = intensity;
             color = Color.Lerp(_currentColor, _targetColor, t);

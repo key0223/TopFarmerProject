@@ -51,6 +51,11 @@ public class GameScene : BaseScene
         Managers.Object.Add(oven);
 
 
+        GameObject fire = Managers.Resource.Instantiate("Object/Craftable/Campfire");
+        CampfireController cc = oven.GetComponent<CampfireController>();
+        Managers.Object.Add(fire);
+
+
 
         #endregion
         //Screen.SetResolution(640, 480, false);

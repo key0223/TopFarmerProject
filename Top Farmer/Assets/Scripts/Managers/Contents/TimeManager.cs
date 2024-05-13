@@ -118,8 +118,8 @@ public class TimeManager
             {
                 CurrentMinute = 0.0f;
                 CurrentHour++;
-                HourPassedRegistered?.Invoke();
                 UpdateState();
+                HourPassedRegistered?.Invoke();
 
                 if (CurrentHour >= 24)
                 {
