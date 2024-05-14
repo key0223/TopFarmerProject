@@ -11,5 +11,6 @@ namespace Assets.Scripts.Contents.Object
         public int PlayerDbId;
         public string PlayerName;
         public int Coin;
+        public int Hp;
     }
 }

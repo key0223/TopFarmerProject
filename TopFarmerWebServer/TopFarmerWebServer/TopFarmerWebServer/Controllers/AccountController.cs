@@ -86,6 +86,7 @@ namespace TopFarmerWebServer.Controllers
                                 PlayerName = playerDb.PlayerName,
                                 PlayerDbId = playerDb.PlayerDbId,
                                 Coin = 500,
+                                Hp = playerDb.Hp,
                             };
 
                             res.Players.Add(player);
@@ -100,6 +101,7 @@ namespace TopFarmerWebServer.Controllers
                             PlayerName = req.AccountName,
                             AccountDbId = account.AccountDbId,
                             Coin = 500, // 초기 자금
+                            Hp = 100,
                         };
                         _context.Players.Add(newPlayerDb);
                         _context.SaveChangesEx();
@@ -109,6 +111,7 @@ namespace TopFarmerWebServer.Controllers
                             PlayerName = req.AccountName,
                             PlayerDbId = newPlayerDb.PlayerDbId,
                             Coin = newPlayerDb.Coin,
+                            Hp = newPlayerDb.Hp,
                         };
 
                         // 초기 지급 아이템
