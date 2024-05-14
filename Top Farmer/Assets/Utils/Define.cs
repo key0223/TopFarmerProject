@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using UnityEngine;
 
-public class Define 
+public class Define
 {
     #region State
     public enum InventoryState
@@ -94,10 +94,10 @@ public class Define
     #region Type
     public enum InteractableObjectType
     {
-       INTERACTABLE_OBJECT_NONE,
-       INTERACTABLE_OBEJCT_TYPE_STORAGE,
-       INTERACTABLE_OBEJCT_TYPE_NPC,
-       INTERACTABLE_OBEJCT_TYPE_KITCHEN,
+        INTERACTABLE_OBJECT_NONE,
+        INTERACTABLE_OBEJCT_TYPE_STORAGE,
+        INTERACTABLE_OBEJCT_TYPE_NPC,
+        INTERACTABLE_OBEJCT_TYPE_KITCHEN,
     }
     public enum NpcType
     {
@@ -137,7 +137,7 @@ public class Define
     #endregion
 
     #region System Message
-    
+
     public enum SYSTEM_MESSAGE
     {
         Game_NoAddress,
@@ -161,6 +161,17 @@ public class Define
         public PositionInfo posInfo;
     }
 
-   
+    public class StatInfo
+    {
+        public int level;
+        public int hp;
+        public int maxHp;
+        public int hunger;
+        public int maxHunger;
+        public float speed;
+        public int totalExp;
+    }
+
+
     #endregion
 }

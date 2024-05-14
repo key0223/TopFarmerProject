@@ -58,14 +58,8 @@ namespace TopFarmerWebServer.Controllers
         {
             LoginAccountPacketRes res = new LoginAccountPacketRes();
 
-            //AccountDb account = _context.Accounts
-            //    .Include(a => a.Players)
-            //        .Where(a => a.AccountName == req.AccountName && a.Password == req.Password)
-            //        .FirstOrDefault();
-
             AccountDb account = _context.Accounts.Include(a => a.Players)
                 .Where(a => a.AccountName == req.AccountName).FirstOrDefault();
-
 
             if (account == null)
             {
@@ -86,7 +80,16 @@ namespace TopFarmerWebServer.Controllers
                                 PlayerName = playerDb.PlayerName,
                                 PlayerDbId = playerDb.PlayerDbId,
                                 Coin = 500,
-                                Hp = playerDb.Hp,
+                                Stat = new StatInfo()
+                                {
+                                    level = playerDb.Level,
+                                    hp = playerDb.Hp,
+                                    maxHp = playerDb.MaxHp,
+                                    hunger = playerDb.Hunger,
+                                    maxHunger = playerDb.MaxHunger,
+                                    speed = playerDb.Speed,
+                                    totalExp = playerDb.TotalExp,
+                                }
                             };
 
                             res.Players.Add(player);
@@ -101,7 +104,13 @@ namespace TopFarmerWebServer.Controllers
                             PlayerName = req.AccountName,
                             AccountDbId = account.AccountDbId,
                             Coin = 500, // 초기 자금
+                            Level = 1,
                             Hp = 100,
+                            MaxHp = 100,
+                            Hunger = 100,
+                            MaxHunger = 100,
+                            Speed = 5,
+                            TotalExp = 0,
                         };
                         _context.Players.Add(newPlayerDb);
                         _context.SaveChangesEx();
@@ -111,9 +120,18 @@ namespace TopFarmerWebServer.Controllers
                             PlayerName = req.AccountName,
                             PlayerDbId = newPlayerDb.PlayerDbId,
                             Coin = newPlayerDb.Coin,
-                            Hp = newPlayerDb.Hp,
+                            Stat = new StatInfo()
+                            {
+                                level = newPlayerDb.Level,
+                                hp = newPlayerDb.Hp,
+                                maxHp = newPlayerDb.MaxHp,
+                                hunger = newPlayerDb.Hunger,
+                                maxHunger = newPlayerDb.MaxHunger,
+                                speed = newPlayerDb.Speed,
+                                totalExp = newPlayerDb.TotalExp,
+                            },
                         };
-
+                        #region 임시 지급 아이템
                         // 초기 지급 아이템
                         ItemDb itemDb = new ItemDb()
                         {
@@ -188,6 +206,8 @@ namespace TopFarmerWebServer.Controllers
                         _context.Items.Add(itemDb5);
                         _context.Items.Add(itemDb6);
                         _context.Items.Add(itemDb7);
+                        #endregion
+
                         res.Players.Add(newPlayer);
 
                         _context.SaveChangesEx();

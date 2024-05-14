@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Define;
 
 namespace Assets.Scripts.Contents.Object
 {
@@ -11,6 +12,6 @@ namespace Assets.Scripts.Contents.Object
         public int PlayerDbId;
         public string PlayerName;
         public int Coin;
-        public int Hp;
+        public StatInfo Stat;
     }
 }

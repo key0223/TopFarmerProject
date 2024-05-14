@@ -10,6 +10,30 @@ using static Define;
 public class PlayerController : CreatureController
 {
     public PlayerInfo Info { get; private set; }
+
+    public StatInfo Stat
+    {
+        get { return Info.Stat; }
+        set
+        {
+            if (Stat.Equals(value))
+                return;
+
+            Stat.hp = value.hp;
+            Stat.maxHp = value.maxHp;
+            Stat.speed = value.speed;
+            UpdateHpBar();
+        }
+    }
+    public int Hp
+    {
+        get { return Stat.hp; }
+        set
+        {
+            Stat.hp = value;
+            UpdateHpBar();
+        }
+    }
     Coroutine _coSkill;
     Coroutine _coUsingItem;
     Coroutine _coUseToolCooltime;
@@ -21,6 +45,8 @@ public class PlayerController : CreatureController
     public void SetPlayerInfo(PlayerInfo info)
     {
         Info= info;
+        Stat = info.Stat;
+        //UpdateHpBar();
     }
     protected override void Init()
     {
@@ -131,7 +157,23 @@ public class PlayerController : CreatureController
     {
         Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y,-10);
     }
-   
+
+    void UpdateHpBar()
+    {
+        UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
+        UI_ToolBar toolbarUI = gameSceneUI.ToolBarUI;
+
+        if (toolbarUI.HpBar == null)
+            return;
+
+        float ratio = 0.0f;
+        if (Stat.maxHp > 0)
+        {
+            ratio = ((float)Hp / Stat.maxHp);
+        }
+
+        toolbarUI.HpBar.SetHpBar(ratio);
+    }
     // 키보드 입력 이동하는 방향만 설정
     void GetDirInput()
     {
@@ -446,4 +488,10 @@ public class PlayerController : CreatureController
     }
     #endregion
 
+    [ContextMenu("HpCheck")]
+    public void DamagePlayer()
+    {
+        int damage = 10;
+        Hp = Mathf.Max(Stat.hp - damage, 0);
+    }
 }

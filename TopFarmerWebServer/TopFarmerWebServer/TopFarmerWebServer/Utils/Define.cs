@@ -142,7 +142,16 @@
         public int slot { get; set; }
         public bool equipped { get; set; }
     }
-
+    public class StatInfo
+    {
+        public int level { get; set; }
+        public int hp { get; set; }
+        public int maxHp { get; set; }
+        public int hunger { get; set; }
+        public int maxHunger { get; set; }
+        public float speed { get; set; }
+        public int totalExp { get; set; }
+    }
 
     #endregion
 }

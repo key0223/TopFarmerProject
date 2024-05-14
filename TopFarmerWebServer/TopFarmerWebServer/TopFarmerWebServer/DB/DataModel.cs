@@ -22,7 +22,15 @@ namespace TopFarmerWebServer.DB
             public int PlayerDbId { get; set; }
             public string PlayerName { get; set; }
             public int Coin { get; set; }
+
+            public int Level { get; set; }
             public int Hp { get; set; }
+            public int MaxHp { get; set; }
+            public int Hunger { get; set; }
+            public int MaxHunger { get; set; }
+            public float Speed { get;set; }
+            public int TotalExp { get; set; }
+
             [ForeignKey("Account")]
             public int AccountDbId { get; set; }
             public AccountDb Account { get; set; }

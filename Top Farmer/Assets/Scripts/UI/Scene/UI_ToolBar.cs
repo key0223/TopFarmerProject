@@ -13,13 +13,18 @@ public class UI_ToolBar : UI_Base
     enum GameObjects
     {
         Slots,
+        Hp,
+        Hunger,
     }
 
     enum Texts
     {
         MoneyValueText
     }
+
     bool _init = false;
+    public HpBar HpBar { get; private set; }
+    public HungerBar HungerBar { get; private set; }
 
     public List<UI_Inventory_Item> Slots { get; } = new List<UI_Inventory_Item>();
     public override void Init()
@@ -29,6 +34,9 @@ public class UI_ToolBar : UI_Base
         Bind<Text>(typeof(Texts));
 
         GetText((int)Texts.MoneyValueText).text = Managers.Object.PlayerInfo.Coin.ToString();
+
+        HpBar = GetObject((int)GameObjects.Hp).GetComponent<HpBar>();
+        HungerBar = GetObject((int)GameObjects.Hunger).GetComponent<HungerBar>();
 
         GameObject slots = GetObject((int)GameObjects.Slots);
         foreach(Transform child in slots.transform)
