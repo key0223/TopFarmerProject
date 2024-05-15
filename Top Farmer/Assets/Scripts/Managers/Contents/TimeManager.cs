@@ -61,8 +61,6 @@ public class TimeManager
         CurrentDayOfWeek = gameTime.week;
         CurrentMonth = gameTime.month;
         CurrentYear = gameTime.year;
-
-
     }
     public void Init()
     {
@@ -80,7 +78,7 @@ public class TimeManager
         {
             State = DayState.Dawn;
             UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
-            gameSceneUI.NightUIOn();
+            //gameSceneUI.NightUIOn();
             Debug.Log("Dawn");
         }
         else if (CurrentHour >= 7 && CurrentHour < 17)
@@ -99,7 +97,7 @@ public class TimeManager
         {
             State = DayState.Night;
             UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
-            gameSceneUI.NightUIOff();
+            //gameSceneUI.NightUIOff();
             Debug.Log("Night");
         }
 

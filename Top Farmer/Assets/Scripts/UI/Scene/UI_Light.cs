@@ -20,14 +20,14 @@ public class UI_Light : UI_Base
 
     Coroutine _coUpdateAlpha = null;
 
-    float _dawnIntensity = 5f;
-    Color _dawnColor = new Color(0.1f, 0.08f, 0.15f);
-    float _dayIntensity = 1.0f;
-    Color _dayColor = Color.white;
-    float _noonIntensity = 1.28f;
-    Color _noonColor = new Color(0.83f, 0.57f, 0.31f);
-    float _nightIntensity = 1.3f;
-    Color _nightColor = new Color(0.05f, 0.057f, 0.11f);
+     float _dawnIntensity = 1f;
+     Color _dawnColor = new Color(0.28f, 0.35f, 0.45f);
+     float _dayIntensity = 1.0f;
+     Color _dayColor = Color.white;
+     float _noonIntensity = 1.28f;
+     Color _noonColor = new Color(0.83f, 0.57f, 0.31f);
+     float _nightIntensity = 1.3f;
+     Color _nightColor = new Color(0.05f, 0.057f, 0.11f);
    
 
     float transitionDuration = 3f;
