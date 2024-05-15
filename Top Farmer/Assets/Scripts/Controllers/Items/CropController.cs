@@ -24,9 +24,6 @@ public class CropController : ItemController
         _sprite = gameObject.GetComponent<SpriteRenderer>();
         Sprite sprite = Managers.Resource.Load<Sprite>($"{_cropData.iconPath}");
         _sprite.sprite = sprite;
-
-        ItemGetEffect getEffect = GetComponent<ItemGetEffect>();
-        getEffect.ItemDropped = true;
     }
 
    
