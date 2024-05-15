@@ -17,6 +17,7 @@ namespace TopFarmerWebServer.Data
         public static Dictionary<string, Data.StringData> StringDict { get; private set; } = new Dictionary<string, Data.StringData>();
         #endregion
 
+        public static Dictionary<int, Data.MonsterData> MonsterDict { get; private set; } = new Dictionary<int, MonsterData>();
         public static void LoadData()
         {
             #region Item
@@ -31,6 +32,8 @@ namespace TopFarmerWebServer.Data
 
             Dictionary<int, Data.NpcData> merchantDict = LoadJson<Data.MerchantNpcLoader, int, Data.NpcData>("NpcData_Merchant").MakeDict();
             NpcDict = CombinedDict<int, Data.NpcData>(merchantDict);
+
+            MonsterDict = LoadJson<Data.MonsterLoader, int, Data.MonsterData>("MonsterData_Monster").MakeDict();
 
             #region String
             Dictionary<string, Data.StringData> npcStringDict = LoadJson<Data.StringLoader, string, Data.StringData>("StringData_Npc").MakeDict();

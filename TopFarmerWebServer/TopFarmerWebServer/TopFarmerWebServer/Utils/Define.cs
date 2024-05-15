@@ -76,6 +76,12 @@
     {
         NPC_TYPE_MERCHANT,
     }
+    public enum MonsterType
+    {
+        MONSTER_TYPE_CONTACT,
+        MONSTER_TYPE_RANGED,
+        MONSTER_TYPE_COUNTERATTACK,
+    }
     public enum ObjectType
     {
         OBJECT_TYPE_NONE,
@@ -83,6 +89,7 @@
         OBJECT_TYPE_ITEM,
         OBJECT_TYPE_INTERACTABLE_OBJECT,
         OBJECT_TYPE_NPC,
+        OBJECT_TYPE_MONSTER,
     }
     public enum ItemType
     {

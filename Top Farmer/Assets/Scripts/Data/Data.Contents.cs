@@ -270,7 +270,42 @@ namespace Data
 
     #endregion
 
-  
+    #region Monster
+
+    [Serializable]
+    public class MonsterData
+    {
+        public int monsterId;
+        public string name;
+        public MonsterType monsterType;
+        public string prefabPath;
+        public int level;
+        public int maxHp;
+        public int attack;
+        public float speed;
+        public int totalExp;
+
+    }
+    [Serializable]
+    public class MonsterLoader : ILoader<int, MonsterData>
+    {
+        public List<MonsterData> array = new List<MonsterData>();
+
+        public Dictionary<int, MonsterData> MakeDict()
+        {
+            Dictionary<int,MonsterData> dict = new Dictionary<int, MonsterData>();
+            foreach(MonsterData monster in array)
+            {
+                dict.Add(monster.monsterId, monster);
+            }
+            return dict;
+        }
+    }
+        
+
+   
+    #endregion
+
     #region File System SavsFiles
     [Serializable]
     public class GameTime
