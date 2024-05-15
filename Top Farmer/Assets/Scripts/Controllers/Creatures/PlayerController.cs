@@ -51,7 +51,7 @@ public class PlayerController : CreatureController
     protected override void Init()
     {
         base.Init();
-        Texture2D tex = Managers.Resource.Load<Texture2D>("Textures/Cursor/Cursor");
+        Texture2D tex = Managers.Resource.Load<Texture2D>("Textures/Icon/Cursor");
         UnityEngine.Cursor.SetCursor(tex, new Vector2(tex.width/5,tex.height/5), CursorMode.Auto);
     }
     protected override void UpdateAnimation()
