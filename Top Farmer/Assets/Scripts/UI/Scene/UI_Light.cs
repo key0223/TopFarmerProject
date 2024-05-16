@@ -62,7 +62,7 @@ public class UI_Light : UI_Base
 
                 if (_coUpdateAlpha != null)
                     return;
-                GetText((int)Texts.MessageText).gameObject.SetActive(false);
+                //GetText((int)Texts.MessageText).gameObject.SetActive(false);
                 _coUpdateAlpha = StartCoroutine("CoUpdateAlpha");
                 break;
             case DayState.Day:
@@ -94,7 +94,7 @@ public class UI_Light : UI_Base
               
                 if (_coUpdateAlpha != null)
                     return;
-                GetText((int)Texts.MessageText).gameObject.SetActive(true);
+               // GetText((int)Texts.MessageText).gameObject.SetActive(true);
                 _coUpdateAlpha = StartCoroutine("CoUpdateAlpha");
                 break;
         }

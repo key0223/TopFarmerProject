@@ -19,10 +19,10 @@ public class CampfireController : ItemController
     float _dayRadiusOut = 3f;
     float _dayStrength = 1;
 
-    float _nightIntensity = 0.6f;
+    float _nightIntensity = 0.5f;
     float _nightRadiusIn = 0.2f;
-    float _nightRadiusOut = 4f;
-    float _nightStrength = 0.65f;
+    float _nightRadiusOut = 5f;
+    float _nightStrength = 0.8f;
 
     float _transitionDuration = 2f;
 
@@ -36,7 +36,7 @@ public class CampfireController : ItemController
     float _targetRadiusOut;
     float _targetStrength;
 
-    private DayState _state = DayState.Dawn;
+    private DayState _state;
     public DayState State
     {
         get { return _state; }
@@ -44,6 +44,7 @@ public class CampfireController : ItemController
         {
             if (_state == value)
                 return;
+
             _state = value;
             UpdateLight();
 
@@ -56,7 +57,7 @@ public class CampfireController : ItemController
         light = gameObject.GetComponentInChildren<Light2D>();
         Managers.Time.HourPassedRegistered -= UpdateState;
         Managers.Time.HourPassedRegistered += UpdateState;
-        _state = Managers.Time.State;
+        State = Managers.Time.State;
 
     }
     protected  void SetItem()
@@ -80,6 +81,25 @@ public class CampfireController : ItemController
     {
         switch(State)
         {
+            case DayState.Dawn:
+                {
+                    if(_targetIntensity == _nightIntensity)
+                        return;
+
+                    _currentIntensity = _dayIntensity;
+                    _currentRadiusIn = _dayRadiusIn;
+                    _currentRadiusOut = _dayRadiusOut;
+                    _currentStrength = _dayStrength;
+
+                    _targetIntensity = _nightIntensity;
+                    _targetRadiusIn = _nightRadiusIn;
+                    _targetRadiusOut = _nightRadiusOut;
+                    _targetStrength = _nightStrength;
+                    StartCoroutine("CoUpdateLight");
+
+                }
+
+                break;
             case DayState.Day:
                 {
                     _currentIntensity = _nightIntensity;
@@ -110,7 +130,21 @@ public class CampfireController : ItemController
                 break;
             case DayState.Night:
                 {
-                  
+                    if (_targetIntensity == _nightIntensity)
+                        return;
+
+                    _currentIntensity = _dayIntensity;
+                    _currentRadiusIn = _dayRadiusIn;
+                    _currentRadiusOut = _dayRadiusOut;
+                    _currentStrength = _dayStrength;
+
+                    _targetIntensity = _nightIntensity;
+                    _targetRadiusIn = _nightRadiusIn;
+                    _targetRadiusOut = _nightRadiusOut;
+                    _targetStrength = _nightStrength;
+                    StartCoroutine("CoUpdateLight");
+
+
                 }
                 break;
         }

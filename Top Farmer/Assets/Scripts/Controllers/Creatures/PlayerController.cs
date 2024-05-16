@@ -136,8 +136,8 @@ public class PlayerController : CreatureController
     }
     protected override void UpdateController()
     {
-        if (Managers.Time.State == DayState.Night)
-            return;
+        //if (Managers.Time.State == DayState.Night)
+        //    return;
 
         GetUIKeyInput();
         switch (State)
