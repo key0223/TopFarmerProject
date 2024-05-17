@@ -61,6 +61,8 @@ public class MapManager
         int y = MaxY - cellPos.y;
         return !_collision[y, x];
     }
+
+    
     public bool CanInteract(Vector3Int cellPos)
     {
         if (cellPos.x < MinX || cellPos.x > MaxX)

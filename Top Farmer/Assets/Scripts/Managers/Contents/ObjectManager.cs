@@ -8,13 +8,34 @@ public class ObjectManager
 {
     //Dictionary<int, GameObject> _items = new Dictionary<int, GameObject>();
     List<GameObject> _objects = new List<GameObject>();
+    GameObject[,] _objPos;
+
     public PlayerInfo PlayerInfo { get; set; }
     public PlayerController Player { get; set; }
+
+    public void Init()
+    {
+        int xCount = Managers.Map.SizeX;
+        int yCount = Managers.Map.SizeY;
+
+        _objPos = new GameObject[yCount, xCount];
+    }
 
     public static ItemType GetObjectTypeByItemType(int id)
     {
         int type = (id / 100) & 0x7F;
         return (ItemType)type;
+    }
+   
+
+    public void UpdateObjectPos(GameObject gameObject, Vector2Int destPos )
+    {
+        int x = gameObject.GetComponent<ObjectController>().CellPos.x;
+        int y = gameObject.GetComponent<ObjectController>().CellPos.y;
+
+        _objPos[y, x] = null;
+        _objPos[destPos.y, x] = gameObject;
+
     }
 
     #region Objects
@@ -26,25 +47,28 @@ public class ObjectManager
             Player = go.GetComponent<PlayerController>();
             Player.SetPlayerInfo(PlayerInfo);
         }
+        else
+        {
+            int x = go.GetComponent<ObjectController>().CellPos.x;
+            int y = go.GetComponent<ObjectController>().CellPos.y;
+
+            _objPos[y, x] = go;
+        }
+        
+
     }
 
     public void Remove(GameObject go)
     {
+        int x = go.GetComponent<ObjectController>().CellPos.x;
+        int y = go.GetComponent<ObjectController>().CellPos.y;
+
+        _objPos[y, x] = null;
         _objects.Remove(go);
     }
 
     public GameObject Find(Vector3Int cellPos)
     {
-        //foreach(GameObject obj in _objects)
-        //{
-        //    CreatureController cc = obj.GetComponent<CreatureController>();
-        //    if (cc == null)
-        //        continue;
-
-        //    if(cc.CellPos== cellPos)
-        //        return obj;
-        //}
-
         foreach(GameObject obj in _objects)
         {
             InteractableObject ic = obj.GetComponent<InteractableObject>();
@@ -57,6 +81,18 @@ public class ObjectManager
         }
 
         return null;
+    }
+   
+    public GameObject Find(Vector2Int cellPos)
+    {
+        if (cellPos.x < Managers.Map.MinX || cellPos.x> Managers.Map.MaxX)
+            return null;
+        if (cellPos.y < Managers.Map.MinY || cellPos.y > Managers.Map.MaxY)
+            return null;
+
+        int x = cellPos.x - Managers.Map.MinX;
+        int y = Managers.Map.MaxY - cellPos.y;
+        return _objPos[y, x];
     }
 
     public GameObject FindLandObject(Vector3Int cellPos)

@@ -16,6 +16,7 @@ public class Managers : MonoBehaviour
     TimeManager _time = new TimeManager();
     WebManager _web = new WebManager();
     NpcManager _npc = new NpcManager();
+    SpawnManager _spwan = new SpawnManager();
     public static InventoryManager Inven { get { return Instance._inven; } }
     public static MapManager Map { get { return Instance._map; } }
     public static ObjectManager Object { get { return Instance._obj; } }
@@ -24,6 +25,8 @@ public class Managers : MonoBehaviour
     public static WebManager Web { get {  return Instance._web; } }
 
     public static NpcManager Npc { get { return Instance._npc; } }
+    public static SpawnManager Spwan { get { return Instance._spwan; } }
+
 
     #endregion
 
