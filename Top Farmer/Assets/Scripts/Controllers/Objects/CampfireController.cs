@@ -68,7 +68,7 @@ public class CampfireController : ItemController
         //_sprite.sprite = Managers.Resource.Load<Sprite>($"{_crafingData.iconPath}");
 
         transform.position = Managers.Map.CurrentGrid.CellToWorld(CellPos) + new Vector3(0.5f, 0.5f);
-        ObjectType = ObjectType.OBJECT_TYPE_INTERACTABLE_OBJECT;
+        //ObjectType = ObjectType.OBJECT_TYPE_INTERACTABLE_OBJECT;
         InteractableObject interactableObject = Util.GetOrAddComponent<InteractableObject>(gameObject);
         interactableObject.InteractableId = InteractableObjectType.INTERACTABLE_OBJECT_NONE;
     }

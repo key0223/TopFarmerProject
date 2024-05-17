@@ -18,6 +18,9 @@ public class GameScene : BaseScene
         #region Temp
         GameObject player = Managers.Resource.Instantiate("Creature/Player");
         player.name = "Player";
+        PlayerController pc = player.GetComponent<PlayerController>();
+        pc.ObjectType = ObjectType.OBJECT_TYPE_PLAYER;
+
         Managers.Object.Add(player,player:true);
 
         // Npc
@@ -34,20 +37,16 @@ public class GameScene : BaseScene
         merchantGo.name = "Merchant";
 
         MerchantController mc1 = merchantGo.GetComponent<MerchantController>();
-        mc1.ObjectType = ObjectType.OBJECT_TYPE_INTERACTABLE_OBJECT;
+        mc1.ObjectType = ObjectType.OBJECT_TYPE_CREATURE;
         mc1.Npc = merchant1;
 
         Managers.Object.Add(merchantGo);
         Managers.Npc.Init();
 
-
-        GameObject chest = Managers.Resource.Instantiate("Object/Craftable/Interactable/Chest");
-        chest.name = "Chest";
-        Managers.Object.Add(chest);
-
         // Oven
         GameObject oven = Managers.Resource.Instantiate("Object/Craftable/Interactable/Oven");
         OvenController oc = oven.GetComponent<OvenController>();
+        oc.ObjectType = ObjectType.OBJECT_TYPE_OBJECT;
         Managers.Object.Add(oven);
 
 

@@ -91,32 +91,16 @@ public class Define
     }
     #endregion
 
-    #region Type
-    public enum InteractableObjectType
-    {
-        INTERACTABLE_OBJECT_NONE,
-        INTERACTABLE_OBEJCT_TYPE_STORAGE,
-        INTERACTABLE_OBEJCT_TYPE_NPC,
-        INTERACTABLE_OBEJCT_TYPE_KITCHEN,
-    }
-    public enum NpcType
-    {
-        NPC_TYPE_MERCHANT,
-    }
-    public enum MonsterType
-    {
-        MONSTER_TYPE_CONTACT,
-        MONSTER_TYPE_RANGED,
-        MONSTER_TYPE_COUNTERATTACK,
-    }
+    // TYPE
     public enum ObjectType
     {
-        OBJECT_TYPE_NONE,
+        OBJECT_TYPE_PLAYER,
+        OBJECT_TYPE_OBJECT,
         OBJECT_TYPE_ITEM,
-        OBJECT_TYPE_INTERACTABLE_OBJECT,
-        OBJECT_TYPE_NPC,
-        OBJECT_TYPE_MONSTER,
+        OBJECT_TYPE_CREATURE,
     }
+
+    #region Item
     public enum ItemType
     {
         ITEM_TYPE_NONE,
@@ -125,8 +109,8 @@ public class Define
         ITEM_TYPE_SEED,
         ITEM_TYPE_CRAFTING,
         ITEM_TYPE_FOOD,
-        ITEM_TYPE_MODERN,
     }
+   
     public enum ToolType
     {
         TOOL_TYPE_NONE,
@@ -140,8 +124,39 @@ public class Define
         CRAFTING_TYPE_KITCHEN,
         CRAFTING_TYPE_DECORATION,
     }
-
     #endregion
+
+    #region Creature
+    public enum CreatureType
+    {
+        CREATURE_TYPE_NPC,
+        CREATURE_TYPE_MONSTER,
+    }
+    public enum NpcType
+    {
+        NPC_TYPE_MERCHANT,
+    }
+    public enum MonsterType
+    {
+        MONSTER_TYPE_CONTACT,
+        MONSTER_TYPE_RANGED,
+        MONSTER_TYPE_COUNTERATTACK,
+    }
+    #endregion
+    public enum InteractableObjectType
+    {
+        INTERACTABLE_OBJECT_NONE,
+        INTERACTABLE_OBEJCT_TYPE_STORAGE,
+        INTERACTABLE_OBEJCT_TYPE_NPC,
+        INTERACTABLE_OBEJCT_TYPE_KITCHEN,
+    }
+ 
+   
+  
+   
+ 
+   
+
 
     #region System Message
 

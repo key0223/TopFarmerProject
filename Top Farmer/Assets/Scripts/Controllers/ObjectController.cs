@@ -9,6 +9,7 @@ using static Define;
 // 맵 위에 생성되는 모든 오브젝트를 관리합니다.
 public class ObjectController : MonoBehaviour
 {
+    public int ObjectId { get; set; }
     public ObjectType ObjectType { get; set; }
     public Vector3Int CellPos { get; set; } = Vector3Int.zero;
     public SpriteRenderer _sprite;

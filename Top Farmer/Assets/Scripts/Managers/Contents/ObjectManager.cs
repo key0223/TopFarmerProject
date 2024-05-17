@@ -8,19 +8,19 @@ public class ObjectManager
 {
     //Dictionary<int, GameObject> _items = new Dictionary<int, GameObject>();
     List<GameObject> _objects = new List<GameObject>();
-    GameObject[,] _objPos;
 
     public PlayerInfo PlayerInfo { get; set; }
     public PlayerController Player { get; set; }
 
-    public void Init()
+    Dictionary<int, ObjectController> _objects2 = new Dictionary<int, ObjectController>();
+    Dictionary<int, CreatureController> _creatures = new Dictionary<int, CreatureController>();
+    Dictionary<int, MonsterController> _monsters = new Dictionary<int, MonsterController>();
+
+    int _counter = 0; //
+    int GenerateId(ObjectType type)
     {
-        int xCount = Managers.Map.SizeX;
-        int yCount = Managers.Map.SizeY;
-
-        _objPos = new GameObject[yCount, xCount];
+        return ((int)type << 24) | (_counter++);
     }
-
     public static ItemType GetObjectTypeByItemType(int id)
     {
         int type = (id / 100) & 0x7F;
@@ -28,42 +28,55 @@ public class ObjectManager
     }
    
 
-    public void UpdateObjectPos(GameObject gameObject, Vector2Int destPos )
-    {
-        int x = gameObject.GetComponent<ObjectController>().CellPos.x;
-        int y = gameObject.GetComponent<ObjectController>().CellPos.y;
-
-        _objPos[y, x] = null;
-        _objPos[destPos.y, x] = gameObject;
-
-    }
-
     #region Objects
     public void Add(GameObject go, bool player = false)
     {
-        _objects.Add(go);
+        ObjectController oc = go.GetComponent<ObjectController>();
+        oc.ObjectId = GenerateId(oc.ObjectType);
+
         if(player)
         {
             Player = go.GetComponent<PlayerController>();
             Player.SetPlayerInfo(PlayerInfo);
+
+            CreatureController cc = (CreatureController)Player;
+            _creatures.Add(cc.ObjectId, cc);
         }
-        else
+
+        if(oc.ObjectType == ObjectType.OBJECT_TYPE_OBJECT)
         {
-            int x = go.GetComponent<ObjectController>().CellPos.x;
-            int y = go.GetComponent<ObjectController>().CellPos.y;
-
-            _objPos[y, x] = go;
+            _objects2.Add(oc.ObjectId, oc);
         }
-        
+        else if(oc.ObjectType == ObjectType.OBJECT_TYPE_CREATURE )
+        {
+            CreatureController cc = (CreatureController)oc;
 
+            switch (cc.CreatureType)
+            {
+                case CreatureType.CREATURE_TYPE_NPC:
+                    _creatures.Add(cc.ObjectId, cc);
+                    break;
+                case CreatureType.CREATURE_TYPE_MONSTER:
+                    {
+                        MonsterController mc = (MonsterController)oc;
+                        _monsters.Add(mc.ObjectId, mc);
+                    }
+                    break;
+            }
+
+        }
+
+        Managers.Map.Add(go);
+        //_objects.Add(go);
+        //if(player)
+        //{
+        //    Player = go.GetComponent<PlayerController>();
+        //    Player.SetPlayerInfo(PlayerInfo);
+        //}
     }
 
     public void Remove(GameObject go)
     {
-        int x = go.GetComponent<ObjectController>().CellPos.x;
-        int y = go.GetComponent<ObjectController>().CellPos.y;
-
-        _objPos[y, x] = null;
         _objects.Remove(go);
     }
 
@@ -83,18 +96,6 @@ public class ObjectManager
         return null;
     }
    
-    public GameObject Find(Vector2Int cellPos)
-    {
-        if (cellPos.x < Managers.Map.MinX || cellPos.x> Managers.Map.MaxX)
-            return null;
-        if (cellPos.y < Managers.Map.MinY || cellPos.y > Managers.Map.MaxY)
-            return null;
-
-        int x = cellPos.x - Managers.Map.MinX;
-        int y = Managers.Map.MaxY - cellPos.y;
-        return _objPos[y, x];
-    }
-
     public GameObject FindLandObject(Vector3Int cellPos)
     {
         foreach (GameObject obj in _objects)

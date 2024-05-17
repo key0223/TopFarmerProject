@@ -8,6 +8,8 @@ public class CreatureController : ObjectController
     float _speed = 5f;
     protected Animator _animator;
 
+    public CreatureType CreatureType { get; set; }
+
     protected CreatureState _state = CreatureState.Idle;
     public CreatureState State
     {
@@ -230,14 +232,19 @@ public class CreatureController : ObjectController
 
             State = CreatureState.Moving;
 
-            
-            if (Managers.Map.CanGo(destPos))
+
+            if(Managers.Map.UpdateObjectPos(this.gameObject, (Vector2Int)destPos))
             {
-                if (Managers.Object.Find(destPos) == null)
-                {
-                    CellPos = destPos;
-                }
+                CellPos = destPos;
             }
+            
+            //if (Managers.Map.CanGo(destPos))
+            //{
+            //    if (Managers.Map.Find((Vector2Int)destPos) == null)
+            //    {
+            //        CellPos = destPos;
+            //    }
+            //}
         }
     }
     // Ω∫∏£∏§ ¿Ãµø

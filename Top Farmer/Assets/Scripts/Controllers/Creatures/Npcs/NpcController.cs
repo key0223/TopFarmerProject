@@ -23,7 +23,7 @@ public class NpcController : CreatureController
         //Npc = Npc.Init(templatedId);
         CellPos = new Vector3Int(4, -2);
         transform.position = Managers.Map.CurrentGrid.CellToWorld(CellPos) + new Vector3(0.5f, 0.5f);
-        if (ObjectType == ObjectType.OBJECT_TYPE_INTERACTABLE_OBJECT)
+        if (ObjectType == ObjectType.OBJECT_TYPE_CREATURE)
         {
             InteractableObject merchantInteract = Util.GetOrAddComponent<InteractableObject>(gameObject);
             merchantInteract.InteractableId = InteractableObjectType.INTERACTABLE_OBEJCT_TYPE_NPC;

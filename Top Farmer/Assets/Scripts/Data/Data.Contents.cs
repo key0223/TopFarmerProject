@@ -173,26 +173,6 @@ namespace Data
         }
     }
     
-    public class ModernData : ItemData
-    {
-        public bool sellable;
-    }
-    [Serializable]
-    public class ModernItemLoader : ILoader<int, ItemData>
-    {
-        public List<ModernData> array = new List<ModernData>();
-        public Dictionary<int, ItemData> MakeDict()
-        {
-            Dictionary<int, ItemData> dict = new Dictionary<int, ItemData>();
-
-            foreach (ItemData modern in array)
-            {
-                modern.itemType = ItemType.ITEM_TYPE_MODERN;
-                dict.Add(modern.itemId, modern);
-            }
-            return dict;
-        }
-    }
     #endregion
 
     [Serializable]

@@ -1,9 +1,11 @@
+using Data;
 using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Tilemaps;
 
 public struct Pos
@@ -44,13 +46,16 @@ public class MapManager
     bool[,] _collision;
     bool[,] _interactable;
 
+    GameObject[,] _objects;
+
+
 
     /// <summary>
     /// 갈 수 있는 영역을 판별합니다.
     /// </summary>
     /// <param name="cellPos"></param>
     /// <returns></returns>
-    public bool CanGo(Vector3Int cellPos)
+    public bool CanGo(Vector3Int cellPos, bool checkObjects = true)
     {
         if (cellPos.x < MinX || cellPos.x > MaxX)
             return false;
@@ -59,10 +64,58 @@ public class MapManager
 
         int x = cellPos.x - MinX;
         int y = MaxY - cellPos.y;
-        return !_collision[y, x];
+        return !_collision[y, x] && (!checkObjects || _objects[y, x] == null);
+    }
+    public void Add(GameObject gameObject)
+    {
+       
+        ObjectController oc = gameObject.GetComponent<ObjectController>();
+        int x = oc.CellPos.x; ;
+        int y = oc.CellPos.y;
+
+        _objects[x, y] = gameObject;
+    }
+    public GameObject Find(Vector2Int cellPos)
+    {
+        if (cellPos.x < MinX || cellPos.x > MaxX)
+            return null;
+        if (cellPos.y < MinY || cellPos.y > MaxY)
+            return null;
+
+        int x = cellPos.x - MinX;
+        int y = MaxY - cellPos.y;
+        return _objects[y, x];
     }
 
-    
+    public bool UpdateObjectPos(GameObject gameObject, Vector2Int dest, bool checkObjects = true, bool collision = true)
+    {
+        if (CanGo((Vector3Int)dest, checkObjects) == false)
+            return false ;
+
+        ObjectController oc = gameObject.GetComponent<ObjectController>();
+        
+        if(collision)
+        {
+            {
+                int x = oc.CellPos.x - MinX;
+                int y = MaxX - oc.CellPos.y;
+
+                if (_objects[y, x] == gameObject)
+                    _objects[y, x] = null;
+            }
+            {
+                int x = dest.x - MinX;
+                int y = MaxY - dest.y;
+                _objects[y, x] = gameObject;
+
+            }
+        }
+
+        return true;
+
+    }
+
+
     public bool CanInteract(Vector3Int cellPos)
     {
         if (cellPos.x < MinX || cellPos.x > MaxX)

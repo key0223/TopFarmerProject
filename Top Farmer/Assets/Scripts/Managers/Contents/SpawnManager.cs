@@ -20,12 +20,12 @@ public class SpawnManager
             randSpawnPos.x = Random.Range(Managers.Object.Player.CellPos.x - 10, Managers.Object.Player.CellPos.x + 10);
             randSpawnPos.y = Random.Range(Managers.Object.Player.CellPos.y - 10, Managers.Object.Player.CellPos.y + 10);
 
-            if(Managers.Object.Find(randSpawnPos) == null )
-            {
-                gameObject.GetComponent<ObjectController>().CellPos = (Vector3Int)randSpawnPos;
-                Managers.Object.Add(gameObject);
+            //if(Managers.Object.Find(randSpawnPos) == null )
+            //{
+            //    gameObject.GetComponent<ObjectController>().CellPos = (Vector3Int)randSpawnPos;
+            //    Managers.Object.Add(gameObject);
 
-            }
+            //}
 
         }
     }

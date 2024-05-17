@@ -246,12 +246,12 @@ public class PlayerController : CreatureController
 
                 }
             }
-            else if(oc.ObjectType == ObjectType.OBJECT_TYPE_INTERACTABLE_OBJECT)
-            {
-                UI_EventHandler evt = Util.GetOrAddComponent<UI_EventHandler>(go);
-                InteractableObject interactableObj = Util.GetOrAddComponent<InteractableObject>(go);
-                Managers.InteractableObject.OnInteract(interactableObj);
-            }
+            //else if(oc.ObjectType == ObjectType.OBJECT_TYPE_INTERACTABLE_OBJECT)
+            //{
+            //    UI_EventHandler evt = Util.GetOrAddComponent<UI_EventHandler>(go);
+            //    InteractableObject interactableObj = Util.GetOrAddComponent<InteractableObject>(go);
+            //    Managers.InteractableObject.OnInteract(interactableObj);
+            //}
 
         }
         else if(Input.GetKeyDown(KeyCode.P))
@@ -414,7 +414,7 @@ public class PlayerController : CreatureController
         GameObject plowed = Managers.Resource.Instantiate($"Object/Land/Land_Plowed");
         plowed.name = "Land_Plowed";
         PlowedLandController pc = plowed.GetComponent<PlowedLandController>();
-        pc.ObjectType = ObjectType.OBJECT_TYPE_NONE;
+        //pc.ObjectType = ObjectType.OBJECT_TYPE_NONE;
         pc.CellPos = GetFrontCellPos();
         pc.IsUsing = false;
         Managers.Object.Add(plowed);

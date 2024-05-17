@@ -68,55 +68,5 @@ public class SaveLoadManager
         }
     }
 
-    public void GetSaveObject()
-    {
-        List<GameObject> currentObjects = Managers.Object.GetGameObjects();
-
-        foreach (GameObject gameObject in currentObjects)
-        {
-            ItemController ic = gameObject.GetComponent<ItemController>();
-            if (ic == null)
-                continue;
-
-            if (ic.ObjectType == ObjectType.OBJECT_TYPE_NONE)
-            {
-                PlowedLandController pc = (PlowedLandController)ic;
-
-                SaveLand sl = new SaveLand()
-                {
-                    objectType = pc.ObjectType,
-                    cellPos = pc.CellPos,
-                    isUsing = pc.IsUsing,
-                };
-
-               // CurrentGameData.landList.Add(sl);
-            }
-            else if(ic.ObjectType == ObjectType.OBJECT_TYPE_ITEM)
-            {
-                switch(ic.Item.ItemType)
-                {
-                    case ItemType.ITEM_TYPE_SEED:
-                        {
-                            SeedController sc = (SeedController)ic;
-
-                            SaveSeed ss = new SaveSeed()
-                            {
-                                objectType = sc.ObjectType,
-                                cellPos = sc.CellPos,
-                                itemType = sc.Item.ItemType,
-                                seedState = sc.State,
-                                itemDbId = sc.Item.ItemDbId,
-                                templatedId = sc.Item.TemplatedId,
-                                currentGrowthDay = sc.currentGrowthDay,
-                            };
-                            //CurrentGameData.seedList.Add(ss);
-                        }
-                        break;
-                    case ItemType.ITEM_TYPE_CRAFTING:
-                        break;
-
-                }    
-            }
-        }
-    }
+   
 }
