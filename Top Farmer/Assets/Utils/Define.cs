@@ -173,8 +173,7 @@ public class Define
         public int level;
         public int hp;
         public int maxHp;
-        public int hunger;
-        public int maxHunger;
+        public int attack;
         public float speed;
         public int totalExp;
     }
