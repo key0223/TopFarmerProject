@@ -134,7 +134,7 @@ public class MerchantController : NpcController
 
             // npc 대화 설정
             int randStringId = Random.Range(1, 6);
-            string messageId = string.Format("npcText({0}{1}{2})", Merchant.Info.templatedId, (int)MerchantState, randStringId);
+            string messageId = string.Format("npcText({0}{1}{2})", Merchant.TemplatedId, (int)MerchantState, randStringId);
             string randMessage = Managers.Data.StringDict[messageId].ko;
             tradedUI.SetMessageText(randMessage);
         }
@@ -148,7 +148,7 @@ public class MerchantController : NpcController
             UI_TextBox textBoxUI = Managers.UI.MakeWorldSpaceUI<UI_TextBox>(transform);
 
             int randStringId = Random.Range(1, 6);
-            string messageId = string.Format("npcText({0}{1}{2})", Merchant.Info.templatedId, (int)MerchantState, randStringId);
+            string messageId = string.Format("npcText({0}{1}{2})", Merchant.TemplatedId, (int)MerchantState, randStringId);
             string randMessage = Managers.Data.StringDict[messageId].ko;
             textBoxUI.SetMessageText(randMessage);
         }
@@ -174,7 +174,7 @@ public class MerchantController : NpcController
 
             // npc 대화 설정
             int randStringId = Random.Range(1, 6);
-            string messageId = string.Format("npcText({0}{1}{2})", Merchant.Info.templatedId, (int)MerchantState, randStringId);
+            string messageId = string.Format("npcText({0}{1}{2})", Merchant.TemplatedId, (int)MerchantState, randStringId);
             string randMessage = Managers.Data.StringDict[messageId].ko;
             merchantUI.SetMessageText(randMessage);
 

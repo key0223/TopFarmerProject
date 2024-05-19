@@ -197,34 +197,23 @@ namespace Data
         }
 
     }
-    #region Npc
+
+
+    #region Creature
+
 
     [Serializable]
-    public class NpcData
+    public class NpcData 
     {
+        public ObjectType ObjectType;
         public int npcId;
         public string name;
-        public NpcType npcType;
+        public CreatureType creatureType;
         public string prefabPath;
+        public NpcType npcType;
     }
-    [Serializable]
-    public class NpcLoader : ILoader<int, NpcData>
-    {
-        public List<NpcData> array = new List<NpcData>();
-        public Dictionary<int, NpcData> MakeDict()
-        {
-            Dictionary<int, NpcData> dict = new Dictionary<int, NpcData>();
-
-            foreach (NpcData npc in array)
-            {
-                npc.npcType = NpcType.NPC_TYPE_MERCHANT;
-                dict.Add(npc.npcId, npc);
-            }
-            return dict;
-        }
-    }
-
-    public class MerchantData : NpcData
+    
+    public class MerchantData  : NpcData
     {
         public int dayOffPeriod;
         public int workingInPeriod;
@@ -239,33 +228,34 @@ namespace Data
         {
             Dictionary<int, NpcData> dict = new Dictionary<int, NpcData>();
 
-            foreach (NpcData merchant in array)
+            foreach (MerchantData merchant in array)
             {
+                merchant.ObjectType = ObjectType.OBJECT_TYPE_CREATURE;
+                merchant.creatureType = CreatureType.CREATURE_TYPE_NPC;
                 merchant.npcType = NpcType.NPC_TYPE_MERCHANT;
+
                 dict.Add(merchant.npcId, merchant);
             }
             return dict;
         }
     }
 
-    #endregion
-
-    #region Monster
-
     [Serializable]
     public class MonsterData
     {
+        public ObjectType ObjectType;
         public int monsterId;
         public string name;
-        public MonsterType monsterType;
+        public CreatureType creatureType;
         public string prefabPath;
+        public MonsterType monsterType;
         public int level;
         public int maxHp;
         public int attack;
         public float speed;
         public int totalExp;
-
     }
+
     [Serializable]
     public class MonsterLoader : ILoader<int, MonsterData>
     {
@@ -273,18 +263,20 @@ namespace Data
 
         public Dictionary<int, MonsterData> MakeDict()
         {
-            Dictionary<int,MonsterData> dict = new Dictionary<int, MonsterData>();
-            foreach(MonsterData monster in array)
+            Dictionary<int, MonsterData> dict = new Dictionary<int, MonsterData>();
+            foreach (MonsterData monster in array)
             {
+                monster.ObjectType = ObjectType.OBJECT_TYPE_CREATURE;
+                monster.creatureType = CreatureType.CREATURE_TYPE_MONSTER;
                 dict.Add(monster.monsterId, monster);
             }
             return dict;
         }
     }
-        
-
    
+
     #endregion
+
 
     #region File System SavsFiles
     [Serializable]
@@ -300,32 +292,10 @@ namespace Data
         public int year;
     }
     [Serializable]
-    public class SaveObject
-    {
-        public ObjectType objectType;
-        public Vector3Int cellPos;
-    }
-    public class SaveLand : SaveObject
-    {
-        public bool isUsing;
-    }
-
-    public class SaveSeed: SaveObject
-    {
-        public ItemType itemType;
-        public SeedState seedState;
-        public int itemDbId;
-        public int templatedId;
-        public int currentGrowthDay;
-    }
-
-
-    [Serializable]
     public class GameData
     {
         public GameTime gameTime;
-        //public List<SaveLand> landList;
-        //public List<SaveSeed> seedList;
+       
     }
     #endregion
 }

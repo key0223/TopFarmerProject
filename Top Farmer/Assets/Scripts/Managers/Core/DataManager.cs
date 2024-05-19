@@ -20,27 +20,22 @@ public class DataManager
 
     public void Init()
     {
-        //SkillDict = LoadJson<Data.SkillData, int, Data.Skill>("SkillData").MakeDict();
-        //ItemDict = LoadJson<Data.ItemLoader, int, Data.ItemData>("ItemData").MakeDict();
-        //MonsterDict = LoadJson<Data.MonsterLoader, int, Data.MonsterData>("MonsterData").MakeDict();
-
-        //ItemDict = LoadJson<Data.ItemLoader,int,Data.ItemData>("ItemData").MakeDict();
-
         #region Item
         Dictionary<int, Data.ItemData> toolDict = LoadJson<Data.ToolItemLoader,int,Data.ItemData>("ItemData_Tool").MakeDict();
         Dictionary<int, Data.ItemData> cropDict = LoadJson<Data.CropItemLoader,int,Data.ItemData>("ItemData_Crop").MakeDict();
         Dictionary<int, Data.ItemData> seedDict = LoadJson<Data.SeedItemLoader,int,Data.ItemData>("ItemData_Seed").MakeDict();
         Dictionary<int, Data.ItemData> craftableDict = LoadJson<Data.CraftableItemLoader,int,Data.ItemData>("ItemData_Crafting").MakeDict();
         Dictionary<int, Data.ItemData> foodDict = LoadJson<Data.FoodItemLoader,int,Data.ItemData>("ItemData_Food").MakeDict();
-        //Dictionary<int, Data.ItemData> modernDict = LoadJson<Data.ModernItemLoader,int,Data.ItemData>("ItemData_Modern").MakeDict();
         ItemDict = CombinedDict<int, Data.ItemData>(toolDict, cropDict, seedDict,craftableDict,foodDict);
         #endregion
 
-
+        // Npc
         Dictionary<int, Data.NpcData> merchantDict = LoadJson<Data.MerchantNpcLoader, int, Data.NpcData>("NpcData_Merchant").MakeDict();
         NpcDict = CombinedDict<int, Data.NpcData>(merchantDict);
 
-        MonsterDict = LoadJson<Data.MonsterLoader, int, Data.MonsterData>("MonsterData_Monster").MakeDict();
+        // Monster
+        Dictionary<int, Data.MonsterData> monsterDict = LoadJson<Data.MonsterLoader, int, Data.MonsterData>("MonsterData_Monster").MakeDict();
+        MonsterDict = CombinedDict(monsterDict);
 
         #region String
         Dictionary<string, Data.StringData> npcStringDict = LoadJson<Data.StringLoader, string, Data.StringData>("StringData_Npc").MakeDict();

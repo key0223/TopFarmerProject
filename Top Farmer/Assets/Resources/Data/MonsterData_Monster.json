@@ -1,11 +1,12 @@
 ﻿{
+	"md5": "6729623bcc01652ffd98825dd6a13d7c",
 	"array": 
 		[
 			{
 				"monsterId": 701,
 				"name": "버블린 슬라임",
+				"PrefabPath": "Creature/Monster/AcidBlob",
 				"monsterType": "MONSTER_TYPE_CONTACT",
-				"prefabPath": "Creature/Monster/AcidBlob",
 				"level": 1,
 				"maxHp": 20,
 				"attack": 5,
@@ -15,8 +16,8 @@
 			{
 				"monsterId": 711,
 				"name": "스위프터 파라사이트",
+				"PrefabPath": "Creature/Monster/Beetle",
 				"monsterType": "MONSTER_TYPE_RANGED",
-				"prefabPath": "Creature/Monster/Beetle",
 				"level": 1,
 				"maxHp": 10,
 				"attack": 3,
@@ -26,8 +27,8 @@
 			{
 				"monsterId": 721,
 				"name": "톡톡이 클러스터",
+				"PrefabPath": "Creature/Monster/EggCluster",
 				"monsterType": "MONSTER_TYPE_COUNTERATTACK",
-				"prefabPath": "Creature/Monster/EggCluster",
 				"level": 2,
 				"maxHp": 30,
 				"attack": 40,
@@ -37,8 +38,8 @@
 			{
 				"monsterId": 731,
 				"name": "웜 리트리버",
+				"PrefabPath": "Creature/Monster/Maggot",
 				"monsterType": "MONSTER_TYPE_COUNTERATTACK",
-				"prefabPath": "Creature/Monster/Maggot",
 				"level": 2,
 				"maxHp": 30,
 				"attack": 6,
@@ -48,8 +49,8 @@
 			{
 				"monsterId": 741,
 				"name": "독사마귀",
+				"PrefabPath": "Creature/Monster/Mantis",
 				"monsterType": "MONSTER_TYPE_RANGED",
-				"prefabPath": "Creature/Monster/Mantis",
 				"level": 3,
 				"maxHp": 50,
 				"attack": 10,

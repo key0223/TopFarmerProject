@@ -14,10 +14,10 @@ namespace TopFarmerWebServer.Data
         #region ItemDict
         public static Dictionary<int, Data.ItemData> ItemDict { get; private set; } = new Dictionary<int, Data.ItemData>();
         public static Dictionary<int, Data.NpcData> NpcDict { get; private set; } = new Dictionary<int, NpcData>();
+        public static Dictionary<int, Data.MonsterData> MonsterDict { get; private set; } = new Dictionary<int, MonsterData>();
         public static Dictionary<string, Data.StringData> StringDict { get; private set; } = new Dictionary<string, Data.StringData>();
         #endregion
 
-        public static Dictionary<int, Data.MonsterData> MonsterDict { get; private set; } = new Dictionary<int, MonsterData>();
         public static void LoadData()
         {
             #region Item
@@ -26,14 +26,16 @@ namespace TopFarmerWebServer.Data
             Dictionary<int, Data.ItemData> seedDict = LoadJson<Data.SeedItemLoader, int, Data.ItemData>("ItemData_Seed").MakeDict();
             Dictionary<int, Data.ItemData> craftableDict = LoadJson<Data.CraftableItemLoader, int, Data.ItemData>("ItemData_Crafting").MakeDict();
             Dictionary<int, Data.ItemData> foodDict = LoadJson<Data.FoodItemLoader, int, Data.ItemData>("ItemData_Food").MakeDict();
-            //Dictionary<int, Data.ItemData> modernDict = LoadJson<Data.ModernItemLoader, int, Data.ItemData>("ItemData_Modern").MakeDict();
             ItemDict = CombinedDict<int, Data.ItemData>(toolDict, cropDict, seedDict, craftableDict, foodDict);
             #endregion
 
+            // Npc
             Dictionary<int, Data.NpcData> merchantDict = LoadJson<Data.MerchantNpcLoader, int, Data.NpcData>("NpcData_Merchant").MakeDict();
             NpcDict = CombinedDict<int, Data.NpcData>(merchantDict);
 
-            MonsterDict = LoadJson<Data.MonsterLoader, int, Data.MonsterData>("MonsterData_Monster").MakeDict();
+            // Monster
+            Dictionary<int, Data.MonsterData> monsterDict = LoadJson<Data.MonsterLoader, int, Data.MonsterData>("MonsterData_Monster").MakeDict();
+            MonsterDict = CombinedDict(monsterDict);
 
             #region String
             Dictionary<string, Data.StringData> npcStringDict = LoadJson<Data.StringLoader, string, Data.StringData>("StringData_Npc").MakeDict();

@@ -1,11 +1,12 @@
 ﻿{
+	"md5": "9379fd24b7124798f4773c44821c5224",
 	"array": 
 		[
 			{
-				"npcId": 1,
+				"npcId": 601,
 				"name": "고양이 상인 니니",
+				"PrefabPath": "Creature/Merchant",
 				"npcType": "NPC_TYPE_MERCHANT",
-				"prefabPath": "Creature/Merchant",
 				"dayOffPeriod": 1,
 				"workingInPeriod": 2,
 				"workingOutPeriod": 2

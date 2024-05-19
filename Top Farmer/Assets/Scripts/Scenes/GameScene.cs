@@ -25,19 +25,14 @@ public class GameScene : BaseScene
 
         // Npc
         NpcData npcData = null;
-        Managers.Data.NpcDict.TryGetValue(1, out npcData);
-        NpcInfo npcInfo = new NpcInfo()
-        {
-            templatedId = npcData.npcId,
-            name = npcData.name,
-        };
-        Npc merchant1 = Npc.Init(npcInfo);
+        Managers.Data.NpcDict.TryGetValue(601, out npcData);
+       
+        Npc merchant1 = Npc.MakeNpc(601);
 
         GameObject merchantGo = Managers.Resource.Instantiate($"{npcData.prefabPath}");
         merchantGo.name = "Merchant";
 
         MerchantController mc1 = merchantGo.GetComponent<MerchantController>();
-        mc1.ObjectType = ObjectType.OBJECT_TYPE_CREATURE;
         mc1.Npc = merchant1;
 
         Managers.Object.Add(merchantGo);

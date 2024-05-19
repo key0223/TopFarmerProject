@@ -4,77 +4,42 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Define;
 
-public class MonsterInfo
+public class Monster 
 {
-    public int templatedId;
-    public string name;
-
-}
-public class Monster : MonoBehaviour
-{
-    public MonsterInfo Info { get; } = new MonsterInfo();
-    public StatInfo Stat { get; } = new StatInfo();
-
+    public int TemplatedId { get; protected set; }
+    public string Name { get; private set; }
+    public ObjectType ObjectType { get; private set; }
+    public CreatureType CreatureType { get; private set; }
     public MonsterType MonsterType { get; private set; }
-
-    public int TemplatedId
+    public int Level { get; private set; }  
+    public int MaxHp { get; private set; }
+    public int Attack { get; private set; } 
+    public  float Speed { get; private set; }
+    public int TotalExp { get; private set; }
+   
+    public Monster(MonsterType monsterType)
     {
-        get { return Info.templatedId; }
-        set { Info.templatedId = value; }
+        MonsterType = monsterType;
     }
-    public string Name
+    public Monster MakeMonster(int templatedId)
     {
-        get { return Info.name; }
-        set { Info.name = value; }
-    }
-    public int Level
-    {
-        get { return Stat.level; }
-        set { Stat.level = value; }
-    }
-    public int Hp
-    {
-        get { return Stat.hp; }
-        set { Stat.hp = value; }
-    }
-    public int MaxHp
-    {
-        get { return Stat.maxHp; }
-        set { Stat.maxHp = value; }
-    }
-    public int Attack
-    {
-        get { return Stat.attack; }
-        set { Stat.attack = value; }
-    }
-    public float Speed
-    {
-        get { return Stat.speed; }
-        set { Stat.speed = value; }
-    }
-    public int TotalExp
-    {
-        get { return Stat.totalExp; }
-        set { Stat.totalExp = value; }
-
-    }
-
-
-    public void Init(int templatedId)
-    {
-        TemplatedId = templatedId;
-
+        Monster monster = null;
         MonsterData monsterData = null;
-        Managers.Data.MonsterDict.TryGetValue(TemplatedId, out monsterData);
-        Name = monsterData.name;
-        MonsterType = monsterData.monsterType;
+        Managers.Data.MonsterDict.TryGetValue(templatedId, out monsterData);
+        if (monsterData == null) return null;
 
-        Level = monsterData.level;
-        Hp = monsterData.maxHp;
-        MaxHp= monsterData.maxHp;
-        Attack = monsterData.attack;
-        Speed = monsterData.speed;
-        TotalExp = monsterData.totalExp;
+        TemplatedId = templatedId;
+        switch(monsterData.monsterType)
+        {
+            case MonsterType.MONSTER_TYPE_CONTACT:
+                break;
+            case MonsterType.MONSTER_TYPE_RANGED:
+                break;
+            case MonsterType.MONSTER_TYPE_COUNTERATTACK:
+                break;
 
+        }
+
+        return monster;
     }
 }

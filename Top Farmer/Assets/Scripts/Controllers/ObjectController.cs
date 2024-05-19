@@ -13,7 +13,7 @@ public class ObjectController : MonoBehaviour
     public ObjectType ObjectType { get; set; }
     public Vector3Int CellPos { get; set; } = Vector3Int.zero;
     public SpriteRenderer _sprite;
-   
+
     void Start()
     {
         Init();

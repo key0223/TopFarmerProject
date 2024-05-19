@@ -94,6 +94,7 @@ public class Define
     // TYPE
     public enum ObjectType
     {
+        OBJECT_TYPE_NONE,
         OBJECT_TYPE_PLAYER,
         OBJECT_TYPE_OBJECT,
         OBJECT_TYPE_ITEM,
@@ -152,11 +153,6 @@ public class Define
     }
  
    
-  
-   
- 
-   
-
 
     #region System Message
 

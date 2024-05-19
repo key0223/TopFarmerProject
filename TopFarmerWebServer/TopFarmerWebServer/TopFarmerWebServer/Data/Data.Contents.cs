@@ -163,26 +163,6 @@ namespace TopFarmerWebServer.Data
             return dict;
         }
     }
-    public class ModernData : ItemData
-    {
-        public bool sellable;
-    }
-    [Serializable]
-    public class ModernItemLoader : ILoader<int, ItemData>
-    {
-        public List<ModernData> array = new List<ModernData>();
-        public Dictionary<int, ItemData> MakeDict()
-        {
-            Dictionary<int, ItemData> dict = new Dictionary<int, ItemData>();
-
-            foreach (ItemData modern in array)
-            {
-                modern.itemType = ItemType.ITEM_TYPE_MODERN;
-                dict.Add(modern.itemId, modern);
-            }
-            return dict;
-        }
-    }
 
     #endregion
 
@@ -193,24 +173,9 @@ namespace TopFarmerWebServer.Data
     {
         public int npcId;
         public string name;
-        public NpcType npcType;
+        public CreatureType creatureType;
         public string prefabPath;
-    }
-    [Serializable]
-    public class NpcLoader : ILoader<int, NpcData>
-    {
-        public List<NpcData> array = new List<NpcData>();
-        public Dictionary<int, NpcData> MakeDict()
-        {
-            Dictionary<int, NpcData> dict = new Dictionary<int, NpcData>();
-
-            foreach (NpcData npc in array)
-            {
-                npc.npcType = NpcType.NPC_TYPE_MERCHANT;
-                dict.Add(npc.npcId, npc);
-            }
-            return dict;
-        }
+        public NpcType npcType;
     }
 
     public class MerchantData : NpcData
@@ -228,14 +193,16 @@ namespace TopFarmerWebServer.Data
         {
             Dictionary<int, NpcData> dict = new Dictionary<int, NpcData>();
 
-            foreach (NpcData merchant in array)
+            foreach (MerchantData merchant in array)
             {
-                merchant.npcType = NpcType.NPC_TYPE_MERCHANT;
+                merchant.creatureType = CreatureType.CREATURE_TYPE_NPC;
                 dict.Add(merchant.npcId, merchant);
             }
             return dict;
         }
     }
+
+
 
     #endregion
 
@@ -244,17 +211,19 @@ namespace TopFarmerWebServer.Data
     [Serializable]
     public class MonsterData
     {
+        public ObjectType ObjectType;
         public int monsterId;
         public string name;
-        public MonsterType monsterType;
+        public CreatureType creatureType;
         public string prefabPath;
+        public MonsterType monsterType;
         public int level;
         public int maxHp;
         public int attack;
         public float speed;
         public int totalExp;
-
     }
+
     [Serializable]
     public class MonsterLoader : ILoader<int, MonsterData>
     {
@@ -265,6 +234,8 @@ namespace TopFarmerWebServer.Data
             Dictionary<int, MonsterData> dict = new Dictionary<int, MonsterData>();
             foreach (MonsterData monster in array)
             {
+                monster.ObjectType = ObjectType.OBJECT_TYPE_CREATURE;
+                monster.creatureType = CreatureType.CREATURE_TYPE_MONSTER;
                 dict.Add(monster.monsterId, monster);
             }
             return dict;

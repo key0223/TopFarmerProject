@@ -70,7 +70,7 @@ public class MapManager
     {
        
         ObjectController oc = gameObject.GetComponent<ObjectController>();
-        int x = oc.CellPos.x; ;
+        int x = oc.CellPos.x;
         int y = oc.CellPos.y;
 
         _objects[x, y] = gameObject;
@@ -98,10 +98,11 @@ public class MapManager
         {
             {
                 int x = oc.CellPos.x - MinX;
-                int y = MaxX - oc.CellPos.y;
+                int y = MaxY - oc.CellPos.y;
 
                 if (_objects[y, x] == gameObject)
                     _objects[y, x] = null;
+
             }
             {
                 int x = dest.x - MinX;
@@ -109,6 +110,7 @@ public class MapManager
                 _objects[y, x] = gameObject;
 
             }
+
         }
 
         return true;
@@ -163,6 +165,7 @@ public class MapManager
             int xCount = MaxX - MinX + 1;
             int yCount = MaxY - MinY + 1;
             _collision = new bool[yCount, xCount];
+            _objects = new GameObject[yCount, xCount];
 
             for (int y = 0; y < yCount; y++)
             {

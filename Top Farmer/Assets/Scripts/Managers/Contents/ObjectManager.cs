@@ -42,8 +42,7 @@ public class ObjectManager
             CreatureController cc = (CreatureController)Player;
             _creatures.Add(cc.ObjectId, cc);
         }
-
-        if(oc.ObjectType == ObjectType.OBJECT_TYPE_OBJECT)
+        else if(oc.ObjectType == ObjectType.OBJECT_TYPE_OBJECT)
         {
             _objects2.Add(oc.ObjectId, oc);
         }
