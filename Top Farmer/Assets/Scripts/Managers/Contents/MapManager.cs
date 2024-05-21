@@ -68,12 +68,11 @@ public class MapManager
     }
     public void Add(GameObject gameObject)
     {
-       
         ObjectController oc = gameObject.GetComponent<ObjectController>();
-        int x = oc.CellPos.x;
-        int y = oc.CellPos.y;
+        int x = oc.CellPos.x - MinX;
+        int y = MaxY - oc.CellPos.y;
 
-        _objects[x, y] = gameObject;
+        _objects[y, x] = gameObject;
     }
     public GameObject Find(Vector2Int cellPos)
     {
@@ -128,6 +127,7 @@ public class MapManager
                 _objects[y, x] = gameObject;
 
             }
+
 
         }
 

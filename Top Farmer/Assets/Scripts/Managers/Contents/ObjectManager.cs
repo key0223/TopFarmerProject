@@ -18,7 +18,7 @@ public class ObjectManager
     int _counter = 0; //
     int GenerateId(ObjectType type)
     {
-        return ((int)type << 24) | (_counter++);
+            return ((int)type << 24) | (_counter++);
     }
     public static ItemType GetObjectTypeByItemType(int id)
     {
@@ -32,8 +32,9 @@ public class ObjectManager
     {
         ObjectController oc = go.GetComponent<ObjectController>();
         oc.ObjectId = GenerateId(oc.ObjectType);
+        Debug.Log(oc.ObjectId);
 
-        if(player)
+        if(oc.ObjectType == ObjectType.OBJECT_TYPE_PLAYER && player)
         {
             Player = go.GetComponent<PlayerController>();
             Player.SetPlayerInfo(PlayerInfo);
@@ -42,6 +43,10 @@ public class ObjectManager
             _creatures.Add(cc.ObjectId, cc);
         }
         else if(oc.ObjectType == ObjectType.OBJECT_TYPE_OBJECT)
+        {
+            _objects.Add(oc.ObjectId, oc);
+        }
+        else if(oc.ObjectType == ObjectType.OBJECT_TYPE_ITEM)
         {
             _objects.Add(oc.ObjectId, oc);
         }

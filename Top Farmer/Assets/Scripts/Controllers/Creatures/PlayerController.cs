@@ -218,7 +218,6 @@ public class PlayerController : CreatureController
         else if(Input.GetKeyDown(KeyCode.X)) // 수확/대화/탑승/재료 넣기
         {
             GameObject go = Managers.Map.Find((Vector2Int)GetFrontCellPos());
-            //GameObject go = Managers.Object.FindObject(GetFrontCellPos());
             if (go == null)
                 return;
             
@@ -245,7 +244,7 @@ public class PlayerController : CreatureController
 
                         if(sc.State == SeedState.Completed)
                         {
-                            //sc.OnHarvest();
+                            sc.OnHarvest();
                         }
                         break;
                     case ItemType.ITEM_TYPE_CRAFTING:
@@ -340,11 +339,11 @@ public class PlayerController : CreatureController
                     bool interactable = Managers.Map.CanInteract(GetFrontCellPos());
                     if (interactable)
                     {
-                        //if (Managers.Object.FindLandObject(GetFrontCellPos()) == null)
-                        //{
-                        //    State = CreatureState.UsingItem;
-                        //    _coUsingItem = StartCoroutine("CoStartHoe");
-                        //}
+                        if (Managers.Map.Find((Vector2Int)GetFrontCellPos()) == null)
+                        {
+                            State = CreatureState.UsingItem;
+                            _coUsingItem = StartCoroutine("CoStartHoe");
+                        }
                     }
                     break;
                 case ToolType.TOOL_TYPE_WATERINGCAN:
@@ -427,9 +426,11 @@ public class PlayerController : CreatureController
         GameObject plowed = Managers.Resource.Instantiate($"Object/Land/Land_Plowed");
         plowed.name = "Land_Plowed";
         PlowedLandController pc = plowed.GetComponent<PlowedLandController>();
+        pc.ObjectType = ObjectType.OBJECT_TYPE_OBJECT;
         //pc.ObjectType = ObjectType.OBJECT_TYPE_NONE;
         pc.CellPos = GetFrontCellPos();
         pc.IsUsing = false;
+        //Managers.Map.InitPos(plowed, (Vector2Int)pc.CellPos);
         Managers.Object.Add(plowed);
 
         yield return new WaitForSeconds(0.3f);
