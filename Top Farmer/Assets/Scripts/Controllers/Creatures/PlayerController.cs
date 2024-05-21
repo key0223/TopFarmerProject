@@ -217,13 +217,20 @@ public class PlayerController : CreatureController
         }
         else if(Input.GetKeyDown(KeyCode.X)) // 수확/대화/탑승/재료 넣기
         {
-            GameObject go = Managers.Object.FindObject(GetFrontCellPos());
+            GameObject go = Managers.Map.Find((Vector2Int)GetFrontCellPos());
+            //GameObject go = Managers.Object.FindObject(GetFrontCellPos());
             if (go == null)
                 return;
             
             ObjectController oc = go.GetComponent<ObjectController>();
 
-            if (oc.ObjectType == ObjectType.OBJECT_TYPE_ITEM)
+            Debug.Log(go.name);
+
+            if(oc.ObjectType == ObjectType.OBJECT_TYPE_OBJECT)
+            {
+
+            }    
+            else if (oc.ObjectType == ObjectType.OBJECT_TYPE_ITEM)
             {
                 ItemController ic = (ItemController)oc;
 
@@ -238,13 +245,19 @@ public class PlayerController : CreatureController
 
                         if(sc.State == SeedState.Completed)
                         {
-                            sc.OnHarvest();
+                            //sc.OnHarvest();
                         }
                         break;
                     case ItemType.ITEM_TYPE_CRAFTING:
                         break;
 
                 }
+            }
+            else if(oc.ObjectType == ObjectType.OBJECT_TYPE_CREATURE)
+            {
+                UI_EventHandler evt = Util.GetOrAddComponent<UI_EventHandler>(go);
+                InteractableObject interactableObj = Util.GetOrAddComponent<InteractableObject>(go);
+                Managers.InteractableObject.OnInteract(interactableObj);
             }
             //else if(oc.ObjectType == ObjectType.OBJECT_TYPE_INTERACTABLE_OBJECT)
             //{
@@ -327,11 +340,11 @@ public class PlayerController : CreatureController
                     bool interactable = Managers.Map.CanInteract(GetFrontCellPos());
                     if (interactable)
                     {
-                        if (Managers.Object.FindLandObject(GetFrontCellPos()) == null)
-                        {
-                            State = CreatureState.UsingItem;
-                            _coUsingItem = StartCoroutine("CoStartHoe");
-                        }
+                        //if (Managers.Object.FindLandObject(GetFrontCellPos()) == null)
+                        //{
+                        //    State = CreatureState.UsingItem;
+                        //    _coUsingItem = StartCoroutine("CoStartHoe");
+                        //}
                     }
                     break;
                 case ToolType.TOOL_TYPE_WATERINGCAN:
@@ -348,36 +361,36 @@ public class PlayerController : CreatureController
         {
             Seed seed = (Seed)item;
 
-            if (Managers.Object.FindLandObject(GetFrontCellPos()) == null)
-                return;
+            //if (Managers.Object.FindLandObject(GetFrontCellPos()) == null)
+            //    return;
 
-            GameObject go = Managers.Object.FindLandObject(GetFrontCellPos()).gameObject;
-            if (go.name == "Land_Plowed")
-            {
-                PlowedLandController pc = go.GetComponent<PlowedLandController>();
-                if (pc == null)
-                    return;
+            //GameObject go = Managers.Object.FindLandObject(GetFrontCellPos()).gameObject;
+            //if (go.name == "Land_Plowed")
+            //{
+            //    PlowedLandController pc = go.GetComponent<PlowedLandController>();
+            //    if (pc == null)
+            //        return;
 
-                if(!pc.IsUsing)
-                {
-                    State = CreatureState.UsingItem;
-                    _coUsingItem = StartCoroutine("CoStartSeed", seed);
-                    pc.IsUsing = true;
-                }
-            }
+            //    if(!pc.IsUsing)
+            //    {
+            //        State = CreatureState.UsingItem;
+            //        _coUsingItem = StartCoroutine("CoStartSeed", seed);
+            //        pc.IsUsing = true;
+            //    }
+            //}
         }
         else if (item.ItemType == ItemType.ITEM_TYPE_CRAFTING)
         {
-            Crafting crafting = (Crafting)item;
-            bool interactable = Managers.Map.CanInteract(GetFrontCellPos());
-            if (interactable)
-            {
-                if (Managers.Object.FindLandObject(GetFrontCellPos()) == null)
-                {
-                    State = CreatureState.UsingItem;
-                    _coUsingItem = StartCoroutine("CoPlaceItem",crafting);
-                }
-            }
+            //Crafting crafting = (Crafting)item;
+            //bool interactable = Managers.Map.CanInteract(GetFrontCellPos());
+            //if (interactable)
+            //{
+            //    if (Managers.Object.FindLandObject(GetFrontCellPos()) == null)
+            //    {
+            //        State = CreatureState.UsingItem;
+            //        _coUsingItem = StartCoroutine("CoPlaceItem",crafting);
+            //    }
+            //}
         }
     }
 
@@ -385,11 +398,11 @@ public class PlayerController : CreatureController
     IEnumerator CoStartPunch()
     {
         // 피격 판정
-        GameObject go =  Managers.Object.Find(GetFrontCellPos());
-        if(go !=null)
-        {
-            Debug.Log(go.name);
-        }
+        //GameObject go =  Managers.Object.Find(GetFrontCellPos());
+        //if(go !=null)
+        //{
+        //    Debug.Log(go.name);
+        //}
         // 대기 시간
         _rangedSkill = false;
         yield return new WaitForSeconds(0.5f);

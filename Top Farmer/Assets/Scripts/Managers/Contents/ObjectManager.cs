@@ -7,12 +7,11 @@ using static Define;
 public class ObjectManager 
 {
     //Dictionary<int, GameObject> _items = new Dictionary<int, GameObject>();
-    List<GameObject> _objects = new List<GameObject>();
 
     public PlayerInfo PlayerInfo { get; set; }
     public PlayerController Player { get; set; }
 
-    Dictionary<int, ObjectController> _objects2 = new Dictionary<int, ObjectController>();
+    Dictionary<int, ObjectController> _objects = new Dictionary<int, ObjectController>();
     Dictionary<int, CreatureController> _creatures = new Dictionary<int, CreatureController>();
     Dictionary<int, MonsterController> _monsters = new Dictionary<int, MonsterController>();
 
@@ -44,7 +43,7 @@ public class ObjectManager
         }
         else if(oc.ObjectType == ObjectType.OBJECT_TYPE_OBJECT)
         {
-            _objects2.Add(oc.ObjectId, oc);
+            _objects.Add(oc.ObjectId, oc);
         }
         else if(oc.ObjectType == ObjectType.OBJECT_TYPE_CREATURE )
         {
@@ -74,46 +73,42 @@ public class ObjectManager
         //}
     }
 
-    public void Remove(GameObject go)
-    {
-        _objects.Remove(go);
-    }
+    //public void Remove(GameObject go)
+    //{
+    //    _objects.Remove(go);
+    //}
 
-    public GameObject Find(Vector3Int cellPos)
-    {
-        foreach(GameObject obj in _objects)
-        {
-            InteractableObject ic = obj.GetComponent<InteractableObject>();
-            if(ic == null) continue;
+    //public GameObject Find(Vector3Int cellPos)
+    //{
+    //    foreach(GameObject obj in _objects)
+    //    {
+    //        InteractableObject ic = obj.GetComponent<InteractableObject>();
+    //        if(ic == null) continue;
 
-            ObjectController oc = obj.GetComponent<ObjectController>();
-            if (oc.CellPos == cellPos)
-                return obj;
+    //        ObjectController oc = obj.GetComponent<ObjectController>();
+    //        if (oc.CellPos == cellPos)
+    //            return obj;
 
-        }
+    //    }
 
-        return null;
-    }
+    //    return null;
+    //}
    
-    public GameObject FindLandObject(Vector3Int cellPos)
-    {
-        foreach (GameObject obj in _objects)
-        {
-            PlowedLandController pc = obj.GetComponent<PlowedLandController>();
-            if (pc == null)
-                continue;
+    //public GameObject FindLandObject(Vector3Int cellPos)
+    //{
+    //    foreach (GameObject obj in _objects)
+    //    {
+    //        PlowedLandController pc = obj.GetComponent<PlowedLandController>();
+    //        if (pc == null)
+    //            continue;
 
-            if (pc.CellPos == cellPos)
-                return obj;
-        }
+    //        if (pc.CellPos == cellPos)
+    //            return obj;
+    //    }
 
-        return null;
-    }
+    //    return null;
+    //}
     
-    public List<GameObject> GetGameObjects()
-    {
-        return _objects;
-    }
     public void Clear(GameObject go)
     {
         _objects.Clear();
@@ -143,39 +138,40 @@ public class ObjectManager
         else if(itemType == ItemType.ITEM_TYPE_SEED)
         {
 
+
         }
         else if(itemType ==ItemType.ITEM_TYPE_CRAFTING)
         {
 
         }
     }
-    public GameObject FindObject(Vector3Int cellPos)
-    {
-        foreach (GameObject obj in _objects)
-        {
-            ObjectController oc = obj.GetComponent<ObjectController>();
-            if (oc == null || obj.gameObject.name == "Land_Plowed")
-                continue;
+    //public GameObject FindObject(Vector3Int cellPos)
+    //{
+    //    foreach (GameObject obj in _objects)
+    //    {
+    //        ObjectController oc = obj.GetComponent<ObjectController>();
+    //        if (oc == null || obj.gameObject.name == "Land_Plowed")
+    //            continue;
 
-            if (oc.CellPos == cellPos)
-                return obj;
-        }
+    //        if (oc.CellPos == cellPos)
+    //            return obj;
+    //    }
 
-        return null;
-    }
+    //    return null;
+    //}
     #endregion
 
-    public GameObject GetMerchant()
-    {
-        foreach (GameObject obj in _objects)
-        {
-            MerchantController mc = obj.GetComponent<MerchantController>();
-            if (mc == null)
-                continue;
+    //public GameObject GetMerchant()
+    //{
+    //    foreach (GameObject obj in _objects)
+    //    {
+    //        MerchantController mc = obj.GetComponent<MerchantController>();
+    //        if (mc == null)
+    //            continue;
 
-            return obj;
-        }
+    //        return obj;
+    //    }
 
-        return null;
-    }
+    //    return null;
+    //}
 }

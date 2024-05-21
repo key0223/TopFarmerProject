@@ -26,7 +26,7 @@ public class UI_Traded : UI_Base
 
         Bind<Text>(typeof(Texts));
         Bind<GameObject>(typeof(GameObjects));
-        GetObject((int)GameObjects.ConfirmBtnText).BindEvent(OnConfirmBtnClick, Define.UIEvent.PointerClick);
+        //GetObject((int)GameObjects.ConfirmBtnText).BindEvent(OnConfirmBtnClick, Define.UIEvent.PointerClick);
 
         GameObject itemList = GetObject((int)GameObjects.TradedItemList);
         foreach(Transform child in itemList.transform)
@@ -74,19 +74,19 @@ public class UI_Traded : UI_Base
     }
     #region Mouse Interaction
 
-    public void OnConfirmBtnClick(PointerEventData evt)
-    {
-        UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
-        UI_ToolBar toobarUI = gameSceneUI.ToolBarUI;
+    //public void OnConfirmBtnClick(PointerEventData evt)
+    //{
+    //    UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
+    //    UI_ToolBar toobarUI = gameSceneUI.ToolBarUI;
 
-        Managers.Object.Player.Info.Coin += _totalCoin;
-        toobarUI.RefreshUI();
-        Clear();
+    //    Managers.Object.Player.Info.Coin += _totalCoin;
+    //    toobarUI.RefreshUI();
+    //    Clear();
 
-        MerchantController mc =  Managers.Object.GetMerchant().GetComponent<MerchantController>();
-        mc.MerchantState = MerchantState.Resting;
-        gameObject.SetActive(false);
-    }
+    //    MerchantController mc =  Managers.Object.GetMerchant().GetComponent<MerchantController>();
+    //    mc.MerchantState = MerchantState.Resting;
+    //    gameObject.SetActive(false);
+    //}
     #endregion
 
 }

@@ -33,6 +33,7 @@ public class GameScene : BaseScene
         merchantGo.name = "Merchant";
 
         MerchantController mc1 = merchantGo.GetComponent<MerchantController>();
+        mc1.ObjectType = npcData.objectType;
         mc1.Npc = merchant1;
 
         Managers.Object.Add(merchantGo);

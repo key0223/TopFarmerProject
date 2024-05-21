@@ -44,7 +44,7 @@ public class MonsterController : CreatureController
     }
     public override void OnDamaged()
     {
-        Managers.Object.Remove(gameObject);
+        //Managers.Object.Remove(gameObject);
         Managers.Resource.Destroy(gameObject);
     }
 

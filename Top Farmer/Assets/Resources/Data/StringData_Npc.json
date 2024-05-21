@@ -2,63 +2,63 @@
 	"array": 
 		[
 			{
-				"stringId": "npcText(101)",
+				"stringId": "npcText(60101)",
 				"ko": "오늘도 완판이다냥!"
 			},
 			{
-				"stringId": "npcText(102)",
+				"stringId": "npcText(60102)",
 				"ko": "5분만에 품절됐다냥!"
 			},
 			{
-				"stringId": "npcText(103)",
+				"stringId": "npcText(60103)",
 				"ko": "츄르있냥?"
 			},
 			{
-				"stringId": "npcText(104)",
+				"stringId": "npcText(60104)",
 				"ko": "광장에 사람들이 가득있었다냥."
 			},
 			{
-				"stringId": "npcText(105)",
+				"stringId": "npcText(60105)",
 				"ko": "갔다왔다냥~!"
 			},
 			{
-				"stringId": "npcText(111)",
+				"stringId": "npcText(60111)",
 				"ko": "조금 쉬고싶다냥…"
 			},
 			{
-				"stringId": "npcText(112)",
+				"stringId": "npcText(60112)",
 				"ko": "방해하지말라냥."
 			},
 			{
-				"stringId": "npcText(113)",
+				"stringId": "npcText(60113)",
 				"ko": "Zzzz…"
 			},
 			{
-				"stringId": "npcText(114)",
+				"stringId": "npcText(60114)",
 				"ko": "마스터 상인이 되겠다냥…. Zzz"
 			},
 			{
-				"stringId": "npcText(115)",
+				"stringId": "npcText(60115)",
 				"ko": "츄르…..."
 			},
 			{
-				"stringId": "npcText(121)",
+				"stringId": "npcText(60121)",
 				"ko": "해가 지기 전엔 떠나야 한다냥."
 			},
 			{
-				"stringId": "npcText(122)",
+				"stringId": "npcText(60122)",
 				"ko": "준비됐냥?"
 			},
 			{
-				"stringId": "npcText(123)",
+				"stringId": "npcText(60123)",
 				"ko": "상인 봇짐이 있어 무겁지 않다냥!"
 			},
 			{
-				"stringId": "npcText(124)",
+				"stringId": "npcText(60124)",
 				"ko": "나 빼고 맛있는 거 먹으면 안 된다냥!"
 			},
 			{
-				"stringId": "npcText(125)",
+				"stringId": "npcText(60125)",
 				"ko": "어서 유명해지고 싶다냥.."
 			}
 		]

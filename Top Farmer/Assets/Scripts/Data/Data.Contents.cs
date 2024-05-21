@@ -205,7 +205,7 @@ namespace Data
     [Serializable]
     public class NpcData 
     {
-        public ObjectType ObjectType;
+        public ObjectType objectType;
         public int npcId;
         public string name;
         public CreatureType creatureType;
@@ -230,7 +230,7 @@ namespace Data
 
             foreach (MerchantData merchant in array)
             {
-                merchant.ObjectType = ObjectType.OBJECT_TYPE_CREATURE;
+                merchant.objectType = ObjectType.OBJECT_TYPE_CREATURE;
                 merchant.creatureType = CreatureType.CREATURE_TYPE_NPC;
                 merchant.npcType = NpcType.NPC_TYPE_MERCHANT;
 

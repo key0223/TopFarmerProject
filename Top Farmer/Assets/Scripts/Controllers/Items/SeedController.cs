@@ -57,25 +57,25 @@ public class SeedController : ItemController
 
 
     }
-    public void OnHarvest()
-    {
-        Debug.Log("OnHarvest");
-        AddInven();
+    //public void OnHarvest()
+    //{
+    //    Debug.Log("OnHarvest");
+    //    AddInven();
 
-        GameObject land = Managers.Object.FindLandObject(CellPos);
-        if (land.name == "Land_Plowed")
-        {
-            PlowedLandController pc = land.GetComponent<PlowedLandController>();
-            if (pc == null)
-                return;
-            pc.IsUsing = false;
-            SetItem();
+    //    GameObject land = Managers.Object.FindLandObject(CellPos);
+    //    if (land.name == "Land_Plowed")
+    //    {
+    //        PlowedLandController pc = land.GetComponent<PlowedLandController>();
+    //        if (pc == null)
+    //            return;
+    //        pc.IsUsing = false;
+    //        SetItem();
 
-        }
+    //    }
 
-        Managers.Object.Remove(gameObject);
-        Managers.Resource.Destroy(gameObject);
-    }
+    //    //Managers.Object.Remove(gameObject);
+    //    Managers.Resource.Destroy(gameObject);
+    //}
 
     void HarvestReady()
     {

@@ -87,6 +87,24 @@ public class MapManager
         return _objects[y, x];
     }
 
+    public void InitPos(GameObject gameObject, Vector2Int cellPos)
+    {
+        ObjectController oc = gameObject.GetComponent<ObjectController>();
+        {
+            int x = oc.CellPos.x - MinX;
+            int y = MaxY - oc.CellPos.y;
+
+            if (_objects[y, x] == gameObject)
+                _objects[y, x] = null;
+
+        }
+        {
+            int x = cellPos.x - MinX;
+            int y = MaxY - cellPos.y;
+            _objects[y, x] = gameObject;
+
+        }
+    }
     public bool UpdateObjectPos(GameObject gameObject, Vector2Int dest, bool checkObjects = true, bool collision = true)
     {
         if (CanGo((Vector3Int)dest, checkObjects) == false)

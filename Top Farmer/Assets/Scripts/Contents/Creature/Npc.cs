@@ -7,10 +7,10 @@ using static Define;
 public class Npc
 {
     public int TemplatedId { get;  protected set; }
-    public string Name { get; private set; }
-    public ObjectType ObjectType { get; private set; }
-    public CreatureType CreatureType { get; private set; }  
-    public NpcType NpcType { get; private set; }
+    public string Name { get; protected set; }
+    public ObjectType ObjectType { get; protected set; }
+    public CreatureType CreatureType { get; protected set; }  
+    public NpcType NpcType { get; protected set; }
    
     public Npc(NpcType npcType)
     {

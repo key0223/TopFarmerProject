@@ -183,8 +183,6 @@ public class CreatureController : ObjectController
     {
         base.Init();
         _animator = GetComponent<Animator>();
-        ObjectType = ObjectType.OBJECT_TYPE_CREATURE;
-      
     }
 
     protected virtual void UpdateController()
@@ -237,7 +235,6 @@ public class CreatureController : ObjectController
             if(Managers.Map.UpdateObjectPos(this.gameObject, (Vector2Int)destPos))
             {
                 CellPos = destPos;
-                Debug.Log(destPos.ToString());
             }
             
             //if (Managers.Map.CanGo(destPos))

@@ -26,6 +26,9 @@ public class Merchant : Npc
         MerchantData data = (MerchantData)npcData;
         {
             TemplatedId = data.npcId;
+            Name = data.name;
+            ObjectType = data.objectType;
+            CreatureType = data.creatureType;
             DayOffPeriod = data.dayOffPeriod;
             WorkingInPeriod = data.workingInPeriod;
             WorkingOutPeriod = data.workingOutPeriod;

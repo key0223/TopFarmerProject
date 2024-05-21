@@ -34,6 +34,8 @@ public class MerchantController : NpcController
     {
         base.Init();
         SetNpc();
+        Managers.Map.InitPos(gameObject, (Vector2Int)CellPos);
+
         _remainingDayOffPeriod = Merchant.DayOffPeriod;
         _remainingWorkingInPeriod = Merchant.WorkingInPeriod;
         _remainingWorkingOutPeriod = Merchant.WorkingOutPeriod;
@@ -76,7 +78,7 @@ public class MerchantController : NpcController
                 _remainingWorkingInPeriod--;
                 if(_remainingWorkingInPeriod <= 0)
                 {
-                    Managers.Object.Remove(this.gameObject);
+                    //Managers.Object.Remove(this.gameObject);
                     _sprite.enabled = false;
                     MerchantState = MerchantState.Working_Outside;
                 }
