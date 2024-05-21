@@ -182,6 +182,12 @@ public class CreatureController : ObjectController
     protected override void Init()
     {
         base.Init();
+        Vector2Int initPos = new Vector2Int(0, 0);
+        if (Managers.Map.UpdateObjectPos(gameObject, initPos))
+        {
+            CellPos = new Vector3Int(0, 0);
+
+        }
         _animator = GetComponent<Animator>();
     }
 

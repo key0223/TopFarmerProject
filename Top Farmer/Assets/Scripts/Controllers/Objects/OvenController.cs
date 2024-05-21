@@ -42,9 +42,14 @@ public class OvenController : ObjectController
 
     public void SetObject()
     {
-        CellPos = new Vector3Int(0, 2);
-        transform.position = Managers.Map.CurrentGrid.CellToWorld(CellPos) + new Vector3(0.5f, 0.5f);
+        Vector2Int initPos = new Vector2Int(0, 2);
+        if(Managers.Map.UpdateObjectPos(gameObject, initPos))
+        {
+            CellPos = new Vector3Int(0, 2);
 
+        }
+        transform.position = Managers.Map.CurrentGrid.CellToWorld(CellPos) + new Vector3(0.5f, 0.5f);
+        Managers.Map.InitPos(gameObject, (Vector2Int)CellPos);
         //ObjectType = ObjectType.OBJECT_TYPE_INTERACTABLE_OBJECT;
         InteractableObject interactableObject = Util.GetOrAddComponent<InteractableObject>(gameObject);
         interactableObject.InteractableId = InteractableObjectType.INTERACTABLE_OBEJCT_TYPE_KITCHEN;

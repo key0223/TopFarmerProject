@@ -127,10 +127,9 @@ public class MapManager
                 _objects[y, x] = gameObject;
 
             }
-
-
+          
         }
-
+       
         return true;
 
     }
