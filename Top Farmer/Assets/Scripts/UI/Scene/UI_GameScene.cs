@@ -80,6 +80,20 @@ public class UI_GameScene : UI_Scene
             {
                 Item item = Item.MakeItem(res.Item);
                 Managers.Inven.Add(item);
+
+                if (res.ExtraItems != null)
+                {
+                    foreach (ItemInfo iteminfo in res.ExtraItems)
+                    {
+                        int? slot = Managers.Inven.GetEmptySlot();
+                        if (slot == null)
+                            return;
+
+                        Item extraItem = Item.MakeItem(iteminfo);
+                        extraItem.Slot = (int)slot;
+                        Managers.Inven.Add(extraItem);
+                    }
+                }
             }
             UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
             gameSceneUI.InvenUI.RefreshUI();

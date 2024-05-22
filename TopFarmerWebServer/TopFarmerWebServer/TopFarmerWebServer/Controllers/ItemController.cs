@@ -29,121 +29,157 @@ namespace TopFarmerWebServer.Controllers
         {
             List<ItemDb> findItems = _context.Items.Where(i => i.OwnerDbId == req.PlayerDbId).ToList();
             AddItemPacketRes res = new AddItemPacketRes();
+            res.ExtraItems = new List<ItemInfo>();
 
             if (CheckStackableItem((req.TemplatedId)))
             {
                 ItemData itemData = null;
-                DataManager.ItemDict.TryGetValue(req.TemplatedId, out itemData);
-                ItemDb findDbItem = findItems.FirstOrDefault(i => i.TemplatedId == req.TemplatedId);
-
-                //ItemInfo itemInfo = RedisFindItem(i => i.templatedId == req.TemplatedId, req.PlayerDbId);
-
-                if (findDbItem != null && findDbItem.Count < itemData.maxStack)
+                if(DataManager.ItemDict.TryGetValue(req.TemplatedId, out itemData))
                 {
-                    findDbItem.Count += req.Count;
-
-                    res.Item = new ItemInfo()
+                    ItemDb findDbItem = findItems.FirstOrDefault(i => i.TemplatedId == req.TemplatedId);
+                    if(findDbItem != null )
                     {
-                        itemDbId = findDbItem.ItemDbId,
-                        templatedId = findDbItem.TemplatedId,
-                        slot = findDbItem.Slot,
-                        count = findDbItem.Count + req.Count,
-                        equipped = false,
-                    };
-
-                    _context.SaveChangesEx();
-                    //RedisItemInfoUpdate(req.PlayerDbId, itemInfo.slot, res.Item);
+                        if(findDbItem.Count + req.Count<= itemData.maxStack)
+                        {
+                            HandleExistingItem(findDbItem, itemData, req, res);
+                        }
+                        else
+                        {
+                            ItemDb newItemDb = AddNewItem(req, req.Count);
+                            res.Item = CreateItemInfo(newItemDb);
+                        }
+                    }
                 }
                 else
                 {
-                    ItemDb newItemDb = new ItemDb()
-                    {
-                        TemplatedId = req.TemplatedId,
-                        Slot = req.Slot,
-                        Count = req.Count,
-                        OwnerDbId = req.PlayerDbId,
-                    };
-
-                    _context.Items.Add(newItemDb);
-                    _context.SaveChangesEx();
-
-
-                    res.Item = new ItemInfo()
-                    {
-                        itemDbId = newItemDb.ItemDbId,
-                        templatedId = newItemDb.TemplatedId,
-                        slot = newItemDb.Slot,
-                        count = newItemDb.Count,
-                        equipped = false,
-                    };
-
-                    //RedisItemInfoUpdate(req.PlayerDbId, newItemDb.Slot, res.Item);
+                    // ItemData == null
+                     res.Item = null;
                 }
             }
-
+            _context.SaveChangesEx();  
             return res;
+        }
+
+        private void HandleExistingItem(ItemDb findDbItem, ItemData itemData, AddItemPacketReq req, AddItemPacketRes res)
+        {
+            if (req.Count == 0)
+            {
+                // 클라이언트로부터 받은 갯수가 0이면 삭제
+                _context.Items.Remove(findDbItem);
+                res.Item = null;
+            }
+            else if (req.Count <= itemData.maxStack)
+            {
+                // 클라이언트로 받은 갯수로 맞춤
+                findDbItem.Count = req.Count;
+                res.Item = CreateItemInfo(findDbItem);
+            }
+            else
+            {
+                // 최대치를 초과하는 경우
+                findDbItem.Count = itemData.maxStack;
+                int remainingCount = req.Count - itemData.maxStack;
+                res.Item = CreateItemInfo(findDbItem);
+
+                ItemDb newItemDb = AddNewItem(req, remainingCount);
+                res.ExtraItems.Add(CreateItemInfo(newItemDb));
+            }
+        }
+        private ItemDb AddNewItem(AddItemPacketReq req, int count)
+        {
+            ItemDb newItemDb = new ItemDb()
+            {
+                TemplatedId = req.TemplatedId,
+                Slot = req.Slot,
+                Count = count,
+                OwnerDbId = req.PlayerDbId,
+            };
+
+            _context.Items.Add(newItemDb);
+            _context.SaveChangesEx();
+
+            return newItemDb;
+        }
+
+        private ItemInfo CreateItemInfo(ItemDb itemDb)
+        {
+            return new ItemInfo()
+            {
+                itemDbId = itemDb.ItemDbId,
+                templatedId = itemDb.TemplatedId,
+                slot = itemDb.Slot,
+                count = itemDb.Count,
+                equipped = false,
+            };
         }
 
         [HttpPost]
         [Route("updateItems")]
         public UpdateDatabaseItemsRes UpdateDatabaseItems([FromBody] UpdateDatabaseItemsReq req)
         {
+            UpdateDatabaseItemsRes res = new UpdateDatabaseItemsRes();
+
+            if (req.ItemInfos == null)
+            {
+                res.UpdatedOk = false;
+                return res;
+
+            }
+
             List<ItemDb> findItems = _context.Items.Where(i => i.OwnerDbId == req.PlayerDbId).ToList();
 
-            UpdateDatabaseItemsRes res = new UpdateDatabaseItemsRes();
-            if (req.ItemInfos == null)
-                res.UpdatedOk = false;
+            foreach (ItemInfo item in req.ItemInfos)
+            {
+               ProcessItemUpdate(req.PlayerDbId,findItems, item);
+            }
+            _context.SaveChangesEx();
+            res.UpdatedOk = true;
+            return res;
+        }
+
+        private void ProcessItemUpdate(int playerDbId, List<ItemDb> findItems, ItemInfo item)
+        {
+            if(item.count == 0)
+            {
+                RemoveItem(findItems, item.itemDbId);
+            }
             else
             {
-                foreach (ItemInfo item in req.ItemInfos)
+                UpdateItem(playerDbId, findItems, item);
+            }
+        }
+
+        private void UpdateItem(int playerDbId, List<ItemDb> findItems,ItemInfo item)
+        {
+            ItemDb findDbItem = findItems.FirstOrDefault(i => i.TemplatedId == item.templatedId);
+            ItemData itemData;
+            DataManager.ItemDict.TryGetValue(item.templatedId, out itemData);
+
+            if (findDbItem != null && itemData != null)
+            {
+                if (item.count <= itemData.maxStack)
                 {
-                   
-                    ItemDb findDbItem = findItems.FirstOrDefault(i => i.TemplatedId == item.templatedId);
-
-                    ItemData itemData = null;
-                    DataManager.ItemDict.TryGetValue(item.templatedId, out itemData);
-
-                    // Db에 아이템이 있고, 가진 아이템 갯수가 최대치를 넘지 않았다면
-                    if (findDbItem != null && item.count < itemData.maxStack)
-                    {
-                        findDbItem.Count = item.count;
-                    }
-
-                    _context.SaveChangesEx();
-
-                    //// 스택이 가능한가
-                    //if (CheckStackableItem((item.templatedId)))
-                    //{
-                    //    ItemDb findDbItem = findItems.FirstOrDefault(i => i.TemplatedId == item.templatedId);
-
-                    //    ItemData itemData = null;
-                    //    DataManager.ItemDict.TryGetValue(item.templatedId, out itemData);
-
-                    //    // Db에 아이템이 있고, 가진 아이템 갯수가 최대치를 넘지 않았다면
-                    //    if (findDbItem != null && item.count < itemData.maxStack)
-                    //    {
-                    //        findDbItem.Count = item.count;
-                    //    }
-                    //    _context.SaveChangesEx();
-                    //}
-                    //else
-                    //{
-                    //    ItemDb newItemDb = new ItemDb()
-                    //    {
-                    //        TemplatedId = item.templatedId,
-                    //        Slot = item.slot,
-                    //        Count = item.count,
-                    //        OwnerDbId = req.PlayerDbId,
-                    //    };
-
-                    //    _context.Items.Add(newItemDb);
-                    //    _context.SaveChangesEx();
-
-                    //}
-                    res.UpdatedOk = true;
+                    findDbItem.Count = item.count;
+                }
+                else
+                {
+                    findDbItem.Count = itemData.maxStack;
+                    int remainingCount = item.count - itemData.maxStack;
+                    AddNewItem(new AddItemPacketReq { TemplatedId = item.templatedId, Slot = item.slot, PlayerDbId = playerDbId }, remainingCount);
                 }
             }
-            return res;
+            else if (itemData != null)
+            {
+                AddNewItem(new AddItemPacketReq { TemplatedId = item.templatedId, Slot = item.slot, PlayerDbId = playerDbId }, item.count);
+            }
+        }
+        private void RemoveItem(List<ItemDb> findItems, int itemDbId)
+        {
+            ItemDb itemDb = findItems.FirstOrDefault(i => i.ItemDbId == itemDbId);
+            if (itemDb != null)
+            {
+                _context.Items.Remove(itemDb);
+            }
         }
 
         public bool CheckStackableItem(int templatedId)

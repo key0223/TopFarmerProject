@@ -48,6 +48,7 @@ public class AddItemPacketReq
 public class AddItemPacketRes
 {
     public ItemInfo Item;
+    public List<ItemInfo> ExtraItems;
 }
 
 public class UpdateDatabaseItemsReq
