@@ -242,14 +242,6 @@ public class CreatureController : ObjectController
             {
                 CellPos = destPos;
             }
-            
-            //if (Managers.Map.CanGo(destPos))
-            //{
-            //    if (Managers.Map.Find((Vector2Int)destPos) == null)
-            //    {
-            //        CellPos = destPos;
-            //    }
-            //}
         }
     }
     // Ω∫∏£∏§ ¿Ãµø

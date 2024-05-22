@@ -97,12 +97,7 @@ namespace TopFarmerWebServer.Controllers
             {
                 foreach (ItemInfo item in req.ItemInfos)
                 {
-                    if (item.count == 0)
-                    {
-                        ItemDb itemDb = findItems.FirstOrDefault(i => i.ItemDbId == item.itemDbId);
-                        _context.Items.Remove(itemDb);
-                        continue;
-                    }
+                   
                     ItemDb findDbItem = findItems.FirstOrDefault(i => i.TemplatedId == item.templatedId);
 
                     ItemData itemData = null;
