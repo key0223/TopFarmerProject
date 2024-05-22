@@ -144,7 +144,6 @@ public class PlayerController : CreatureController
         {
             case CreatureState.Idle:
                 GetDirInput();
-                GetIdleInput();
                 break;
             case CreatureState.Moving:
                 GetDirInput();
@@ -156,6 +155,88 @@ public class PlayerController : CreatureController
     private void LateUpdate()
     {
         Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y,-10);
+    }
+    protected override void UpdateIdle()
+    {
+        //  이동 상태로 갈지 확인
+        if(Dir != MoveDir.None)
+        {
+            State = CreatureState.Moving;
+        }
+
+        // 액션 상태로 갈지 확인
+        if (Input.GetKey(KeyCode.Space))
+        {
+            State = CreatureState.Skill;
+            _coSkill = StartCoroutine("CoStartPunch");
+        }
+        else if (_coUseToolCooltime == null && Input.GetKey(KeyCode.C)) // 도구 사용 도는 아이템 배치
+        {
+            if (HoldingItem == null)
+                return;
+
+            UseItem(HoldingItem);
+            _coUseToolCooltime = StartCoroutine("CoInputCoolTime", 0.2f);
+
+        }
+        else if (Input.GetKeyDown(KeyCode.X)) // 수확/대화/탑승/재료 넣기
+        {
+            GameObject go = Managers.Object.Find(GetFrontCellPos());
+            if (go == null)
+                return;
+
+            ObjectController oc = go.GetComponent<ObjectController>();
+
+            Debug.Log(go.name);
+
+            if (oc.ObjectType == ObjectType.OBJECT_TYPE_OBJECT)
+            {
+
+            }
+            else if (oc.ObjectType == ObjectType.OBJECT_TYPE_ITEM)
+            {
+                ItemController ic = (ItemController)oc;
+
+                switch (ic.Item.ItemType)
+                {
+                    case ItemType.ITEM_TYPE_TOOL:
+                        break;
+                    case ItemType.ITEM_TYPE_CROP:
+                        break;
+                    case ItemType.ITEM_TYPE_SEED:
+                        SeedController sc = oc as SeedController;
+
+                        if (sc.State == SeedState.Completed)
+                        {
+                            sc.OnHarvest();
+                        }
+                        break;
+                    case ItemType.ITEM_TYPE_CRAFTING:
+                        break;
+
+                }
+            }
+            else if (oc.ObjectType == ObjectType.OBJECT_TYPE_CREATURE)
+            {
+                UI_EventHandler evt = Util.GetOrAddComponent<UI_EventHandler>(go);
+                InteractableObject interactableObj = Util.GetOrAddComponent<InteractableObject>(go);
+                Managers.InteractableObject.OnInteract(interactableObj);
+            }
+            //else if(oc.ObjectType == ObjectType.OBJECT_TYPE_INTERACTABLE_OBJECT)
+            //{
+            //    UI_EventHandler evt = Util.GetOrAddComponent<UI_EventHandler>(go);
+            //    InteractableObject interactableObj = Util.GetOrAddComponent<InteractableObject>(go);
+            //    Managers.InteractableObject.OnInteract(interactableObj);
+            //}
+
+        }
+        else if (Input.GetKeyDown(KeyCode.P))
+        {
+            // Managers.Map.SaveMap("Assets/Resources/Map");
+            Managers.SaveLoad.SaveGameData();
+            Debug.Log("SaveFile saved");
+        }
+
     }
 
     void UpdateHpBar()
@@ -198,82 +279,7 @@ public class PlayerController : CreatureController
             Dir = MoveDir.None;
         }
     }
-
-    void GetIdleInput()
-    {
-        if (Input.GetKey(KeyCode.Space))
-        {
-            State = CreatureState.Skill;
-            _coSkill = StartCoroutine("CoStartPunch");
-        }
-        else if(_coUseToolCooltime == null && Input.GetKey(KeyCode.C)) // 도구 사용 도는 아이템 배치
-        {
-            if (HoldingItem == null)
-                return;
-
-            UseItem(HoldingItem);
-            _coUseToolCooltime = StartCoroutine("CoInputCoolTime", 0.2f);
-
-        }
-        else if(Input.GetKeyDown(KeyCode.X)) // 수확/대화/탑승/재료 넣기
-        {
-            GameObject go = Managers.Object.Find(GetFrontCellPos());
-            if (go == null)
-                return;
-            
-            ObjectController oc = go.GetComponent<ObjectController>();
-
-            Debug.Log(go.name);
-
-            if(oc.ObjectType == ObjectType.OBJECT_TYPE_OBJECT)
-            {
-
-            }    
-            else if (oc.ObjectType == ObjectType.OBJECT_TYPE_ITEM)
-            {
-                ItemController ic = (ItemController)oc;
-
-                switch (ic.Item.ItemType)
-                {
-                    case ItemType.ITEM_TYPE_TOOL:
-                        break;
-                    case ItemType.ITEM_TYPE_CROP:
-                        break;
-                    case ItemType.ITEM_TYPE_SEED:
-                        SeedController sc = oc as SeedController;
-
-                        if(sc.State == SeedState.Completed)
-                        {
-                            sc.OnHarvest();
-                        }
-                        break;
-                    case ItemType.ITEM_TYPE_CRAFTING:
-                        break;
-
-                }
-            }
-            else if(oc.ObjectType == ObjectType.OBJECT_TYPE_CREATURE)
-            {
-                UI_EventHandler evt = Util.GetOrAddComponent<UI_EventHandler>(go);
-                InteractableObject interactableObj = Util.GetOrAddComponent<InteractableObject>(go);
-                Managers.InteractableObject.OnInteract(interactableObj);
-            }
-            //else if(oc.ObjectType == ObjectType.OBJECT_TYPE_INTERACTABLE_OBJECT)
-            //{
-            //    UI_EventHandler evt = Util.GetOrAddComponent<UI_EventHandler>(go);
-            //    InteractableObject interactableObj = Util.GetOrAddComponent<InteractableObject>(go);
-            //    Managers.InteractableObject.OnInteract(interactableObj);
-            //}
-
-        }
-        else if(Input.GetKeyDown(KeyCode.P))
-        {
-            // Managers.Map.SaveMap("Assets/Resources/Map");
-            Managers.SaveLoad.SaveGameData();
-            Debug.Log("SaveFile saved");
-        }
-       
-    }
+   
     void GetUIKeyInput()
     {
         if(Input.GetKeyDown(KeyCode.I))

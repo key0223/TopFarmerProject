@@ -14,7 +14,7 @@ public class CreatureController : ObjectController
     public CreatureState State
     {
         get { return _state; }
-        set 
+        set
         {
             if (_state == value)
                 return;
@@ -34,7 +34,7 @@ public class CreatureController : ObjectController
                 return;
 
             _dir = value;
-            if(value != MoveDir.None)
+            if (value != MoveDir.None)
                 _lastDir = value;
 
             UpdateAnimation();
@@ -44,11 +44,11 @@ public class CreatureController : ObjectController
     public Vector3Int GetFrontCellPos(int range = 1)
     {
         Vector3Int cellPos = CellPos;
-        
-        switch(_lastDir)
+
+        switch (_lastDir)
         {
             case MoveDir.Up:
-                cellPos += Vector3Int.up*range;
+                cellPos += Vector3Int.up * range;
                 break;
             case MoveDir.Down:
                 cellPos += Vector3Int.down * range;
@@ -64,9 +64,9 @@ public class CreatureController : ObjectController
     }
     protected virtual void UpdateAnimation()
     {
-        if(_state == CreatureState.Idle)
+        if (_state == CreatureState.Idle)
         {
-            switch(_lastDir)
+            switch (_lastDir)
             {
                 case MoveDir.Up:
                     _animator.Play("IDLE_BACK");
@@ -87,7 +87,7 @@ public class CreatureController : ObjectController
 
             }
         }
-        else if(_state == CreatureState.Moving)
+        else if (_state == CreatureState.Moving)
         {
             switch (_dir)
             {
@@ -171,7 +171,7 @@ public class CreatureController : ObjectController
     //void Start()
     //{
     //    Init();
-       
+
     //}
 
     void Update()
@@ -193,7 +193,7 @@ public class CreatureController : ObjectController
 
     protected virtual void UpdateController()
     {
-        switch(State)
+        switch (State)
         {
             case CreatureState.Idle:
                 UpdateIdle();
@@ -215,34 +215,7 @@ public class CreatureController : ObjectController
     // 이동 가능한 상태일 때, 실제 좌표 이동
     protected virtual void UpdateIdle()
     {
-        if (_dir != MoveDir.None)
-        {
-            Vector3Int destPos = CellPos;
 
-            switch (_dir)
-            {
-                case MoveDir.Up:
-                    destPos += Vector3Int.up;
-                    break;
-                case MoveDir.Down:
-                    destPos += Vector3Int.down;
-                    break;
-                case MoveDir.Left:
-                    destPos += Vector3Int.left;
-                    break;
-                case MoveDir.Right:
-                    destPos += Vector3Int.right;
-                    break;
-            }
-
-            State = CreatureState.Moving;
-
-
-            if(Managers.Map.UpdateObjectPos(this.gameObject, (Vector2Int)destPos))
-            {
-                CellPos = destPos;
-            }
-        }
     }
     // 스르륵 이동
     protected virtual void UpdateMoving()
@@ -255,16 +228,43 @@ public class CreatureController : ObjectController
         if (dist < _speed * Time.deltaTime)
         {
             transform.position = destPos;
-
-            // 예외적으로 애니메이션을 직접 컨트롤
-            _state = CreatureState.Idle;
-            if (_dir == MoveDir.None)
-                UpdateAnimation();
+            MoveToNextPos();
         }
         else
         {
             transform.position += moveDir.normalized * _speed * Time.deltaTime;
-           State = CreatureState.Moving;
+            State = CreatureState.Moving;
+        }
+
+    }
+    protected virtual void MoveToNextPos()
+    {
+        if (_dir == MoveDir.None)
+        {
+            State = CreatureState.Idle;
+            return;
+        }
+        Vector3Int destPos = CellPos;
+
+        switch (_dir)
+        {
+            case MoveDir.Up:
+                destPos += Vector3Int.up;
+                break;
+            case MoveDir.Down:
+                destPos += Vector3Int.down;
+                break;
+            case MoveDir.Left:
+                destPos += Vector3Int.left;
+                break;
+            case MoveDir.Right:
+                destPos += Vector3Int.right;
+                break;
+        }
+
+        if (Managers.Map.UpdateObjectPos(this.gameObject, (Vector2Int)destPos))
+        {
+            CellPos = destPos;
         }
 
     }
