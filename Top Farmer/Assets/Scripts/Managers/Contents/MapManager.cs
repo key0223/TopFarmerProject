@@ -49,7 +49,6 @@ public class MapManager
     GameObject[,] _objects;
 
 
-
     /// <summary>
     /// 갈 수 있는 영역을 판별합니다.
     /// </summary>

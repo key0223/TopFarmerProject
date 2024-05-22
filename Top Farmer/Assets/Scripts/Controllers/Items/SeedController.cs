@@ -52,29 +52,26 @@ public class SeedController : ItemController
         Managers.Time.DayPassedRegistered -= OnDayPassed;
         Managers.Time.DayPassedRegistered += OnDayPassed;
         Seed = Item as Seed;
-        currentGrowthDay = 0;
+        currentGrowthDay = 7;
         State = SeedState.Progressing;
-
-
     }
     public void OnHarvest()
     {
         Debug.Log("OnHarvest");
         AddInven();
 
-        GameObject land = Managers.Map.Find((Vector2Int)CellPos);
+        GameObject land = Managers.Object.FindLand(CellPos);
         //GameObject land = Managers.Object.FindLandObject(CellPos);
-        if (land.name == "Land_Plowed")
-        {
-            PlowedLandController pc = land.GetComponent<PlowedLandController>();
-            if (pc == null)
-                return;
-            pc.IsUsing = false;
-            SetItem();
+        if (land == null) return;
 
-        }
 
-        //Managers.Object.Remove(gameObject);
+        PlowedLandController pc = land.GetComponent<PlowedLandController>();
+        if (pc == null)
+            return;
+        pc.IsUsing = false;
+        SetItem();
+
+        Managers.Object.Remove(gameObject);
         Managers.Resource.Destroy(gameObject);
     }
 

@@ -2,6 +2,7 @@ using Assets.Scripts.Contents.Object;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using static Define;
 
 public class ObjectManager 
@@ -11,7 +12,9 @@ public class ObjectManager
     public PlayerInfo PlayerInfo { get; set; }
     public PlayerController Player { get; set; }
 
-    Dictionary<int, ObjectController> _objects = new Dictionary<int, ObjectController>();
+    List<GameObject> _objects = new List<GameObject>();
+
+    //Dictionary<int, ObjectController> _objects = new Dictionary<int, ObjectController>();
     Dictionary<int, CreatureController> _creatures = new Dictionary<int, CreatureController>();
     Dictionary<int, MonsterController> _monsters = new Dictionary<int, MonsterController>();
 
@@ -27,7 +30,6 @@ public class ObjectManager
     }
    
 
-    #region Objects
     public void Add(GameObject go, bool player = false)
     {
         ObjectController oc = go.GetComponent<ObjectController>();
@@ -44,11 +46,11 @@ public class ObjectManager
         }
         else if(oc.ObjectType == ObjectType.OBJECT_TYPE_OBJECT)
         {
-            _objects.Add(oc.ObjectId, oc);
+            _objects.Add(go);
         }
         else if(oc.ObjectType == ObjectType.OBJECT_TYPE_ITEM)
         {
-            _objects.Add(oc.ObjectId, oc);
+            _objects.Add(go);
         }
         else if(oc.ObjectType == ObjectType.OBJECT_TYPE_CREATURE )
         {
@@ -66,10 +68,12 @@ public class ObjectManager
                     }
                     break;
             }
-
         }
 
-        Managers.Map.Add(go);
+        if(oc.ObjectType != ObjectType.OBJECT_TYPE_ITEM)
+        {
+            Managers.Map.Add(go);
+        }
         //_objects.Add(go);
         //if(player)
         //{
@@ -77,11 +81,38 @@ public class ObjectManager
         //    Player.SetPlayerInfo(PlayerInfo);
         //}
     }
+    public GameObject Find(Vector3Int cellPos)
+    {
+        foreach (GameObject obj in _objects)
+        {
+            ObjectController oc = obj.GetComponent<ObjectController>();
+            if (oc == null || obj.gameObject.name == "Land_Plowed")
+                continue;
 
-    //public void Remove(GameObject go)
-    //{
-    //    _objects.Remove(go);
-    //}
+            if (oc.CellPos == cellPos)
+                return obj;
+        }
+        return null;
+    }
+
+    public GameObject FindLand(Vector3Int cellPos)
+    {
+        foreach (GameObject obj in _objects)
+        {
+            PlowedLandController pc = obj.GetComponent<PlowedLandController>();
+            if (pc == null)
+                continue;
+
+            if (pc.CellPos == cellPos)
+                return obj;
+        }
+        return null;
+    }
+
+    public void Remove(GameObject go)
+    {
+        _objects.Remove(go);
+    }
 
     //public GameObject Find(Vector3Int cellPos)
     //{
@@ -98,73 +129,11 @@ public class ObjectManager
 
     //    return null;
     //}
-   
-    //public GameObject FindLandObject(Vector3Int cellPos)
-    //{
-    //    foreach (GameObject obj in _objects)
-    //    {
-    //        PlowedLandController pc = obj.GetComponent<PlowedLandController>();
-    //        if (pc == null)
-    //            continue;
 
-    //        if (pc.CellPos == cellPos)
-    //            return obj;
-    //    }
-
-    //    return null;
-    //}
-    
     public void Clear(GameObject go)
     {
         _objects.Clear();
     }
-
-    #endregion
-
-    #region Items
-
-    public void Add(Item item)
-    {
-        //if (_items.ContainsKey(item.Info.itemDbId))
-        //    return;
-
-        ItemType itemType = GetObjectTypeByItemType(item.TemplatedId);
-
-        if(itemType  == ItemType.ITEM_TYPE_TOOL)
-        {
-
-        }
-        else if(itemType == ItemType.ITEM_TYPE_CROP)
-        {
-            GameObject go = Managers.Resource.Instantiate($"Object/Land/Crop");
-            Crop crop = (Crop)item;
-
-        }
-        else if(itemType == ItemType.ITEM_TYPE_SEED)
-        {
-
-
-        }
-        else if(itemType ==ItemType.ITEM_TYPE_CRAFTING)
-        {
-
-        }
-    }
-    //public GameObject FindObject(Vector3Int cellPos)
-    //{
-    //    foreach (GameObject obj in _objects)
-    //    {
-    //        ObjectController oc = obj.GetComponent<ObjectController>();
-    //        if (oc == null || obj.gameObject.name == "Land_Plowed")
-    //            continue;
-
-    //        if (oc.CellPos == cellPos)
-    //            return obj;
-    //    }
-
-    //    return null;
-    //}
-    #endregion
 
     //public GameObject GetMerchant()
     //{

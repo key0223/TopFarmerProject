@@ -217,7 +217,7 @@ public class PlayerController : CreatureController
         }
         else if(Input.GetKeyDown(KeyCode.X)) // 수확/대화/탑승/재료 넣기
         {
-            GameObject go = Managers.Map.Find((Vector2Int)GetFrontCellPos());
+            GameObject go = Managers.Object.Find(GetFrontCellPos());
             if (go == null)
                 return;
             
@@ -339,11 +339,16 @@ public class PlayerController : CreatureController
                     bool interactable = Managers.Map.CanInteract(GetFrontCellPos());
                     if (interactable)
                     {
-                        if (Managers.Map.Find((Vector2Int)GetFrontCellPos()) == null)
+                        if(Managers.Object.FindLand(GetFrontCellPos()) == null)
                         {
                             State = CreatureState.UsingItem;
                             _coUsingItem = StartCoroutine("CoStartHoe");
                         }
+                        //if (Managers.Map.Find((Vector2Int)GetFrontCellPos()) == null)
+                        //{
+                        //    State = CreatureState.UsingItem;
+                        //    _coUsingItem = StartCoroutine("CoStartHoe");
+                        //}
                     }
                     break;
                 case ToolType.TOOL_TYPE_WATERINGCAN:
@@ -360,6 +365,19 @@ public class PlayerController : CreatureController
         {
             Seed seed = (Seed)item;
 
+            if (Managers.Object.FindLand(GetFrontCellPos()) == null)
+                return;
+
+            GameObject go = Managers.Object.FindLand(GetFrontCellPos());
+            PlowedLandController pc = go.GetComponent<PlowedLandController>();
+            if (pc == null) return;
+
+            if(!pc.IsUsing)
+            {
+                State = CreatureState.UsingItem;
+                _coUsingItem = StartCoroutine("CoStartSeed", seed);
+                pc.IsUsing = true;
+            }
             //if (Managers.Object.FindLandObject(GetFrontCellPos()) == null)
             //    return;
 
@@ -426,7 +444,7 @@ public class PlayerController : CreatureController
         GameObject plowed = Managers.Resource.Instantiate($"Object/Land/Land_Plowed");
         plowed.name = "Land_Plowed";
         PlowedLandController pc = plowed.GetComponent<PlowedLandController>();
-        pc.ObjectType = ObjectType.OBJECT_TYPE_OBJECT;
+        pc.ObjectType = ObjectType.OBJECT_TYPE_ITEM;
         //pc.ObjectType = ObjectType.OBJECT_TYPE_NONE;
         pc.CellPos = GetFrontCellPos();
         pc.IsUsing = false;
