@@ -11,7 +11,7 @@ public class CreatureController : ObjectController
     public CreatureType CreatureType { get; set; }
 
     protected CreatureState _state = CreatureState.Idle;
-    public CreatureState State
+    public virtual CreatureState State
     {
         get { return _state; }
         set

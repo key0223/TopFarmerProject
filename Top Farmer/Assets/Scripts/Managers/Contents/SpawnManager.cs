@@ -15,23 +15,23 @@ public class SpawnManager
 
         if(randomPos)
         {
-            Vector2Int randSpawnPos = new Vector2Int();
-
-            while(true)
+            for (int i = 0; i < 5; i++)
             {
-                randSpawnPos.x = Random.Range(Managers.Object.Player.CellPos.x - 10, Managers.Object.Player.CellPos.x + 10);
-                randSpawnPos.y = Random.Range(Managers.Object.Player.CellPos.y - 10, Managers.Object.Player.CellPos.y + 10);
-                
-                if(Managers.Map.Find(randSpawnPos) == null)
+                int randSpawnPosX = Random.Range(Managers.Object.Player.CellPos.x - 10, Managers.Object.Player.CellPos.x + 10);
+                int randSpawnPosY = Random.Range(Managers.Object.Player.CellPos.y - 10, Managers.Object.Player.CellPos.y + 10);
+
+                if (Managers.Map.Find(new Vector2Int(randSpawnPosX, randSpawnPosY)) == null)
                 {
                     Data.MonsterData monsterData = null;
-                    Managers.Data.MonsterDict.TryGetValue(randTemplatedId, out monsterData);
-                    MonsterData seedData = (MonsterData)monsterData;
+                    Managers.Data.MonsterDict.TryGetValue(701, out monsterData);
 
-                    GameObject monster = Managers.Resource.Instantiate($"{seedData.prefabPath}");
-                    MonsterController mc = monster.GetComponent<MonsterController>();
+
+                    GameObject monsterGo = Managers.Resource.Instantiate($"{monsterData.prefabPath}");
+                    MaggotController mc = monsterGo.GetComponent<MaggotController>();
+                    mc.CellPos = new Vector3Int(randSpawnPosX, randSpawnPosY, 0);
                 }
             }
+            
             //if(Managers.Object.Find(randSpawnPos) == null )
             //{
             //    gameObject.GetComponent<ObjectController>().CellPos = (Vector3Int)randSpawnPos;

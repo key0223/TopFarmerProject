@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7797874091916401767}
   - component: {fileID: 6780088335153079453}
   - component: {fileID: 5377223330180465713}
-  - component: {fileID: 8973116596139732137}
+  - component: {fileID: -1167320193527511358}
   m_Layer: 0
   m_Name: AcidBlob1
   m_TagString: Untagged
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 1884246844, guid: bad50347642cc2f4383c5b8fbcad3f4b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -107,7 +107,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8973116596139732137
+--- !u!114 &-1167320193527511358
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,6 +116,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7789020191687287791}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12b2db9046b6bc945a2ec92c338d3e44, type: 3}
+  m_Script: {fileID: 11500000, guid: 383e4321eac493248a4c35a4cc4dfb27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sprite: {fileID: 0}
