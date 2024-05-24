@@ -26,8 +26,7 @@ namespace TopFarmerWebServer.DB
             public int Level { get; set; }
             public int Hp { get; set; }
             public int MaxHp { get; set; }
-            public int Hunger { get; set; }
-            public int MaxHunger { get; set; }
+            public int Attack { get; set; }
             public float Speed { get;set; }
             public int TotalExp { get; set; }
 

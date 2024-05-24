@@ -17,28 +17,26 @@ public class Monster
     public  float Speed { get; private set; }
     public int TotalExp { get; private set; }
    
-    public Monster(MonsterType monsterType)
-    {
-        MonsterType = monsterType;
-    }
-    public Monster MakeMonster(int templatedId)
+    public static Monster MakeMonster(int templatedId)
     {
         Monster monster = null;
         MonsterData monsterData = null;
         Managers.Data.MonsterDict.TryGetValue(templatedId, out monsterData);
         if (monsterData == null) return null;
 
-        TemplatedId = templatedId;
-        switch(monsterData.monsterType)
+        monster = new Monster()
         {
-            case MonsterType.MONSTER_TYPE_CONTACT:
-                break;
-            case MonsterType.MONSTER_TYPE_RANGED:
-                break;
-            case MonsterType.MONSTER_TYPE_COUNTERATTACK:
-                break;
-
-        }
+            TemplatedId = monsterData.monsterId,
+            Name = monsterData.name,
+            ObjectType = monsterData.objectType,
+            CreatureType = monsterData.creatureType,
+            MonsterType = monsterData.monsterType,
+            Level = monsterData.level,
+            MaxHp = monsterData.maxHp,
+            Attack = monsterData.attack,
+            Speed = monsterData.speed,
+            TotalExp = monsterData.totalExp,
+        };
 
         return monster;
     }

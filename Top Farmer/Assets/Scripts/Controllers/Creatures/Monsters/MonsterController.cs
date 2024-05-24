@@ -9,6 +9,7 @@ public class MonsterController : CreatureController
     public MonsterController()
     {
         ObjectType = ObjectType.OBJECT_TYPE_CREATURE;
+        CreatureType = CreatureType.CREATURE_TYPE_MONSTER;
     }
     protected Coroutine _coPatrol;
     protected Coroutine _coSearch;
@@ -18,6 +19,10 @@ public class MonsterController : CreatureController
 
     [SerializeField]
     protected GameObject _target; // 추적하는 대상
+
+    protected int _hp;
+
+
     protected float _searchRange = 5.0f;
 
     public override CreatureState State
@@ -29,17 +34,6 @@ public class MonsterController : CreatureController
                 return;
 
             base.State = value;
-
-            //if (_coPatrol != null)
-            //{
-            //    StopCoroutine(_coPatrol);
-            //    _coPatrol = null;
-            //}
-            //if (_coSearch != null)
-            //{
-            //    StopCoroutine(_coSearch);
-            //    _coSearch = null;
-            //}
         }
     }
     protected override void Init()
@@ -48,68 +42,28 @@ public class MonsterController : CreatureController
         State = CreatureState.Idle;
         Dir = MoveDir.None;
     }
+    public virtual void SetStat()
+    {
+        _speed = Monster.Speed;
+        _hp = Monster.MaxHp;
 
+    }
     protected override void UpdateIdle()
     {
         base.UpdateIdle();
-
-        //if (_coPatrol == null)
-        //{
-        //    _coPatrol = StartCoroutine("CoPatrol");
-        //}
-        //if (_coSearch == null)
-        //{
-        //    _coSearch = StartCoroutine("CoSearch");
-        //}
-
     }
-    /*
-    protected override void MoveToNextPos()
+    public override void OnDamaged(int damage)
     {
-        Vector3Int destPos = _destCellPos;
-        if(_target != null)
-        {
-            destPos = _target.GetComponent<CreatureController>().CellPos;
-        }
+        _hp = Mathf.Max(_hp - damage, 0);
+        Debug.Log($"Monster Hp : {_hp}");
 
-        List<Vector3Int> path = Managers.Map.FindPath(CellPos,destPos, ignoreDestCollision: true);
-        
-        // 길을 못찾았거나, (타겟이 있지만)너무 멀리있을 경우
-        if(path.Count <2 || (_target != null && path.Count >10))
+        if(_hp <= 0)
         {
-            _target =null;
-            State = CreatureState.Idle;
-            return;
+            Managers.Object.Remove(gameObject);
+            Managers.Resource.Destroy(gameObject);
+            
         }
-
-        Vector3Int nextPos = path[1];
-        Vector3Int moveCellDir = nextPos - CellPos;
-
-        if (moveCellDir.x > 0)
-            Dir = MoveDir.Right;
-        else if (moveCellDir.x < 0)
-            Dir = MoveDir.Left;
-        else if (moveCellDir.y > 0)
-            Dir = MoveDir.Up;
-        else if (moveCellDir.y < 0)
-            Dir = MoveDir.Down;
-        else
-            Dir = MoveDir.None;
-
-        if (Managers.Map.UpdateObjectPos(this.gameObject, (Vector2Int)nextPos))
-        {
-            CellPos = nextPos;
-        }
-        else
-        {
-            State = CreatureState.Idle;
-        }
-    }
-    */
-    public override void OnDamaged()
-    {
         //Managers.Object.Remove(gameObject);
-        Managers.Resource.Destroy(gameObject);
     }
 
     protected IEnumerator CoPatrol()
@@ -138,7 +92,6 @@ public class MonsterController : CreatureController
 
     protected IEnumerator CoSearch()
     {
-
         // 1초마다 타겟을 찾는다.
         while (true)
         {
@@ -159,7 +112,6 @@ public class MonsterController : CreatureController
                 return true;
 
             });
-
         }
     }
 
@@ -171,7 +123,7 @@ public class MonsterController : CreatureController
         {
             PlayerController pc = go.GetComponent<PlayerController> ();
             if (pc != null)
-                pc.OnDamaged();
+                pc.OnDamaged(Monster.Attack);
         }
         // 대기 시간
         yield return new WaitForSeconds(0.5f);

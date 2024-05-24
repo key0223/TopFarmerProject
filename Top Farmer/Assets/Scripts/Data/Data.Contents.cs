@@ -243,7 +243,7 @@ namespace Data
     [Serializable]
     public class MonsterData
     {
-        public ObjectType ObjectType;
+        public ObjectType objectType;
         public int monsterId;
         public string name;
         public CreatureType creatureType;
@@ -266,7 +266,7 @@ namespace Data
             Dictionary<int, MonsterData> dict = new Dictionary<int, MonsterData>();
             foreach (MonsterData monster in array)
             {
-                monster.ObjectType = ObjectType.OBJECT_TYPE_CREATURE;
+                monster.objectType = ObjectType.OBJECT_TYPE_CREATURE;
                 monster.creatureType = CreatureType.CREATURE_TYPE_MONSTER;
                 dict.Add(monster.monsterId, monster);
             }

@@ -63,10 +63,15 @@ public class GameScene : BaseScene
                 Data.MonsterData monsterData = null;
                 Managers.Data.MonsterDict.TryGetValue(741, out monsterData);
 
+                Monster monster = Monster.MakeMonster(monsterData.monsterId);
 
                 GameObject monsterGo = Managers.Resource.Instantiate($"{monsterData.prefabPath}");
-                MantisController mc = monsterGo.GetComponent<MantisController>();
+                MonsterController mc = monsterGo.GetComponent<MonsterController>();
+                mc.Monster = monster;
                 mc.CellPos = new Vector3Int(randSpawnPosX, randSpawnPosY, 0);
+                mc.CreatureType = monster.CreatureType;
+                mc.SetStat();
+                Managers.Object.Add(monsterGo);
             }
         }
 

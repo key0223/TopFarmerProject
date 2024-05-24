@@ -298,7 +298,7 @@ public class CreatureController : ObjectController
 
     }
 
-    public virtual void OnDamaged()
+    public virtual void OnDamaged(int damage)
     {
 
     }

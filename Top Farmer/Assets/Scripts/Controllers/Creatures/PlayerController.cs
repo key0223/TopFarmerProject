@@ -421,11 +421,29 @@ public class PlayerController : CreatureController
     IEnumerator CoStartPunch()
     {
         // 피격 판정
-        //GameObject go =  Managers.Object.Find(GetFrontCellPos());
-        //if(go !=null)
-        //{
-        //    Debug.Log(go.name);
-        //}
+        GameObject go = Managers.Object.FindMonster(GetFrontCellPos());
+        if (go != null)
+        {
+            MonsterController mc = go.GetComponent<MonsterController>();
+
+            if (mc == null) yield break;
+
+            if(mc.Monster.MonsterType == MonsterType.MONSTER_TYPE_CONTACT)
+            {
+
+            }
+            else if(mc.Monster.MonsterType == MonsterType.MONSTER_TYPE_RANGED)
+            {
+                MantisController mantisC = (MantisController)mc;
+                mantisC.OnDamaged(Stat.attack);
+            }
+            else if (mc.Monster.MonsterType == MonsterType.MONSTER_TYPE_COUNTERATTACK)
+            {
+                
+            }
+            //if (mc != null)
+            //    mc.OnDamaged(Stat.attack);
+        }
         // 대기 시간
         _rangedSkill = false;
         yield return new WaitForSeconds(0.5f);
@@ -526,9 +544,8 @@ public class PlayerController : CreatureController
     }
     #endregion
 
-    public override void OnDamaged()
+    public override void OnDamaged(int damage)
     {
-        int damage = 10;
         Hp = Mathf.Max(Stat.hp - damage, 0);
     }
     

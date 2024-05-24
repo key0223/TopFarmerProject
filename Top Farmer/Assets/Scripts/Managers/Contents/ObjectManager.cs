@@ -109,6 +109,20 @@ public class ObjectManager
         }
         return null;
     }
+
+    public GameObject FindMonster(Vector3Int cellPos)
+    {
+        foreach (MonsterController obj in _monsters.Values)
+        {
+            MonsterController mc = obj.GetComponent<MonsterController>();
+            if (mc == null)
+                continue;
+
+            if (mc.CellPos == cellPos)
+                return obj.gameObject;
+        }
+        return null;
+    }
     public GameObject FindLand(Vector3Int cellPos)
     {
         foreach (GameObject obj in _objects)
@@ -147,6 +161,12 @@ public class ObjectManager
     public void Remove(GameObject go)
     {
         _objects.Remove(go);
+    }
+    public void RemoveMonster(GameObject go)
+    {
+        MonsterController mc = go.GetComponent<MonsterController>();
+
+        _monsters.Remove(mc.ObjectId);
     }
 
     //public GameObject Find(Vector3Int cellPos)

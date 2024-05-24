@@ -7,7 +7,6 @@ public class MantisController : MonsterController
 {
     [SerializeField]
     float _skillRange = 1.0f;
-
    
 
     public override CreatureState State
@@ -157,4 +156,6 @@ public class MantisController : MonsterController
             }
         }
     }
+
+    
 }
