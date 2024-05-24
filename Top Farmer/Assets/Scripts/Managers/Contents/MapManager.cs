@@ -295,6 +295,7 @@ public class MapManager
     int[] _deltaX = new int[] { 0, 0, -1, 1 };
     int[] _cost = new int[] { 10, 10, 10, 10 };
 
+    // ignoreDestCollision : destPos에 어떤 물체가 있을때, 충돌로 인식할지 말지
     public List<Vector3Int> FindPath(Vector3Int startCellPos, Vector3Int destCellPos, bool ignoreDestCollision = false)
     {
         List<Pos> path = new List<Pos>();

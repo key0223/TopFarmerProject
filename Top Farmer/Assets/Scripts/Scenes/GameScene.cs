@@ -52,35 +52,36 @@ public class GameScene : BaseScene
 
         int randTemplatedId = monsterId * 100 + randType * 10 + 1;
 
-            for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 5; i++)
+        {
+            int randSpawnPosX = Random.Range(Managers.Object.Player.CellPos.x - 10, Managers.Object.Player.CellPos.x + 10);
+            int randSpawnPosY = Random.Range(Managers.Object.Player.CellPos.y - 10, Managers.Object.Player.CellPos.y + 10);
+            Vector3Int pos = new Vector3Int(randSpawnPosX, randSpawnPosY);
+
+            if (Managers.Map.Find((Vector2Int)pos) == null && Managers.Map.CanGo(pos))
             {
-                int randSpawnPosX = Random.Range(Managers.Object.Player.CellPos.x - 10, Managers.Object.Player.CellPos.x + 10);
-                int randSpawnPosY = Random.Range(Managers.Object.Player.CellPos.y - 10, Managers.Object.Player.CellPos.y + 10);
-
-                if (Managers.Map.Find(new Vector2Int(randSpawnPosX, randSpawnPosY)) == null)
-                {
-                    Data.MonsterData monsterData = null;
-                    Managers.Data.MonsterDict.TryGetValue(731, out monsterData);
+                Data.MonsterData monsterData = null;
+                Managers.Data.MonsterDict.TryGetValue(731, out monsterData);
 
 
-                    GameObject monsterGo = Managers.Resource.Instantiate($"{monsterData.prefabPath}");
-                    MaggotController mc = monsterGo.GetComponent<MaggotController>();
-                    mc.CellPos = new Vector3Int(randSpawnPosX, randSpawnPosY, 0);
-                }
+                GameObject monsterGo = Managers.Resource.Instantiate($"{monsterData.prefabPath}");
+                MaggotController mc = monsterGo.GetComponent<MaggotController>();
+                mc.CellPos = new Vector3Int(randSpawnPosX, randSpawnPosY, 0);
             }
+        }
 
-            //if(Managers.Object.Find(randSpawnPos) == null )
-            //{
-            //    gameObject.GetComponent<ObjectController>().CellPos = (Vector3Int)randSpawnPos;
-            //    Managers.Object.Add(gameObject);
+        //if(Managers.Object.Find(randSpawnPos) == null )
+        //{
+        //    gameObject.GetComponent<ObjectController>().CellPos = (Vector3Int)randSpawnPos;
+        //    Managers.Object.Add(gameObject);
 
-            //}
+        //}
 
         //GameObject fire = Managers.Resource.Instantiate("Object/Craftable/Campfire");
         //CampfireController cc = fire.GetComponent<CampfireController>();
         //Managers.Object.Add(fire);
 
-        
+
 
         #endregion
         //Screen.SetResolution(640, 480, false);

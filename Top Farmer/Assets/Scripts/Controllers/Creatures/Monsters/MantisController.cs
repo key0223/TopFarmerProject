@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Define;
-using static UnityEngine.GraphicsBuffer;
 
-public class MaggotController : MonsterController
+public class MantisController : MonsterController
 {
+    [SerializeField]
+    GameObject _target; // 추적하는 대상
+    float _searchRange = 5.0f;
 
     public override CreatureState State
     {
@@ -22,9 +24,13 @@ public class MaggotController : MonsterController
                 StopCoroutine(_coPatrol);
                 _coPatrol = null;
             }
+            if (_coSearch != null)
+            {
+                StopCoroutine(_coSearch);
+                _coSearch = null;
+            }
         }
     }
-
     protected override void Init()
     {
         base.Init();
@@ -33,51 +39,41 @@ public class MaggotController : MonsterController
 
         _speed = 3.0f;
     }
-    protected override void UpdateIdle()
-    {
-        base.UpdateIdle();
-
-        if (_coPatrol == null)
-        {
-            _coPatrol = StartCoroutine("CoPatrol");
-        }
-    }
     protected override void MoveToNextPos()
     {
-        Vector3Int moveCellPos = _destCellPos - CellPos;
+        Vector3Int destPos = _destCellPos;
+        if (_target != null)
+        {
+            destPos = _target.GetComponent<CreatureController>().CellPos;
+        }
 
-        if (moveCellPos.x > 0)
+        List<Vector3Int> path = Managers.Map.FindPath(CellPos, destPos, ignoreDestCollision: true);
+
+        // 길을 못찾았거나, (타겟이 있지만)너무 멀리있을 경우
+        if (path.Count < 2 || (_target != null && path.Count > 10))
+        {
+            _target = null;
+            State = CreatureState.Idle;
+            return;
+        }
+
+        Vector3Int nextPos = path[1];
+        Vector3Int moveCellDir = nextPos - CellPos;
+
+        if (moveCellDir.x > 0)
             Dir = MoveDir.Right;
-        else if (moveCellPos.x < 0)
+        else if (moveCellDir.x < 0)
             Dir = MoveDir.Left;
-        else if (moveCellPos.y > 0)
+        else if (moveCellDir.y > 0)
             Dir = MoveDir.Up;
-        else if (moveCellPos.y < 0)
+        else if (moveCellDir.y < 0)
             Dir = MoveDir.Down;
         else
             Dir = MoveDir.None;
 
-        Vector3Int destPos = CellPos;
-
-        switch (_dir)
+        if (Managers.Map.UpdateObjectPos(this.gameObject, (Vector2Int)nextPos))
         {
-            case MoveDir.Up:
-                destPos += Vector3Int.up;
-                break;
-            case MoveDir.Down:
-                destPos += Vector3Int.down;
-                break;
-            case MoveDir.Left:
-                destPos += Vector3Int.left;
-                break;
-            case MoveDir.Right:
-                destPos += Vector3Int.right;
-                break;
-        }
-
-        if (Managers.Map.UpdateObjectPos(this.gameObject, (Vector2Int)destPos))
-        {
-            CellPos = destPos;
+            CellPos = nextPos;
         }
         else
         {
@@ -91,16 +87,16 @@ public class MaggotController : MonsterController
             switch (_lastDir)
             {
                 case MoveDir.Up:
-                    _animator.Play("Maggot_MOVE_BACK");
+                    _animator.Play("Mantis_MOVE_BACK");
                     break;
                 case MoveDir.Down:
-                    _animator.Play("Maggot_MOVE_FRONT");
+                    _animator.Play("Mantis_MOVE_FRONT");
                     break;
                 case MoveDir.Left:
-                    _animator.Play("Maggot_MOVE_LEFT");
+                    _animator.Play("Mantis_MOVE_LEFT");
                     break;
                 case MoveDir.Right:
-                    _animator.Play("Maggot_MOVE_RIGHT");
+                    _animator.Play("Mantis_MOVE_RIGHT");
                     break;
 
             }
@@ -110,16 +106,16 @@ public class MaggotController : MonsterController
             switch (_dir)
             {
                 case MoveDir.Up:
-                    _animator.Play("Maggot_MOVE_BACK");
+                    _animator.Play("Mantis_MOVE_BACK");
                     break;
                 case MoveDir.Down:
-                    _animator.Play("Maggot_MOVE_FRONT");
+                    _animator.Play("Mantis_MOVE_FRONT");
                     break;
                 case MoveDir.Left:
-                    _animator.Play("Maggot_MOVE_LEFT");
+                    _animator.Play("Mantis_MOVE_LEFT");
                     break;
                 case MoveDir.Right:
-                    _animator.Play("Maggot_MOVE_RIGHT");
+                    _animator.Play("Mantis_MOVE_RIGHT");
                     break;
                 case MoveDir.None:
 
@@ -131,16 +127,16 @@ public class MaggotController : MonsterController
             switch (_lastDir)
             {
                 case MoveDir.Up:
-                    _animator.Play("Maggot_ATTACK_BACK");
+                    _animator.Play("Mantis_ATTACK_BACK");
                     break;
                 case MoveDir.Down:
-                    _animator.Play("Maggot_ATTACK_FRONT");
+                    _animator.Play("Mantis_ATTACK_FRONT");
                     break;
                 case MoveDir.Left:
-                    _animator.Play("Maggot_ATTACK_LEFT");
+                    _animator.Play("Mantis_ATTACK_LEFT");
                     break;
                 case MoveDir.Right:
-                    _animator.Play("Maggot_ATTACK_RIGHT");
+                    _animator.Play("Mantis_ATTACK_RIGHT");
                     break;
                 case MoveDir.None:
 

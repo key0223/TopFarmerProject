@@ -5,7 +5,8 @@ using static Define;
 
 public class CreatureController : ObjectController
 {
-    float _speed = 5f;
+    [SerializeField]
+    public float _speed = 5f;
     protected Animator _animator;
 
     public CreatureType CreatureType { get; set; }
@@ -24,6 +25,7 @@ public class CreatureController : ObjectController
         }
     }
     protected MoveDir _lastDir = MoveDir.Down;
+    [SerializeField]
     protected MoveDir _dir = MoveDir.Down;
     public MoveDir Dir
     {

@@ -1,4 +1,5 @@
 using Assets.Scripts.Contents.Object;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -105,6 +106,27 @@ public class ObjectManager
 
             if (pc.CellPos == cellPos)
                 return obj;
+        }
+        return null;
+    }
+
+    // GameObject를 인자로 받고 그에 대한 결과값을 bool로 반환
+    public GameObject Find(Func<GameObject, bool> condition) 
+    {
+        foreach(GameObject obj in _objects)
+        {
+            if(condition.Invoke(obj))
+                return obj;
+        }
+        return null;
+    }
+
+    public GameObject FindCreature(Func<GameObject, bool> condition)
+    {
+        foreach(CreatureController obj in _creatures.Values)
+        {
+            if (condition.Invoke(obj.gameObject))
+                return obj.gameObject;
         }
         return null;
     }
