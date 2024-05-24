@@ -19,7 +19,7 @@ public class TimeManager
     #endregion
 
     bool _init = false;
-    private const float _timeRatio = 0.1f; // 인게임 10분 = 실제 시간 7초
+    private const float _timeRatio = 0.7f; // 인게임 10분 = 실제 시간 7초
 
     public int CurrentDayOfSurvival { get; private set; }
     public float CurrentMinute { get; private set; }
