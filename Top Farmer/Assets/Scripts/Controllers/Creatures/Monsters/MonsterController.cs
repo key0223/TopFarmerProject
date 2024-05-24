@@ -12,12 +12,13 @@ public class MonsterController : CreatureController
     }
     protected Coroutine _coPatrol;
     protected Coroutine _coSearch;
+    protected Coroutine _coSkill;
     [SerializeField]
     protected Vector3Int _destCellPos;
 
     [SerializeField]
-    GameObject _target; // 추적하는 대상
-    float _searchRange = 5.0f;
+    protected GameObject _target; // 추적하는 대상
+    protected float _searchRange = 5.0f;
 
     public override CreatureState State
     {
@@ -46,8 +47,6 @@ public class MonsterController : CreatureController
         base.Init();
         State = CreatureState.Idle;
         Dir = MoveDir.None;
-
-        //_speed = 3.0f;
     }
 
     protected override void UpdateIdle()
@@ -162,5 +161,21 @@ public class MonsterController : CreatureController
             });
 
         }
+    }
+
+    protected IEnumerator CoStartPunch()
+    {
+        // 피격 판정
+        GameObject go = Managers.Object.FindCreature(GetFrontCellPos());
+        if (go != null)
+        {
+            PlayerController pc = go.GetComponent<PlayerController> ();
+            if (pc != null)
+                pc.OnDamaged();
+        }
+        // 대기 시간
+        yield return new WaitForSeconds(0.5f);
+        State = CreatureState.Idle;
+        _coSkill = null;
     }
 }

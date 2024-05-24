@@ -6,8 +6,9 @@ using static Define;
 public class MantisController : MonsterController
 {
     [SerializeField]
-    GameObject _target; // 추적하는 대상
-    float _searchRange = 5.0f;
+    float _skillRange = 1.0f;
+
+   
 
     public override CreatureState State
     {
@@ -39,12 +40,35 @@ public class MantisController : MonsterController
 
         _speed = 3.0f;
     }
+    protected override void UpdateIdle()
+    {
+        base.UpdateIdle();
+
+        if (_coPatrol == null)
+        {
+            _coPatrol = StartCoroutine("CoPatrol");
+        }
+        if (_coSearch == null)
+        {
+            _coSearch = StartCoroutine("CoSearch");
+        }
+    }
     protected override void MoveToNextPos()
     {
         Vector3Int destPos = _destCellPos;
         if (_target != null)
         {
             destPos = _target.GetComponent<CreatureController>().CellPos;
+
+            Vector3Int dir = destPos - CellPos;
+            if(dir.magnitude <= _skillRange)
+            {
+                Dir = GetDirFromVec(dir);
+                State = CreatureState.Skill;
+                _coSkill = StartCoroutine("CoStartPunch");
+                return;
+            }
+
         }
 
         List<Vector3Int> path = Managers.Map.FindPath(CellPos, destPos, ignoreDestCollision: true);
@@ -60,16 +84,7 @@ public class MantisController : MonsterController
         Vector3Int nextPos = path[1];
         Vector3Int moveCellDir = nextPos - CellPos;
 
-        if (moveCellDir.x > 0)
-            Dir = MoveDir.Right;
-        else if (moveCellDir.x < 0)
-            Dir = MoveDir.Left;
-        else if (moveCellDir.y > 0)
-            Dir = MoveDir.Up;
-        else if (moveCellDir.y < 0)
-            Dir = MoveDir.Down;
-        else
-            Dir = MoveDir.None;
+        Dir = GetDirFromVec(moveCellDir);
 
         if (Managers.Map.UpdateObjectPos(this.gameObject, (Vector2Int)nextPos))
         {
@@ -118,7 +133,6 @@ public class MantisController : MonsterController
                     _animator.Play("Mantis_MOVE_RIGHT");
                     break;
                 case MoveDir.None:
-
                     break;
             }
         }
@@ -139,7 +153,6 @@ public class MantisController : MonsterController
                     _animator.Play("Mantis_ATTACK_RIGHT");
                     break;
                 case MoveDir.None:
-
                     break;
             }
         }

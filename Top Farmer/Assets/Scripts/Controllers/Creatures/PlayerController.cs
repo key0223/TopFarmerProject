@@ -526,10 +526,10 @@ public class PlayerController : CreatureController
     }
     #endregion
 
-    [ContextMenu("HpCheck")]
-    public void DamagePlayer()
+    public override void OnDamaged()
     {
         int damage = 10;
         Hp = Mathf.Max(Stat.hp - damage, 0);
     }
+    
 }

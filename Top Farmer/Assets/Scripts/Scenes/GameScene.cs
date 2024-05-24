@@ -61,11 +61,11 @@ public class GameScene : BaseScene
             if (Managers.Map.Find((Vector2Int)pos) == null && Managers.Map.CanGo(pos))
             {
                 Data.MonsterData monsterData = null;
-                Managers.Data.MonsterDict.TryGetValue(731, out monsterData);
+                Managers.Data.MonsterDict.TryGetValue(741, out monsterData);
 
 
                 GameObject monsterGo = Managers.Resource.Instantiate($"{monsterData.prefabPath}");
-                MaggotController mc = monsterGo.GetComponent<MaggotController>();
+                MantisController mc = monsterGo.GetComponent<MantisController>();
                 mc.CellPos = new Vector3Int(randSpawnPosX, randSpawnPosY, 0);
             }
         }

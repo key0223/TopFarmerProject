@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3845854045607174080}
   - component: {fileID: 1942339113154380304}
   - component: {fileID: 2650026272114362269}
-  - component: {fileID: 1034597881034280986}
+  - component: {fileID: 6789146081298120647}
   m_Layer: 0
   m_Name: Mantis
   m_TagString: Untagged
@@ -107,7 +107,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1034597881034280986
+--- !u!114 &6789146081298120647
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,7 +116,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4967756711731979905}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 383e4321eac493248a4c35a4cc4dfb27, type: 3}
+  m_Script: {fileID: 11500000, guid: 1239b3cadb919784ea681f4db5694d6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _sprite: {fileID: 0}
+  _speed: 5
+  _dir: 2
+  _destCellPos: {x: 0, y: 0, z: 0}
+  _target: {fileID: 0}
+  _target: {fileID: 0}
+  _skillRange: 1

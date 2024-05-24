@@ -2,6 +2,7 @@ using Assets.Scripts.Contents.Object;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 using static Define;
@@ -95,7 +96,19 @@ public class ObjectManager
         }
         return null;
     }
+    public GameObject FindCreature(Vector3Int cellPos)
+    {
+        foreach(CreatureController obj in _creatures.Values)
+        {
+            CreatureController cc = obj.GetComponent<CreatureController>();
+            if (cc == null)
+                continue;
 
+            if(cc.CellPos == cellPos)
+                return obj.gameObject;
+        }
+        return null;
+    }
     public GameObject FindLand(Vector3Int cellPos)
     {
         foreach (GameObject obj in _objects)

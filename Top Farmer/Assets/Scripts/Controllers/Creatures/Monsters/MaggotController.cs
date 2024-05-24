@@ -46,16 +46,7 @@ public class MaggotController : MonsterController
     {
         Vector3Int moveCellPos = _destCellPos - CellPos;
 
-        if (moveCellPos.x > 0)
-            Dir = MoveDir.Right;
-        else if (moveCellPos.x < 0)
-            Dir = MoveDir.Left;
-        else if (moveCellPos.y > 0)
-            Dir = MoveDir.Up;
-        else if (moveCellPos.y < 0)
-            Dir = MoveDir.Down;
-        else
-            Dir = MoveDir.None;
+        Dir = GetDirFromVec(moveCellPos);
 
         Vector3Int destPos = CellPos;
 
