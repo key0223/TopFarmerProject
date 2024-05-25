@@ -60,7 +60,9 @@ public class MantisController : MonsterController
             destPos = _target.GetComponent<CreatureController>().CellPos;
 
             Vector3Int dir = destPos - CellPos;
-            if(dir.magnitude <= _skillRange)
+
+            // 범위 내에 있고 일직선상에 있을 때
+            if(dir.magnitude <= _skillRange && (dir.x == 0 || dir.y == 0))
             {
                 Dir = GetDirFromVec(dir);
                 State = CreatureState.Skill;
