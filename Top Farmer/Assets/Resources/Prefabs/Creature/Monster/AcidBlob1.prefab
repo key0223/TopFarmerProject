@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7797874091916401767}
   - component: {fileID: 6780088335153079453}
   - component: {fileID: 5377223330180465713}
-  - component: {fileID: -1167320193527511358}
+  - component: {fileID: -1461951696398868575}
   m_Layer: 0
   m_Name: AcidBlob1
   m_TagString: Untagged
@@ -107,7 +107,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-1167320193527511358
+--- !u!114 &-1461951696398868575
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,7 +116,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 7789020191687287791}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 383e4321eac493248a4c35a4cc4dfb27, type: 3}
+  m_Script: {fileID: 11500000, guid: 46ca56ce9579cc34b87771dc485a79ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _sprite: {fileID: 0}
+  _speed: 5
+  _dir: 2
+  _monsterName: 
+  _destCellPos: {x: 0, y: 0, z: 0}
+  _target: {fileID: 0}
+  _skillRange: 1

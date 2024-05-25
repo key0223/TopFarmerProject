@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Define;
 
-public class MantisController : MonsterController
+public class MonsterRangedTypeController : MonsterController
 {
-    [SerializeField]
-    float _skillRange = 1.0f;
-   
-
+ 
     public override CreatureState State
     {
         get { return _state; }
@@ -62,7 +59,7 @@ public class MantisController : MonsterController
             Vector3Int dir = destPos - CellPos;
 
             // 범위 내에 있고 일직선상에 있을 때
-            if(dir.magnitude <= _skillRange && (dir.x == 0 || dir.y == 0))
+            if (dir.magnitude <= _skillRange && (dir.x == 0 || dir.y == 0))
             {
                 Dir = GetDirFromVec(dir);
                 State = CreatureState.Skill;
@@ -96,68 +93,4 @@ public class MantisController : MonsterController
             State = CreatureState.Idle;
         }
     }
-    protected override void UpdateAnimation()
-    {
-        if (_state == CreatureState.Idle)
-        {
-            switch (_lastDir)
-            {
-                case MoveDir.Up:
-                    _animator.Play("Mantis_MOVE_BACK");
-                    break;
-                case MoveDir.Down:
-                    _animator.Play("Mantis_MOVE_FRONT");
-                    break;
-                case MoveDir.Left:
-                    _animator.Play("Mantis_MOVE_LEFT");
-                    break;
-                case MoveDir.Right:
-                    _animator.Play("Mantis_MOVE_RIGHT");
-                    break;
-
-            }
-        }
-        else if (_state == CreatureState.Moving)
-        {
-            switch (_dir)
-            {
-                case MoveDir.Up:
-                    _animator.Play("Mantis_MOVE_BACK");
-                    break;
-                case MoveDir.Down:
-                    _animator.Play("Mantis_MOVE_FRONT");
-                    break;
-                case MoveDir.Left:
-                    _animator.Play("Mantis_MOVE_LEFT");
-                    break;
-                case MoveDir.Right:
-                    _animator.Play("Mantis_MOVE_RIGHT");
-                    break;
-                case MoveDir.None:
-                    break;
-            }
-        }
-        else if (_state == CreatureState.Skill)
-        {
-            switch (_lastDir)
-            {
-                case MoveDir.Up:
-                    _animator.Play("Mantis_ATTACK_BACK");
-                    break;
-                case MoveDir.Down:
-                    _animator.Play("Mantis_ATTACK_FRONT");
-                    break;
-                case MoveDir.Left:
-                    _animator.Play("Mantis_ATTACK_LEFT");
-                    break;
-                case MoveDir.Right:
-                    _animator.Play("Mantis_ATTACK_RIGHT");
-                    break;
-                case MoveDir.None:
-                    break;
-            }
-        }
-    }
-
-    
 }

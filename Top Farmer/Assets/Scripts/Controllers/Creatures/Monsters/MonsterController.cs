@@ -6,14 +6,20 @@ using static Define;
 public class MonsterController : CreatureController
 {
     public Monster Monster { get; set; }
+
+    [SerializeField]
+    public string _monsterName;
     public MonsterController()
     {
         ObjectType = ObjectType.OBJECT_TYPE_CREATURE;
         CreatureType = CreatureType.CREATURE_TYPE_MONSTER;
+
+      
     }
     protected Coroutine _coPatrol;
     protected Coroutine _coSearch;
     protected Coroutine _coSkill;
+
     [SerializeField]
     protected Vector3Int _destCellPos;
 
@@ -22,7 +28,8 @@ public class MonsterController : CreatureController
 
     protected int _hp;
 
-
+    [SerializeField]
+    protected float _skillRange = 1.0f;
     protected float _searchRange = 5.0f;
 
     public override CreatureState State
@@ -41,12 +48,100 @@ public class MonsterController : CreatureController
         base.Init();
         State = CreatureState.Idle;
         Dir = MoveDir.None;
+
+        Managers.Map.InitPos(gameObject, (Vector2Int)CellPos);
+        Vector3 pos = Managers.Map.CurrentGrid.CellToWorld(CellPos) + new Vector3(0.5f, 0.5f);
+        transform.position = pos;
     }
     public virtual void SetStat()
     {
         _speed = Monster.Speed;
         _hp = Monster.MaxHp;
 
+        // 수정 필요
+        if (Monster.TemplatedId == 701)
+        {
+            _monsterName = "AcidBlob";
+        }
+        else if (Monster.TemplatedId == 711)
+        {
+            _monsterName = "Beetle";
+        }
+        else if (Monster.TemplatedId == 721)
+        {
+            _monsterName = "EggCluster";
+        }
+        else if (Monster.TemplatedId == 731)
+        {
+            _monsterName = "Maggot";
+        }
+        else if (Monster.TemplatedId == 741)
+        {
+            _monsterName = "Mantis";
+        }
+
+    }
+    protected override void UpdateAnimation()
+    {
+
+        if (_state == CreatureState.Idle)
+        {
+            switch (_lastDir)
+            {
+                case MoveDir.Up:
+                    _animator.Play($"{_monsterName}_MOVE_BACK");
+                    break;
+                case MoveDir.Down:
+                    _animator.Play($"{_monsterName}_MOVE_FRONT");
+                    break;
+                case MoveDir.Left:
+                    _animator.Play($"{_monsterName}_MOVE_LEFT");
+                    break;
+                case MoveDir.Right:
+                    _animator.Play($"{_monsterName}_MOVE_RIGHT");
+                    break;
+            }
+        }
+        else if (_state == CreatureState.Moving)
+        {
+            switch (_dir)
+            {
+                case MoveDir.Up:
+                    _animator.Play($"{_monsterName}_MOVE_BACK");
+                    break;
+                case MoveDir.Down:
+                    _animator.Play($"{_monsterName}_MOVE_FRONT");
+                    break;
+                case MoveDir.Left:
+                    _animator.Play($"{_monsterName}_MOVE_LEFT");
+                    break;
+                case MoveDir.Right:
+                    _animator.Play($"{_monsterName}_MOVE_RIGHT");
+                    break;
+                case MoveDir.None:
+                    break;
+            }
+        }
+        else if (_state == CreatureState.Skill)
+        {
+            switch (_lastDir)
+            {
+                case MoveDir.Up:
+                    _animator.Play($"{_monsterName}_ATTACK_BACK");
+                    break;
+                case MoveDir.Down:
+                    _animator.Play($"{_monsterName}_ATTACK_FRONT");
+                    break;
+                case MoveDir.Left:
+                    _animator.Play($"{_monsterName}_ATTACK_LEFT");
+                    break;
+                case MoveDir.Right:
+                    _animator.Play($"{_monsterName}_ATTACK_RIGHT");
+                    break;
+                case MoveDir.None:
+                    break;
+            }
+        }
     }
     protected override void UpdateIdle()
     {
@@ -66,7 +161,7 @@ public class MonsterController : CreatureController
             effect.GetComponent<Animator>().Play("DieEffect");
             GameObject.Destroy(effect, 0.5f);
 
-            Managers.Object.Remove(gameObject);
+            Managers.Object.RemoveMonster(gameObject);
             Managers.Resource.Destroy(gameObject);
             
         }
@@ -96,7 +191,7 @@ public class MonsterController : CreatureController
 
     }
 
-    protected IEnumerator CoSearch()
+    protected virtual IEnumerator CoSearch()
     {
         // 1초마다 타겟을 찾는다.
         while (true)

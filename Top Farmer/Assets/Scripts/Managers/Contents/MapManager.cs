@@ -73,6 +73,16 @@ public class MapManager
 
         _objects[y, x] = gameObject;
     }
+
+    public void Remove(GameObject gameObject)
+    {
+        ObjectController oc = gameObject.GetComponent<ObjectController>();
+        int x = oc.CellPos.x - MinX;
+        int y = MaxY - oc.CellPos.y;
+
+        if (_objects[y, x] == gameObject)
+            _objects[y, x] = null;
+    }
     public GameObject Find(Vector2Int cellPos)
     {
         if (cellPos.x < MinX || cellPos.x > MaxX)

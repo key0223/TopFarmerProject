@@ -434,8 +434,8 @@ public class PlayerController : CreatureController
             }
             else if(mc.Monster.MonsterType == MonsterType.MONSTER_TYPE_RANGED)
             {
-                MantisController mantisC = (MantisController)mc;
-                mantisC.OnDamaged(Stat.attack);
+                MonsterRangedTypeController rangedC = (MonsterRangedTypeController)mc;
+                rangedC.OnDamaged(Stat.attack);
             }
             else if (mc.Monster.MonsterType == MonsterType.MONSTER_TYPE_COUNTERATTACK)
             {

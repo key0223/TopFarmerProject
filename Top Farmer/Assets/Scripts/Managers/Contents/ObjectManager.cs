@@ -167,6 +167,7 @@ public class ObjectManager
         MonsterController mc = go.GetComponent<MonsterController>();
 
         _monsters.Remove(mc.ObjectId);
+        Managers.Map.Remove(go);
     }
 
     //public GameObject Find(Vector3Int cellPos)
