@@ -54,6 +54,8 @@ public class MonsterController : CreatureController
     }
     public override void OnDamaged(int damage)
     {
+        base.OnDamaged(damage);
+
         _hp = Mathf.Max(_hp - damage, 0);
         Debug.Log($"Monster Hp : {_hp}");
 

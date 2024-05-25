@@ -5,6 +5,12 @@ using static Define;
 
 public class CreatureController : ObjectController
 {
+    // ÇÇ°Ý
+    protected float _delay = 0.1f;
+    protected int _repeat = 4;
+    protected int _repeatCount = 0;
+
+
     [SerializeField]
     public float _speed = 5f;
     protected Animator _animator;
@@ -300,6 +306,21 @@ public class CreatureController : ObjectController
 
     public virtual void OnDamaged(int damage)
     {
+        _repeatCount = _repeat;
+        StartCoroutine(CoFlicker());
+    }
 
+    public IEnumerator CoFlicker()
+    {
+        while (_repeatCount > 0)
+        {
+            _repeatCount--;
+
+            _sprite.color = new Color(_sprite.color.r, _sprite.color.g, _sprite.color.b, 0.5f);
+            yield return new WaitForSeconds(_delay);
+
+            _sprite.color = new Color(_sprite.color.r, _sprite.color.g, _sprite.color.b, 1f);
+            yield return new WaitForSeconds(_delay);
+        }
     }
 }

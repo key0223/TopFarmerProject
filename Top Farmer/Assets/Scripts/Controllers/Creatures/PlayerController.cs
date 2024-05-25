@@ -546,6 +546,8 @@ public class PlayerController : CreatureController
 
     public override void OnDamaged(int damage)
     {
+        base.OnDamaged(damage);
+
         Hp = Mathf.Max(Stat.hp - damage, 0);
     }
     
