@@ -61,11 +61,15 @@ public class MonsterController : CreatureController
 
         if(_hp <= 0)
         {
+            GameObject effect = Managers.Resource.Instantiate("Effect/DieEffect");
+            effect.transform.position = transform.position;
+            effect.GetComponent<Animator>().Play("DieEffect");
+            GameObject.Destroy(effect, 0.5f);
+
             Managers.Object.Remove(gameObject);
             Managers.Resource.Destroy(gameObject);
             
         }
-        //Managers.Object.Remove(gameObject);
     }
 
     protected IEnumerator CoPatrol()
