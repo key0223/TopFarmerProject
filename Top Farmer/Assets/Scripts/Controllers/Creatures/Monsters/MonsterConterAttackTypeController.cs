@@ -196,13 +196,32 @@ public class MonsterConterAttackTypeController : MonsterController
     protected override IEnumerator CoStartAttack()
     {
         // 피격 판정
-        GameObject go = Managers.Object.FindCreature(GetFrontCellPos());
-        if (go != null)
+        if(Monster.SkillRange>1)
         {
-            PlayerController pc = go.GetComponent<PlayerController>();
-            if (pc != null)
-                pc.OnDamaged(Monster.Attack);
+            List<GameObject> objects = Managers.Map.FindCreaturesInRange(CellPos, Monster.SearchRange);
+            if (objects != null)
+            {
+                foreach (GameObject go in objects)
+                {
+                    PlayerController pc = go.GetComponent<PlayerController>();
+                    if (pc != null)
+                    {
+                        pc.OnDamaged(Monster.Attack);
+                    }
+                }
+            }
         }
+        else
+        {
+            GameObject go = Managers.Object.FindCreature(GetFrontCellPos());
+            if (go != null)
+            {
+                PlayerController pc = go.GetComponent<PlayerController>();
+                if (pc != null)
+                    pc.OnDamaged(Monster.Attack);
+            }
+        }
+
         // 대기 시간
         yield return new WaitForSeconds(0.5f);
         State = CreatureState.Idle;

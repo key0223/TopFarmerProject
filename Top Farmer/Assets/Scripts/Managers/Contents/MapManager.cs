@@ -4,9 +4,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Tilemaps;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public struct Pos
 {
@@ -94,7 +96,37 @@ public class MapManager
         int y = MaxY - cellPos.y;
         return _objects[y, x];
     }
+    /// <summary>
+    /// 범위 내에 있는 CreatureController을 찾아서 반환합니다.
+    /// </summary>
+    /// <param name="center"></param>
+    /// <param name="range"></param>
+    /// <returns></returns>
+    public List<GameObject> FindCreaturesInRange(Vector3Int cellPos, int range)
+    {
+            int centerX = cellPos.x - MinX;
+            int centerY = MaxY - cellPos.y;
+      
+        List<GameObject> objectsInRange = new List<GameObject>();
+        // 시작 값, 끝 값,
+        for (int y = centerY - range; y <= centerY + range; y++)
+        {
+            for (int x = centerX - range; x <= centerX + range; x++)
+            {
+                if (_objects[y,x] == null) continue;
 
+                if (_objects[y,x].gameObject.GetComponent<CreatureController>() !=null)
+                {
+                    GameObject go = _objects[y, x];
+
+                    objectsInRange.Add(go);
+                }
+            }
+        }
+        return objectsInRange;
+        
+    }
+    
     public void InitPos(GameObject gameObject, Vector2Int cellPos)
     {
         ObjectController oc = gameObject.GetComponent<ObjectController>();

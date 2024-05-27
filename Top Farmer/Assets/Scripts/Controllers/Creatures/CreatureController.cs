@@ -83,6 +83,8 @@ public class CreatureController : ObjectController
         }
         return cellPos;
     }
+
+    #region State Controll
     protected virtual void UpdateAnimation()
     {
         if (_state == CreatureState.Idle)
@@ -188,12 +190,6 @@ public class CreatureController : ObjectController
 
         }
     }
-
-    //void Start()
-    //{
-    //    Init();
-
-    //}
 
     void Update()
     {
@@ -309,6 +305,8 @@ public class CreatureController : ObjectController
         _repeatCount = _repeat;
         StartCoroutine(CoFlicker());
     }
+
+    #endregion
 
     public IEnumerator CoFlicker()
     {
