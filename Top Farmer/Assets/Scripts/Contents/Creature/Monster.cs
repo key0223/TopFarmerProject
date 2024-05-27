@@ -15,6 +15,8 @@ public class Monster
     public int MaxHp { get; private set; }
     public int Attack { get; private set; } 
     public  float Speed { get; private set; }
+    public int SkillRange { get; private set; }
+    public int SearchRange { get; private set; }
     public int TotalExp { get; private set; }
    
     public static Monster MakeMonster(int templatedId)
@@ -35,6 +37,8 @@ public class Monster
             MaxHp = monsterData.maxHp,
             Attack = monsterData.attack,
             Speed = monsterData.speed,
+            SkillRange = monsterData.skillRange,
+            SearchRange = monsterData.searchRange,
             TotalExp = monsterData.totalExp,
         };
 

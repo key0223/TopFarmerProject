@@ -36,10 +36,6 @@ public class MonsterConterAttackTypeController : MonsterController
         base.Init();
         State = CreatureState.Idle;
         Dir = MoveDir.None;
-
-        _speed = 0f;
-        _searchRange = 5;
-        _skillRange = 2;
     }
     protected override void UpdateIdle()
     {
@@ -67,7 +63,7 @@ public class MonsterConterAttackTypeController : MonsterController
                 Vector3Int dir = _target.GetComponent<CreatureController>().CellPos - CellPos;
 
                 // 플레이어가 범위 내에 있고, 일직선상에 있을 때
-                if (dir.magnitude <= _skillRange && (dir.x == 0 || dir.y == 0))
+                if (dir.magnitude <= Monster.SkillRange && (dir.x == 0 || dir.y == 0))
                 {
                     Dir = GetDirFromVec(dir);
                     State = CreatureState.Skill;
@@ -148,14 +144,14 @@ public class MonsterConterAttackTypeController : MonsterController
     protected override void MoveToNextPos()
     {
         Vector3Int destPos = _destCellPos;
-        if (_target != null)
+        if (_target != null && _isAttacked)
         {
             destPos = _target.GetComponent<CreatureController>().CellPos;
 
             Vector3Int dir = destPos - CellPos;
 
             // 범위 내에 있고 일직선상에 있을 때
-            if (dir.magnitude <= _skillRange && (dir.x == 0 || dir.y == 0) && _isAttacked)
+            if (dir.magnitude <= Monster.SkillRange && (dir.x == 0 || dir.y == 0))
             {
                 Dir = GetDirFromVec(dir);
                 State = CreatureState.Skill;
@@ -167,7 +163,7 @@ public class MonsterConterAttackTypeController : MonsterController
         List<Vector3Int> path = Managers.Map.FindPath(CellPos, destPos, ignoreDestCollision: true);
 
         // 길을 못찾았거나, (타겟이 있지만)너무 멀리있을 경우
-        if (path.Count < 2 || (_target != null && path.Count > 10) || !_isAttacked)
+        if (path.Count < 2 || (_target != null && path.Count > Monster.SearchRange))
         {
             _target = null;
             _isAttacked = false;

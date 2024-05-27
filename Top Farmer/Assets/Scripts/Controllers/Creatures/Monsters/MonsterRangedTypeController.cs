@@ -33,8 +33,6 @@ public class MonsterRangedTypeController : MonsterController
         base.Init();
         State = CreatureState.Idle;
         Dir = MoveDir.None;
-
-        _speed = 3.0f;
     }
     protected override void UpdateIdle()
     {

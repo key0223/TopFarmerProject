@@ -10,6 +10,8 @@
 				"maxHp": 20,
 				"attack": 5,
 				"speed": 0,
+				"skillRange": 1,
+				"searchRange": 1,
 				"totalExp": 10
 			},
 			{
@@ -21,6 +23,8 @@
 				"maxHp": 10,
 				"attack": 3,
 				"speed": 2,
+				"skillRange": 1,
+				"searchRange": 10,
 				"totalExp": 5
 			},
 			{
@@ -32,6 +36,8 @@
 				"maxHp": 30,
 				"attack": 40,
 				"speed": 0,
+				"skillRange": 2,
+				"searchRange": 2,
 				"totalExp": 50
 			},
 			{
@@ -43,6 +49,8 @@
 				"maxHp": 30,
 				"attack": 6,
 				"speed": 1,
+				"skillRange": 1,
+				"searchRange": 5,
 				"totalExp": 20
 			},
 			{
@@ -54,6 +62,8 @@
 				"maxHp": 50,
 				"attack": 10,
 				"speed": 3,
+				"skillRange": 1,
+				"searchRange": 5,
 				"totalExp": 40
 			}
 		]

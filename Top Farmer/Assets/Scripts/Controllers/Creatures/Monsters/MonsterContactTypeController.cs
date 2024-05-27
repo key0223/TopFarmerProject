@@ -28,9 +28,6 @@ public class MonsterContactTypeController : MonsterController
         base.Init();
         State = CreatureState.Idle;
         Dir = MoveDir.None;
-
-        _speed = 0;
-        _searchRange = 1;
     }
     protected override void UpdateIdle()
     {
@@ -45,7 +42,7 @@ public class MonsterContactTypeController : MonsterController
             Vector3Int dir = _target.GetComponent<CreatureController>().CellPos - CellPos;
 
             // 플레이어가 범위 내에 있고, 일직선상에 있을 때
-            if (dir.magnitude <= _skillRange && (dir.x == 0 || dir.y == 0))
+            if (dir.magnitude <= Monster.SkillRange && (dir.x == 0 || dir.y == 0))
             {
                 Dir = GetDirFromVec(dir);
                 State = CreatureState.Skill;

@@ -253,6 +253,8 @@ namespace Data
         public int maxHp;
         public int attack;
         public float speed;
+        public int skillRange;
+        public int searchRange;
         public int totalExp;
     }
 

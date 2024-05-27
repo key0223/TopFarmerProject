@@ -26,9 +26,6 @@ public class MonsterController : CreatureController
 
     protected int _hp;
 
-    [SerializeField]
-    protected float _skillRange = 1.0f;
-    protected float _searchRange = 5.0f;
 
     public override CreatureState State
     {
@@ -50,6 +47,7 @@ public class MonsterController : CreatureController
         Managers.Map.InitPos(gameObject, (Vector2Int)CellPos);
         Vector3 pos = Managers.Map.CurrentGrid.CellToWorld(CellPos) + new Vector3(0.5f, 0.5f);
         transform.position = pos;
+
     }
     public virtual void SetStat()
     {
@@ -156,7 +154,7 @@ public class MonsterController : CreatureController
             Vector3Int dir = destPos - CellPos;
 
             // 범위 내에 있고 일직선상에 있을 때
-            if (dir.magnitude <= _skillRange && (dir.x == 0 || dir.y == 0))
+            if (dir.magnitude <= Monster.SkillRange && (dir.x == 0 || dir.y == 0))
             {
                 Dir = GetDirFromVec(dir);
                 State = CreatureState.Skill;
@@ -249,7 +247,7 @@ public class MonsterController : CreatureController
                     return false;
 
                 Vector3Int dir = (pc.CellPos - CellPos);
-                if (dir.magnitude > _searchRange) return false;
+                if (dir.magnitude > Monster.SearchRange) return false;
 
                 return true;
 
@@ -269,7 +267,7 @@ public class MonsterController : CreatureController
         }
         // 대기 시간
         yield return new WaitForSeconds(0.5f);
-        State = CreatureState.Idle;
+        State = CreatureState.Moving;
         _coSkill = null;
     }
 }
