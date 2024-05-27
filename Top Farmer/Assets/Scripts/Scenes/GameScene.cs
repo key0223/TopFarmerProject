@@ -61,11 +61,11 @@ public class GameScene : BaseScene
             if (Managers.Map.Find((Vector2Int)pos) == null && Managers.Map.CanGo(pos))
             {
                 Data.MonsterData monsterData = null;
-                Managers.Data.MonsterDict.TryGetValue(701, out monsterData);
+                Managers.Data.MonsterDict.TryGetValue(721, out monsterData);
 
                 Monster monster = Monster.MakeMonster(monsterData.monsterId);
 
-                GameObject monsterGo = Managers.Resource.Instantiate($"{monsterData.prefabPath}1");
+                GameObject monsterGo = Managers.Resource.Instantiate($"{monsterData.prefabPath}");
                 MonsterController mc = monsterGo.GetComponent<MonsterController>();
                 mc.Monster = monster;
                 mc.CellPos = new Vector3Int(randSpawnPosX, randSpawnPosY, 0);

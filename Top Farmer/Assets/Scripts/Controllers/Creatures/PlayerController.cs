@@ -439,7 +439,8 @@ public class PlayerController : CreatureController
             }
             else if (mc.Monster.MonsterType == MonsterType.MONSTER_TYPE_COUNTERATTACK)
             {
-                
+                MonsterConterAttackTypeController counterAttackC = (MonsterConterAttackTypeController)mc;
+                counterAttackC.OnDamaged(Stat.attack);
             }
             //if (mc != null)
             //    mc.OnDamaged(Stat.attack);

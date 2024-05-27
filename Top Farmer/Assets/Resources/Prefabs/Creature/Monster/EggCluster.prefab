@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7019758077089650354}
   - component: {fileID: 4822942344522004135}
   - component: {fileID: 6465373862655245510}
-  - component: {fileID: 8536696920600297558}
+  - component: {fileID: 1276840873106273550}
   m_Layer: 0
   m_Name: EggCluster
   m_TagString: Untagged
@@ -107,7 +107,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8536696920600297558
+--- !u!114 &1276840873106273550
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,7 +116,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 7199118030949330735}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 383e4321eac493248a4c35a4cc4dfb27, type: 3}
+  m_Script: {fileID: 11500000, guid: 425c5512c58c20f4b87d80b1bcc3fe86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _sprite: {fileID: 0}
+  _speed: 5
+  _dir: 2
+  _monsterName: 
+  _destCellPos: {x: 0, y: 0, z: 0}
+  _target: {fileID: 0}
+  _skillRange: 1

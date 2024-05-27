@@ -13,8 +13,6 @@ public class MonsterController : CreatureController
     {
         ObjectType = ObjectType.OBJECT_TYPE_CREATURE;
         CreatureType = CreatureType.CREATURE_TYPE_MONSTER;
-
-      
     }
     protected Coroutine _coPatrol;
     protected Coroutine _coSearch;
@@ -81,6 +79,7 @@ public class MonsterController : CreatureController
         }
 
     }
+
     protected override void UpdateAnimation()
     {
 
@@ -147,6 +146,49 @@ public class MonsterController : CreatureController
     {
         base.UpdateIdle();
     }
+    protected override void MoveToNextPos()
+    {
+        Vector3Int destPos = _destCellPos;
+        if (_target != null)
+        {
+            destPos = _target.GetComponent<CreatureController>().CellPos;
+
+            Vector3Int dir = destPos - CellPos;
+
+            // 범위 내에 있고 일직선상에 있을 때
+            if (dir.magnitude <= _skillRange && (dir.x == 0 || dir.y == 0))
+            {
+                Dir = GetDirFromVec(dir);
+                State = CreatureState.Skill;
+                _coSkill = StartCoroutine("CoStartAttack");
+                return;
+            }
+        }
+
+        List<Vector3Int> path = Managers.Map.FindPath(CellPos, destPos, ignoreDestCollision: true);
+
+        // 길을 못찾았거나, (타겟이 있지만)너무 멀리있을 경우
+        if (path.Count < 2 || (_target != null && path.Count > 10))
+        {
+            _target = null;
+            State = CreatureState.Idle;
+            return;
+        }
+
+        Vector3Int nextPos = path[1];
+        Vector3Int moveCellDir = nextPos - CellPos;
+
+        Dir = GetDirFromVec(moveCellDir);
+
+        if (Managers.Map.UpdateObjectPos(this.gameObject, (Vector2Int)nextPos))
+        {
+            CellPos = nextPos;
+        }
+        else
+        {
+            State = CreatureState.Idle;
+        }
+    }
     public override void OnDamaged(int damage)
     {
         base.OnDamaged(damage);
@@ -188,10 +230,9 @@ public class MonsterController : CreatureController
         }
 
         State = CreatureState.Idle;
-
     }
 
-    protected virtual IEnumerator CoSearch()
+    protected  IEnumerator CoSearch()
     {
         // 1초마다 타겟을 찾는다.
         while (true)
@@ -216,7 +257,7 @@ public class MonsterController : CreatureController
         }
     }
 
-    protected IEnumerator CoStartPunch()
+    protected virtual IEnumerator CoStartAttack()
     {
         // 피격 판정
         GameObject go = Managers.Object.FindCreature(GetFrontCellPos());

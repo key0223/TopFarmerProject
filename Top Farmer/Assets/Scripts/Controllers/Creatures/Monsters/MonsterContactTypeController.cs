@@ -49,53 +49,10 @@ public class MonsterContactTypeController : MonsterController
             {
                 Dir = GetDirFromVec(dir);
                 State = CreatureState.Skill;
-                _coSkill = StartCoroutine("CoSplat");
+                _coSkill = StartCoroutine("CoStartAttack");
                 return;
             }
         }
-    }
-    protected override void MoveToNextPos()
-    {
-        Vector3Int destPos = _destCellPos;
-        if (_target != null)
-        {
-            destPos = _target.GetComponent<CreatureController>().CellPos;
-            Vector3Int dir = destPos - CellPos;
-
-            // 플레이어가 범위 내에 있고, 일직선상에 있을 때
-            if (dir.magnitude <= _skillRange && (dir.x == 0 || dir.y == 0))
-            {
-                Dir = GetDirFromVec(dir);
-                State = CreatureState.Skill;
-                _coSkill = StartCoroutine("CoSplat");
-                return;
-            }
-        }
-
-        List<Vector3Int> path = Managers.Map.FindPath(CellPos, destPos, ignoreDestCollision: true);
-
-        // 길을 찾지 못했거나, 타겟이 너무 멀리 있을 경우
-        if (path.Count < 2 || (_target != null && path.Count > 10))
-        {
-            _target = null;
-            State = CreatureState.Idle;
-            return;
-        }
-
-        Vector3Int nextPos = path[1];
-        Vector3Int moveCellDir = nextPos - CellPos;
-
-        Dir = GetDirFromVec(moveCellDir);
-
-        if (Managers.Map.UpdateObjectPos(this.gameObject, (Vector2Int)nextPos))
-        {
-            CellPos = nextPos;
-        }
-        else
-        {
-            State = CreatureState.Idle;
-        }
-
     }
     protected override void UpdateAnimation()
     {
@@ -159,7 +116,7 @@ public class MonsterContactTypeController : MonsterController
     }
 
 
-    IEnumerator CoSplat()
+    protected override IEnumerator CoStartAttack()
     {
         // 피격 판정
         GameObject go = Managers.Object.FindCreature(GetFrontCellPos());
@@ -177,5 +134,4 @@ public class MonsterContactTypeController : MonsterController
         Managers.Object.RemoveMonster(gameObject);
         Managers.Resource.Destroy(gameObject);
     }
-    
 }
