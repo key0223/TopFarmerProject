@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6450707806868986700}
   - component: {fileID: 5811559615220851392}
   - component: {fileID: 3272441554720992027}
-  - component: {fileID: 3760674689551987959}
+  - component: {fileID: 8512078875241248830}
   m_Layer: 0
   m_Name: Beetle
   m_TagString: Untagged
@@ -107,7 +107,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3760674689551987959
+--- !u!114 &8512078875241248830
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,7 +116,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6189894416562658975}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 383e4321eac493248a4c35a4cc4dfb27, type: 3}
+  m_Script: {fileID: 11500000, guid: c2608797d090c6645a3d27314f09fb7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _sprite: {fileID: 0}
+  _speed: 5
+  _dir: 2
+  _monsterName: 
+  _destCellPos: {x: 0, y: 0, z: 0}
+  _target: {fileID: 0}

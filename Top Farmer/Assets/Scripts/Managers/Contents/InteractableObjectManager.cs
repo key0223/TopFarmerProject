@@ -16,6 +16,7 @@ public class InteractableObjectManager
 
     void Register()
     {
+        _handler.Add((int)InteractableObjectType.INTERACTABLE_OBJECT_NONE, NoneHandler);
         _handler.Add((int)InteractableObjectType.INTERACTABLE_OBEJCT_TYPE_STORAGE, StorageBoxHandler);
         _handler.Add((int)InteractableObjectType.INTERACTABLE_OBEJCT_TYPE_NPC,NpcHandler);
         _handler.Add((int)InteractableObjectType.INTERACTABLE_OBEJCT_TYPE_KITCHEN, OvenHandler);

@@ -353,11 +353,6 @@ public class PlayerController : CreatureController
                             State = CreatureState.UsingItem;
                             _coUsingItem = StartCoroutine("CoStartHoe");
                         }
-                        //if (Managers.Map.Find((Vector2Int)GetFrontCellPos()) == null)
-                        //{
-                        //    State = CreatureState.UsingItem;
-                        //    _coUsingItem = StartCoroutine("CoStartHoe");
-                        //}
                     }
                     break;
                 case ToolType.TOOL_TYPE_WATERINGCAN:
@@ -387,36 +382,20 @@ public class PlayerController : CreatureController
                 _coUsingItem = StartCoroutine("CoStartSeed", seed);
                 pc.IsUsing = true;
             }
-            //if (Managers.Object.FindLandObject(GetFrontCellPos()) == null)
-            //    return;
-
-            //GameObject go = Managers.Object.FindLandObject(GetFrontCellPos()).gameObject;
-            //if (go.name == "Land_Plowed")
-            //{
-            //    PlowedLandController pc = go.GetComponent<PlowedLandController>();
-            //    if (pc == null)
-            //        return;
-
-            //    if(!pc.IsUsing)
-            //    {
-            //        State = CreatureState.UsingItem;
-            //        _coUsingItem = StartCoroutine("CoStartSeed", seed);
-            //        pc.IsUsing = true;
-            //    }
-            //}
+         
         }
         else if (item.ItemType == ItemType.ITEM_TYPE_CRAFTING)
         {
-            //Crafting crafting = (Crafting)item;
-            //bool interactable = Managers.Map.CanInteract(GetFrontCellPos());
-            //if (interactable)
-            //{
-            //    if (Managers.Object.FindLandObject(GetFrontCellPos()) == null)
-            //    {
-            //        State = CreatureState.UsingItem;
-            //        _coUsingItem = StartCoroutine("CoPlaceItem",crafting);
-            //    }
-            //}
+            Crafting crafting = (Crafting)item;
+            bool interactable = Managers.Map.CanInteract(GetFrontCellPos());
+            if (interactable)
+            {
+                if (Managers.Object.Find(GetFrontCellPos()) == null)
+                {
+                    State = CreatureState.UsingItem;
+                    _coUsingItem = StartCoroutine("CoPlaceItem", crafting);
+                }
+            }
         }
     }
 

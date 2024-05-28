@@ -52,7 +52,13 @@ public class ObjectManager
         }
         else if(oc.ObjectType == ObjectType.OBJECT_TYPE_ITEM)
         {
+            ItemController ic = (ItemController)oc;
             _objects.Add(go);
+            if (ic.Item.ItemType == ItemType.ITEM_TYPE_CRAFTING)
+            {
+                Managers.Map.Add(go);
+            }
+
         }
         else if(oc.ObjectType == ObjectType.OBJECT_TYPE_CREATURE )
         {
