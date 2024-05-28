@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SpawnManager
 {
-    public void Spawn(bool randomPos)
+    public void SpawnMonsters()
     {
         int randCount = Random.Range(0, 6);
         int monsterId = 7;
@@ -13,32 +13,28 @@ public class SpawnManager
 
         int randTemplatedId = monsterId * 100 + randType * 10 + 1;
 
-        if(randomPos)
+        for (int i = 0; i < randCount; i++)
         {
-            for (int i = 0; i < 5; i++)
+            int randSpawnPosX = Random.Range(Managers.Object.Player.CellPos.x - 10, Managers.Object.Player.CellPos.x + 10);
+            int randSpawnPosY = Random.Range(Managers.Object.Player.CellPos.y - 10, Managers.Object.Player.CellPos.y + 10);
+
+            Vector3Int pos = new Vector3Int(randSpawnPosX, randSpawnPosY);
+
+            if (Managers.Map.Find((Vector2Int)pos) == null && Managers.Map.CanGo(pos))
             {
-                int randSpawnPosX = Random.Range(Managers.Object.Player.CellPos.x - 10, Managers.Object.Player.CellPos.x + 10);
-                int randSpawnPosY = Random.Range(Managers.Object.Player.CellPos.y - 10, Managers.Object.Player.CellPos.y + 10);
+                Data.MonsterData monsterData = null;
+                Managers.Data.MonsterDict.TryGetValue(721, out monsterData);
 
-                if (Managers.Map.Find(new Vector2Int(randSpawnPosX, randSpawnPosY)) == null)
-                {
-                    Data.MonsterData monsterData = null;
-                    Managers.Data.MonsterDict.TryGetValue(701, out monsterData);
+                Monster monster = Monster.MakeMonster(monsterData.monsterId);
 
-
-                    GameObject monsterGo = Managers.Resource.Instantiate($"{monsterData.prefabPath}");
-                    MaggotController mc = monsterGo.GetComponent<MaggotController>();
-                    mc.CellPos = new Vector3Int(randSpawnPosX, randSpawnPosY, 0);
-                }
+                GameObject monsterGo = Managers.Resource.Instantiate($"{monsterData.prefabPath}");
+                MonsterController mc = monsterGo.GetComponent<MonsterController>();
+                mc.Monster = monster;
+                mc.CellPos = new Vector3Int(randSpawnPosX, randSpawnPosY, 0);
+                mc.CreatureType = monster.CreatureType;
+                mc.SetStat();
+                Managers.Object.Add(monsterGo);
             }
-            
-            //if(Managers.Object.Find(randSpawnPos) == null )
-            //{
-            //    gameObject.GetComponent<ObjectController>().CellPos = (Vector3Int)randSpawnPos;
-            //    Managers.Object.Add(gameObject);
-
-            //}
-
         }
     }
 }

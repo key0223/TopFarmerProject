@@ -33,6 +33,8 @@ public class TimeManager
     private float _realTime = 0.0f;
     //UI_GameScene gameSceneUI;
 
+    private bool _isSpawned;
+
     private DayState _state = DayState.Dawn;
     public DayState State
     {
@@ -79,6 +81,8 @@ public class TimeManager
             State = DayState.Dawn;
             UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
             //gameSceneUI.NightUIOn();
+            if (_isSpawned)
+                _isSpawned = false;
             Debug.Log("Dawn");
         }
         else if (CurrentHour >= 7 && CurrentHour < 17)
@@ -98,6 +102,11 @@ public class TimeManager
             State = DayState.Night;
             UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
             //gameSceneUI.NightUIOff();
+            if(_isSpawned == false)
+            {
+                Managers.Spawn.SpawnMonsters();
+                _isSpawned = true;
+            }
             Debug.Log("Night");
         }
 
@@ -128,6 +137,4 @@ public class TimeManager
             }
         }
     }
-
-    
 }
