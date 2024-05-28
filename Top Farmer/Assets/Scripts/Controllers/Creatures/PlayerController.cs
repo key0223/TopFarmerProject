@@ -2,9 +2,7 @@ using Assets.Scripts.Contents.Object;
 using Data;
 using System;
 using System.Collections;
-using System.Security.Cryptography;
 using UnityEngine;
-using UnityEngine.UIElements;
 using static Define;
 
 
@@ -236,8 +234,14 @@ public class PlayerController : CreatureController
         else if (Input.GetKeyDown(KeyCode.P))
         {
             // Managers.Map.SaveMap("Assets/Resources/Map");
-            Managers.SaveLoad.SaveGameData();
-            Debug.Log("SaveFile saved");
+            //Managers.SaveLoad.SaveGameData();
+            //Debug.Log("SaveFile saved");
+
+            GameObject dropItem = Managers.Resource.Instantiate($"Object/Craftable/Interactable/DropItem");
+            ItemDrop drop = dropItem.GetComponent<ItemDrop>();
+            Vector3Int rand = new Vector3Int(UnityEngine.Random.Range(-1,1), UnityEngine.Random.Range(-1,1),0);
+            Vector3Int randCell = CellPos+rand;
+            drop.OnDropItem(CellPos);
         }
 
     }
