@@ -2,6 +2,7 @@ using Assets.Scripts.Contents.Object;
 using Data;
 using System;
 using System.Collections;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.UIElements;
 using static Define;
@@ -181,54 +182,56 @@ public class PlayerController : CreatureController
         }
         else if (Input.GetKeyDown(KeyCode.X)) // 수확/대화/탑승/재료 넣기
         {
-            GameObject go = Managers.Object.Find(GetFrontCellPos());
-            if (go == null)
-                return;
+            GameObject go = Managers.Map.Find((Vector2Int)GetFrontCellPos());
+            if (go == null) return;
 
             ObjectController oc = go.GetComponent<ObjectController>();
-
-            Debug.Log(go.name);
-
-            if (oc.ObjectType == ObjectType.OBJECT_TYPE_OBJECT)
+            if(oc.ObjectType !=ObjectType.OBJECT_TYPE_CREATURE)
             {
-
-            }
-            else if (oc.ObjectType == ObjectType.OBJECT_TYPE_ITEM)
-            {
-                ItemController ic = (ItemController)oc;
-
-                switch (ic.Item.ItemType)
+                if (oc.ObjectType == ObjectType.OBJECT_TYPE_OBJECT)
                 {
-                    case ItemType.ITEM_TYPE_TOOL:
-                        break;
-                    case ItemType.ITEM_TYPE_CROP:
-                        break;
-                    case ItemType.ITEM_TYPE_SEED:
-                        SeedController sc = oc as SeedController;
+                    InteractableObject io = go.gameObject.GetComponent<InteractableObject>();
+                    if (io == null) return;
 
-                        if (sc.State == SeedState.Completed)
-                        {
-                            sc.OnHarvest();
-                        }
-                        break;
-                    case ItemType.ITEM_TYPE_CRAFTING:
-                        break;
+                    Managers.InteractableObject.OnInteract(io);
+                }
+                else if (oc.ObjectType == ObjectType.OBJECT_TYPE_ITEM)
+                {
+                    ItemController ic = (ItemController)oc;
 
+                    switch (ic.Item.ItemType)
+                    {
+                        case ItemType.ITEM_TYPE_TOOL:
+                            break;
+                        case ItemType.ITEM_TYPE_CROP:
+                            break;
+                        case ItemType.ITEM_TYPE_SEED:
+                            SeedController sc = oc as SeedController;
+
+                            if (sc.State == SeedState.Completed)
+                            {
+                                sc.OnHarvest();
+                            }
+                            break;
+                        case ItemType.ITEM_TYPE_CRAFTING:
+                            break;
+
+                    }
                 }
             }
+
             else if (oc.ObjectType == ObjectType.OBJECT_TYPE_CREATURE)
             {
-                UI_EventHandler evt = Util.GetOrAddComponent<UI_EventHandler>(go);
-                InteractableObject interactableObj = Util.GetOrAddComponent<InteractableObject>(go);
-                Managers.InteractableObject.OnInteract(interactableObj);
+                CreatureController cc = go.GetComponent<CreatureController>();
+                if (cc == null) return;
+                
+                if(cc.CreatureType == CreatureType.CREATURE_TYPE_NPC)
+                {
+                    InteractableObject io = go.gameObject.GetComponent<InteractableObject>();
+                    if (io == null) return;
+                    Managers.InteractableObject.OnInteract(io);
+                }
             }
-            //else if(oc.ObjectType == ObjectType.OBJECT_TYPE_INTERACTABLE_OBJECT)
-            //{
-            //    UI_EventHandler evt = Util.GetOrAddComponent<UI_EventHandler>(go);
-            //    InteractableObject interactableObj = Util.GetOrAddComponent<InteractableObject>(go);
-            //    Managers.InteractableObject.OnInteract(interactableObj);
-            //}
-
         }
         else if (Input.GetKeyDown(KeyCode.P))
         {

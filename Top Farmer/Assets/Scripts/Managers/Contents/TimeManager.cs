@@ -19,7 +19,7 @@ public class TimeManager
     #endregion
 
     bool _init = false;
-    private const float _timeRatio = 0.7f; // 인게임 10분 = 실제 시간 7초
+    private const float _timeRatio = 7f; // 인게임 10분 = 실제 시간 7초
 
     public int CurrentDayOfSurvival { get; private set; }
     public float CurrentMinute { get; private set; }
@@ -67,11 +67,15 @@ public class TimeManager
     public void Init()
     {
         SetTime();
+        UpdateUI();
+        UpdateState();
+    }
+    void UpdateUI()
+    {
         UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
         gameSceneUI.DayUI.SetPlayerData();
         gameSceneUI.DayUI.UpdateAnimation();
         gameSceneUI.LightUI.UpdateAlpha();
-        UpdateState();
     }
 
     void UpdateState()
@@ -115,11 +119,12 @@ public class TimeManager
     {
         _realTime += Time.deltaTime;
 
-        if (_realTime >= _timeRatio)
+        if (_realTime >= _timeRatio) // 7초 간격으로 업데이트
         {
             _realTime = 0.0f;
             CurrentMinute += 10.0f;
             MinutePassedRegisterd?.Invoke();
+            
 
             if (CurrentMinute >= 60.0f)
             {

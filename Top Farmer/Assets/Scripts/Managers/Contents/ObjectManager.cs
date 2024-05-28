@@ -76,12 +76,6 @@ public class ObjectManager
         {
             Managers.Map.Add(go);
         }
-        //_objects.Add(go);
-        //if(player)
-        //{
-        //    Player = go.GetComponent<PlayerController>();
-        //    Player.SetPlayerInfo(PlayerInfo);
-        //}
     }
     public GameObject Find(Vector3Int cellPos)
     {
