@@ -74,6 +74,7 @@ public class MonsterConterAttackTypeController : MonsterController
         }
 
     }
+   
     protected override void UpdateAnimation()
     {
         if(_monsterName == "Maggot")
@@ -229,8 +230,7 @@ public class MonsterConterAttackTypeController : MonsterController
 
          if(_monsterName == "EggCluster")
         {
-            Managers.Object.RemoveMonster(gameObject);
-            Managers.Resource.Destroy(gameObject);
+            State = CreatureState.Dead;
         }
             
     }

@@ -38,7 +38,34 @@ namespace Data
     #endregion
 
     #region Item
+    [Serializable]
+    public class RewardData
+    {
+        public int ownerId;
+        public int itemId;
+        public int probability;
+        public int count;
+    }
+    [Serializable]
+    public class RewardLoader : ILoader<int, List<RewardData>>
+    {
+        public List<RewardData> array = new List<RewardData>();
+        public Dictionary<int, List<RewardData>> MakeDict()
+        {
+            Dictionary<int, List<RewardData>> dict = new Dictionary<int, List<RewardData>>();
 
+            foreach (RewardData reward in array)
+            {
+                if (!dict.ContainsKey(reward.ownerId))
+                {
+                    dict[reward.ownerId] = new List<RewardData>();
+                }
+
+                dict[reward.ownerId].Add(reward);
+            }
+            return dict;
+        }
+    }
     [Serializable]
     public class ItemData
     {
@@ -243,9 +270,9 @@ namespace Data
     [Serializable]
     public class MonsterData
     {
-        public ObjectType objectType;
         public int monsterId;
         public string name;
+        public ObjectType objectType;
         public CreatureType creatureType;
         public string prefabPath;
         public MonsterType monsterType;

@@ -51,6 +51,7 @@ public class MonsterContactTypeController : MonsterController
             }
         }
     }
+  
     protected override void UpdateAnimation()
     {
 
@@ -125,10 +126,10 @@ public class MonsterContactTypeController : MonsterController
         }
         // 대기 시간
         yield return new WaitForSeconds(0.5f);
-        State = CreatureState.Idle;
+        //State = CreatureState.Idle;
         _coSkill = null;
 
-        Managers.Object.RemoveMonster(gameObject);
-        Managers.Resource.Destroy(gameObject);
+        State = CreatureState.Dead;
+
     }
 }

@@ -23,7 +23,7 @@ public class SpawnManager
             if (Managers.Map.Find((Vector2Int)pos) == null && Managers.Map.CanGo(pos))
             {
                 Data.MonsterData monsterData = null;
-                Managers.Data.MonsterDict.TryGetValue(721, out monsterData);
+                Managers.Data.MonsterDict.TryGetValue(randTemplatedId, out monsterData);
 
                 Monster monster = Monster.MakeMonster(monsterData.monsterId);
 

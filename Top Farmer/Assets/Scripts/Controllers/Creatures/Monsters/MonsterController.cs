@@ -1,3 +1,4 @@
+using Data;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -196,17 +197,58 @@ public class MonsterController : CreatureController
 
         if(_hp <= 0)
         {
+
             GameObject effect = Managers.Resource.Instantiate("Effect/DieEffect");
             effect.transform.position = transform.position;
             effect.GetComponent<Animator>().Play("DieEffect");
             GameObject.Destroy(effect, 0.5f);
 
-            Managers.Object.RemoveMonster(gameObject);
-            Managers.Resource.Destroy(gameObject);
-            
+            State = CreatureState.Dead;
+
+            //Managers.Object.RemoveMonster(gameObject);
+            //Managers.Resource.Destroy(gameObject);
+
         }
     }
 
+    protected override void UpdateDead()
+    {
+        RewardData rewardData = GetRandomReward();
+        if(rewardData != null)
+        {
+            int randCount = Random.Range(1, rewardData.count);
+
+            GameObject dropItem = Managers.Resource.Instantiate($"Object/Craftable/Interactable/DropItem");
+            ItemDrop drop = dropItem.GetComponent<ItemDrop>();
+            drop.Init(rewardData.itemId, randCount);
+            drop.OnDropItem(CellPos);
+
+            State = CreatureState.Idle;
+            // TODO: 아이템 드랍
+        }
+        Managers.Object.RemoveMonster(gameObject);
+        Managers.Resource.Destroy(gameObject);
+    }
+    RewardData GetRandomReward()
+    {
+        List<RewardData> data = null;
+        Managers.Data.RewardDict.TryGetValue(Monster.TemplatedId, out data);
+
+        int rand = Random.Range(0, 101);
+        int sum = 0;
+        foreach(RewardData rewardData in data)
+        {
+            sum += rewardData.probability;
+            if(rand<= sum)
+            {
+                return rewardData;
+            }
+        }
+
+        return null;
+    }
+
+    #region Coroutine
     protected IEnumerator CoPatrol()
     {
         int waitSeconds = Random.Range(1, 4);
@@ -270,4 +312,5 @@ public class MonsterController : CreatureController
         State = CreatureState.Moving;
         _coSkill = null;
     }
+    #endregion
 }

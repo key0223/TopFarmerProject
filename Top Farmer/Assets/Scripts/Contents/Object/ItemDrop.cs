@@ -1,3 +1,4 @@
+using Data;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,12 +6,16 @@ using UnityEngine.UIElements;
 
 public class ItemDrop : MonoBehaviour
 {
+    private SpriteRenderer _renderer;
     Coroutine _coDrop = null;
     Coroutine _coSearch = null;
     Coroutine _coLoot = null;
-    
-
     public Vector3Int CellPos { get; private set; }
+
+    public int ItemId {get; private set; }
+    public int Count { get; private set; }
+
+
 
     #region Drop
     private float _gravity = -9.8f; // 중력 가속도
@@ -23,13 +28,15 @@ public class ItemDrop : MonoBehaviour
     #endregion
 
     #region Loot
-
-    [SerializeField]
     private GameObject _target;
     private int _speed =5;
     private int _searchRange = 2;
     #endregion
 
+    private void Awake()
+    {
+        _renderer = GetComponent<SpriteRenderer>();
+    }
 
     private void Update()
     {
@@ -43,6 +50,16 @@ public class ItemDrop : MonoBehaviour
         }
     }
 
+    public void Init(int templatedId, int count)
+    {
+        ItemData data = null;
+        Managers.Data.ItemDict.TryGetValue(templatedId ,out data);
+
+        ItemId = data.itemId;
+        Count = count;
+        _renderer.sprite = Managers.Resource.Load<Sprite>($"{data.iconPath}");
+
+    }
     public void OnDropItem(Vector3Int cellPos)
     {
         transform.position = Managers.Map.CurrentGrid.CellToWorld(cellPos) + new Vector3(0.5f, 0.5f, 0.0f);

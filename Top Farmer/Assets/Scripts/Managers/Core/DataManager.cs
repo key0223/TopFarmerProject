@@ -15,6 +15,7 @@ public class DataManager
     public Dictionary<int, Data.NpcData> NpcDict { get; private set; } = new Dictionary<int, NpcData>();
     public Dictionary<int, Data.MonsterData> MonsterDict { get; private set; } = new Dictionary<int, MonsterData>();
     public Dictionary<string, Data.StringData> StringDict { get; private set; } = new Dictionary<string, Data.StringData>();
+    public Dictionary<int, List<RewardData>> RewardDict { get; private set; } = new Dictionary<int, List<RewardData>>();
     public Dictionary<string, Sprite> SpriteDict { get; private set; } = new Dictionary<string, Sprite>();
     #endregion
 
@@ -42,6 +43,9 @@ public class DataManager
         Dictionary<string, Data.StringData> itemStringDict = LoadJson<Data.StringLoader, string, Data.StringData>("StringData_Item").MakeDict();
         StringDict = CombinedDict<string, Data.StringData>(npcStringDict, itemStringDict);
         #endregion
+
+        Dictionary<int, List<RewardData>> monsterRewardDict = LoadJson<Data.RewardLoader, int, List<RewardData>>("RewardData_Monster").MakeDict();
+        RewardDict = CombinedDict<int, List<RewardData>>(monsterRewardDict);
 
         #region Sprites
         //Dictionary<string, Sprite> cropSpriteDict = new Dictionary<string, Sprite>();
@@ -74,8 +78,6 @@ public class DataManager
         TextAsset textAsset = Managers.Resource.Load<TextAsset>($"Data/{path}");
         return JsonConvert.DeserializeObject<Loader>(textAsset.text);
     }
-
-   
    
     
     Dictionary<TKey,TValue> CombinedDict<TKey,TValue> (params Dictionary<TKey,TValue>[] dictionaries)

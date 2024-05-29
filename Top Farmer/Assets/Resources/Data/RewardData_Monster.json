@@ -1,0 +1,71 @@
+﻿{
+	"array": 
+		[
+			{
+				"ownerId": 701,
+				"itemId": 201,
+				"probability": 25,
+				"count": 3
+			},
+			{
+				"ownerId": 701,
+				"itemId": 205,
+				"probability": 10,
+				"count": 2
+			},
+			{
+				"ownerId": 701,
+				"itemId": 210,
+				"probability": 10,
+				"count": 2
+			},
+			{
+				"ownerId": 711,
+				"itemId": 112,
+				"probability": 5,
+				"count": 1
+			},
+			{
+				"ownerId": 711,
+				"itemId": 101,
+				"probability": 5,
+				"count": 1
+			},
+			{
+				"ownerId": 721,
+				"itemId": 5000,
+				"probability": 20,
+				"count": 1
+			},
+			{
+				"ownerId": 721,
+				"itemId": 5305,
+				"probability": 5,
+				"count": 1
+			},
+			{
+				"ownerId": 731,
+				"itemId": 204,
+				"probability": 10,
+				"count": 2
+			},
+			{
+				"ownerId": 731,
+				"itemId": 207,
+				"probability": 10,
+				"count": 2
+			},
+			{
+				"ownerId": 731,
+				"itemId": 208,
+				"probability": 4,
+				"count": 1
+			},
+			{
+				"ownerId": 741,
+				"itemId": 209,
+				"probability": 5,
+				"count": 2
+			}
+		]
+}

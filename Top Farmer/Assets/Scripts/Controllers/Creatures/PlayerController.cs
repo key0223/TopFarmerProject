@@ -184,7 +184,7 @@ public class PlayerController : CreatureController
             if (go == null) return;
 
             ObjectController oc = go.GetComponent<ObjectController>();
-            if(oc.ObjectType !=ObjectType.OBJECT_TYPE_CREATURE)
+            if (oc.ObjectType != ObjectType.OBJECT_TYPE_CREATURE)
             {
                 if (oc.ObjectType == ObjectType.OBJECT_TYPE_OBJECT)
                 {
@@ -222,8 +222,8 @@ public class PlayerController : CreatureController
             {
                 CreatureController cc = go.GetComponent<CreatureController>();
                 if (cc == null) return;
-                
-                if(cc.CreatureType == CreatureType.CREATURE_TYPE_NPC)
+
+                if (cc.CreatureType == CreatureType.CREATURE_TYPE_NPC)
                 {
                     InteractableObject io = go.gameObject.GetComponent<InteractableObject>();
                     if (io == null) return;
@@ -237,12 +237,15 @@ public class PlayerController : CreatureController
             //Managers.SaveLoad.SaveGameData();
             //Debug.Log("SaveFile saved");
 
-            GameObject dropItem = Managers.Resource.Instantiate($"Object/Craftable/Interactable/DropItem");
-            ItemDrop drop = dropItem.GetComponent<ItemDrop>();
-            Vector3Int rand = new Vector3Int(UnityEngine.Random.Range(-1,1), UnityEngine.Random.Range(-1,1),0);
-            Vector3Int randCell = CellPos+rand;
-            drop.OnDropItem(CellPos);
+            //GameObject dropItem = Managers.Resource.Instantiate($"Object/Craftable/Interactable/DropItem");
+            //ItemDrop drop = dropItem.GetComponent<ItemDrop>();
+            //drop.OnDropItem(CellPos);
         }
+        else if (Input.GetKeyDown(KeyCode.O))
+        {
+            Managers.Spawn.SpawnMonsters();
+        }
+
 
     }
 
