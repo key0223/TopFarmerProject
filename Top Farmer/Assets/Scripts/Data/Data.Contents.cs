@@ -10,6 +10,37 @@ using static Define;
 
 namespace Data
 {
+    #region Map
+    [Serializable]
+    public class PotalData
+    {
+        public string potalName;
+        public string mapName;
+        public string prefabPath;
+        public float potalPosX;
+        public float potalPosY;
+        public float playerPosX;
+        public float playerPosY;
+        public string connectedMap;
+        public string connectedPotal;
+    }
+    [Serializable]
+    public class PotalLoader : ILoader<string, PotalData>
+    {
+        public List<PotalData> array = new List<PotalData>();
+
+        public Dictionary<string, PotalData> MakeDict()
+        {
+            Dictionary<string, PotalData> dict = new Dictionary<string, PotalData>();
+
+            foreach (PotalData str in array)
+            {
+                dict.Add(str.potalName, str);
+            }
+            return dict;
+        }
+    }
+    #endregion
     #region String
     [Serializable]
     public class StringData

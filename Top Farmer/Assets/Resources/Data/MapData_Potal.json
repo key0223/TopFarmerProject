@@ -1,0 +1,27 @@
+﻿{
+	"array": 
+		[
+			{
+				"potalName": "FarmerHouseFront",
+				"mapName": "Farm",
+				"prefabPath": "Object/MapChanger",
+				"potalPosX": 11.5,
+				"potalPosY": -6,
+				"playerPosX": 11.5,
+				"playerPosY": -7,
+				"connectedMap": "FarmerHouse",
+				"connectedPotal": "InsideHouse"
+			},
+			{
+				"potalName": "InsideHouse",
+				"mapName": "FarmerHouse",
+				"prefabPath": "Object/MapChanger",
+				"potalPosX": -3,
+				"potalPosY": -7.5,
+				"playerPosX": -3,
+				"playerPosY": -6,
+				"connectedMap": "Farm",
+				"connectedPotal": "FarmerHouseFront"
+			}
+		]
+}

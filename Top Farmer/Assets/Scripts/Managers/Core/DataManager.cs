@@ -10,7 +10,8 @@ public interface ILoader<Key, Value>
 }
 public class DataManager
 {
-    #region ItemDict
+    #region Dict
+    public Dictionary<string, Data.PotalData> PotalDict { get; private set; } = new Dictionary<string, PotalData>();
     public Dictionary<int, Data.ItemData> ItemDict { get; private set; } = new Dictionary<int, Data.ItemData>();
     public Dictionary<int, Data.NpcData> NpcDict { get; private set; } = new Dictionary<int, NpcData>();
     public Dictionary<int, Data.MonsterData> MonsterDict { get; private set; } = new Dictionary<int, MonsterData>();
@@ -21,6 +22,10 @@ public class DataManager
 
     public void Init()
     {
+        #region Map
+        PotalDict = LoadJson<Data.PotalLoader, string, Data.PotalData>("MapData_Potal").MakeDict();
+
+        #endregion
         #region Item
         Dictionary<int, Data.ItemData> toolDict = LoadJson<Data.ToolItemLoader,int,Data.ItemData>("ItemData_Tool").MakeDict();
         Dictionary<int, Data.ItemData> cropDict = LoadJson<Data.CropItemLoader,int,Data.ItemData>("ItemData_Crop").MakeDict();

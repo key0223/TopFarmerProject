@@ -259,6 +259,8 @@ public class MapManager
                 }
             }
         }
+
+        Managers.Spawn.SpawnMapObject(name);
     }
     public void LoadMap(int mapld)
     {

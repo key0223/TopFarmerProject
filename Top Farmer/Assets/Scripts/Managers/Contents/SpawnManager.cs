@@ -1,5 +1,4 @@
 using Data;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,5 +35,30 @@ public class SpawnManager
                 Managers.Object.Add(monsterGo);
             }
         }
+    }
+
+    public void SpawnMapObject(string mapName)
+    {
+        List<PotalData> potals = SpawnPotal(mapName);
+        
+        foreach(PotalData data in potals)
+        {
+            GameObject potal = Managers.Resource.Instantiate($"{data.prefabPath}");
+            MapChanger mc = Util.GetOrAddComponent<MapChanger>(potal);
+            mc.InitPotal(data);
+        }
+       
+    }
+
+    List<PotalData> SpawnPotal(string mapName)
+    {
+        List<PotalData> mapPotal = new List<PotalData>();
+        foreach(PotalData potal in Managers.Data.PotalDict.Values)
+        {
+            if (potal.mapName != mapName)
+                continue;
+            mapPotal.Add(potal);
+        }
+        return mapPotal;
     }
 }

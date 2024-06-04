@@ -1,0 +1,38 @@
+﻿{
+	"array": 
+		[
+			{
+				"objectName": "Bed",
+				"prefabPath": "Object/Craftable/Interactable",
+				"prefabName": "Bed",
+				"initPosX": 10,
+				"initPosY": -5
+			},
+			{
+				"objectName": "GasRange",
+				"prefabPath": "Object/Craftable/Interactable",
+				"prefabName": "GasRange",
+				"initPosX": -1,
+				"initPosY": 0
+			},
+			{
+				"objectName": "Refrigerator",
+				"prefabPath": "Object/Craftable/Interactable",
+				"prefabName": "Refrigerator",
+				"initPosX": 0,
+				"initPosY": 0
+			},
+			{
+				"objectName": "Stool",
+				"prefabPath": "Object/Craftable/Interactable",
+				"prefabName": "Stool"
+			},
+			{
+				"objectName": "TV",
+				"prefabPath": "Object/Craftable/Interactable",
+				"prefabName": "TV",
+				"initPosX": 6,
+				"initPosY": -0.5
+			}
+		]
+}
