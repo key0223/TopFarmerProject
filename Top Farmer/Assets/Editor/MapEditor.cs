@@ -37,12 +37,15 @@ public class MapEditor : MonoBehaviour
 
         foreach (GameObject go in gameObjects)
         {
-            Tilemap tmBase = Util.FindChild<Tilemap>(go, "Tilemap_Base", true);
-            Tilemap tm = Util.FindChild<Tilemap>(go, "Tilemap_Collision", true);
-            Tilemap ti = Util.FindChild<Tilemap>(go, "Tilemap_Interaction", true);
+            //Tilemap tmBase = Util.FindChild<Tilemap>(go, "Tilemap_Base", true);
+            //Tilemap tm = Util.FindChild<Tilemap>(go, "Tilemap_Collision", true);
+            //Tilemap ti = Util.FindChild<Tilemap>(go, "Tilemap_Interaction", true);
 
+            Tilemap tmBase = Util.FindChild<Tilemap>(go, "Tilemap_Back", true);
+            Tilemap tm = Util.FindChild<Tilemap>(go, "Tilemap_Buildings", true);
+            Tilemap ti = Util.FindChild<Tilemap>(go, "Tilemap_Path", true);
             //Collision Map Data
-            using (var writer = File.CreateText($"{pathPrefix}/{go.name}_Collision.txt"))
+            using (var writer = File.CreateText($"{pathPrefix}/{go.name}_Buildings.txt"))
             {
                 writer.WriteLine(tmBase.cellBounds.xMin);
                 writer.WriteLine(tmBase.cellBounds.xMax);
@@ -64,7 +67,7 @@ public class MapEditor : MonoBehaviour
             }
 
             // Interactable Map Data
-            using(var writer = File.CreateText($"{pathPrefix}/{go.name}_Interaction.txt"))
+            using(var writer = File.CreateText($"{pathPrefix}/{go.name}_Path.txt"))
             {
                 writer.WriteLine(tmBase.cellBounds.xMin);
                 writer.WriteLine(tmBase.cellBounds.xMax);

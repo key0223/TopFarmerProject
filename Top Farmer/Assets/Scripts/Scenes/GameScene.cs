@@ -13,7 +13,8 @@ public class GameScene : BaseScene
 
         SceneType = Define.Scene.Game;
 
-        Managers.Map.LoadMap(1);
+        //Managers.Map.LoadMap(1);
+        Managers.Map.LoadMap("test");
 
         #region Temp
         GameObject player = Managers.Resource.Instantiate("Creature/Player");
