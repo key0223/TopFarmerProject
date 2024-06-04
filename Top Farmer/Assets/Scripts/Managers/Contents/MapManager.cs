@@ -188,20 +188,93 @@ public class MapManager
         return _interactable[y, x];
     }
 
+    public void LoadMap(string name)
+    {
+        DestroyMap();
+        string mapName = "Map_" + name;
+        GameObject go = Managers.Resource.Instantiate($"Map/{mapName}");
+        go.name = "Map";
+        //go.name = mapName;
+       
+        GameObject collision = Util.FindChild(go, "Tilemap_Buildings", true);
+        if (collision != null)
+            collision.SetActive(true);
+
+        GameObject interaction = Util.FindChild(go, "Tilemap_Path", true);
+        if (interaction != null)
+        {
+            InteractionTileMap = interaction.GetComponent<Tilemap>();
+            interaction.SetActive(true);
+        }
+
+        CurrentGrid = go.GetComponent<Grid>();
+
+        // Collision 관련 파일
+        {
+            TextAsset txt = Managers.Resource.Load<TextAsset>($"Map/{mapName}_Buildings");
+            StringReader reader = new StringReader(txt.text);
+
+            MinX = int.Parse(reader.ReadLine());
+            MaxX = int.Parse(reader.ReadLine());
+            MinY = int.Parse(reader.ReadLine());
+            MaxY = int.Parse(reader.ReadLine());
+
+            // 맵 크기
+            int xCount = MaxX - MinX + 1;
+            int yCount = MaxY - MinY + 1;
+            _collision = new bool[yCount, xCount];
+            _objects = new GameObject[yCount, xCount];
+
+            for (int y = 0; y < yCount; y++)
+            {
+                string line = reader.ReadLine();
+                for (int x = 0; x < xCount; x++)
+                {
+                    _collision[y, x] = (line[x] == '1' ? true : false);
+                }
+            }
+        }
+
+        // Interactable 관련 파일
+        {
+            TextAsset txt = Managers.Resource.Load<TextAsset>($"Map/{mapName}_Path");
+            StringReader reader = new StringReader(txt.text);
+
+            MinX = int.Parse(reader.ReadLine());
+            MaxX = int.Parse(reader.ReadLine());
+            MinY = int.Parse(reader.ReadLine());
+            MaxY = int.Parse(reader.ReadLine());
+
+            // 맵 크기
+            int xCount = MaxX - MinX + 1;
+            int yCount = MaxY - MinY + 1;
+            _interactable = new bool[yCount, xCount];
+
+            for (int y = 0; y < yCount; y++)
+            {
+                string line = reader.ReadLine();
+                for (int x = 0; x < xCount; x++)
+                {
+                    _interactable[y, x] = (line[x] == '1' ? true : false);
+                }
+            }
+        }
+    }
     public void LoadMap(int mapld)
     {
         DestroyMap();
         string mapName = "Map_" + mapld.ToString("000");
         GameObject go = Managers.Resource.Instantiate($"Map/{mapName}");
-        //go.name = "Map";
-        go.name = mapName;
+        go.name = "Map";
+        //go.name = mapName;
 
         GameObject collision = Util.FindChild(go, "Tilemap_Collision", true);
         if (collision != null)
             collision.SetActive(false);
 
-        GameObject interaction = Util.FindChild(go, "Tilemap_Interaction" ,true);
-        if(interaction != null)
+
+        GameObject interaction = Util.FindChild(go, "Tilemap_Interaction", true);
+        if (interaction != null)
         {
             InteractionTileMap = interaction.GetComponent<Tilemap>();
             interaction.SetActive(false);
@@ -234,7 +307,6 @@ public class MapManager
                 }
             }
         }
-
         // Interactable 관련 파일
         {
             TextAsset txt = Managers.Resource.Load<TextAsset>($"Map/{mapName}_Interaction");
@@ -271,65 +343,7 @@ public class MapManager
             CurrentGrid = null;
         }
     }
-
-    // 맵 저장
-    public void SaveMap(string pathPrefix)
-    {
-        // "Assets/Resources/Map"
-
-        GameObject go = GameObject.Find("Map");
-        if (go != null)
-        {
-            Tilemap tmBase = Util.FindChild<Tilemap>(go, "Tilemap_Base", true);
-            //Tilemap ti = Util.FindChild<Tilemap>(go, "Tilemap_Interaction", true);
-            Tilemap tp = Util.FindChild<Tilemap>(go,"Tilemap_PlayerSet",true);
-
-            //// Interactable Map Data
-            //using (var writer = File.CreateText($"{pathPrefix}/{go.name}_Interaction.txt"))
-            //{
-            //    writer.WriteLine(tmBase.cellBounds.xMin);
-            //    writer.WriteLine(tmBase.cellBounds.xMax);
-            //    writer.WriteLine(tmBase.cellBounds.yMin);
-            //    writer.WriteLine(tmBase.cellBounds.yMax);
-
-            //    for (int y = tmBase.cellBounds.yMax; y >= tmBase.cellBounds.yMin; y--)
-            //    {
-            //        for (int x = tmBase.cellBounds.xMin; x <= tmBase.cellBounds.xMax; x++)
-            //        {
-            //            TileBase tile = ti.GetTile(new Vector3Int(x, y, 0));
-            //            if (tile != null)
-            //                writer.Write("1"); // true
-            //            else
-            //                writer.Write("0"); // false
-            //        }
-            //        writer.WriteLine();
-            //    }
-            //}
-
-            // PlayerSet Map Data
-            using (var writer = File.CreateText($"{pathPrefix}/{go.name}_PlayerSet.txt"))
-            {
-                writer.WriteLine(tmBase.cellBounds.xMin);
-                writer.WriteLine(tmBase.cellBounds.xMax);
-                writer.WriteLine(tmBase.cellBounds.yMin);
-                writer.WriteLine(tmBase.cellBounds.yMax);
-
-                for (int y = tmBase.cellBounds.yMax; y >= tmBase.cellBounds.yMin; y--)
-                {
-                    for (int x = tmBase.cellBounds.xMin; x <= tmBase.cellBounds.xMax; x++)
-                    {
-                        TileBase tile = tp.GetTile(new Vector3Int(x, y, 0));
-                        if (tile != null)
-                            writer.Write("1"); // true
-                        else
-                            writer.Write("0"); // false
-                    }
-                    writer.WriteLine();
-                }
-                Debug.Log("Saved");
-            }
-        }
-    }
+    
     #region A* PathFinding
 
     // U D L R
