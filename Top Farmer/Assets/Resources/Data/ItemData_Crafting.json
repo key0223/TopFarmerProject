@@ -1,4 +1,5 @@
 ﻿{
+	"md5": "bf765c457c9e64dc89ad590c12307b7a",
 	"array": 
 		[
 			{
@@ -35,6 +36,51 @@
 				"sizeX": 1,
 				"sizeY": 1,
 				"prefabPath": "Object/Craftable/Campfire"
+			},
+			{
+				"itemId": 404,
+				"name": "침대",
+				"maxStack": 1,
+				"craftingType": "CRAFTING_TYPE_DECORATION",
+				"sellable": false,
+				"destroyable": false,
+				"prefabPath": "Object/Craftable/Interactable/Bed"
+			},
+			{
+				"itemId": 405,
+				"name": "가스렌지",
+				"maxStack": 1,
+				"craftingType": "CRAFTING_TYPE_KITCHEN",
+				"sellable": false,
+				"destroyable": false,
+				"prefabPath": "Object/Craftable/Interactable/GasRange"
+			},
+			{
+				"itemId": 406,
+				"name": "냉장고",
+				"maxStack": 1,
+				"craftingType": "CRAFTING_TYPE_KITCHEN",
+				"sellable": false,
+				"destroyable": false,
+				"prefabPath": "Object/Craftable/Interactable/Refrigerator"
+			},
+			{
+				"itemId": 407,
+				"name": "스툴",
+				"maxStack": 1,
+				"craftingType": "CRAFTING_TYPE_DECORATION",
+				"sellable": false,
+				"destroyable": false,
+				"prefabPath": "Object/Craftable/Interactable/Stool"
+			},
+			{
+				"itemId": 408,
+				"name": "TV",
+				"maxStack": 1,
+				"craftingType": "CRAFTING_TYPE_DECORATION",
+				"sellable": false,
+				"destroyable": false,
+				"prefabPath": "Object/Craftable/Interactable/TV"
 			}
 		]
 }

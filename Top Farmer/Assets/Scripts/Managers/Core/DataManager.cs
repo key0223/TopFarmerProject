@@ -1,6 +1,7 @@
 using Data;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -8,10 +9,16 @@ public interface ILoader<Key, Value>
 {
     Dictionary<Key, Value> MakeDict();
 }
+public interface ILoader<Value>
+{
+    List<Value> MakeList();
+}
+
 public class DataManager
 {
     #region Dict
     public Dictionary<string, Data.PotalData> PotalDict { get; private set; } = new Dictionary<string, PotalData>();
+    public Dictionary<string, List<Data.MapObjectData>> MapObjectDict { get; private set; } = new Dictionary<string, List<MapObjectData>>();
     public Dictionary<int, Data.ItemData> ItemDict { get; private set; } = new Dictionary<int, Data.ItemData>();
     public Dictionary<int, Data.NpcData> NpcDict { get; private set; } = new Dictionary<int, NpcData>();
     public Dictionary<int, Data.MonsterData> MonsterDict { get; private set; } = new Dictionary<int, MonsterData>();
@@ -24,6 +31,10 @@ public class DataManager
     {
         #region Map
         PotalDict = LoadJson<Data.PotalLoader, string, Data.PotalData>("MapData_Potal").MakeDict();
+
+        List<Data.MapObjectData> farmObject = LoadJson<Data.MapObjectLoader,Data.MapObjectData>("MapObjectData_Farm").MakeList();
+        List<string> keyList = KeyProvider<string>(farmObject[0].mapName);
+        MapObjectDict = ListDict<string, List<Data.MapObjectData>>(keyList,farmObject);
 
         #endregion
         #region Item
@@ -83,8 +94,22 @@ public class DataManager
         TextAsset textAsset = Managers.Resource.Load<TextAsset>($"Data/{path}");
         return JsonConvert.DeserializeObject<Loader>(textAsset.text);
     }
-   
-    
+    Loader LoadJson<Loader,Value>(string path) where Loader : ILoader<Value>
+    {
+        TextAsset textAsset = Managers.Resource.Load<TextAsset>($"Data/{path}");
+        return JsonConvert.DeserializeObject<Loader>(textAsset.text);
+    }
+
+    List<T> KeyProvider<T>(params T[] value)
+    {
+        List<T> key = new List<T>();
+        foreach(var list  in value)
+        {
+            key.Add(list);
+        }
+        return key;
+    }
+
     Dictionary<TKey,TValue> CombinedDict<TKey,TValue> (params Dictionary<TKey,TValue>[] dictionaries)
     {
         Dictionary<TKey, TValue> combinedDict = new Dictionary<TKey, TValue>();
@@ -100,5 +125,15 @@ public class DataManager
         return combinedDict;
     }
 
+    Dictionary<TKey,TValue> ListDict<TKey,TValue>(List<TKey> keyList, params TValue[] lists)
+    {
+        Dictionary<TKey, TValue> listDict = new Dictionary<TKey, TValue>();
+
+        for (int i = 0; i < keyList.Count; i++)
+        {
+            listDict[keyList[i]] = lists[i];
+        }
+        return listDict;
+    }
 
 }

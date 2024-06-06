@@ -25,12 +25,11 @@ public class ObjectManager
     {
             return ((int)type << 24) | (_counter++);
     }
-    public static ItemType GetObjectTypeByItemType(int id)
+    public static ItemType GetObjectTypeByItemId(int id)
     {
         int type = (id / 100) & 0x7F;
         return (ItemType)type;
     }
-   
 
     public void Add(GameObject go, bool player = false)
     {

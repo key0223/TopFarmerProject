@@ -2,35 +2,40 @@
 	"array": 
 		[
 			{
+				"mapName": "Farm",
+				"itemId": 404,
 				"objectName": "Bed",
-				"prefabPath": "Object/Craftable/Interactable",
-				"prefabName": "Bed",
+				"prefabPath": "Object/Craftable/Interactable/Bad",
 				"initPosX": 10,
 				"initPosY": -5
 			},
 			{
+				"mapName": "Farm",
+				"itemId": 405,
 				"objectName": "GasRange",
-				"prefabPath": "Object/Craftable/Interactable",
-				"prefabName": "GasRange",
+				"prefabPath": "Object/Craftable/Interactable/GasRange",
 				"initPosX": -1,
 				"initPosY": 0
 			},
 			{
+				"mapName": "Farm",
+				"itemId": 406,
 				"objectName": "Refrigerator",
-				"prefabPath": "Object/Craftable/Interactable",
-				"prefabName": "Refrigerator",
+				"prefabPath": "Object/Craftable/Interactable/Refrigerator",
 				"initPosX": 0,
 				"initPosY": 0
 			},
 			{
+				"mapName": "Farm",
+				"itemId": 407,
 				"objectName": "Stool",
-				"prefabPath": "Object/Craftable/Interactable",
-				"prefabName": "Stool"
+				"prefabPath": "Object/Craftable/Interactable/Stool"
 			},
 			{
+				"mapName": "Farm",
+				"itemId": 408,
 				"objectName": "TV",
-				"prefabPath": "Object/Craftable/Interactable",
-				"prefabName": "TV",
+				"prefabPath": "Object/Craftable/Interactable/Tv",
 				"initPosX": 6,
 				"initPosY": -0.5
 			}

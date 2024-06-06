@@ -40,6 +40,27 @@ namespace Data
             return dict;
         }
     }
+
+    [Serializable]
+    public class MapObjectData 
+    {
+        public string mapName;
+        public int itemId;
+        public string objectName;
+        public string prefabPath;
+        public float initPosX;
+        public float initPosY;
+    }
+
+    [Serializable]
+    public class MapObjectLoader:ILoader<MapObjectData>
+    {
+        public List<MapObjectData> array = new List<MapObjectData>();
+        public List<MapObjectData> MakeList()
+        {
+            return array;
+        }
+    }
     #endregion
     #region String
     [Serializable]
