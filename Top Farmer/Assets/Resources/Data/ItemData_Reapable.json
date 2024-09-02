@@ -1,0 +1,56 @@
+﻿{
+	"array": 
+		[
+			{
+				"itemId": 501,
+				"itemType": "ITEM_REAPABLE_SCENARY",
+				"itemSpritePath": "Grass_0",
+				"itemName": "Grass_0",
+				"itemUseGridRadius": 0,
+				"isStartingItem": false,
+				"canBePickedUp": false,
+				"canBeDropped": false,
+				"canBeEaten": false,
+				"canBeCarried2": false
+			},
+			{
+				"itemId": 502,
+				"itemType": "ITEM_REAPABLE_SCENARY",
+				"itemSpritePath": "Grass_1",
+				"itemName": "Grass_1",
+				"itemUseGridRadius": 0,
+				"itemUseRaius": 0,
+				"isStartingItem": false,
+				"canBePickedUp": false,
+				"canBeDropped": false,
+				"canBeEaten": false,
+				"canBeCarried2": false
+			},
+			{
+				"itemId": 503,
+				"itemType": "ITEM_REAPABLE_SCENARY",
+				"itemSpritePath": "Grass_2",
+				"itemName": "Grass_2",
+				"itemUseGridRadius": 0,
+				"itemUseRaius": 0,
+				"isStartingItem": false,
+				"canBePickedUp": false,
+				"canBeDropped": false,
+				"canBeEaten": false,
+				"canBeCarried2": false
+			},
+			{
+				"itemId": 504,
+				"itemType": "ITEM_REAPABLE_SCENARY",
+				"itemSpritePath": "Grass_3",
+				"itemName": "Grass_3",
+				"itemUseGridRadius": 0,
+				"itemUseRaius": 0,
+				"isStartingItem": false,
+				"canBePickedUp": false,
+				"canBeDropped": false,
+				"canBeEaten": false,
+				"canBeCarried2": false
+			}
+		]
+}

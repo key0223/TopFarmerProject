@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngineInternal;
 
 public class ResourceManager
 {
@@ -39,8 +40,9 @@ public class ResourceManager
         GameObject go = Object.Instantiate(original, parent);
         go.name = original.name;
         return go;
-    }
 
+        
+    }
     public void Destroy(GameObject go)
     {
         if (go == null)

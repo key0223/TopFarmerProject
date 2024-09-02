@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - BoundsConfiner
+  - ItemsParentTransform
+  - GroundDecoration1
+  - GroundDecoration2
+  - CropsParentTransform
   layers:
   - Default
   - TransparentFX
@@ -11,7 +16,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Player
   - 
   - 
   - 
@@ -40,4 +45,31 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Ground1
+    uniqueID: 757262407
+    locked: 0
+  - name: Ground2
+    uniqueID: 21916203
+    locked: 0
+  - name: Ground3
+    uniqueID: 2170594683
+    locked: 0
+  - name: GroundDeco1
+    uniqueID: 3486130855
+    locked: 0
+  - name: GroundDeco2
+    uniqueID: 3943768611
+    locked: 0
+  - name: Instances
+    uniqueID: 2797189651
+    locked: 0
+  - name: Front1
+    uniqueID: 1242811713
+    locked: 0
+  - name: Front2
+    uniqueID: 851413435
+    locked: 0
+  - name: Collisions
+    uniqueID: 2507894357
     locked: 0

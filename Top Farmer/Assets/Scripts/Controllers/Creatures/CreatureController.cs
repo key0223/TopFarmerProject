@@ -11,8 +11,7 @@ public class CreatureController : ObjectController
     protected int _repeatCount = 0;
 
 
-    [SerializeField]
-    public float _speed = 5f;
+    public float _speed = 20f;
     protected Animator _animator;
 
     public CreatureType CreatureType { get; set; }
@@ -61,27 +60,6 @@ public class CreatureController : ObjectController
             return MoveDir.Down;
         else
             return MoveDir.None;
-    }
-    public Vector3Int GetFrontCellPos(int range = 1)
-    {
-        Vector3Int cellPos = CellPos;
-
-        switch (_lastDir)
-        {
-            case MoveDir.Up:
-                cellPos += Vector3Int.up * range;
-                break;
-            case MoveDir.Down:
-                cellPos += Vector3Int.down * range;
-                break;
-            case MoveDir.Left:
-                cellPos += Vector3Int.left * range;
-                break;
-            case MoveDir.Right:
-                cellPos += Vector3Int.right * range;
-                break;
-        }
-        return cellPos;
     }
 
     #region State Controll
@@ -160,7 +138,7 @@ public class CreatureController : ObjectController
                     break;
             }
         }
-        else if (_state == CreatureState.UsingItem)
+        else if (_state == CreatureState.ClickInput)
         {
             switch (_lastDir)
             {
@@ -200,11 +178,7 @@ public class CreatureController : ObjectController
     {
         base.Init();
         Vector2Int initPos = new Vector2Int(0, 0);
-        if (Managers.Map.UpdateObjectPos(gameObject, initPos))
-        {
-            CellPos = new Vector3Int(0, 0);
-
-        }
+       
         _animator = GetComponent<Animator>();
     }
 
@@ -221,8 +195,8 @@ public class CreatureController : ObjectController
             case CreatureState.Skill:
                 UpdateSkill();
                 break;
-            case CreatureState.UsingItem:
-                UpdateUsingItem();
+            case CreatureState.ClickInput:
+                UpdateUsingTool();
                 break;
             case CreatureState.Dead:
                 UpdateDead();
@@ -237,52 +211,10 @@ public class CreatureController : ObjectController
     // 스르륵 이동
     protected virtual void UpdateMoving()
     {
-        Vector3 destPos = Managers.Map.CurrentGrid.CellToWorld(CellPos) + new Vector3(0.5f, 0.5f);
-        Vector3 moveDir = destPos - transform.position;
-
-        // 도착 여부 체크
-        float dist = moveDir.magnitude;
-        if (dist < _speed * Time.deltaTime)
-        {
-            transform.position = destPos;
-            MoveToNextPos();
-        }
-        else
-        {
-            transform.position += moveDir.normalized * _speed * Time.deltaTime;
-            State = CreatureState.Moving;
-        }
-
     }
     protected virtual void MoveToNextPos()
     {
-        if (_dir == MoveDir.None)
-        {
-            State = CreatureState.Idle;
-            return;
-        }
-        Vector3Int destPos = CellPos;
-
-        switch (_dir)
-        {
-            case MoveDir.Up:
-                destPos += Vector3Int.up;
-                break;
-            case MoveDir.Down:
-                destPos += Vector3Int.down;
-                break;
-            case MoveDir.Left:
-                destPos += Vector3Int.left;
-                break;
-            case MoveDir.Right:
-                destPos += Vector3Int.right;
-                break;
-        }
-
-        if (Managers.Map.UpdateObjectPos(this.gameObject, (Vector2Int)destPos))
-        {
-            CellPos = destPos;
-        }
+        
 
     }
 
@@ -290,7 +222,7 @@ public class CreatureController : ObjectController
     {
 
     }
-    protected virtual void UpdateUsingItem()
+    protected virtual void UpdateUsingTool()
     {
 
     }

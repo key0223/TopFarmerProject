@@ -15,32 +15,31 @@ public class UIManager
     {
         get
         {
-            // UI SetParent
-            GameObject root = GameObject.Find("@UI_Root"); ;
+            GameObject root = GameObject.Find("@UI_Root");
             if (root == null)
-                root = new GameObject { name = "@UI_Root" };
+                root = Managers.Resource.Instantiate("UI/@UI_Root");
 
-            return root;
+            return root.gameObject.transform.GetChild(0).gameObject;
         }
     }
     // 팝업 UI가 켜질때 캔버스에 있는 order를 채워달라고 요청
     public void SetCanvas(GameObject go, bool sort = true)
     {
-        Canvas canvas = Util.GetOrAddComponent<Canvas>(go);
-        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        Canvas _canvas = Util.GetOrAddComponent<Canvas>(go);
+        _canvas.renderMode = RenderMode.ScreenSpaceOverlay;
 
         // 캔버스가 중첩으로 있을때 부모가 어떤 값을 가지던 무조건 자기 소팅 오더를 가진다.
-        canvas.overrideSorting = true;
+        _canvas.overrideSorting = true;
 
         if (sort)
         {
-            canvas.sortingOrder = (_order);
+            _canvas.sortingOrder = (_order);
             _order++;
         }
         else
         {
             // PopupUI가 아닌 일반 UI
-            canvas.sortingOrder=0;
+            _canvas.sortingOrder=0;
         }
 
     }
@@ -53,9 +52,9 @@ public class UIManager
         if (parent != null)
             go.transform.SetParent(parent,false);
 
-        Canvas canvas = go.GetOrAddComponent<Canvas>();
-        canvas.renderMode = RenderMode.WorldSpace;
-        canvas.worldCamera = Camera.main;
+        Canvas _canvas = go.GetOrAddComponent<Canvas>();
+        _canvas.renderMode = RenderMode.WorldSpace;
+        _canvas.worldCamera = Camera.main;
 
         return Util.GetOrAddComponent<T>(go);
     }

@@ -1,0 +1,356 @@
+﻿{
+	"md5": "220d4dce9abbc14b0ba35af40acb87da",
+	"array": 
+		[
+			{
+				"itemId": 201,
+				"purchasable": "TRUE",
+				"sellable": "TRUE",
+				"purchasePrice": 20,
+				"sellPrice": 10
+			},
+			{
+				"itemId": 202,
+				"purchasable": "TRUE",
+				"sellable": "TRUE",
+				"purchasePrice": 60,
+				"sellPrice": 30
+			},
+			{
+				"itemId": 203,
+				"purchasable": "TRUE",
+				"sellable": "TRUE",
+				"purchasePrice": 80,
+				"sellPrice": 40
+			},
+			{
+				"itemId": 204,
+				"purchasable": "TRUE",
+				"sellable": "TRUE",
+				"purchasePrice": 50,
+				"sellPrice": 25
+			},
+			{
+				"itemId": 205,
+				"purchasable": "TRUE",
+				"sellable": "TRUE",
+				"purchasePrice": 40,
+				"sellPrice": 20
+			},
+			{
+				"itemId": 206,
+				"purchasable": "TRUE",
+				"sellable": "TRUE",
+				"purchasePrice": 70,
+				"sellPrice": 35
+			},
+			{
+				"itemId": 207,
+				"purchasable": "TRUE",
+				"sellable": "TRUE",
+				"purchasePrice": 100,
+				"sellPrice": 50
+			},
+			{
+				"itemId": 208,
+				"purchasable": "TRUE",
+				"sellable": "TRUE",
+				"purchasePrice": 80,
+				"sellPrice": 40
+			},
+			{
+				"itemId": 209,
+				"purchasable": "TRUE",
+				"sellable": "TRUE",
+				"purchasePrice": 50,
+				"sellPrice": 25
+			},
+			{
+				"itemId": 210,
+				"purchasable": "TRUE",
+				"sellable": "TRUE",
+				"purchasePrice": 80,
+				"sellPrice": 40
+			},
+			{
+				"itemId": 211,
+				"purchasable": "TRUE",
+				"sellable": "TRUE",
+				"purchasePrice": 40,
+				"sellPrice": 20
+			},
+			{
+				"itemId": 212,
+				"purchasable": "TRUE",
+				"sellable": "TRUE",
+				"purchasePrice": 10,
+				"sellPrice": 5
+			},
+			{
+				"itemId": 213,
+				"purchasable": "TRUE",
+				"sellable": "TRUE",
+				"purchasePrice": 40,
+				"sellPrice": 20
+			},
+			{
+				"itemId": 214,
+				"purchasable": "TRUE",
+				"sellable": "TRUE",
+				"purchasePrice": 100,
+				"sellPrice": 50
+			},
+			{
+				"itemId": 215,
+				"purchasable": "TRUE",
+				"sellable": "TRUE",
+				"purchasePrice": 400,
+				"sellPrice": 200
+			},
+			{
+				"itemId": 216,
+				"purchasable": "TRUE",
+				"sellable": "TRUE",
+				"purchasePrice": 150,
+				"sellPrice": 75
+			},
+			{
+				"itemId": 217,
+				"purchasable": "TRUE",
+				"sellable": "TRUE",
+				"purchasePrice": 20,
+				"sellPrice": 10
+			},
+			{
+				"itemId": 218,
+				"purchasable": "TRUE",
+				"sellable": "TRUE",
+				"purchasePrice": 30,
+				"sellPrice": 15
+			},
+			{
+				"itemId": 219,
+				"purchasable": "TRUE",
+				"sellable": "TRUE",
+				"purchasePrice": 100,
+				"sellPrice": 50
+			},
+			{
+				"itemId": 220,
+				"purchasable": "TRUE",
+				"sellable": "TRUE",
+				"purchasePrice": 50,
+				"sellPrice": 25
+			},
+			{
+				"itemId": 221,
+				"purchasable": "TRUE",
+				"sellable": "TRUE",
+				"purchasePrice": 60,
+				"sellPrice": 30
+			},
+			{
+				"itemId": 222,
+				"purchasable": "TRUE",
+				"sellable": "TRUE",
+				"purchasePrice": 240,
+				"sellPrice": 120
+			},
+			{
+				"itemId": 223,
+				"purchasable": "TRUE",
+				"sellable": "TRUE",
+				"purchasePrice": 20,
+				"sellPrice": 10
+			},
+			{
+				"itemId": 224,
+				"purchasable": "FALSE",
+				"sellable": "TRUE",
+				"purchasePrice": 0,
+				"sellPrice": 20
+			},
+			{
+				"itemId": 225,
+				"purchasable": "FALSE",
+				"sellable": "TRUE",
+				"purchasePrice": 0,
+				"sellPrice": 5
+			},
+			{
+				"itemId": 226,
+				"purchasable": "FALSE",
+				"sellable": "TRUE",
+				"purchasePrice": 0,
+				"sellPrice": 5
+			},
+			{
+				"itemId": 301,
+				"purchasable": "FALSE",
+				"sellable": "TRUE",
+				"purchasePrice": 0,
+				"sellPrice": 35
+			},
+			{
+				"itemId": 302,
+				"purchasable": "FALSE",
+				"sellable": "TRUE",
+				"purchasePrice": 0,
+				"sellPrice": 40
+			},
+			{
+				"itemId": 303,
+				"purchasable": "FALSE",
+				"sellable": "TRUE",
+				"purchasePrice": 0,
+				"sellPrice": 175
+			},
+			{
+				"itemId": 304,
+				"purchasable": "FALSE",
+				"sellable": "TRUE",
+				"purchasePrice": 0,
+				"sellPrice": 80
+			},
+			{
+				"itemId": 305,
+				"purchasable": "FALSE",
+				"sellable": "TRUE",
+				"purchasePrice": 0,
+				"sellPrice": 60
+			},
+			{
+				"itemId": 306,
+				"purchasable": "FALSE",
+				"sellable": "TRUE",
+				"purchasePrice": 0,
+				"sellPrice": 110
+			},
+			{
+				"itemId": 307,
+				"purchasable": "FALSE",
+				"sellable": "TRUE",
+				"purchasePrice": 0,
+				"sellPrice": 220
+			},
+			{
+				"itemId": 308,
+				"purchasable": "FALSE",
+				"sellable": "TRUE",
+				"purchasePrice": 0,
+				"sellPrice": 250
+			},
+			{
+				"itemId": 309,
+				"purchasable": "FALSE",
+				"sellable": "TRUE",
+				"purchasePrice": 0,
+				"sellPrice": 60
+			},
+			{
+				"itemId": 310,
+				"purchasable": "FALSE",
+				"sellable": "TRUE",
+				"purchasePrice": 0,
+				"sellPrice": 50
+			},
+			{
+				"itemId": 311,
+				"purchasable": "FALSE",
+				"sellable": "TRUE",
+				"purchasePrice": 0,
+				"sellPrice": 40
+			},
+			{
+				"itemId": 312,
+				"purchasable": "FALSE",
+				"sellable": "TRUE",
+				"purchasePrice": 0,
+				"sellPrice": 25
+			},
+			{
+				"itemId": 313,
+				"purchasable": "FALSE",
+				"sellable": "TRUE",
+				"purchasePrice": 0,
+				"sellPrice": 90
+			},
+			{
+				"itemId": 314,
+				"purchasable": "FALSE",
+				"sellable": "TRUE",
+				"purchasePrice": 0,
+				"sellPrice": 260
+			},
+			{
+				"itemId": 315,
+				"purchasable": "FALSE",
+				"sellable": "TRUE",
+				"purchasePrice": 0,
+				"sellPrice": 750
+			},
+			{
+				"itemId": 316,
+				"purchasable": "FALSE",
+				"sellable": "TRUE",
+				"purchasePrice": 0,
+				"sellPrice": 50
+			},
+			{
+				"itemId": 317,
+				"purchasable": "FALSE",
+				"sellable": "TRUE",
+				"purchasePrice": 0,
+				"sellPrice": 60
+			},
+			{
+				"itemId": 318,
+				"purchasable": "FALSE",
+				"sellable": "TRUE",
+				"purchasePrice": 0,
+				"sellPrice": 160
+			},
+			{
+				"itemId": 319,
+				"purchasable": "FALSE",
+				"sellable": "TRUE",
+				"purchasePrice": 0,
+				"sellPrice": 320
+			},
+			{
+				"itemId": 320,
+				"purchasable": "FALSE",
+				"sellable": "TRUE",
+				"purchasePrice": 0,
+				"sellPrice": 80
+			},
+			{
+				"itemId": 321,
+				"purchasable": "FALSE",
+				"sellable": "TRUE",
+				"purchasePrice": 0,
+				"sellPrice": 160
+			},
+			{
+				"itemId": 322,
+				"purchasable": "FALSE",
+				"sellable": "TRUE",
+				"purchasePrice": 0,
+				"sellPrice": 75
+			},
+			{
+				"itemId": 323,
+				"purchasable": "FALSE",
+				"sellable": "TRUE",
+				"purchasePrice": 0,
+				"sellPrice": 100
+			},
+			{
+				"itemId": 324,
+				"purchasable": "TRUE",
+				"sellable": "TRUE",
+				"purchasePrice": 10,
+				"sellPrice": 2
+			}
+		]
+}

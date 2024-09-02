@@ -17,34 +17,33 @@ public interface ILoader<Value>
 public class DataManager
 {
     #region Dict
-    public Dictionary<string, Data.PotalData> PotalDict { get; private set; } = new Dictionary<string, PotalData>();
-    public Dictionary<string, List<Data.MapObjectData>> MapObjectDict { get; private set; } = new Dictionary<string, List<MapObjectData>>();
-    public Dictionary<int, Data.ItemData> ItemDict { get; private set; } = new Dictionary<int, Data.ItemData>();
+
+    public Dictionary<int, QuestData> QuestDict { get; private set; } = new Dictionary<int, QuestData>();
+    public Dictionary<int, ObjectiveData> ObjectiveDict { get; private set; } = new Dictionary<int, ObjectiveData>();
+
+    public Dictionary<int, ItemData> ItemDict { get; private set; } = new Dictionary<int, ItemData>();
+    public Dictionary<int, CropData> CropDict { get; private set; } = new Dictionary<int, CropData>();
+    public Dictionary<int, ShopItemData> ShopItemDict { get; private set; }= new Dictionary<int, ShopItemData>();
     public Dictionary<int, Data.NpcData> NpcDict { get; private set; } = new Dictionary<int, NpcData>();
     public Dictionary<int, Data.MonsterData> MonsterDict { get; private set; } = new Dictionary<int, MonsterData>();
     public Dictionary<string, Data.StringData> StringDict { get; private set; } = new Dictionary<string, Data.StringData>();
-    public Dictionary<int, List<RewardData>> RewardDict { get; private set; } = new Dictionary<int, List<RewardData>>();
     public Dictionary<string, Sprite> SpriteDict { get; private set; } = new Dictionary<string, Sprite>();
     #endregion
 
     public void Init()
     {
-        #region Map
-        PotalDict = LoadJson<Data.PotalLoader, string, Data.PotalData>("MapData_Potal").MakeDict();
 
-        List<Data.MapObjectData> farmObject = LoadJson<Data.MapObjectLoader,Data.MapObjectData>("MapObjectData_Farm").MakeList();
-        List<string> keyList = KeyProvider<string>(farmObject[0].mapName);
-        MapObjectDict = ListDict<string, List<Data.MapObjectData>>(keyList,farmObject);
+        Dictionary<int,ItemData> comodityDict = LoadJson<Data.ItemLoader, int,ItemData>("ItemData_Comodity").MakeDict();
+        Dictionary<int,ItemData> reapableDict = LoadJson<Data.ItemLoader, int,ItemData>("ItemData_Reapable").MakeDict();
+        Dictionary<int,ItemData> seedDict = LoadJson<Data.ItemLoader, int,ItemData>("ItemData_Seed").MakeDict();
+        Dictionary<int,ItemData> toolDict = LoadJson<Data.ItemLoader, int,ItemData>("ItemData_Tool").MakeDict();
+        ItemDict = CombinedDict<int, ItemData>(comodityDict, reapableDict, seedDict,toolDict);
 
-        #endregion
-        #region Item
-        Dictionary<int, Data.ItemData> toolDict = LoadJson<Data.ToolItemLoader,int,Data.ItemData>("ItemData_Tool").MakeDict();
-        Dictionary<int, Data.ItemData> cropDict = LoadJson<Data.CropItemLoader,int,Data.ItemData>("ItemData_Crop").MakeDict();
-        Dictionary<int, Data.ItemData> seedDict = LoadJson<Data.SeedItemLoader,int,Data.ItemData>("ItemData_Seed").MakeDict();
-        Dictionary<int, Data.ItemData> craftableDict = LoadJson<Data.CraftableItemLoader,int,Data.ItemData>("ItemData_Crafting").MakeDict();
-        Dictionary<int, Data.ItemData> foodDict = LoadJson<Data.FoodItemLoader,int,Data.ItemData>("ItemData_Food").MakeDict();
-        ItemDict = CombinedDict<int, Data.ItemData>(toolDict, cropDict, seedDict,craftableDict,foodDict);
-        #endregion
+        Dictionary<int, CropData> cropDict = LoadJson<Data.CropLoader, int, CropData>("ItemData_Crop").MakeDict();
+        CropDict = CombinedDict<int, CropData>(cropDict);
+
+        Dictionary<int,ShopItemData> seedShopDict = LoadJson<Data.ShopItemLoader, int, ShopItemData>("ShopData_SeedShop").MakeDict();
+        ShopItemDict = CombinedDict<int, ShopItemData>(seedShopDict);
 
         // Npc
         Dictionary<int, Data.NpcData> merchantDict = LoadJson<Data.MerchantNpcLoader, int, Data.NpcData>("NpcData_Merchant").MakeDict();
@@ -60,9 +59,6 @@ public class DataManager
         StringDict = CombinedDict<string, Data.StringData>(npcStringDict, itemStringDict);
         #endregion
 
-        Dictionary<int, List<RewardData>> monsterRewardDict = LoadJson<Data.RewardLoader, int, List<RewardData>>("RewardData_Monster").MakeDict();
-        RewardDict = CombinedDict<int, List<RewardData>>(monsterRewardDict);
-
         #region Sprites
         //Dictionary<string, Sprite> cropSpriteDict = new Dictionary<string, Sprite>();
         //Sprite[] sprites = Resources.LoadAll<Sprite>("Textures/Object/Seed/Seeds");
@@ -70,11 +66,25 @@ public class DataManager
         //{
         //    CropSpriteDict.Add(sprite.name, sprite);
         //}
-        Dictionary<string,Sprite> cropSpriteDict = new SpriteLoader("Seed/Seeds").MakeDict();
-        Dictionary<string, Sprite> capmFireDict = new SpriteLoader("Craftable/CampFire").MakeDict();
-        SpriteDict = CombinedDict<string, Sprite>(cropSpriteDict, capmFireDict);
+        Dictionary<string,Sprite> objectSpriteDict = new SpriteLoader("Object/Objects").MakeDict();
+        Dictionary<string,Sprite> grassSpriteDict = new SpriteLoader("Object/Scenary/Grass").MakeDict();
+        Dictionary<string, Sprite> toolSpriteDict = new SpriteLoader("Object/Tool/Tool_Icons").MakeDict();
+        Dictionary<string, Sprite> weaponSpriteDict = new SpriteLoader("Object/Weapon/Weapons").MakeDict();
+        Dictionary<string, Sprite> timeUISpriteDict = new SpriteLoader("UI/TimeUI").MakeDict();
+        Dictionary<string, Sprite> cropSpriteDict = new SpriteLoader("Object/Crops").MakeDict();
+        Dictionary<string, Sprite> oakSpriteDict = new SpriteLoader("Object/Scenary/Spring/OakTree_spring").MakeDict();
+        Dictionary<string, Sprite> mapleSpriteDict = new SpriteLoader("Object/Scenary/Spring/MapleTree_spring").MakeDict();
+        Dictionary<string, Sprite> pineSpriteDict = new SpriteLoader("Object/Scenary/Spring/PineTree_spring").MakeDict();
+
+
+
+        SpriteDict = CombinedDict<string, Sprite>(objectSpriteDict,grassSpriteDict, toolSpriteDict,weaponSpriteDict,timeUISpriteDict,cropSpriteDict,
+                                                  oakSpriteDict,mapleSpriteDict,pineSpriteDict);
 
         #endregion
+
+        QuestDict = LoadJson<Data.QuestLoader, int, QuestData>("QuestData_Quest").MakeDict();
+        ObjectiveDict = LoadJson<Data.ObjectiveLoader, int, ObjectiveData>("QuestData_Objective").MakeDict();
 
     }
     public Sprite GetSpriteByName(string name)
@@ -86,6 +96,19 @@ public class DataManager
         else
         {
             Debug.Log("Sprite not found" + name);
+            return null;
+        }
+    }
+
+    public ItemData GetItemData(int itemId)
+    {
+        ItemData itemData = null;
+        if (ItemDict.TryGetValue(itemId, out itemData))
+        {
+            return itemData;
+        }
+        else
+        {
             return null;
         }
     }

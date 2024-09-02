@@ -5,14 +5,160 @@ using UnityEngine;
 
 public class Define
 {
-    #region State
-    public enum InventoryState
+    static Define()
     {
-        Inventory,
-        Merchant,
-        Oven,
+        EventAnimation = Animator.StringToHash("EventAnimation");
+    }
+    // Scene
+    public const string PersistentScene = "PersistentScene";
+
+
+    // Tilemap
+    public const float GridCellSize = 1f;
+    public const float GridCellDiagonalSize = 1.41f; // diagonal distance bwtween unity cell centers
+    public const int MaxGridWidth = 99999;
+    public const int MaxGridHeight = 99999;
+    public static Vector2 CursorSize = Vector2.one;
+
+    
+
+    // Item Sprite Path "Path+/sprite number
+    public const string ObjectSpritePath = "Textures/";
+
+    // Obscuring Item fading -ObscuringItemFader
+    public const float FadeInSeconds = 0.25f;
+    public const float FadeOutSecons = 0.35f;
+    public const float TargetAlpha = 0.45f;
+
+    public const int PlayerInitInvenCampacity = 24;
+    public const int PlayerMaxInvenCampacity = 36;
+
+    // Player
+    public static float PlayerCenterYOffset = 0.875f;
+
+    // Player Movement
+    public const float RunningSpeed = 35f;
+    public const float WalkingSpeed = 20f;
+    public static float UseToolAnimationPause = 0.25f;
+    public static float AfterUseToolAnimationPause = 0.2f;
+
+    // NPC Movement
+    public static float PixelSize = 0.0625f;
+
+    public static int EventAnimation;
+
+    // Reaping
+    public const int MaxCollidersToTestPerReapSwing = 15;
+    public const int MaxTargetComponentsToDestroyPerReapSwing = 2;
+
+    // String
+    public const string SeedString = "Seed";
+    public const string ComodityString = "Comodity";
+    public const string FurnitureString = "Furniture";
+    public const string HoeString = "Hoe";
+    public const string AxeString = "Axe";
+    public const string PickaxeString = "Pickaxe";
+    public const string ScytheString = "Scythe";
+    public const string WateringCanstring = "Watering Can";
+    public const string BasketString = "Basket";
+
+    // Prefab Path
+    public const string CropStandardPrefabPath = "Object/Item/CropStandard";
+    public const string OakTreePrefabPath = "Object/Item/CropTree_Oak";
+    public const string MapleTreePrefabPath = "Object/Item/CropTree_Maple";
+    public const string PineTreePrefabPath = "Object/Item/CropTree_Pine";
+
+    // Number Sprite
+    public const string Number0SpritePath = "UI/TimeUI/TimeUI_30";
+    public const string Number1SpritePath = "UI/TimeUI/TimeUI_29";
+    public const string Number2SpritePath = "UI/TimeUI/TimeUI_28";
+    public const string Number3SpritePath = "UI/TimeUI/TimeUI_23";
+    public const string Number4SpritePath = "UI/TimeUI/TimeUI_22";
+    public const string Number5SpritePath = "UI/TimeUI/TimeUI_21";
+    public const string Number6SpritePath = "UI/TimeUI/TimeUI_20";
+    public const string Number7SpritePath = "UI/TimeUI/TimeUI_19";
+    public const string Number8SpritePath = "UI/TimeUI/TimeUI_18";
+    public const string Number9SpritePath = "UI/TimeUI/TimeUI_17";
+
+    // Quest
+
+    public enum QuestType
+    {
+        Basic,
+        Crafing,
+        ItemDelivery,
+        Monster,
+        Socialize,
+        Location,
+        Finshing,
+        Building,
+        Harvest,
+        Resource,
+    }
+    public enum QuestState
+    {
+        Inactive,
+        Running,
+        Complete,
+        Cancel,
+        WatingForCompletion, //완료 버튼을 눌러야 완료되는 퀘스트
+    }
+    public enum ObjectiveActionType
+    {
+        Increment,
+        Decrement,
+    }
+    public enum ObjectiveState
+    {
+        Inactive,
+        Running,
+        Complete,
+    }
+    public enum ObjectiveGroupState
+    {
+        Running,
+        Complete,
+    }
+    public enum MailType
+    {
+        Quest,
+        Reward,
+    }
+    public enum Scene
+    {
+        PersistentScene,
+        Scene1_Farm,
+        Scene2_Field,
+        Scene3_House,
+        Scene4_Town,
+        Scene5_Title,
+        Scene6_Shop,
     }
 
+    // Time
+    public const float SecondsPerGameSecond = 0.012f;
+
+    public enum Season
+    {
+        NONE,
+        SPRING,
+        SUMMER,
+        AUTUMN,
+        WINTER,
+        COUNT,
+    }
+    
+    // Grid
+    public enum GridBoolProperty
+    {
+        Diggable,
+        CanDropItem,
+        CanPlaceFurniture,
+        IsPath,
+        IsNPCObstacle,
+    }
+   
+    #region State
     public enum StateMarkState
     {
         ExclamationMark,
@@ -20,29 +166,14 @@ public class Define
         QuestionMark,
         ProgressingMark,
     }
-    public enum StoveState
+    
+    public enum Weather
     {
-        Empty,
-        Using,
-        Completed,
-    }
-    public enum SeedStoreState
-    {
-        Available,
-        Unavailable,
-        ItemGrid,
-        Purchase,
-        CheckPurchase,
-    }
-    public enum DayState
-    {
-        Dawn,
-        Day,
-        Noon,
-        Night,
-        Lightning_1,
-        Lightning_2,
-        Raining,
+        NONE,
+        SUNNY,
+        RAINING,
+        SNOWING,
+        COUNT,
     }
     public enum UIEvent
     {
@@ -58,29 +189,12 @@ public class Define
         Idle,
         Moving,
         Skill,
-        UsingItem,
+        ClickInput,
         Dead,
+        Event,
     }
-    public enum SeedState
-    {
-        None,
-        Progressing,
-        Completed,
-    }
-    public enum MerchantState
-    {
-        TradeCompleted,
-        Resting,
-        Working_Inside,
-        Working_Outside,
-    }
-    public enum Scene
-    {
-        Unknown,
-        Login,
-        Lobby,
-        Game,
-    }
+    
+   
     public enum MoveDir
     {
         None,
@@ -91,40 +205,63 @@ public class Define
     }
     #endregion
 
-    // TYPE
-    public enum ObjectType
+    #region Effect
+
+    public enum HarvestEffectType
     {
-        OBJECT_TYPE_NONE,
-        OBJECT_TYPE_PLAYER,
-        OBJECT_TYPE_OBJECT,
-        OBJECT_TYPE_ITEM,
-        OBJECT_TYPE_CREATURE,
+       NONE,
+       EFFECT_REAPING,
+       EFFECT_WEED,
+       EFFECT_LAEAVES_FALLING,
+    }
+    
+    public enum Sound
+    {
+        NONE = 0,
+        FOOTSTEP_SOFT_GROUND = 10,
+        FOOTSTEP_HARD_GROUND= 20,
+        SOUND_WATERING = 30,
+        SOUND_HOE =40,
+        SOUND_AXE = 50,
+        SOUND_PICKAXE = 60,
+        SOUND_SCYTHE = 70,
+        SOUND_COLLECTING =80,
+        SOUND_PICKUP = 90,
+        SOUND_RUSTLE = 100,
+        SOUND_PLANT = 110,
+        SOUND_PLUCK = 120,
+        SOUND_COUNTRYSIDE_1 =1000,
+        SOUND_COUNTRYSIDE_2 =1010,
+        SOUND_INDOOR = 1020,
+        SOUND_BACKGROUND_1 =2000,
+        SOUND_BACKGROUND_2 =2010,
     }
 
+    #endregion
     #region Item
+    public enum InventoryType
+    {
+        INVEN_PLAYER,
+        INVEN_CHEST,
+        COUNT,
+    }
     public enum ItemType
     {
-        ITEM_TYPE_NONE,
-        ITEM_TYPE_TOOL,
-        ITEM_TYPE_CROP,
-        ITEM_TYPE_SEED,
-        ITEM_TYPE_CRAFTING,
-        ITEM_TYPE_FOOD,
+        NONE,
+        ITEM_SEED,
+        ITEM_COMODITY,
+        ITEM_FURNITURE,
+        ITEM_REAPABLE_SCENARY,
+        ITEM_TOOL_WATERING,
+        ITEM_TOOL_HOEING,
+        ITEM_TOOL_AXE,
+        ITEM_TOOL_PICKAXE,
+        ITEM_TOOL_SCYTHE,
+        ITEM_TOOL_COLLECTING,
+        COUNT,
     }
    
-    public enum ToolType
-    {
-        TOOL_TYPE_NONE,
-        TOOL_TYPE_PICKAXE,
-        TOOL_TYPE_AXE,
-        TOOL_TYPE_HOE,
-        TOOL_TYPE_WATERINGCAN,
-    }
-    public enum CraftingType
-    {
-        CRAFTING_TYPE_KITCHEN,
-        CRAFTING_TYPE_DECORATION,
-    }
+   
     #endregion
 
     #region Creature
@@ -144,15 +281,6 @@ public class Define
         MONSTER_TYPE_COUNTERATTACK,
     }
     #endregion
-    public enum InteractableObjectType
-    {
-        INTERACTABLE_OBJECT_NONE,
-        INTERACTABLE_OBEJCT_TYPE_STORAGE,
-        INTERACTABLE_OBEJCT_TYPE_NPC,
-        INTERACTABLE_OBEJCT_TYPE_KITCHEN,
-    }
- 
-   
 
     #region System Message
 

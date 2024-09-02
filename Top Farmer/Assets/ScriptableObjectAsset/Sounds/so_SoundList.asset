@@ -1,0 +1,117 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a3ac80300837bd4fb4bef25582f0b6b, type: 3}
+  m_Name: so_SoundList
+  m_EditorClassIdentifier: 
+  soundDetails:
+  - _soundName: 10
+    _soundClip: {fileID: 8300000, guid: 2bce46dccd8d1f5439f4e64fcd9ba2d2, type: 3}
+    _soundDescription: Sound effect from Freesound cc0
+    _soundPitchRandomVariationMin: 0.9
+    _soundPitchRandomVariationMax: 1.1
+    _soundVolume: 0.2
+  - _soundName: 20
+    _soundClip: {fileID: 8300000, guid: 2bce46dccd8d1f5439f4e64fcd9ba2d2, type: 3}
+    _soundDescription: Sound effect from Freesound cc0
+    _soundPitchRandomVariationMin: 0.9
+    _soundPitchRandomVariationMax: 1.1
+    _soundVolume: 0.2
+  - _soundName: 30
+    _soundClip: {fileID: 8300000, guid: bf15abddf8f277c4e81de6b2068df0b4, type: 3}
+    _soundDescription: Sound effect from Freesound cc0
+    _soundPitchRandomVariationMin: 0.8
+    _soundPitchRandomVariationMax: 1.2
+    _soundVolume: 0.2
+  - _soundName: 40
+    _soundClip: {fileID: 8300000, guid: b59e075c13cef9e4abeca5fd5843b427, type: 3}
+    _soundDescription: Sound effect from Freesound cc0
+    _soundPitchRandomVariationMin: 0.6
+    _soundPitchRandomVariationMax: 0.8
+    _soundVolume: 0.124
+  - _soundName: 50
+    _soundClip: {fileID: 8300000, guid: 5aff12b070d09a640bf21cf8355e3582, type: 3}
+    _soundDescription: Sound effect from Freesound cc0
+    _soundPitchRandomVariationMin: 0.7
+    _soundPitchRandomVariationMax: 0.8
+    _soundVolume: 0.2
+  - _soundName: 60
+    _soundClip: {fileID: 8300000, guid: 233dd3bd5b506924ea3f4781c137f28e, type: 3}
+    _soundDescription: Sound effect from Freesound cc0
+    _soundPitchRandomVariationMin: 0.8
+    _soundPitchRandomVariationMax: 1
+    _soundVolume: 0.2
+  - _soundName: 70
+    _soundClip: {fileID: 8300000, guid: 9b33974eded429d49a26390a97968d4c, type: 3}
+    _soundDescription: Sound effect from Freesound cc0
+    _soundPitchRandomVariationMin: 0.7
+    _soundPitchRandomVariationMax: 1
+    _soundVolume: 0.2
+  - _soundName: 80
+    _soundClip: {fileID: 8300000, guid: 222d4460abb4d0c4a8a40f7a88bbf6c5, type: 3}
+    _soundDescription: Sound effect from Freesound cc0
+    _soundPitchRandomVariationMin: 0.8
+    _soundPitchRandomVariationMax: 1.2
+    _soundVolume: 0.2
+  - _soundName: 90
+    _soundClip: {fileID: 8300000, guid: f91d9a8dd30094c4182567d1484413b6, type: 3}
+    _soundDescription: Sound effect from Freesound cc0
+    _soundPitchRandomVariationMin: 0.8
+    _soundPitchRandomVariationMax: 1.2
+    _soundVolume: 0.2
+  - _soundName: 100
+    _soundClip: {fileID: 8300000, guid: fe990f3b1bf0bfe4fba33fcdfef78bf4, type: 3}
+    _soundDescription: Sound effect from Freesound cc0
+    _soundPitchRandomVariationMin: 0.9
+    _soundPitchRandomVariationMax: 1.1
+    _soundVolume: 0.34
+  - _soundName: 110
+    _soundClip: {fileID: 8300000, guid: d95fa69e6eb89864c9f05919f1c2de5a, type: 3}
+    _soundDescription: Sound effect from Freesound cc0
+    _soundPitchRandomVariationMin: 0.8
+    _soundPitchRandomVariationMax: 1
+    _soundVolume: 0.2
+  - _soundName: 120
+    _soundClip: {fileID: 8300000, guid: 62e8c50536139f9488d1bf1c396e79b9, type: 3}
+    _soundDescription: Sound effect from Freesound cc0
+    _soundPitchRandomVariationMin: 0.8
+    _soundPitchRandomVariationMax: 1
+    _soundVolume: 0.3
+  - _soundName: 1000
+    _soundClip: {fileID: 8300000, guid: 6b7e24d4f992c144aa742b5c9a7befd4, type: 3}
+    _soundDescription: Sound effect from Freesound cc0
+    _soundPitchRandomVariationMin: 1
+    _soundPitchRandomVariationMax: 1
+    _soundVolume: 0.78
+  - _soundName: 1010
+    _soundClip: {fileID: 8300000, guid: 2990c063ae2a35943b08484446249614, type: 3}
+    _soundDescription: Sound effect from Freesound cc0
+    _soundPitchRandomVariationMin: 1
+    _soundPitchRandomVariationMax: 1
+    _soundVolume: 0.782
+  - _soundName: 1020
+    _soundClip: {fileID: 8300000, guid: 40bc08a909bb81a4483e363a9f812ac4, type: 3}
+    _soundDescription: Sound effect from Freesound cc0
+    _soundPitchRandomVariationMin: 1
+    _soundPitchRandomVariationMax: 1
+    _soundVolume: 0.75
+  - _soundName: 2000
+    _soundClip: {fileID: 8300000, guid: 55649fa293650f54d904b778fe825363, type: 3}
+    _soundDescription: Sound effect from Freesound cc0
+    _soundPitchRandomVariationMin: 1
+    _soundPitchRandomVariationMax: 1
+    _soundVolume: 0.55
+  - _soundName: 2010
+    _soundClip: {fileID: 8300000, guid: c133f8b8298ee1042b320b01d4d1668e, type: 3}
+    _soundDescription: From opengameart.org SubspaceAudio cc0
+    _soundPitchRandomVariationMin: 1
+    _soundPitchRandomVariationMax: 1
+    _soundVolume: 0.55

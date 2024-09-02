@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SceneManagerEx
 {
@@ -12,6 +13,10 @@ public class SceneManagerEx
         Managers.Clear();
 
         SceneManager.LoadScene(GetSceneName(type));
+    }
+    public void LoadAdditveScene(Define.Scene type)
+    {
+        SceneManager.LoadScene(GetSceneName(type),LoadSceneMode.Additive);
     }
 
     string GetSceneName(Define.Scene type)

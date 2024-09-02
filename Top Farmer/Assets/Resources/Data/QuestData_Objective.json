@@ -1,0 +1,197 @@
+﻿{
+	"array": 
+		[
+			{
+				"ownerQuestId": 1,
+				"objectiveId": 1,
+				"questType": "Basic",
+				"objectiveDescription": "광산 5층 도달하기.",
+				"actionType": "Increment",
+				"needSuccessToComplete": 1
+			},
+			{
+				"ownerQuestId": 2,
+				"objectiveId": 2,
+				"questType": "Basic",
+				"objectiveDescription": "광산 40층 도달하기.",
+				"actionType": "Increment",
+				"needSuccessToComplete": 1
+			},
+			{
+				"ownerQuestId": 3,
+				"objectiveId": 3,
+				"questType": "Basic",
+				"objectiveDescription": "광산 바닥에 도달하기.",
+				"actionType": "Increment",
+				"needSuccessToComplete": 1
+			},
+			{
+				"ownerQuestId": 4,
+				"objectiveId": 4,
+				"questType": "Basic",
+				"objectiveDescription": "동굴 당근을 가지고 마니의 가게 찾아가기.",
+				"actionType": "Increment",
+				"needSuccessToComplete": 1
+			},
+			{
+				"ownerQuestId": 5,
+				"objectiveId": 5,
+				"questType": "Basic",
+				"objectiveDescription": "박물관에 유물이나 광물 기증하기.",
+				"actionType": "Increment",
+				"needSuccessToComplete": 1
+			},
+			{
+				"ownerQuestId": 6,
+				"objectiveId": 6,
+				"questType": "Basic",
+				"objectiveDescription": "누군가에게 선물 주기.",
+				"actionType": "Increment",
+				"needSuccessToComplete": 1
+			},
+			{
+				"ownerQuestId": 7,
+				"objectiveId": 7,
+				"questType": "ItemDelivery",
+				"objectiveDescription": "조디에게 콜리플라워 가져다주기.",
+				"actionType": "Increment",
+				"targetsRaw": "Jodi",
+				"needSuccessToComplete": 1
+			},
+			{
+				"ownerQuestId": 8,
+				"objectiveId": 8,
+				"questType": "ItemDelivery",
+				"objectiveDescription": "팸에게 페일 에일 가져다주기.",
+				"actionType": "Increment",
+				"targetsRaw": "Pam",
+				"needSuccessToComplete": 1
+			},
+			{
+				"ownerQuestId": 9,
+				"objectiveId": 9,
+				"questType": "ItemDelivery",
+				"objectiveDescription": "드미트리우스에게 멜론 가져다주기.",
+				"actionType": "Increment",
+				"targetsRaw": "Demetrius",
+				"needSuccessToComplete": 1
+			},
+			{
+				"ownerQuestId": 10,
+				"objectiveId": 10,
+				"questType": "ItemDelivery",
+				"objectiveDescription": "조지에게 매운 고추 가져다주기.",
+				"actionType": "Increment",
+				"targetsRaw": "George",
+				"needSuccessToComplete": 1
+			},
+			{
+				"ownerQuestId": 11,
+				"objectiveId": 11,
+				"questType": "ItemDelivery",
+				"objectiveDescription": "마니에게 아마란스 한 뭉치 가져다주기.",
+				"actionType": "Increment",
+				"targetsRaw": "Marnie",
+				"needSuccessToComplete": 1
+			},
+			{
+				"ownerQuestId": 12,
+				"objectiveId": 12,
+				"questType": "ItemDelivery",
+				"objectiveDescription": "캐롤라인에게 호박 가져다주기.",
+				"actionType": "Increment",
+				"targetsRaw": "Caroline",
+				"needSuccessToComplete": 1
+			},
+			{
+				"ownerQuestId": 13,
+				"objectiveId": 13,
+				"questType": "ItemDelivery",
+				"objectiveDescription": "에밀리에게 자수정 주기.",
+				"actionType": "Increment",
+				"targetsRaw": "Emily",
+				"needSuccessToComplete": 1
+			},
+			{
+				"ownerQuestId": 14,
+				"objectiveId": 14,
+				"questType": "ItemDelivery",
+				"objectiveDescription": "마법사에게 공허 정수 주기.",
+				"actionType": "Increment",
+				"targetsRaw": "Wizard",
+				"needSuccessToComplete": 1
+			},
+			{
+				"ownerQuestId": 15,
+				"objectiveId": 15,
+				"questType": "ItemDelivery",
+				"objectiveDescription": "클린트에게 철 주괴 가져다주기.",
+				"actionType": "Increment",
+				"targetsRaw": "Clint",
+				"needSuccessToComplete": 1
+			},
+			{
+				"ownerQuestId": 16,
+				"objectiveId": 16,
+				"questType": "ItemDelivery",
+				"objectiveDescription": "로빈에게 단단한 나무 10조각 가져다주기.",
+				"actionType": "Increment",
+				"targetsRaw": "Robin",
+				"needSuccessToComplete": 10
+			},
+			{
+				"ownerQuestId": 17,
+				"objectiveId": 17,
+				"questType": "Monster",
+				"objectiveDescription": "슬라임 10마리 중 0마리 처치함.",
+				"actionType": "Increment",
+				"targetsRaw": "Green_Slime",
+				"needSuccessToComplete": 10
+			},
+			{
+				"ownerQuestId": 18,
+				"objectiveId": 18,
+				"questType": "Location",
+				"objectiveDescription": "마법사의 탑 입장하기.",
+				"actionType": "Increment",
+				"targetsRaw": "WizardHouse",
+				"needSuccessToComplete": 1
+			},
+			{
+				"ownerQuestId": 19,
+				"objectiveId": 19,
+				"questType": "Location",
+				"objectiveDescription": "모험가 길드 들어가기.",
+				"actionType": "Increment",
+				"targetsRaw": "AdventureGuild",
+				"needSuccessToComplete": 1
+			},
+			{
+				"ownerQuestId": 20,
+				"objectiveId": 20,
+				"questType": "Location",
+				"objectiveDescription": "박물관에 있는 건터 방문하기.",
+				"actionType": "Increment",
+				"targetsRaw": "ArchaeologyHouse",
+				"needSuccessToComplete": 1
+			},
+			{
+				"ownerQuestId": 21,
+				"objectiveId": 21,
+				"questType": "Basic",
+				"objectiveDescription": "피에르와 대화하기.",
+				"actionType": "Increment",
+				"targetsRaw": "Pierr",
+				"needSuccessToComplete": 1
+			},
+			{
+				"ownerQuestId": 21,
+				"objectiveId": 22,
+				"questType": "Basic",
+				"objectiveDescription": "잡화점에서 씨앗 구매하기.",
+				"actionType": "Increment",
+				"targetsRaw": "seed",
+				"needSuccessToComplete": 1
+			}
+		]
+}

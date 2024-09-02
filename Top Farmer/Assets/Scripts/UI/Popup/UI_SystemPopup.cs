@@ -43,7 +43,7 @@ public class UI_SystemPopup : UI_Popup
 
     void OnInteractionBtnClicked(PointerEventData evt)
     {
-        Managers.UI.ClosePopupUI();
+        //Managers.UI.ClosePopupUI();
     }
 
 }
