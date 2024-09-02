@@ -77,7 +77,7 @@ crashlytics-build.properties
 /Top Farmer/Sheets
 /Top Farmer/Assets/ThirdParty
 /Top Farmer/Assets/Resources/Tiles
-
+/Top Farmer/Assets/Resources/Textures
 
 # Except
 !/TopFarmerWebServer/TopFarmerWebServer/TopFarmerWebServer/*.csproj
