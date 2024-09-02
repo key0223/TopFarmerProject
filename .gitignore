@@ -76,7 +76,8 @@ crashlytics-build.properties
 
 /Top Farmer/Sheets
 /Top Farmer/Assets/ThirdParty
-/Top Farmer/Assets/Resources/Tiles
+/Top Farmer/Assets/Resources/Tilemap
+/Top Farmer/Assets/Resources/Sounds
 /Top Farmer/Assets/Resources/Textures
 
 # Except
