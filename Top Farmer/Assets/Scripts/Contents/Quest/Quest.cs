@@ -80,6 +80,7 @@ public class Quest
             QuestType = questData.questType;
             NextQuest = questData.nextQuest;
         }
+        Objectives = new List<Objective>();
        
     }
     public void AddObjective(Objective objective)

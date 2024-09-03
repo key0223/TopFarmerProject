@@ -45,6 +45,7 @@ public class QuestManager : MonoBehaviour
         quest.OnRegister();
         onQuestRegistered?.Invoke(quest);
 
+        Debug.Log(ActiveQuests.Count.ToString());
     }
 
     public void ReceiveReport(QuestType questType, object target, int successCount)

@@ -34,7 +34,8 @@ public class Objective
             QuestType = objectiveData.questType;
             ObjectiveDescription = objectiveData.objectiveDescription;
             SuccessToComplete = objectiveData.needSuccessToComplete;
-            
+            ObjectiveTargets = new List<ObjectiveTarget>();
+
             switch(objectiveData.questType)
             {
                 case QuestType.Basic:
