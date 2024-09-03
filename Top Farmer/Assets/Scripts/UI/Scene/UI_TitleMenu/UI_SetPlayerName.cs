@@ -14,6 +14,7 @@ public class UI_SetPlayerName : MonoBehaviour
 
     string _farmerName;
     string _farmName;
+    string _farmerCoin= "5000";
 
     private void Awake()
     {
@@ -44,7 +45,7 @@ public class UI_SetPlayerName : MonoBehaviour
     {
         //string uniqueId = Guid.NewGuid().ToString();
         string uniqueId = _farmerName;
-        Managers.PlayerInfo.SetPlayerInfo(uniqueId, _farmerName, _farmName);
+        Managers.PlayerInfo.SetPlayerInfo(uniqueId, _farmerName, _farmName,_farmerCoin);
 
         StartCoroutine(CoLoadInitialScene());
     }

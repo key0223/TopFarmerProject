@@ -11,7 +11,7 @@ public class HouseScene : BaseScene
 
         SceneType = Define.Scene.Scene3_House;
 
-        if(Managers.Instance.IsFirstLoad)
+        if (Managers.Instance.IsFirstLoad)
         {
             StartCoroutine(CoFirstLoad());
         }

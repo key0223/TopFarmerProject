@@ -158,7 +158,7 @@ public class PlayerController : CreatureController, ISaveable
 
         FarmerName = Managers.PlayerInfo.FarmerName;
         FarmName = Managers.PlayerInfo.FarmName;
-        PlayerCoin = 5000;
+        PlayerCoin = int.Parse(Managers.PlayerInfo.FarmerCoin);
         //ISaveableUniqueID = GetComponent<GenerateGUID>().GUID;
         ISaveableUniqueID = "PlayerController";
         GameObjectSave = new GameObjectSave();
@@ -895,8 +895,18 @@ public class PlayerController : CreatureController, ISaveable
                 // Get player position
                 if (sceneSave._vector3Dictionary != null && sceneSave._vector3Dictionary.TryGetValue("playerPosition", out Vector3Serializable playerPosition))
                 {
-                    transform.position = new Vector3(playerPosition.x, playerPosition.y, playerPosition.z);
+                    if (SceneManager.GetActiveScene().name != "Scene3_House")
+                    {
+
+                        transform.position = new Vector3(playerPosition.x, playerPosition.y, playerPosition.z);
+                    }
+                    else
+                    {
+                        transform.position = new Vector3(0, 6f,0f);
+                    }
                 }
+
+
 
                 // Get String dictionary
                 if (sceneSave._stringDictionary != null)

@@ -8,8 +8,8 @@ using UnityEngine.UI;
 public class UI_SavefileButton : MonoBehaviour
 {
     [SerializeField] Text _farmerNameText;
-
     [SerializeField] Text _farmNameText;
+    [SerializeField] Text _farmerCoinText;
 
     GameSave _gameSave;
     public void SetButton(GameSave gameSave)
@@ -27,6 +27,10 @@ public class UI_SavefileButton : MonoBehaviour
                 {
                     _farmNameText.text = farmName;
                 }
+                if (sceneSave._stringDictionary.TryGetValue("farmerCoin", out string farmerCoin))
+                {
+                    _farmerCoinText.text = farmerCoin;
+                }
             }
         }
 
@@ -36,7 +40,7 @@ public class UI_SavefileButton : MonoBehaviour
    
     public void OnButtonSelected()
     {
-        Managers.PlayerInfo.SetPlayerInfo(_farmerNameText.text, _farmerNameText.text, _farmNameText.text);
+        Managers.PlayerInfo.SetPlayerInfo(_farmerNameText.text, _farmerNameText.text, _farmNameText.text,_farmerCoinText.text);
         StartCoroutine(CoLoadScene());
 
     }
@@ -61,9 +65,8 @@ public class UI_SavefileButton : MonoBehaviour
             }
             else
             {
-                Managers.PlayerInfo.SetPlayerInfo(_farmerNameText.text, _farmerNameText.text, _farmNameText.text);
+                Managers.PlayerInfo.SetPlayerInfo(_farmerNameText.text, _farmerNameText.text, _farmNameText.text, _farmerCoinText.text);
                 op.allowSceneActivation = true;
-                //Managers.Save.LoadData(_gameSave);
                 yield return null;
             }
         }

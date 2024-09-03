@@ -9,6 +9,7 @@ public class PlayerInfo : ISaveable
 
     public string FarmerName;
     public string FarmName;
+    public string FarmerCoin;
 
     string _iSaveableUniqueID;
     public string ISaveableUniqueID { get { return _iSaveableUniqueID; } set { _iSaveableUniqueID = value; } }
@@ -23,7 +24,7 @@ public class PlayerInfo : ISaveable
 
         ISaveableRegister();
     }
-    public void SetPlayerInfo(string uniqueId, string farmerName, string farmName)
+    public void SetPlayerInfo(string uniqueId, string farmerName, string farmName, string farmerCoin)
     {
 
         GameObjectSave = new GameObjectSave();
@@ -32,6 +33,7 @@ public class PlayerInfo : ISaveable
         ISaveableUniqueID = "PlayerInfo";
         FarmerName = farmerName;
         FarmName = farmName;
+        FarmerCoin = farmerCoin;
     }
 
     public void ISaveableRegister()
@@ -51,6 +53,7 @@ public class PlayerInfo : ISaveable
 
         sceneSave._stringDictionary.Add("farmerName", FarmerName);
         sceneSave._stringDictionary.Add("farmName", FarmName);
+        sceneSave._stringDictionary.Add("farmerCoin", PlayerController.Instance.PlayerCoin.ToString());
 
         GameObjectSave.sceneData.Add(Define.PersistentScene,sceneSave);
 
@@ -73,6 +76,10 @@ public class PlayerInfo : ISaveable
                     if(sceneSave._stringDictionary.TryGetValue("farmName", out string farmName))
                     {
                         FarmName = farmName;
+                    }
+                    if (sceneSave._stringDictionary.TryGetValue("farmerCoin", out string farmerCoin))
+                    {
+                        FarmerCoin = farmerCoin;
                     }
                 }
             }

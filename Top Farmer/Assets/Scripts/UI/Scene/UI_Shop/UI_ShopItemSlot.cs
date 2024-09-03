@@ -76,7 +76,7 @@ public class UI_ShopItemSlot : UI_Base,IPointerEnterHandler, IPointerExitHandler
         {
             PlayerController.Instance.PlayerCoin -= Managers.Data.ShopItemDict[_itemData.itemId].purchasePrice;
             InventoryManager.Instance.AddItem(Define.InventoryType.INVEN_PLAYER, _itemData.itemId);
-
+            Managers.Reporter.ReportItemPurchased(_itemData,1);
         }
     }
     #endregion
