@@ -11,7 +11,6 @@ public class UI_QuestList : MonoBehaviour
 
     [Header("Content")]
     [SerializeField] GameObject _content;
-    [SerializeField] GameObject _questSlotPrefab;
     private void Awake()
     {
         _closeButton.onClick.AddListener(() => OnCloseButtonClicked());
@@ -33,7 +32,7 @@ public class UI_QuestList : MonoBehaviour
     {
         foreach(Quest quest in Managers.Quest.ActiveQuests)
         {
-            GameObject questSlotGO = Managers.Resource.Instantiate("UI/Scene/QuestSlot", _content.transform);
+            GameObject questSlotGO = Managers.Resource.Instantiate("UI/Scene/Quest/QuestSlot", _content.transform);
             UI_QuestSlot questSlot = questSlotGO.GetComponent<UI_QuestSlot>();
             questSlot.SetQuestSlot(quest);
         }
