@@ -36,6 +36,7 @@ public class UI_MailBox : MonoBehaviour
                 break;
         }
 
+        _mailBox._uiTrigger.GetComponent<UI_Interactor>().ToggleUI(PlayerController.Instance);
         gameObject.SetActive(false); 
     }
 }

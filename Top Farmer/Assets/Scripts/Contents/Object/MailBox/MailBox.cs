@@ -7,7 +7,7 @@ public class MailBox : MonoBehaviour
     Queue<IMailItem> _mails = new Queue<IMailItem>();
     public Queue<IMailItem> Mails { get { return _mails; } }
 
-    [SerializeField]GameObject _uiTrigger;
+    public GameObject _uiTrigger;
     [SerializeField] GameObject _exclamationMark;
 
     bool _isLoaded = false;
@@ -59,7 +59,7 @@ public class MailBox : MonoBehaviour
     void UpdateExclamiationMark()
     {
         _exclamationMark.SetActive(_mails.Count > 0);
-        _uiTrigger.SetActive(_mails.Count > 0);
+        //uiTrigger.SetActive(_mails.Count > 0);
         Debug.Log(_mails.Count.ToString());
     }
 

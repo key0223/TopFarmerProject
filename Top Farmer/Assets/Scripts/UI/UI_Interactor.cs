@@ -6,8 +6,6 @@ public class UI_Interactor : MonoBehaviour
 {
     public float _interactionDistance = 3f;
     protected bool _isUIOn = false;
-    bool _interactable = false;
-    public bool Interactable { get { return _interactable; } set { _interactable = value; } }
     GameObject _currentTarget;
     [SerializeField]
     protected GameObject _uiGameObject;
@@ -48,7 +46,7 @@ public class UI_Interactor : MonoBehaviour
         }
     }
 
-    void ToggleUI(PlayerController player)
+    public void ToggleUI(PlayerController player)
     {
         _isUIOn = !_isUIOn;
         player.PlayerInputDisabled = _isUIOn;

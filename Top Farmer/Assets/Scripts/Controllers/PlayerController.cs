@@ -35,6 +35,7 @@ public class PlayerController : CreatureController, ISaveable
     WaitForSeconds _useToolAnimationPause;
 
     bool _isCarrying = false;
+    [SerializeField]
     bool _playerInputDisabled = false;
     bool _playerToolUseDisabled = false;
 
