@@ -1,0 +1,16 @@
+﻿{
+	"array": 
+		[
+			{
+				"questId": 600,
+				"questType": "Harvest",
+				"questTitle": "시작하기",
+				"questDescription": "농부가 되고 싶다면, 기본부터 시작해야 합니다. 땅을 호미질하고, 씨앗을 심으십시오. 수확할 수 있을 때까지 매일 물을 주세요.",
+				"questObjective": "파스닙 키워서 수확하기.",
+				"nextQuest": -1,
+				"target": "101 10",
+				"itemReward": -1,
+				"moneyReward": 100
+			}
+		]
+}

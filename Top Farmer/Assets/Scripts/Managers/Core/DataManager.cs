@@ -83,9 +83,21 @@ public class DataManager
 
         #endregion
 
-        QuestDict = LoadJson<Data.QuestLoader, int, QuestData>("QuestData_Quest").MakeDict();
-        ObjectiveDict = LoadJson<Data.ObjectiveLoader, int, ObjectiveData>("QuestData_Objective").MakeDict();
+        #region Quest
+        Dictionary<int, QuestData> basicQuestDict = LoadJson<Data.QuestLoader, int, QuestData>("QuestData_Basic").MakeDict();
+        Dictionary<int, ItemDeliveryQuestData> itemDeliveryQuestDict = LoadJson<Data.ItemDeliveryQuestLoader, int, ItemDeliveryQuestData>("QuestData_ItemDelivery").MakeDict();
+        Dictionary<int, MonsterQuestData> monsterQuestDict = LoadJson<Data.MonsterQuestLoader, int, MonsterQuestData>("QuestData_Monster").MakeDict();
+        Dictionary<int, SocializeQuestData> socializeQuestDict = LoadJson<Data.SocializeQuestLoader, int, SocializeQuestData>("QuestData_Socialize").MakeDict();
+        Dictionary<int, LocationQuestData> locationQuestDict = LoadJson<Data.LocationQuestLoader, int, LocationQuestData>("QuestData_Location").MakeDict();
+        Dictionary<int, HarvestQuestData> harvestQuestDict = LoadJson<Data.HarvestQuestLoader, int, HarvestQuestData>("QuestData_Harvest").MakeDict();
 
+        MergeDictionaries(basicQuestDict, QuestDict);
+        MergeDictionaries(itemDeliveryQuestDict, QuestDict);
+        MergeDictionaries(monsterQuestDict, QuestDict);
+        MergeDictionaries(socializeQuestDict, QuestDict);
+        MergeDictionaries(locationQuestDict, QuestDict);
+        MergeDictionaries(harvestQuestDict, QuestDict);
+        #endregion
     }
     public Sprite GetSpriteByName(string name)
     {
@@ -117,21 +129,6 @@ public class DataManager
         TextAsset textAsset = Managers.Resource.Load<TextAsset>($"Data/{path}");
         return JsonConvert.DeserializeObject<Loader>(textAsset.text);
     }
-    Loader LoadJson<Loader,Value>(string path) where Loader : ILoader<Value>
-    {
-        TextAsset textAsset = Managers.Resource.Load<TextAsset>($"Data/{path}");
-        return JsonConvert.DeserializeObject<Loader>(textAsset.text);
-    }
-
-    List<T> KeyProvider<T>(params T[] value)
-    {
-        List<T> key = new List<T>();
-        foreach(var list  in value)
-        {
-            key.Add(list);
-        }
-        return key;
-    }
 
     Dictionary<TKey,TValue> CombinedDict<TKey,TValue> (params Dictionary<TKey,TValue>[] dictionaries)
     {
@@ -148,15 +145,20 @@ public class DataManager
         return combinedDict;
     }
 
-    Dictionary<TKey,TValue> ListDict<TKey,TValue>(List<TKey> keyList, params TValue[] lists)
+    void MergeDictionaries<TKey, TValue>(Dictionary<TKey, TValue> source, Dictionary<TKey, QuestData> destination) where TValue : QuestData
     {
-        Dictionary<TKey, TValue> listDict = new Dictionary<TKey, TValue>();
-
-        for (int i = 0; i < keyList.Count; i++)
+        foreach (var kvp in source)
         {
-            listDict[keyList[i]] = lists[i];
+            if (!destination.ContainsKey(kvp.Key))
+            {
+                destination.Add(kvp.Key, kvp.Value);
+            }
+            else
+            {
+                destination[kvp.Key] = kvp.Value; // µ¤¾î¾²±â
+            }
         }
-        return listDict;
     }
+
 
 }

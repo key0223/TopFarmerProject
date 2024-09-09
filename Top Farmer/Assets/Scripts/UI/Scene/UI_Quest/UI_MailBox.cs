@@ -28,8 +28,7 @@ public class UI_MailBox : MonoBehaviour
             case MailType.Quest:
 
                 QuestMailItem questMail = _currentMail as QuestMailItem;
-                Quest newQuest = Managers.Quest.CreateQuest(questMail.QuestData.questId);
-                Managers.Quest.Register(newQuest);
+               
 
                 break;
             case MailType.Reward:

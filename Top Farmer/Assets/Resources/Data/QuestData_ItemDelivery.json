@@ -1,0 +1,125 @@
+﻿{
+	"array": 
+		[
+			{
+				"questId": 200,
+				"questType": "ItemDelivery",
+				"questTitle": "조디의 부탁",
+				"questDescription": "조디가 요리를 만들기 위해 콜리플라워가 필요하다고 하네요. 하나 가져와달라고 합니다.",
+				"questObjective": "조디에게 콜리플라워 가져다주기.",
+				"nextQuest": -1,
+				"target": "Jodi 190",
+				"itemReward": -1,
+				"moneyReward": 350,
+				"reactionText": "오, 너무 맛있어 보인다! 고마워, 딱 내가 원하던 거야. 내 노란 카레랑 완벽하게 어울리겠는걸?"
+			},
+			{
+				"questId": 201,
+				"questType": "ItemDelivery",
+				"questTitle": "목마른 팸",
+				"questDescription": "팸이 페일 에일 한잔해야 풀릴 갈증이 있답니다. 평범한 맥주로는 안된대요. 홉과 술통이 있다면 직접 만들 수 있습니다.",
+				"questObjective": "팸에게 페일 에일 가져다주기.",
+				"nextQuest": -1,
+				"target": "Pam 303",
+				"itemReward": -1,
+				"moneyReward": 350,
+				"reactionText": "줘봐 봐. *홀짝*... 아, 그래 이거지. 홉 맛 나는게 최고구먼... 시트러스하고 솔 향도 나고, 보디감이 왕성해서 딱 밸런스를 잡아주네.#$b#고맙다, 꼬마야. 나한테 의미가 커. 너라면 믿어도 될 줄 알았어."
+			},
+			{
+				"questId": 202,
+				"questType": "ItemDelivery",
+				"questTitle": "작물 연구",
+				"questDescription": "드미트리우스가 연구를 위해 신선한 멜론이 하나 필요하다고 합니다.",
+				"questObjective": "드미트리우스에게 멜론 가져다주기.",
+				"nextQuest": -1,
+				"target": "Demetrius 254",
+				"itemReward": -1,
+				"moneyReward": 550,
+				"reactionText": "완벽해! 연구를 위해 딱 필요하던 거야. 먹지 않기 어려울 정도로 신선한걸! 너무 고마워."
+			},
+			{
+				"questId": 203,
+				"questType": "ItemDelivery",
+				"questTitle": "무릎 테라피",
+				"questDescription": "조지가 무릎이 아린 것을 달래주기 위해 매운 고추가 필요하다 합니다.",
+				"questObjective": "조지에게 매운 고추 가져다주기.",
+				"nextQuest": -1,
+				"target": "George 260",
+				"itemReward": -1,
+				"moneyReward": 200,
+				"reactionText": "오래도 걸렸다... 흥... 그래도 매콤하고 괜찮네. 고맙다."
+			},
+			{
+				"questId": 204,
+				"questType": "ItemDelivery",
+				"questTitle": "소의 기쁨",
+				"questDescription": "마니가 소들에게 특별한 간식을 주고 싶어 합니다. 아마란스 한 다발을 부탁했습니다.",
+				"questObjective": "마니에게 아마란스 한 뭉치 가져다주기.",
+				"nextQuest": -1,
+				"target": "Marnie 300",
+				"itemReward": -1,
+				"moneyReward": 500,
+				"reactionText": "오, 내가 부탁한 아마란스! 너무 고마워... 소들이 정말 좋아할 거야!"
+			},
+			{
+				"questId": 205,
+				"questType": "ItemDelivery",
+				"questTitle": "호박 깎기",
+				"questDescription": "캐롤라인이 딸과 함께 호박을 하나 깎고 싶어 한답니다. 농장에서 호박을 하나 가져다 달라고 부탁했습니다.",
+				"questObjective": "캐롤라인에게 호박 가져다주기.",
+				"nextQuest": -1,
+				"target": "Caroline 276",
+				"itemReward": -1,
+				"moneyReward": 500,
+				"reactionText": "오, 호박! 좋은 호박이네... 애비게일이 이걸 보면 너무나 기뻐할 거야. 고마워"
+			},
+			{
+				"questId": 206,
+				"questType": "ItemDelivery",
+				"questTitle": "클린트의 시도",
+				"questDescription": "클린트가 에밀리에게 자수정을 전달해 달라고 하네요. 자기가 보냈다고 꼭 얘기해달라 했습니다.",
+				"questObjective": "에밀리에게 자수정 주기.",
+				"nextQuest": -1,
+				"target": "Emily 66",
+				"itemReward": -1,
+				"moneyReward": 500,
+				"reactionText": "오, 내가 제일 좋아하는 보석! 너무 달달하잖아! 흠? 누가 보냈다고? 오, 클린트 씨한테 받았다고? 뭐 어디서 났는지는 중요하지 않아, 너무 아름다운걸! 고마워! *쪽*"
+			},
+			{
+				"questId": 207,
+				"questType": "ItemDelivery",
+				"questTitle": "어둠의 재료",
+				"questDescription": "마법사가 광산으로 내려가 공허 정수를 하나 가져다 달라 합니다. 무슨 어둠의 마법을 위해 필요하다네요.",
+				"questObjective": "마법사에게 공허 정수 주기.",
+				"nextQuest": -1,
+				"target": "Wizard 769",
+				"itemReward": -1,
+				"moneyReward": 1000,
+				"reactionText": "아, 가져왔구나. 내 감사를 얻었구나, 추가로 1000골드 보상도. 이제 가보거라."
+			},
+			{
+				"questId": 208,
+				"questType": "ItemDelivery",
+				"questTitle": "클린트를 위한 부탁",
+				"questDescription": "클린트가 새로운 망치를 실험해볼 다양한 금속을 찾고 있습니다.",
+				"questObjective": "클린트에게 철 주괴 가져다주기.",
+				"nextQuest": -1,
+				"target": "Clint 335",
+				"itemReward": -1,
+				"moneyReward": 500,
+				"reactionText": "이야, 내가 부탁한 철 주괴구먼. 강해 보여... 완벽해. 고맙네. 정말 고마워."
+			},
+			{
+				"questId": 209,
+				"questType": "ItemDelivery",
+				"questTitle": "로빈의 부탁",
+				"questDescription": "로빈이 단단한 나무를 가져다 달라고 부탁했습니다.",
+				"questObjective": "로빈에게 단단한 나무 10조각 가져다주기.",
+				"nextQuest": -1,
+				"target": "Robin 709 10",
+				"itemReward": -1,
+				"moneyReward": 500,
+				"reactionText": "오, 가져왔구나! 너라면 항상 의지할 수 있을 줄 알았어. 으흠... 이 나무라면 완벽해. 딱 내가 필요하던 거야. 고마워!"
+			}
+		]
+}

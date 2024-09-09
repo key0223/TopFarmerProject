@@ -42,16 +42,8 @@ public class MailBox : MonoBehaviour
 
     void GetQuestMails()
     {
-        List<QuestData> questDatas = Managers.Quest.GetAcceptableQuestData();
 
-        if(questDatas!=null )
-        {
-            foreach( QuestData data in questDatas )
-            {
-                QuestMailItem questMail = new QuestMailItem(data);
-                AddToMailBox((QuestMailItem)questMail);
-            }
-        }
+        
 
         _isLoaded = true;
     }

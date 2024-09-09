@@ -10,7 +10,6 @@ public class EventReporter
         object target = item.itemId;
         int successCount = quantity;
 
-        Managers.Quest.ReceiveReport(questType, target, successCount);
         Debug.Log("Item Purchased");
     }
 }

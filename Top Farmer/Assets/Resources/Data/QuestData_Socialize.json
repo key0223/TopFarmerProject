@@ -1,0 +1,16 @@
+﻿{
+	"array": 
+		[
+			{
+				"questId": 400,
+				"questType": "Socialize",
+				"questTitle": "자기소개",
+				"questDescription": "동네 주민들에게 스스로 소개를 하는 것이 좋을 것 같습니다. 새로 온 농부를 만나고 싶어 하는 사람들도 많을 거예요.",
+				"questObjective": ".",
+				"nextQuest": -1,
+				"target": "Clint",
+				"itemReward": -1,
+				"moneyReward": 0
+			}
+		]
+}

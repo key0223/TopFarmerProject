@@ -1,0 +1,38 @@
+﻿{
+	"array": 
+		[
+			{
+				"questId": 500,
+				"questType": "Location",
+				"questTitle": "마법사 만나기",
+				"questDescription": "마을 마법사로부터 편지를 받았습니다. 마을회관에 관련해 전해줄 정보가 있다고 합니다.",
+				"questObjective": "마법사의 탑 입장하기.",
+				"nextQuest": -1,
+				"target": "WizardHouse",
+				"itemReward": -1,
+				"moneyReward": 0
+			},
+			{
+				"questId": 501,
+				"questType": "Location",
+				"questTitle": "가입",
+				"questDescription": "성공적으로 슬라임을 10마리 처치했습니다. 이제 모험가 길드에 가입할 수 있습니다.",
+				"questObjective": "모험가 길드 들어가기.",
+				"nextQuest": -1,
+				"target": "AdventureGuild",
+				"itemReward": -1,
+				"moneyReward": 0
+			},
+			{
+				"questId": 502,
+				"questType": "Location",
+				"questTitle": "고고학",
+				"questDescription": "고대의 것으로 보이는 물건을 발견했습니다. 예전 시대의 유물일까요? 마을 박물관의 큐레이터인 건터가 그 답을 알고 있을지도 모릅니다.",
+				"questObjective": "박물관에 있는 건터 방문하기.",
+				"nextQuest": -1,
+				"target": "ArchaeologyHouse",
+				"itemReward": -1,
+				"moneyReward": 0
+			}
+		]
+}

@@ -15,7 +15,6 @@ public class Objective
     #endregion
     public Quest Owner { get; private set; } 
     public QuestType QuestType { get; private set; }
-    public string ObjectiveTitle {  get; private set; } 
     public string ObjectiveDescription { get; private set; }
     public int SuccessToComplete { get; private set; }
 

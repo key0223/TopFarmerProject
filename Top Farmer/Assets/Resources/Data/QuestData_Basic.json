@@ -1,0 +1,60 @@
+﻿{
+	"array": 
+		[
+			{
+				"questId": 100,
+				"questType": "Basic",
+				"questTitle": "광산 탐험",
+				"questDescription": "마을 북쪽에 있는 산에 오래된 갱도가 있습니다. 안에 귀중한 광석들이 있을 수 있지만, 말론 말에 의하면 위험할 수도 있다고 합니다.",
+				"questObjective": "광산 5층 도달하기.",
+				"nextQuest": 101,
+				"itemReward": -1,
+				"moneyReward": 0,
+				"cancellable": false
+			},
+			{
+				"questId": 101,
+				"questType": "Basic",
+				"questTitle": "광산 더 깊이에",
+				"questDescription": "광산에 있는 엘리베이터가 아직 가동되고 있나 봅니다. 한 번이라도 가본 엘리베이터가 있는 층으로 다시 쉽게 갈 수 있습니다. 더 깊은 곳까지 탐험할 수 있을 것 같습니다.",
+				"questObjective": "광산 40층 도달하기.",
+				"nextQuest": 102,
+				"itemReward": -1,
+				"moneyReward": 0,
+				"cancellable": false
+			},
+			{
+				"questId": 102,
+				"questType": "Basic",
+				"questTitle": "바닥까지?",
+				"questDescription": "아직까지는 바닥을 보지 못했습니다. 얼마나 깊이까지 가는 걸까요?",
+				"questObjective": "광산 바닥에 도달하기.",
+				"nextQuest": -1,
+				"itemReward": -1,
+				"moneyReward": 0,
+				"cancellable": false
+			},
+			{
+				"questId": 103,
+				"questType": "Basic",
+				"questTitle": "마니의 부탁",
+				"questDescription": "마니가 농장에 들려서 동굴 당근을 하나 가져다줄 수 있는지 물어보았습니다. 염소에게 말하는 법을 가르치는 중인데, 염소들이 동굴 당근을 그렇게 좋아한답니다.",
+				"questObjective": "동굴 당근을 가지고 마니의 가게 찾아가기.",
+				"nextQuest": -1,
+				"itemReward": -1,
+				"moneyReward": 0,
+				"cancellable": true
+			},
+			{
+				"questId": 104,
+				"questType": "Basic",
+				"questTitle": "친구를 얻는 법",
+				"questDescription": "선물을 주는 것만큼 우정을 쌓기에 훌륭한 방법이 없죠. 개인의 취향을 알아내서 선물을 준다면 금세 인기인이 될 겁니다.",
+				"questObjective": "누군가에게 선물 주기.",
+				"nextQuest": -1,
+				"itemReward": -1,
+				"moneyReward": 100,
+				"cancellable": true
+			}
+		]
+}

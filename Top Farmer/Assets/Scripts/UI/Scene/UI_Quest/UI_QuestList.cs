@@ -47,15 +47,7 @@ public class UI_QuestList : MonoBehaviour
     }
     void InitalizeQuestList()
     {
-        foreach(Quest quest in Managers.Quest.ActiveQuests)
-        {
-            GameObject questSlotGO = Managers.Resource.Instantiate("UI/Scene/Quest/QuestSlot", _content.transform);
-            UI_QuestSlot questSlot = questSlotGO.GetComponent<UI_QuestSlot>();
-            questSlot.SetQuestSlot(quest);
-
-            questSlot.onQuestSlotClicked -= OnQuestSlotClicked;
-            questSlot.onQuestSlotClicked += OnQuestSlotClicked;
-        }
+        
       
     }
 

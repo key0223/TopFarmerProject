@@ -1,0 +1,16 @@
+﻿{
+	"array": 
+		[
+			{
+				"questId": 300,
+				"questType": "Monster",
+				"questTitle": "가입",
+				"questDescription": "슬라임 10마리를 처치할 수 있다면, 모험가 길드에 가입할 수 있습니다.",
+				"questObjective": "슬라임 10마리 중 0마리 처치함.",
+				"nextQuest": 501,
+				"target": "Green_Slime 10",
+				"itemReward": -1,
+				"moneyReward": 0
+			}
+		]
+}
