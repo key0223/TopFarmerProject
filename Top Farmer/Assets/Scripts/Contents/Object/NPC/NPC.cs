@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Define;
 
 [RequireComponent(typeof(NPCMovement))]
 [RequireComponent(typeof(GenerateGUID))]
@@ -15,6 +16,8 @@ public class NPC : MonoBehaviour,ISaveable
 
     NPCMovement _npcMovement;
 
+    bool _receivedGift = false;
+    public bool ReceivedGift { get { return _receivedGift; } }
     void Awake()
     {
         //ISaveableUniqueID = GetComponent<GenerateGUID>().GUID;
@@ -33,6 +36,8 @@ public class NPC : MonoBehaviour,ISaveable
     {
         _npcMovement = GetComponent<NPCMovement>();
     }
+
+    #region Save
     public void ISaveableRegister()
     {
        Managers.Save.iSaveableObjectList.Add(this);
@@ -107,4 +112,7 @@ public class NPC : MonoBehaviour,ISaveable
     {
         // Nothing required here since on persistent scene
     }
+    #endregion
+
+   
 }

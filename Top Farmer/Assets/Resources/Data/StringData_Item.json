@@ -83,127 +83,223 @@
 			},
 			{
 				"stringId": "itemName(201)",
-				"ko": "당근 씨앗",
+				"ko": "파스닙 씨앗",
 				"en": "Carrot Seeds"
 			},
 			{
 				"stringId": "itemName(202)",
-				"ko": "순무 씨앗",
+				"ko": "콩 종자",
 				"en": "Turnip Seeds"
 			},
 			{
 				"stringId": "itemName(203)",
-				"ko": "양배추 씨앗",
+				"ko": "컬리플라워 씨앗",
 				"en": "Cabbage Seeds"
 			},
 			{
 				"stringId": "itemName(204)",
-				"ko": "옥수수 씨앗",
+				"ko": "감자 씨앗",
 				"en": "Corn Seeds"
 			},
 			{
 				"stringId": "itemName(205)",
-				"ko": "가지 씨앗",
+				"ko": "마늘 씨앗",
 				"en": "Eggplant Seeds"
 			},
 			{
 				"stringId": "itemName(206)",
-				"ko": "양파 씨앗",
+				"ko": "케일 씨앗",
 				"en": "Onion Seeds"
 			},
 			{
 				"stringId": "itemName(207)",
-				"ko": "감자 씨앗",
+				"ko": "대황 씨앗",
 				"en": "Potato Seeds"
 			},
 			{
 				"stringId": "itemName(208)",
-				"ko": "딸기 씨앗",
+				"ko": "멜론 씨앗",
 				"en": "Strawberry Seeds"
 			},
 			{
 				"stringId": "itemName(209)",
-				"ko": "고구마 씨앗",
+				"ko": "토마토 씨앗",
 				"en": "Sweet Potato Seeds"
 			},
 			{
 				"stringId": "itemName(210)",
-				"ko": "토마토 씨앗",
+				"ko": "블루베리 씨앗",
 				"en": "Tomato Seeds"
 			},
 			{
+				"stringId": "itemName(211)",
+				"ko": "고추 씨앗"
+			},
+			{
+				"stringId": "itemName(212)",
+				"ko": "밀 씨앗"
+			},
+			{
+				"stringId": "itemName(213)",
+				"ko": "사탕무 씨앗"
+			},
+			{
+				"stringId": "itemName(214)",
+				"ko": "붉은양배추 씨앗"
+			},
+			{
+				"stringId": "itemName(215)",
+				"ko": "스타푸르트 씨앗"
+			},
+			{
+				"stringId": "itemName(216)",
+				"ko": "옥수수 씨앗"
+			},
+			{
+				"stringId": "itemName(217)",
+				"ko": "가지 씨앗"
+			},
+			{
+				"stringId": "itemName(218)",
+				"ko": "아티초크 씨앗"
+			},
+			{
+				"stringId": "itemName(219)",
+				"ko": "호박 씨앗"
+			},
+			{
+				"stringId": "itemName(220)",
+				"ko": "청경채 씨앗"
+			},
+			{
+				"stringId": "itemName(221)",
+				"ko": "마 씨앗"
+			},
+			{
+				"stringId": "itemName(222)",
+				"ko": "크랜베리 씨앗"
+			},
+			{
+				"stringId": "itemName(223)",
+				"ko": "비트 씨앗"
+			},
+			{
+				"stringId": "itemName(224)",
+				"ko": "도토리"
+			},
+			{
+				"stringId": "itemName(225)",
+				"ko": "단풍"
+			},
+			{
+				"stringId": "itemName(226)",
+				"ko": "솔방울"
+			},
+			{
 				"stringId": "itemName(301)",
-				"ko": "당근",
+				"ko": "파스닙",
 				"en": "Carrot"
 			},
 			{
 				"stringId": "itemName(302)",
-				"ko": "순무",
+				"ko": "콩",
 				"en": "Turnip"
 			},
 			{
 				"stringId": "itemName(303)",
-				"ko": "양배추",
+				"ko": "컬리플라워",
 				"en": "Cabbage"
 			},
 			{
 				"stringId": "itemName(304)",
-				"ko": "옥수수",
+				"ko": "감자",
 				"en": "Corn"
 			},
 			{
 				"stringId": "itemName(305)",
-				"ko": "가지",
+				"ko": "마늘",
 				"en": "Eggplant"
 			},
 			{
 				"stringId": "itemName(306)",
-				"ko": "양파",
+				"ko": "케일",
 				"en": "Onion"
 			},
 			{
 				"stringId": "itemName(307)",
-				"ko": "감자",
+				"ko": "대황",
 				"en": "Potato"
 			},
 			{
 				"stringId": "itemName(308)",
-				"ko": "딸기",
+				"ko": "멜론",
 				"en": "Strawberry"
 			},
 			{
 				"stringId": "itemName(309)",
-				"ko": "고구마",
+				"ko": "토마토",
 				"en": "Sweet Potato"
 			},
 			{
-				"stringId": "itemName(401)",
-				"ko": "오븐"
-			},
-			{
-				"stringId": "itemName(403)",
-				"ko": "장작불"
-			},
-			{
-				"stringId": "itemName(5000)",
-				"ko": "타버린 무언가"
-			},
-			{
-				"stringId": "itemName(5304)",
-				"ko": "군옥수수"
-			},
-			{
-				"stringId": "itemName(5307)",
-				"ko": "군감자"
-			},
-			{
-				"stringId": "itemName(5309)",
-				"ko": "군고구마"
-			},
-			{
 				"stringId": "itemName(310)",
-				"ko": "토마토",
+				"ko": "블루베리"
+			},
+			{
+				"stringId": "itemName(311)",
+				"ko": "매운고추"
+			},
+			{
+				"stringId": "itemName(312)",
+				"ko": "밀"
+			},
+			{
+				"stringId": "itemName(313)",
+				"ko": "무"
+			},
+			{
+				"stringId": "itemName(314)",
+				"ko": "붉은양배추 씨앗"
+			},
+			{
+				"stringId": "itemName(315)",
+				"ko": "스타푸르트"
+			},
+			{
+				"stringId": "itemName(316)",
+				"ko": "옥수수"
+			},
+			{
+				"stringId": "itemName(317)",
+				"ko": "가지",
 				"en": "Tomato"
+			},
+			{
+				"stringId": "itemName(318)",
+				"ko": "아티초크"
+			},
+			{
+				"stringId": "itemName(319)",
+				"ko": "호박"
+			},
+			{
+				"stringId": "itemName(320)",
+				"ko": "청경채"
+			},
+			{
+				"stringId": "itemName(321)",
+				"ko": "마늘"
+			},
+			{
+				"stringId": "itemName(322)",
+				"ko": "크랜베리"
+			},
+			{
+				"stringId": "itemName(323)",
+				"ko": "비트"
+			},
+			{
+				"stringId": "itemName(324)",
+				"ko": "나무"
 			},
 			{
 				"stringId": "itemDesc(101)",

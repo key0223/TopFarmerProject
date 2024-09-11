@@ -7,6 +7,7 @@ public class MonsterQuest : Quest
     public string TargetName { get; private set; }
     public int TargetQuantity { get; private set; }
 
+    string _questStringId = "SlayMonsterQuest";
     public MonsterQuest(int questId)
     {
         Init(questId);
@@ -24,5 +25,12 @@ public class MonsterQuest : Quest
 
         TargetName = data.targetName;
         TargetQuantity = data.targetQuantity;
+    }
+
+    public MonsterQuest()
+    {
+        QuestType = Define.QuestType.Monster;
+        QuestTitle = Managers.Data.StringDict[_questStringId + 1.ToString()].ko;
+
     }
 }

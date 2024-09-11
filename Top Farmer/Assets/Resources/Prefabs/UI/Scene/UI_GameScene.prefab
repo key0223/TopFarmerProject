@@ -1006,7 +1006,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 156957561437192051}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.1
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1947,6 +1947,7 @@ MonoBehaviour:
   _questDescriptionText: {fileID: 6618896001676855752}
   _objectiveParent: {fileID: 4043275588788030341}
   _backButton: {fileID: 4566535143888048008}
+  _questListGO: {fileID: 8013671452084913636}
 --- !u!1 &4862692637864421596
 GameObject:
   m_ObjectHideFlags: 0
@@ -4749,6 +4750,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3597343317101606894, guid: a88235f76415ced4d8a93b0943f67628,
+        type: 3}
+      propertyPath: m_Text
+      value: ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
       objectReference: {fileID: 0}
     - target: {fileID: 6150973304772498147, guid: a88235f76415ced4d8a93b0943f67628,
         type: 3}

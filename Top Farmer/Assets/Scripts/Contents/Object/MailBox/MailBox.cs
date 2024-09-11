@@ -60,4 +60,11 @@ public class MailBox : MonoBehaviour
         _mails.Clear();
         _isLoaded = false;
     }
+
+    [ContextMenu("Make Daily Quest")]
+    void MakeDailyQuest()
+    {
+        Quest newDailyQuest = Quest.MakeQuest();
+        Managers.Quest.AcceptQuest(newDailyQuest);
+    }
 }

@@ -56,7 +56,8 @@ public class DataManager
         #region String
         Dictionary<string, Data.StringData> npcStringDict = LoadJson<Data.StringLoader, string, Data.StringData>("StringData_Npc").MakeDict();
         Dictionary<string, Data.StringData> itemStringDict = LoadJson<Data.StringLoader, string, Data.StringData>("StringData_Item").MakeDict();
-        StringDict = CombinedDict<string, Data.StringData>(npcStringDict, itemStringDict);
+        Dictionary<string, Data.StringData> questStringDict = LoadJson<Data.StringLoader, string, Data.StringData>("StringData_Quest").MakeDict();
+        StringDict = CombinedDict<string, Data.StringData>(npcStringDict, itemStringDict,questStringDict);
         #endregion
 
         #region Sprites

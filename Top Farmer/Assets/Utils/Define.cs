@@ -80,6 +80,12 @@ public class Define
     public const string Number8SpritePath = "UI/TimeUI/TimeUI_18";
     public const string Number9SpritePath = "UI/TimeUI/TimeUI_17";
 
+    public enum CursorType
+    {
+        None = 0,
+        Gift,
+        Dialogue,
+    }
     // Quest
 
     public enum QuestType
@@ -94,6 +100,13 @@ public class Define
         Building,
         Harvest,
         Resource,
+    }
+    public enum ObjectiveType
+    {
+        ItemDelivery,
+        Monster,
+        Socialize,
+        Location,
     }
     public enum QuestState
     {

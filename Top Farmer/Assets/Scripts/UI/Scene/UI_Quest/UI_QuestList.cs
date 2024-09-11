@@ -24,7 +24,7 @@ public class UI_QuestList : MonoBehaviour
         _questListPanel.SetActive(false);
         _questDetail.gameObject.SetActive(false);
     }
-
+   
     void OnQuestListButtonClicked()
     {
         DisablePlayerInput();
@@ -47,10 +47,24 @@ public class UI_QuestList : MonoBehaviour
     }
     void InitalizeQuestList()
     {
-        
+        foreach (Quest quest in Managers.Quest.ActiveQuests)
+        {
+            GameObject questSlotGO = Managers.Resource.Instantiate("UI/Scene/Quest/QuestSlot", _content.transform);
+            UI_QuestSlot questSlot = questSlotGO.GetComponent<UI_QuestSlot>();
+            questSlot.SetQuestSlot(quest);
+            questSlot.onQuestSlotClicked -= OnQuestSlotClicked;
+            questSlot.onQuestSlotClicked += OnQuestSlotClicked;
+
+            questSlot.gameObject.SetActive(true);
+        }
       
     }
 
+    public void ReloadeQuestList()
+    {
+        ClearQuestList();
+        InitalizeQuestList();
+    }
     void DisablePlayerInput()
     {
         PlayerController.Instance.PlayerInputDisabled = true;

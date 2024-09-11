@@ -29,6 +29,8 @@ public class PlayerController : CreatureController, ISaveable
     Cursor _cursor;
     MoveDir _cursorDir;
 
+    [SerializeField] Texture2D[] _cursorTextures;
+
     float _inputX;
     float _inputY;
     WaitForSeconds _afterUseToolAnimationPause;
@@ -200,7 +202,7 @@ public class PlayerController : CreatureController, ISaveable
         _speed = 35f;
 
     }
-
+  
     private void PlayerTestInput()
     {
         if(Input.GetKey(KeyCode.T))
@@ -218,6 +220,8 @@ public class PlayerController : CreatureController, ISaveable
             SceneControllerManager.Instance.FadeAndLoadScene(Define.Scene.Scene1_Farm.ToString(), transform.position);
         }
     }
+
+    
     protected override void UpdateAnimation()
     {
         if (_state == CreatureState.Idle)
@@ -858,6 +862,7 @@ public class PlayerController : CreatureController, ISaveable
         return animationName;
     }
 
+    #region Save
     public void ISaveableRegister()
     {
        Managers.Save.iSaveableObjectList.Add(this);
@@ -943,4 +948,5 @@ public class PlayerController : CreatureController, ISaveable
     {
         // Nothing required here since the player is on a persistent scene;
     }
+    #endregion
 }

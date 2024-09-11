@@ -1,0 +1,429 @@
+﻿{
+	"array": 
+		[
+			{
+				"stringId": "ItemDeliveryQuest1",
+				"ko": "배달"
+			},
+			{
+				"stringId": "ItemDeliveryQuest2",
+				"ko": "찾고 있는 게 있습니다,"
+			},
+			{
+				"stringId": "ItemDeliveryQuest3",
+				"ko": "구하는 게 있어요,"
+			},
+			{
+				"stringId": "ItemDeliveryQuest4",
+				"ko": "정말 원하는게 있는데,"
+			},
+			{
+				"stringId": "ItemDeliveryQuest5",
+				"ko": "농장에서 난 신선한 {0}(이)죠."
+			},
+			{
+				"stringId": "ItemDeliveryQuest6",
+				"ko": "정말 맛있는 {0}입니다."
+			},
+			{
+				"stringId": "ItemDeliveryQuest7",
+				"ko": "동네 농부 한 분이 저한테 하나 배달해 줄 수 있나요?"
+			},
+			{
+				"stringId": "ItemDeliveryQuest8",
+				"ko": "가져오시면 값을 지불하겠습니다."
+			},
+			{
+				"stringId": "ItemDeliveryQuest9",
+				"ko": "누군가 배달해준다면 정말 행복할 거 것 같아요."
+			},
+			{
+				"stringId": "ItemDeliveryQuest10",
+				"ko": "{0} {1}을(를) 찾고 있습니다."
+			},
+			{
+				"stringId": "ItemDeliveryQuest11",
+				"ko": "{1} {0}이(가) 필요합니다"
+			},
+			{
+				"stringId": "ItemDeliveryQuest12",
+				"ko": "오후 다과 파티를 차리기 위해"
+			},
+			{
+				"stringId": "ItemDeliveryQuest13",
+				"ko": "오늘 밤 드라이한 레드 와인과 함께할"
+			},
+			{
+				"stringId": "ItemDeliveryQuest14",
+				"ko": "신선한 빵과 함께 즐길"
+			},
+			{
+				"stringId": "ItemDeliveryQuest15",
+				"ko": "북클럽에 가져갈"
+			},
+			{
+				"stringId": "ItemDeliveryQuest16",
+				"ko": "저녁으로 대접할"
+			},
+			{
+				"stringId": "ItemDeliveryQuest17",
+				"ko": "간식용으로 미리 얼려둘"
+			},
+			{
+				"stringId": "ItemDeliveryQuest18",
+				"ko": "내일 점심으로 먹을"
+			},
+			{
+				"stringId": "ItemDeliveryQuest19",
+				"ko": "기분을 북돋아주기 위해"
+			},
+			{
+				"stringId": "ItemDeliveryQuest20",
+				"ko": "내일 아침을 차리기 위해"
+			},
+			{
+				"stringId": "ItemDeliveryQuest21",
+				"ko": "너무 배고픔. {0} 필요함."
+			},
+			{
+				"stringId": "ItemDeliveryQuest22",
+				"ko": "누군가 가져다주실 수 있나요?"
+			},
+			{
+				"stringId": "ItemDeliveryQuest23",
+				"ko": "꼭 하나 가져다 주세요."
+			},
+			{
+				"stringId": "ItemDeliveryQuest24",
+				"ko": "혀가 부었을 때"
+			},
+			{
+				"stringId": "ItemDeliveryQuest25",
+				"ko": "감기에"
+			},
+			{
+				"stringId": "ItemDeliveryQuest26",
+				"ko": "욕창에"
+			},
+			{
+				"stringId": "ItemDeliveryQuest27",
+				"ko": "통풍에"
+			},
+			{
+				"stringId": "ItemDeliveryQuest28",
+				"ko": "구취에"
+			},
+			{
+				"stringId": "ItemDeliveryQuest29",
+				"ko": "소화불량에"
+			},
+			{
+				"stringId": "ItemDeliveryQuest30",
+				"ko": "{1} {0}을(를) 찾고 있습니다. 오늘 중으로 배달해주세요."
+			},
+			{
+				"stringId": "ItemDeliveryQuest31",
+				"ko": "선반에 올려둘"
+			},
+			{
+				"stringId": "ItemDeliveryQuest32",
+				"ko": "벽난로 위에 올려둘"
+			},
+			{
+				"stringId": "ItemDeliveryQuest33",
+				"ko": "배게 밑에 둘"
+			},
+			{
+				"stringId": "ItemDeliveryQuest34",
+				"ko": "체인에 걸어 둘"
+			},
+			{
+				"stringId": "ItemDeliveryQuest35",
+				"ko": "{0}을(를) 찾고 있습니다."
+			},
+			{
+				"stringId": "ItemDeliveryQuest36",
+				"ko": "배달 시 고정 요금으로 보상해드리겠음."
+			},
+			{
+				"stringId": "ItemDeliveryQuest37",
+				"ko": "배달 시 현금으로 지불하겠음."
+			},
+			{
+				"stringId": "ItemDeliveryQuest38",
+				"ko": "{0}을(를) 가져다주실 분 있나요?"
+			},
+			{
+				"stringId": "ItemDeliveryQuest39",
+				"ko": "정말 너무 좋아해요."
+			},
+			{
+				"stringId": "ItemDeliveryQuest40",
+				"ko": " 하나 필요합니다."
+			},
+			{
+				"stringId": "ItemDeliveryQuest41",
+				"ko": "{0} 하나 남는 분 있나요?"
+			},
+			{
+				"stringId": "ItemDeliveryQuest42",
+				"ko": "{0}이(가) 부족합니다. 하나 가져다주실 수 있다면, 보상 드리겠습니다."
+			},
+			{
+				"stringId": "ItemDeliveryQuest43",
+				"ko": "요즘 {1} 아파서 문지를 {0}이(가) 필요합니다."
+			},
+			{
+				"stringId": "ItemDeliveryQuest44",
+				"ko": "무릎이"
+			},
+			{
+				"stringId": "ItemDeliveryQuest45",
+				"ko": "팔꿈치가"
+			},
+			{
+				"stringId": "ItemDeliveryQuest46",
+				"ko": "등이"
+			},
+			{
+				"stringId": "ItemDeliveryQuest47",
+				"ko": "머리가"
+			},
+			{
+				"stringId": "ItemDeliveryQuest48",
+				"ko": "코가"
+			},
+			{
+				"stringId": "ItemDeliveryQuest49",
+				"ko": "발가락이"
+			},
+			{
+				"stringId": "ItemDeliveryQuest50",
+				"ko": "최대한 빨리 가져와주세요!"
+			},
+			{
+				"stringId": "ItemDeliveryQuest51",
+				"ko": "{0} 하나를 세 배 가격에 삽니다! 저한테 바로 배달 와주세요."
+			},
+			{
+				"stringId": "ItemDeliveryQuest52",
+				"ko": "{0} 하나를 세 배 가격에 삽니다! 제 쪽으로 바로 배달 와주세요."
+			},
+			{
+				"stringId": "ItemDeliveryQuest53",
+				"ko": "오!"
+			},
+			{
+				"stringId": "ItemDeliveryQuest54",
+				"ko": "안녕!"
+			},
+			{
+				"stringId": "ItemDeliveryQuest55",
+				"ko": "내가 부탁한 {0}(이)야?"
+			},
+			{
+				"stringId": "ItemDeliveryQuest56",
+				"ko": "내가 의뢰한 아이템을 가져왔구나!"
+			},
+			{
+				"stringId": "ItemDeliveryQuest57",
+				"ko": "내가 올린 공지 봤구나?"
+			},
+			{
+				"stringId": "ItemDeliveryQuest58",
+				"ko": "내가 올린 공고 봤구나?"
+			},
+			{
+				"stringId": "ItemDeliveryQuest59",
+				"ko": "내가 올린 광고 봤구나?"
+			},
+			{
+				"stringId": "ItemDeliveryQuest60",
+				"ko": "너무 고마워!"
+			},
+			{
+				"stringId": "ItemDeliveryQuest61",
+				"ko": "정말 고마워."
+			},
+			{
+				"stringId": "ItemDeliveryQuest62",
+				"ko": "완벽해 보이네."
+			},
+			{
+				"stringId": "ItemDeliveryQuest63",
+				"ko": "여기, 약속한 보상이야."
+			},
+			{
+				"stringId": "ItemDeliveryQuest64",
+				"ko": "여기, 고생해줘서 고마워."
+			},
+			{
+				"stringId": "ItemDeliveryQuest65",
+				"ko": "..어디 보자. 여기, 주겠다고 한 거."
+			},
+			{
+				"stringId": "ItemDeliveryQuest66",
+				"ko": "부족해.. 난 {0}게 필요해."
+			},
+			{
+				"stringId": "SlayMonsterQuest1",
+				"ko": "몬스터 처치"
+			},
+			{
+				"stringId": "SlayMonsterQuest2",
+				"ko": "구함: {1} {0}마리 처치할 슬라임 헌터"
+			},
+			{
+				"stringId": "SlayMonsterQuest3",
+				"ko": "광산에서 초록 슬라임"
+			},
+			{
+				"stringId": "SlayMonsterQuest4",
+				"ko": "아, {0}! 우리 슬라임 문제를 자네가 해결해줬구먼? 고맙네! 너무 애먹진 않았기를 바라네..."
+			},
+			{
+				"stringId": "SlayMonsterQuest5",
+				"ko": "내 새 {2}바지에 {1} 슬라임 온통 묻었더니 {0} 기억이 나네... 뭐, 여하튼... 보상은 여기 있네."
+			},
+			{
+				"stringId": "SlayMonsterQuest6",
+				"ko": "엄마가 난리 치셨던 게"
+			},
+			{
+				"stringId": "SlayMonsterQuest7",
+				"ko": "아빠가 화내셨던 게"
+			},
+			{
+				"stringId": "SlayMonsterQuest8",
+				"ko": "정장"
+			},
+			{
+				"stringId": "SlayMonsterQuest9",
+				"ko": "실크"
+			},
+			{
+				"stringId": "SlayMonsterQuest10",
+				"ko": "면"
+			},
+			{
+				"stringId": "SlayMonsterQuest11",
+				"ko": "여럿 모이면 그 슬라임도 꽤 위험해지지. 네 노력 덕분에 이제 동굴 탐험하는 건 좀 더 수월해졌을 거야. 보상을 즐기게!"
+			},
+			{
+				"stringId": "SlayMonsterQuest12",
+				"ko": "외래 게 종 하나가 광산을 침범해서 생태계에 위협을 주고 있습니다! 돌로 변장하는 걸로 알려진 종입니다. {0}마리 잡아주신다면 보상을 드리겠습니다."
+			},
+			{
+				"stringId": "SlayMonsterQuest13",
+				"ko": "아, {0} 개체 수를 좀 줄였구나. 동굴 내에 인간들의 활동 때문에 너무 빨리 번식하고 있었는데, 우리 노력으로 그들이 다른 종에게 해를 입히는 걸 막았으면 좋겠네. 현지 야생 동물들이 네가 한 일에 감사할 거야, {1}. 여기, 보상이야."
+			},
+			{
+				"stringId": "SlayMonsterQuest14",
+				"ko": "구함: 지역 광산에서 {1} {0}마리를 처치할 몬스터 헌터 구함."
+			},
+			{
+				"stringId": "SlayMonsterQuest15",
+				"ko": "{0}/{1} {2} 처치함"
+			},
+			{
+				"stringId": "SocializeQuest1",
+				"ko": "인사하기"
+			},
+			{
+				"stringId": "SocializeQuest2",
+				"ko": "안녕! 오늘 마을 사람 모두에게 인사해줄 사람 있나요? 오늘 {0} 담긴 메시지를 퍼트리고 싶어요!"
+			},
+			{
+				"stringId": "SocializeQuest3",
+				"ko": "순수한 기쁨이"
+			},
+			{
+				"stringId": "SocializeQuest4",
+				"ko": "평화 & 호의가"
+			},
+			{
+				"stringId": "SocializeQuest5",
+				"ko": "공동체의식이"
+			},
+			{
+				"stringId": "SocializeQuest6",
+				"ko": "\\n\\n- 모두가 당신과 조금 더 친해질 것입니다"
+			},
+			{
+				"stringId": "SocializeQuest7",
+				"ko": "{0}/{1} 사람들에게 인사함"
+			},
+			{
+				"stringId": "ResourceCollectionQuest1",
+				"ko": "채집"
+			},
+			{
+				"stringId": "ResourceCollectionQuest2",
+				"ko": "{2} {1} {0}개를 가져다줄 분을 구합니다."
+			},
+			{
+				"stringId": "ResourceCollectionQuest3",
+				"ko": "이 지역의 광물에 대한 이해를 돕기 위해"
+			},
+			{
+				"stringId": "ResourceCollectionQuest4",
+				"ko": "살펴보기 위해"
+			},
+			{
+				"stringId": "ResourceCollectionQuest5",
+				"ko": "지역 지질 조사의 일부로"
+			},
+			{
+				"stringId": "ResourceCollectionQuest6",
+				"ko": "안에 혹시 희귀한 광물이 있는지 확인하기 위해"
+			},
+			{
+				"stringId": "ResourceCollectionQuest7",
+				"ko": "내가 의뢰한 광석을 가져왔구나."
+			},
+			{
+				"stringId": "ResourceCollectionQuest8",
+				"ko": "아주 좋아."
+			},
+			{
+				"stringId": "ResourceCollectionQuest9",
+				"ko": "고마워."
+			},
+			{
+				"stringId": "ResourceCollectionQuest10",
+				"ko": "좋아."
+			},
+			{
+				"stringId": "ResourceCollectionQuest11",
+				"ko": "안녕! 나 로빈. 누군가 혹시 {1} {0}조각 가져다줄 수 있어? 신선해야 해... 오늘 모은 걸로 가져오면 될 거야. 고마워!"
+			},
+			{
+				"stringId": "ResourceCollectionQuest12",
+				"ko": "어, 내가 부탁한 {0} 가져왔구나. "
+			},
+			{
+				"stringId": "ResourceCollectionQuest13",
+				"ko": "목재"
+			},
+			{
+				"stringId": "ResourceCollectionQuest14",
+				"ko": "석재"
+			},
+			{
+				"stringId": "ResourceCollectionQuest15",
+				"ko": "멋져!"
+			},
+			{
+				"stringId": "ResourceCollectionQuest16",
+				"ko": "큰 도움이 될 거야.. 고마워!"
+			},
+			{
+				"stringId": "ResourceCollectionQuest17",
+				"ko": "고마워!"
+			},
+			{
+				"stringId": "ResourceCollectionQuest18",
+				"ko": "{0}/{1} {2} 수집함"
+			}
+		]
+}

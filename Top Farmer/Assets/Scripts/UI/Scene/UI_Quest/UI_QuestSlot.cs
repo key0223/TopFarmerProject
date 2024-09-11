@@ -21,6 +21,7 @@ public class UI_QuestSlot : MonoBehaviour
     public void SetQuestSlot(Quest quest)
     {
         Quest = quest;
+        _questTitle.text = quest.QuestTitle;
     }
 
     void OnSlotButtonClicked()

@@ -16,6 +16,7 @@ public class Quest
     public string ReactionText { get; protected set; }
 
     public bool DailyQuest { get; protected set; }
+    public Objective Objective { get; protected set; }
 
     public static Quest MakeQuest(int questId)
     {
@@ -74,7 +75,9 @@ public class Quest
         int randomQuestType = Random.Range(2, 5);
         Quest quest = null;
 
-        switch ((QuestType)randomQuestType)
+        int testMakeQuestIndex = 2;
+
+        switch ((QuestType)testMakeQuestIndex)
         {
             case QuestType.Basic:
                 quest = new Quest();
@@ -83,19 +86,21 @@ public class Quest
                 quest = new ItemDeliveryQuest();
                 break;
             case QuestType.Monster:
-                quest = new MonsterQuest(questId);
+                //quest = new MonsterQuest(questId);
                 break;
             case QuestType.Socialize:
-                quest = new SocializeQuest(questId);
+                //quest = new SocializeQuest(questId);
                 break;
             case QuestType.Location:
-                quest = new LocationQuest(questId);
+                //quest = new LocationQuest(questId);
                 break;
             case QuestType.Harvest:
-                quest = new LocationQuest(questId);
+                //quest = new LocationQuest(questId);
                 break;
         }
 
         return quest;
     }
+
+    
 }
