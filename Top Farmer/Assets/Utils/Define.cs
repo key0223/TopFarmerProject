@@ -85,6 +85,7 @@ public class Define
         None = 0,
         Gift,
         Dialogue,
+        Quest,
     }
     // Quest
 

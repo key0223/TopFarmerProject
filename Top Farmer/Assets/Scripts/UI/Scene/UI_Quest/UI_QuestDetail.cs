@@ -12,6 +12,7 @@ public class UI_QuestDetail : MonoBehaviour
 
     [SerializeField] Button _backButton;
     [SerializeField] GameObject _questListGO;
+    [SerializeField] Button _questCompleteButton;
     
     GameObject _questDetail;
     UI_QuestList _questListUI;
@@ -34,6 +35,11 @@ public class UI_QuestDetail : MonoBehaviour
         GameObject objectiveSlotGO = Managers.Resource.Instantiate("UI/Scene/Quest/ObjectiveSlot", _objectiveParent.transform);
         ObjectiveSlot objectiveSlot = objectiveSlotGO.GetComponent<ObjectiveSlot>();
         objectiveSlot.SetObjectiveSlot(quest.Objective);
+
+        if(quest.QuestState == Define.QuestState.WatingForCompletion)
+        {
+            _questCompleteButton.gameObject.SetActive(true);
+        }
     }
     
     void ClearObjectives()

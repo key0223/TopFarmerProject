@@ -6,7 +6,7 @@ using static Define;
 
 public class EventReporter 
 {
-    public event Action<string, InventoryItem> ItemDeliveredEvent;
+    public event Action<string, ItemData> ItemDeliveredEvent;
    public void ReportItemPurchased(ItemData item, int quantity)
     {
         QuestType questType = QuestType.Resource;
@@ -16,7 +16,7 @@ public class EventReporter
         Debug.Log("Item Purchased");
     }
 
-     public void ItemDelivered(string npcName, InventoryItem item)
+     public void ItemDelivered(string npcName, ItemData item)
     {
         ItemDeliveredEvent?.Invoke(npcName, item);
     }

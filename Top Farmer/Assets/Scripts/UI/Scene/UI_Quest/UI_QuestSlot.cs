@@ -9,6 +9,7 @@ public class UI_QuestSlot : MonoBehaviour
     public event QuestSlotCilckedHandler onQuestSlotClicked;
 
     [SerializeField] Text _questTitle;
+    [SerializeField] Image _completeImage;
     Button _slotButton;
 
     public Quest Quest {  get; private set; }
@@ -22,6 +23,12 @@ public class UI_QuestSlot : MonoBehaviour
     {
         Quest = quest;
         _questTitle.text = quest.QuestTitle;
+
+        if(quest.QuestState == Define.QuestState.WatingForCompletion )
+        {
+            _completeImage.gameObject.SetActive(true);
+        }
+        
     }
 
     void OnSlotButtonClicked()

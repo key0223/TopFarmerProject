@@ -24,16 +24,15 @@ public class Objective
     int _currentSuccess;
 
 
-    public Objective(Quest quest)
+    public static  Objective MakeObjective(Quest quest)
     {
-        Owner = quest;
         Objective objective = null;
-        switch(quest.QuestType)
+        switch (quest.QuestType)
         {
             case QuestType.ItemDelivery:
 
                 objective = new DeliverObjective(quest);
-                
+
                 break;
             case QuestType.Monster:
                 //quest = new MonsterQuest(questId);
@@ -49,9 +48,13 @@ public class Objective
                 break;
 
         }
-        ObjectiveDescription = quest.QuestObjective;
-        
+
+        objective.Owner = quest;
+        objective.ObjectiveDescription = quest.QuestObjective;
+
+        return objective;
     }
+   
    
     public int CurrentSuccess
     {
@@ -99,8 +102,6 @@ public class Objective
     {
         return ObjectiveState == ObjectiveState.Complete;
     }
-
-  
     
     public void ReceiveReport(int successCount)
     {

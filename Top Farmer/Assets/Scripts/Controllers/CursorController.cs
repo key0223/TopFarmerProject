@@ -7,11 +7,13 @@ public class CursorController : MonoBehaviour
 {
     [SerializeField] Texture2D[] _cursorIcons;
 
+
     CursorType _cursorType = CursorType.None;
+    public CursorType CursorType {  get { return _cursorType; } }
 
     void Start()
     {
-
+        SetDefaultCursor();
     }
 
     // Update is called once per frame
@@ -27,25 +29,27 @@ public class CursorController : MonoBehaviour
 
         if (hit.collider != null)
         {
+
             IRaycastable raycastable = hit.collider.GetComponent<IRaycastable>();
 
             if (raycastable != null)
             {
-                // 커서 타입이 변경될 때만 커서 아이콘 업데이트
-                if (_cursorType != raycastable.GetCursorType())
+                float distanceToPlayer = Vector2.Distance(PlayerController.Instance.transform.position, hit.collider.transform.position);
+
+                if(distanceToPlayer <= 3)
                 {
-                    _cursorType = raycastable.GetCursorType();
-                    UnityEngine.Cursor.SetCursor(
-                        _cursorIcons[(int)_cursorType],
-                        new Vector2(_cursorIcons[(int)_cursorType].width / 5, 0),
-                        CursorMode.Auto
-                    );
+                    // 커서 타입이 변경될 때만 커서 아이콘 업데이트
+                    if (_cursorType != raycastable.GetCursorType())
+                    {
+                        _cursorType = raycastable.GetCursorType();
+                        UnityEngine.Cursor.SetCursor(
+                            _cursorIcons[(int)_cursorType],
+                            new Vector2(_cursorIcons[(int)_cursorType].width / 5, 0),
+                            CursorMode.Auto
+                        );
+                    }
                 }
-                if(Input.GetMouseButtonDown(1))
-                {
-                    // HandleRaycast 호출
-                    raycastable.HandleRaycast(null);  // PlayerController를 전달해야 하는 경우 적절히 전달
-                }
+               
             }
             else
             {

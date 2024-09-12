@@ -7,10 +7,12 @@ public class NpcInteraction : MonoBehaviour,IRaycastable
 {
 
     NPC _npc;
+    CursorController _cursor;
 
     void Start()
     {
         _npc = GetComponentInParent<NPC>();
+        _cursor = FindObjectOfType<CursorController>();
     }
 
     // Update is called once per frame
@@ -21,7 +23,23 @@ public class NpcInteraction : MonoBehaviour,IRaycastable
     public CursorType GetCursorType()
     {
         ItemData itemData = InventoryManager.Instance.GetSelectedInventoryItemData(InventoryType.INVEN_PLAYER);
-        if (!_npc.ReceivedGift && itemData != null && itemData.canBeDropped)
+        
+       if(Managers.Quest.ActiveQuests.Count > 0&& itemData !=null)
+        {
+            foreach(Quest quest in Managers.Quest.ActiveQuests)
+            {
+                if(quest.Objective.ObjectiveType == ObjectiveType.ItemDelivery && !quest.Objective.IsComplete() )
+                {
+                    ItemDeliveryQuest deliveryQuest = (ItemDeliveryQuest)quest;
+
+                    if (deliveryQuest.TargetItemId == InventoryManager.Instance.GetSelectedInventoryItemData(InventoryType.INVEN_PLAYER).itemId && _npc.gameObject.name.Contains(deliveryQuest.TargetName))
+                    {
+                        return CursorType.Quest;
+                    }
+                }
+            }
+        }
+        else if (!_npc.ReceivedGift && itemData != null && itemData.canBeDropped)
         {
 
             return CursorType.Gift;
@@ -30,13 +48,23 @@ public class NpcInteraction : MonoBehaviour,IRaycastable
         {
             return CursorType.Dialogue;
         }
-        else { return CursorType.None; }
+
+        return CursorType.None;
 
     }
 
     public bool HandleRaycast(PlayerController controller)
     {
-            Debug.Log("HandleRaycast 호출");
+        if (_cursor.CursorType == CursorType.Gift)
+        {
+            Debug.Log("Gift 호출");
+
+
+        }
+        else if(_cursor.CursorType == CursorType.Dialogue)
+        {
+            Debug.Log("Dialogue 호출");
+        }
         return true;
     }
 

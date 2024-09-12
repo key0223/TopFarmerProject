@@ -18,6 +18,7 @@ public class Quest
     public bool DailyQuest { get; protected set; }
     public Objective Objective { get; protected set; }
 
+    public QuestState QuestState { get; protected set; }
     public static Quest MakeQuest(int questId)
     {
         if (Managers.Data.QuestDict == null)
@@ -65,6 +66,7 @@ public class Quest
             quest.MoneyReward = questData.moneyReward;
             quest.Cancellable = questData.cancellable;
             quest.ReactionText = questData.reactionText;
+            quest.DailyQuest = false;
         }
 
         return quest;
@@ -99,8 +101,21 @@ public class Quest
                 break;
         }
 
+        quest.DailyQuest = true;
         return quest;
     }
 
+    public void OnRegister()
+    {
+        QuestState = QuestState.Running;
+    }
+
+    public void CheckObjectiveComplete(Objective objective, ObjectiveState currentState, ObjectiveState prevState)
+    {
+        if (Objective.ObjectiveState == ObjectiveState.Complete)
+        {
+            QuestState = QuestState.WatingForCompletion;
+        }
+    }
     
 }

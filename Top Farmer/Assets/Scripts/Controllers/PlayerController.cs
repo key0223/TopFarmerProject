@@ -28,8 +28,8 @@ public class PlayerController : CreatureController, ISaveable
     GridCursor _gridCursor;
     Cursor _cursor;
     MoveDir _cursorDir;
+    CursorController _cursorController;
 
-    [SerializeField] Texture2D[] _cursorTextures;
 
     float _inputX;
     float _inputY;
@@ -165,6 +165,8 @@ public class PlayerController : CreatureController, ISaveable
         //ISaveableUniqueID = GetComponent<GenerateGUID>().GUID;
         ISaveableUniqueID = "PlayerController";
         GameObjectSave = new GameObjectSave();
+
+        _cursorController = FindObjectOfType<CursorController>();
     }
 
 
@@ -399,6 +401,37 @@ public class PlayerController : CreatureController, ISaveable
                     ProcessPlayerClickInput(cursorGridPosition, playerGridPosition);
                 }
             }
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                Vector2 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                RaycastHit2D hit = Physics2D.Raycast(mouseWorldPosition, Vector2.zero, 100.0f);
+
+
+                if (hit.collider !=null )
+                {
+                    Debug.DrawLine(transform.position, hit.transform.position, Color.blue, 0.1f);
+                    float distance = (hit.transform.position - transform.position).magnitude;
+
+                    if(distance <= 2)
+                    {
+                        if (_cursorController.CursorType == CursorType.Gift)
+                        {
+
+                        }
+                        else if (_cursorController.CursorType == CursorType.Dialogue)
+                        {
+
+                        }
+                        else if(_cursorController.CursorType == CursorType.Quest)
+                        {
+                            Managers.Reporter.ItemDelivered(hit.transform.name,InventoryManager.Instance.GetSelectedInventoryItemData(InventoryType.INVEN_PLAYER));
+                        }
+                        Debug.Log("Target in position");
+                    }
+                }
+            }
+          
         }
         
     }
@@ -860,6 +893,11 @@ public class PlayerController : CreatureController, ISaveable
         }
 
         return animationName;
+    }
+
+    public void OnItemDelivered()
+    {
+
     }
 
     #region Save

@@ -152,6 +152,18 @@ public class InventoryManager :SingletonMonobehaviour<InventoryManager>, ISaveab
         Managers.Event.UpdateInventory(inventoryType, inventory);
     }
 
+    public void RemoveItem(InventoryType inventoryType, int itemCode, int amount)
+    {
+        List<InventoryItem> inventory = _inventoryLists[(int)inventoryType];
+        // Check if inventory already contains the item
+        int itemPosition = FindItemInInventory(inventoryType, itemCode);
+
+        if (itemPosition != -1)
+        {
+            RemoveItemAtPosition(inventory, itemCode, itemPosition,amount);
+        }
+        Managers.Event.UpdateInventory(inventoryType, inventory);
+    }
     private void RemoveItemAtPosition(List<InventoryItem> inventory, int itemId, int position)
     {
         InventoryItem invenItem = new InventoryItem();
@@ -170,6 +182,24 @@ public class InventoryManager :SingletonMonobehaviour<InventoryManager>, ISaveab
             inventory.RemoveAt(position);
         }
 
+    }
+    private void RemoveItemAtPosition(List<InventoryItem> inventory, int itemId, int position, int amount)
+    {
+        InventoryItem invenItem = new InventoryItem();
+
+        int quantity = inventory[position]._itemQuantity - amount;
+
+        if (quantity > 0)
+        {
+            invenItem._itemQuantity = quantity;
+            invenItem._itemId = itemId;
+            inventory[position] = invenItem;
+
+        }
+        else
+        {
+            inventory.RemoveAt(position);
+        }
 
     }
 
@@ -248,6 +278,24 @@ public class InventoryManager :SingletonMonobehaviour<InventoryManager>, ISaveab
             return itemData;
         }
     }
+    public InventoryItem FindInventoryItem(InventoryType inventoryType, int itemId)
+    {
+        List<InventoryItem> inventory = _inventoryLists[(int)inventoryType];
+        InventoryItem inventoryItem = new InventoryItem();
+        for (int i = 0; i < inventory.Count; i++)
+        {
+            if (inventory[i]._itemId == itemId)
+            {
+                inventoryItem = inventory[i];
+                return inventoryItem;
+            }
+        }
+
+        return inventoryItem;
+       
+    }
+
+  
     public string GetItemTypeString(ItemType itemType)
     {
         string itemTypeString = null;

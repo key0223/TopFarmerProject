@@ -86,7 +86,8 @@ public class ItemDeliveryQuest : Quest
         Cancellable = true;
         ReactionText = GetReactionText();
 
-        Objective = new Objective(this);
+        Objective = Objective.MakeObjective(this);
+        Objective.OnStateChanged += CheckObjectiveComplete;
 
     }
 
