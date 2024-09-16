@@ -21,6 +21,8 @@ public class UI_QuestSlot : MonoBehaviour
     }
     public void SetQuestSlot(Quest quest)
     {
+        _completeImage.gameObject.SetActive(false);
+
         Quest = quest;
         _questTitle.text = quest.QuestTitle;
 

@@ -10,6 +10,13 @@ public class QuestManager : MonoBehaviour
 
     public void AcceptQuest(Quest quest)
     {
+        quest.onCompleted += OnQuestCompleted;
         _activeQuests.Add(quest);
+        quest.OnRegister();
+    }
+
+    void OnQuestCompleted(Quest quest)
+    {
+        _activeQuests.Remove(quest);
     }
 }

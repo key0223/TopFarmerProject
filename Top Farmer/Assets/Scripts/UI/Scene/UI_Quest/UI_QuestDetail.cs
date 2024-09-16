@@ -13,7 +13,12 @@ public class UI_QuestDetail : MonoBehaviour
     [SerializeField] Button _backButton;
     [SerializeField] GameObject _questListGO;
     [SerializeField] Button _questCompleteButton;
-    
+
+    [Header("Reward")]
+    [SerializeField] GameObject _rewardBox;
+    [SerializeField] Image _iconImage;
+    [SerializeField] Button _rewardButton;
+
     GameObject _questDetail;
     UI_QuestList _questListUI;
 
@@ -23,10 +28,14 @@ public class UI_QuestDetail : MonoBehaviour
     {
         _backButton.onClick.AddListener(()=> OnBackButtonClicked());
         _questListUI = gameObject.GetComponentInParent<UI_QuestList>();
+        _rewardButton.onClick.AddListener(() => OnRewardButtonClicked());
     }
     public void SetQuestDetail(Quest quest)
     {
-      _quest = quest;
+        _rewardBox.SetActive(false);
+        _questCompleteButton.gameObject.SetActive(false);
+
+        _quest = quest;
         _questTitleText.text = quest.QuestTitle;
         _questDescriptionText.text = quest.QuestDescription;
 
@@ -36,12 +45,14 @@ public class UI_QuestDetail : MonoBehaviour
         ObjectiveSlot objectiveSlot = objectiveSlotGO.GetComponent<ObjectiveSlot>();
         objectiveSlot.SetObjectiveSlot(quest.Objective);
 
-        if(quest.QuestState == Define.QuestState.WatingForCompletion)
+        if (quest.QuestState == Define.QuestState.WatingForCompletion)
         {
             _questCompleteButton.gameObject.SetActive(true);
+            _rewardBox.gameObject.SetActive(true);
+            SetReward(quest);
         }
     }
-    
+
     void ClearObjectives()
     {
         for (int i = _objectiveParent.transform.childCount - 1; i >= 0; i--)
@@ -63,5 +74,20 @@ public class UI_QuestDetail : MonoBehaviour
         _questListGO.SetActive(true);
         _questListUI.ReloadeQuestList();
         gameObject.SetActive(false);
+    }
+
+    void SetReward(Quest quest)
+    {
+        if(quest.MoneyReward!=0)
+        {
+            _iconImage.sprite = Managers.Resource.Load<Sprite>("Textures/UI/Money");
+
+        }
+    }
+    void OnRewardButtonClicked()
+    {
+        _quest.Complete();
+        OnBackButtonClicked();
+
     }
 }

@@ -4,6 +4,9 @@ using static Define;
 
 public class Quest 
 {
+    public delegate void CompletedHandler(Quest quest);
+    public event CompletedHandler onCompleted;
+
     public int QuestId { get; private set; }
     public QuestType QuestType { get; protected set; }
     public string QuestTitle { get; protected set; }
@@ -116,6 +119,22 @@ public class Quest
         {
             QuestState = QuestState.WatingForCompletion;
         }
+    }
+
+    public void Complete()
+    {
+        Objective.Complete();
+        QuestState = QuestState.Complete;
+
+        GiveReward();
+        onCompleted?.Invoke(this);
+        onCompleted = null;
+
+    }
+
+    void GiveReward()
+    {
+        PlayerController.Instance.PlayerCoin += MoneyReward;
     }
     
 }

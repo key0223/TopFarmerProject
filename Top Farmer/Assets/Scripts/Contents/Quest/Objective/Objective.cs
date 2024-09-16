@@ -95,6 +95,7 @@ public class Objective
     }
     public void Complete()
     {
+        End();
         CurrentSuccess = SuccessToComplete;
     }
 

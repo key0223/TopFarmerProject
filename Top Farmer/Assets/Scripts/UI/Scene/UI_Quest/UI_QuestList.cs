@@ -36,6 +36,7 @@ public class UI_QuestList : MonoBehaviour
     void OnCloseButtonClicked()
     {
         EnablePlayerInput();
+        _questDetail.gameObject.SetActive(false);
         _questListPanel.SetActive(false);
     }
 
