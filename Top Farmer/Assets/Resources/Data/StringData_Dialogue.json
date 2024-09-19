@@ -1,0 +1,17 @@
+﻿{
+	"array": 
+		[
+			{
+				"stringId": "Abigail_Daily_1",
+				"ko": "오, 안녕."
+			},
+			{
+				"stringId": "Abigail_Daily_2",
+				"ko": "오, 야. 일 좀 쉬는거야?"
+			},
+			{
+				"stringId": "Abigail_Daily_3",
+				"ko": "할 말 있어?"
+			}
+		]
+}

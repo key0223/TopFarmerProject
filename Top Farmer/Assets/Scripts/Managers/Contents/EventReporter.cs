@@ -7,6 +7,7 @@ using static Define;
 public class EventReporter 
 {
     public event Action<string, ItemData> ItemDeliveredEvent;
+    public event Action<string> SocializeEvent;
    public void ReportItemPurchased(ItemData item, int quantity)
     {
         QuestType questType = QuestType.Resource;
@@ -19,5 +20,10 @@ public class EventReporter
      public void ItemDelivered(string npcName, ItemData item)
     {
         ItemDeliveredEvent?.Invoke(npcName, item);
+    }
+
+    public void ConversationNPC(string npcName)
+    {
+        SocializeEvent?.Invoke(npcName);
     }
 }

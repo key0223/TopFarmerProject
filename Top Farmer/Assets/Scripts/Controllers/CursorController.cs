@@ -48,6 +48,7 @@ public class CursorController : MonoBehaviour
                             CursorMode.Auto
                         );
                     }
+
                 }
                
             }

@@ -14,11 +14,13 @@ public class Managers : MonoBehaviour
     EventsHandler _event = new EventsHandler();
     EventReporter _reporter = new EventReporter();  
     QuestManager _quest = new QuestManager();
+    DialogueManager _dialogue = new DialogueManager();
 
     public static EventsHandler Event { get { return Instance._event; } }
     public static PlayerInfo PlayerInfo { get { return Instance._playerInfo; } }
     public static EventReporter Reporter { get {  return Instance._reporter; } }
     public static QuestManager Quest { get {  return Instance._quest; } }
+    public static DialogueManager Dialogue { get {  return Instance._dialogue; } }
 
     #endregion
 

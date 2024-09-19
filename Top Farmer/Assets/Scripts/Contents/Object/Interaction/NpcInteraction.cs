@@ -63,7 +63,14 @@ public class NpcInteraction : MonoBehaviour,IRaycastable
         }
         else if(_cursor.CursorType == CursorType.Dialogue)
         {
-            Debug.Log("Dialogue »£√‚");
+            int rand = Random.Range(1, 4);
+            string name = _npc.gameObject.name.Split('_')[1];
+            string dialogueId = $"{name}_Daily_{rand}";
+
+            string dialogue = Managers.Data.StringDict[dialogueId].ko;
+
+            Managers.Dialogue.MakeDialogueQueue(dialogue);
+            Managers.Dialogue.DialogueUI.NpcText = name;
         }
         return true;
     }

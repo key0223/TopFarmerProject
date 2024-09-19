@@ -35,9 +35,12 @@ public class UI_QuestList : MonoBehaviour
     }
     void OnCloseButtonClicked()
     {
-        EnablePlayerInput();
-        _questDetail.gameObject.SetActive(false);
-        _questListPanel.SetActive(false);
+        if (!PlayerController.Instance.PlayerInputDisabled)
+        {
+            EnablePlayerInput();
+            _questDetail.gameObject.SetActive(false);
+            _questListPanel.SetActive(false);
+        }
     }
 
     void OnQuestSlotClicked(Quest quest)

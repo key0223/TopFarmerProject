@@ -421,7 +421,11 @@ public class PlayerController : CreatureController, ISaveable
                         }
                         else if (_cursorController.CursorType == CursorType.Dialogue)
                         {
-
+                            IRaycastable raycastable = hit.transform.GetComponentInChildren<IRaycastable>();
+                            if (raycastable.HandleRaycast(this))
+                            {
+                                Managers.Reporter.ConversationNPC(hit.transform.name);
+                            }
                         }
                         else if(_cursorController.CursorType == CursorType.Quest)
                         {
@@ -895,10 +899,6 @@ public class PlayerController : CreatureController, ISaveable
         return animationName;
     }
 
-    public void OnItemDelivered()
-    {
-
-    }
 
     #region Save
     public void ISaveableRegister()
