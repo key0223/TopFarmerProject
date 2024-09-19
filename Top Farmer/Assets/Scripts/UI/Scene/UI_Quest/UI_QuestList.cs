@@ -29,18 +29,17 @@ public class UI_QuestList : MonoBehaviour
     {
         DisablePlayerInput();
         _questListPanel.SetActive(true);
+        _questList.SetActive(true);
         ClearQuestList();
         InitalizeQuestList();
 
     }
     void OnCloseButtonClicked()
     {
-        if (!PlayerController.Instance.PlayerInputDisabled)
-        {
-            EnablePlayerInput();
-            _questDetail.gameObject.SetActive(false);
-            _questListPanel.SetActive(false);
-        }
+
+        EnablePlayerInput();
+        _questDetail.gameObject.SetActive(false);
+        _questListPanel.SetActive(false);
     }
 
     void OnQuestSlotClicked(Quest quest)
@@ -66,8 +65,10 @@ public class UI_QuestList : MonoBehaviour
 
     public void ReloadeQuestList()
     {
-        ClearQuestList();
-        InitalizeQuestList();
+        OnQuestListButtonClicked();
+            
+        //ClearQuestList();
+        //InitalizeQuestList();
     }
     void DisablePlayerInput()
     {

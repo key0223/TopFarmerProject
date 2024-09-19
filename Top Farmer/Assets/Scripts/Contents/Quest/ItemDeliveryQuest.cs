@@ -27,6 +27,7 @@ public class ItemDeliveryQuest : Quest
         TargetName = data.targetName;
         TargetItemId = data.targetItemId;
         TargetQuantity = data.targetQuantity;
+
     }
 
     public ItemDeliveryQuest()
@@ -148,5 +149,10 @@ public class ItemDeliveryQuest : Quest
         string reactionText = Managers.Data.StringDict[_questStringId + reactionIndex.ToString()].ko;
 
         return reactionText;
+    }
+
+    public void OnCompleted()
+    {
+
     }
 }

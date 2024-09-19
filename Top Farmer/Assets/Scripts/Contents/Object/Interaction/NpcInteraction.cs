@@ -69,8 +69,8 @@ public class NpcInteraction : MonoBehaviour,IRaycastable
 
             string dialogue = Managers.Data.StringDict[dialogueId].ko;
 
-            Managers.Dialogue.MakeDialogueQueue(dialogue);
             Managers.Dialogue.DialogueUI.NpcText = name;
+            Managers.Dialogue.MakeDialogueQueue(dialogue);
         }
         return true;
     }

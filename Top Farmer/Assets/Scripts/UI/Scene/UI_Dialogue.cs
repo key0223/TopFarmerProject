@@ -9,6 +9,8 @@ public class UI_Dialogue : MonoBehaviour
     [SerializeField] GameObject _dialogueGO;
     [SerializeField] Text _dialogueText;
     [SerializeField] Text _npcNameText;
+    [SerializeField] Image _portraitImage;
+
     public string NpcText { get { return _npcNameText.text; } set { _npcNameText.text = value; } }
     Coroutine CoTyping;
 
@@ -42,7 +44,8 @@ public class UI_Dialogue : MonoBehaviour
         {
             StopCoroutine(CoTyping);  
         }
-        _dialogueText.text = text; 
+        _dialogueText.text = text;
+        _portraitImage.sprite = Managers.Data.SpriteDict[$"{_npcNameText.text}_0"];
     }
     public void StartTyping(string text, float typingSpeed)
     {

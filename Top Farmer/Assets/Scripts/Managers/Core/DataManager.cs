@@ -77,11 +77,12 @@ public class DataManager
         Dictionary<string, Sprite> oakSpriteDict = new SpriteLoader("Object/Scenary/Spring/OakTree_spring").MakeDict();
         Dictionary<string, Sprite> mapleSpriteDict = new SpriteLoader("Object/Scenary/Spring/MapleTree_spring").MakeDict();
         Dictionary<string, Sprite> pineSpriteDict = new SpriteLoader("Object/Scenary/Spring/PineTree_spring").MakeDict();
+        Dictionary<string, Sprite> abigailPortraitDict = new SpriteLoader("Object/Creatures/NPC/Portrait/Abigail").MakeDict();
 
 
 
         SpriteDict = CombinedDict<string, Sprite>(objectSpriteDict,grassSpriteDict, toolSpriteDict,weaponSpriteDict,timeUISpriteDict,cropSpriteDict,
-                                                  oakSpriteDict,mapleSpriteDict,pineSpriteDict);
+                                                  oakSpriteDict,mapleSpriteDict,pineSpriteDict, abigailPortraitDict);
 
         #endregion
 

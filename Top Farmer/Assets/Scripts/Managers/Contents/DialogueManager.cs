@@ -62,6 +62,7 @@ public class DialogueManager : MonoBehaviour
         DialogueUI.gameObject.SetActive(false);
         PlayerController.Instance.PlayerInputDisabled = false;
         Time.timeScale = 1;
+        _dialougeQueue = null;
        
     }
 }

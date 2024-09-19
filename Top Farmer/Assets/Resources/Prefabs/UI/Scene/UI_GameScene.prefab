@@ -1285,7 +1285,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 156957561437192051}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.1
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4102,6 +4102,7 @@ MonoBehaviour:
   _dialogueGO: {fileID: 8485136629646798426}
   _dialogueText: {fileID: 2547417845420293954}
   _npcNameText: {fileID: 5119922411202915945}
+  _portraitImage: {fileID: 214428625856391365}
 --- !u!1 &8628383039518258620
 GameObject:
   m_ObjectHideFlags: 0
