@@ -38,7 +38,7 @@ public class Objective
                 //quest = new MonsterQuest(questId);
                 break;
             case QuestType.Socialize:
-                //quest = new SocializeQuest(questId);
+                objective = new SocializeObjective(quest);
                 break;
             case QuestType.Location:
                 //quest = new LocationQuest(questId);
