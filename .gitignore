@@ -74,11 +74,11 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
-/Top Farmer/Sheets
-/Top Farmer/Assets/ThirdParty
-/Top Farmer/Assets/Resources/Tilemap
-/Top Farmer/Assets/Resources/Sounds
-/Top Farmer/Assets/Resources/Textures
+/TopFarmer/Sheets
+/TopFarmer/Assets/ThirdParty
+/TopFarmer/Assets/Resources/Tilemap
+/TopFarmer/Assets/Resources/Sounds
+/TopFarmer/Assets/Resources/Textures
 
 # Except
 !/TopFarmerWebServer/TopFarmerWebServer/TopFarmerWebServer/*.csproj
