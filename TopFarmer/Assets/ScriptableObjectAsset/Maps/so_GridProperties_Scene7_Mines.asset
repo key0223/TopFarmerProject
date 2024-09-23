@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1987fcf7fc553b04396b2f2dd9be7683, type: 3}
+  m_Name: so_GridProperties_Scene7_Mines
+  m_EditorClassIdentifier: 
+  sceneName: 7
+  gridWidth: 16
+  gridHeight: 12
+  originX: 4
+  originY: 46
+  gridPropertyList: []

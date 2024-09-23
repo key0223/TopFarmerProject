@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 05736996d29267d42bb496a509c0c6f4
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _ambientSoundAudioSource: {instanceID: 0}
+  - _gameMusicAudioSource: {instanceID: 0}
+  - _gameAudioMixer: {instanceID: 0}
+  - _gameMusicSnapshot: {instanceID: 0}
+  - _gameAmbientSnapshot: {instanceID: 0}
+  - _soSoundList: {fileID: 11400000, guid: 88a416a66ecc29b4eb93d13eb76db511, type: 2}
+  - _soSceneSoundList: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
