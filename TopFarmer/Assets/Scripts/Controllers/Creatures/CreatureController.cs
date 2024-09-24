@@ -232,7 +232,7 @@ public class CreatureController : ObjectController
 
     }
 
-    public virtual void OnDamaged(int damage)
+    public virtual void OnDamaged()
     {
         _repeatCount = _repeat;
         StartCoroutine(CoFlicker());

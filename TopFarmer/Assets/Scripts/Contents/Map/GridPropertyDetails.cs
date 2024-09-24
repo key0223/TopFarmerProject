@@ -8,6 +8,7 @@ public class GridPropertyDetails
     public bool canPlaceFurniture = false;
     public bool isPath = false;
     public bool isNPCObstacle = false;
+    public bool canSpawnMonster=false;
     public int daysSinceDug = -1;
     public int daysSinceWatered = -1;
     public int seedItemId = -1;

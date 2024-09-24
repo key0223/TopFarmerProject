@@ -6,8 +6,6 @@ using UnityEngine;
 public class MinesScene : BaseScene
 {
     [SerializeField] GameObject _mainLevel;
-    [SerializeField] GameObject _mainLevelBoundsConfiner;
-    [SerializeField] GameObject _ladder;
 
     public int CurrentLevel {  get; private set; }
     GameObject _currentLevelGO;
@@ -29,8 +27,6 @@ public class MinesScene : BaseScene
             Managers.Resource.Destroy( _currentLevelGO );
         }
         _mainLevel.gameObject.SetActive(false);
-        _mainLevelBoundsConfiner.gameObject.SetActive(false);
-        _ladder.gameObject.SetActive(false);
 
         _currentLevelGO = Managers.Resource.Instantiate($"Map/Mines/MinesLevel_{level}");
         PolygonCollider2D polygonCollider2D = _currentLevelGO.GetComponentInChildren<PolygonCollider2D>();

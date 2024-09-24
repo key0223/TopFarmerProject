@@ -148,6 +148,7 @@ public class Define
         Scene5_Title,
         Scene6_Shop,
         Scene7_Mines,
+        SceneMinesLevel_1,
     }
 
     // Time
@@ -171,6 +172,7 @@ public class Define
         CanPlaceFurniture,
         IsPath,
         IsNPCObstacle,
+        CanSpawnMonster,
     }
    
     #region State

@@ -492,6 +492,9 @@ public class GridPropertiesManager : SingletonMonobehaviour<GridPropertiesManage
                     case GridBoolProperty.IsNPCObstacle:
                         gridPropertyDetails.isNPCObstacle = gridProperty.gridBoolValue;
                         break;
+                    case GridBoolProperty.CanSpawnMonster:
+                        gridPropertyDetails.canSpawnMonster = gridProperty.gridBoolValue;
+                        break;
 
                     default:
                         break;
