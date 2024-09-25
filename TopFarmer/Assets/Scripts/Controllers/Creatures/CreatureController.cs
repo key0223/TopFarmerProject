@@ -16,6 +16,7 @@ public class CreatureController : ObjectController
 
     public CreatureType CreatureType { get; set; }
 
+    [SerializeField]
     protected CreatureState _state = CreatureState.Idle;
     public virtual CreatureState State
     {
@@ -49,6 +50,19 @@ public class CreatureController : ObjectController
     }
 
     public MoveDir GetDirFromVec(Vector3Int dir)
+    {
+        if (dir.x > 0)
+            return MoveDir.Right;
+        else if (dir.x < 0)
+            return MoveDir.Left;
+        else if (dir.y > 0)
+            return MoveDir.Up;
+        else if (dir.y < 0)
+            return MoveDir.Down;
+        else
+            return MoveDir.None;
+    }
+    public MoveDir GetDirFromVec(Vector3 dir)
     {
         if (dir.x > 0)
             return MoveDir.Right;
