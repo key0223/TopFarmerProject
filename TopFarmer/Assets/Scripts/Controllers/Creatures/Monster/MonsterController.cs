@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using static Define;
 
@@ -10,6 +11,16 @@ public class MonsterController : CreatureController
     public Vector3Int CellPos { get; set; } = Vector3Int.zero;
     protected Vector3Int _destCellPos;
     protected Queue<Vector3Int> _pathQueue = new Queue<Vector3Int>();
+
+    [Header("Target")]
+    [SerializeField] GameObject _target;
+    [SerializeField] float _viewAngle;
+    [SerializeField] float _searchRange = 10f;
+    [SerializeField] float _skillRange = 1.0f;
+
+    public GameObject Target { get { return _target; } }
+    public float ViewAngle { get { return _viewAngle; } }
+    public float SearchRange { get { return  _searchRange; } }
 
     protected Coroutine _coSkill;
     protected Coroutine _coPatrol;
@@ -38,6 +49,7 @@ public class MonsterController : CreatureController
         State = CreatureState.Idle;
         Dir = MoveDir.None;
 
+        _target = FindObjectOfType<PlayerController>().gameObject;
         // TODO : speed, 변수 초기화
          _speed = 3f;
         CellPos = GetGridPosition(transform.position);
@@ -216,5 +228,45 @@ public class MonsterController : CreatureController
     public override void OnDamaged()
     {
         base.OnDamaged();
+    }
+    public Vector3 DirFromAngle(float angleInDegrees, bool angleIsGlobal)
+    {
+        if (!angleIsGlobal)
+        {
+            angleInDegrees += transform.eulerAngles.z; // Z축을 기준으로 회전
+        }
+        return new Vector3(Mathf.Cos(angleInDegrees * Mathf.Deg2Rad), Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0);
+    }
+    private void OnDrawGizmos()
+    {
+        // 시야 범위 원형 표시 (2D 환경용, X-Y 평면에서 그리기)
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireSphere(transform.position, _searchRange);
+
+        // 시야각 표시
+        Vector3 viewAngleA = DirFromAngle(-_viewAngle / 2, false);  // 왼쪽 시야각
+        Vector3 viewAngleB = DirFromAngle(_viewAngle / 2, false);   // 오른쪽 시야각
+
+        // 시야각을 선으로 표시 (2D 평면)
+        Gizmos.DrawLine(transform.position, transform.position + viewAngleA * _searchRange);
+        Gizmos.DrawLine(transform.position, transform.position + viewAngleB * _searchRange);
+
+        // 타겟이 보이면 빨간색으로 선을 그림
+        Gizmos.color = Color.red;
+
+        float dist = (_target.transform.position - transform.position).magnitude;
+        if (dist<= _searchRange)
+        {
+            Gizmos.DrawLine(transform.position, _target.transform.position);
+        }
+        //foreach (Transform visibleTarget in visibleTargets)
+        //{
+        //    Gizmos.DrawLine(transform.position, visibleTarget.position);
+        //}
+    }
+    private void OnValidate()
+    {
+        // 시야각 값이 변경될 때마다 Scene 뷰를 갱신
+        UnityEditor.SceneView.RepaintAll();
     }
 }
