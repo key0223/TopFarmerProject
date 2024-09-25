@@ -11,9 +11,9 @@ public class MonsterController : CreatureController
     protected Vector3Int _destCellPos;
     protected Queue<Vector3Int> _pathQueue = new Queue<Vector3Int>();
 
-    Coroutine _coSkill;
-    Coroutine _coPatrol;
-    Coroutine _coSearch;
+    protected Coroutine _coSkill;
+    protected Coroutine _coPatrol;
+    protected Coroutine _coSearch;
     public override CreatureState State
     {
         get { return _state; }
@@ -144,6 +144,7 @@ public class MonsterController : CreatureController
     #region Path
     public void SetDestination(Vector3Int destPos)
     {
+        _pathQueue.Clear();
         List<Vector3Int> path = FindPath(CellPos, destPos);
         if (path != null && path.Count > 0)
         {
