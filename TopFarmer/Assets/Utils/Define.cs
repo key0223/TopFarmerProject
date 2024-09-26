@@ -175,6 +175,10 @@ public class Define
         CanSpawnMonster,
     }
    
+    public enum Layer
+    {
+        Wall =7,
+    }
     #region State
     public enum StateMarkState
     {

@@ -4,7 +4,9 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngineInternal;
 using static Define;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class MonsterController : CreatureController
 {
@@ -19,9 +21,10 @@ public class MonsterController : CreatureController
     [SerializeField] protected float _searchRange = 10f;
     [SerializeField] protected float _skillRange = 1.0f;
 
+    protected int _mask = (1 << (int)Layer.Wall);
     public GameObject Target { get { return _target; } }
     public float ViewAngle { get { return _viewAngle; } }
-    public float SearchRange { get { return  _searchRange; } }
+    public float SearchRange { get { return _searchRange; } }
 
     protected Coroutine _coSkill;
     protected Coroutine _coPatrol;
@@ -31,7 +34,7 @@ public class MonsterController : CreatureController
         get { return _state; }
         set
         {
-            if(_state == value)
+            if (_state == value)
                 return;
 
             base.State = value;
@@ -57,9 +60,9 @@ public class MonsterController : CreatureController
 
         //_target = FindObjectOfType<PlayerController>().gameObject;
         // TODO : speed, 변수 초기화
-         _speed = 3f;
+        _speed = 3f;
         CellPos = GetGridPosition(transform.position);
-}
+    }
     protected Vector3Int GetGridPosition(Vector3 worldPosition)
     {
         if (_grid != null)
@@ -126,14 +129,14 @@ public class MonsterController : CreatureController
         {
             transform.position += moveDir.normalized * _speed * Time.deltaTime;
             Dir = GetDirFromVec(moveDir);
-            State = CreatureState.Moving; 
+            State = CreatureState.Moving;
         }
     }
 
     protected override void MoveToNextPos()
     {
 
-        if (_pathQueue.Count < 2 ||_pathQueue.Count > 10)
+        if (_pathQueue.Count < 2 || _pathQueue.Count > 10)
         {
             _target = null;
             State = CreatureState.Idle;
@@ -145,7 +148,15 @@ public class MonsterController : CreatureController
         Vector3Int moveCellDir = nextPos - CellPos;
 
         Dir = GetDirFromVec(moveCellDir);
-        CellPos = nextPos;
+
+        if (CanGo(nextPos))
+        {
+            CellPos = nextPos;
+        }
+        else
+        {
+            State = CreatureState.Idle;
+        }
     }
 
 
@@ -154,16 +165,25 @@ public class MonsterController : CreatureController
         int waitSeconds = Random.Range(1, 8);
         yield return new WaitForSeconds(waitSeconds);
 
-        int xRange = Random.Range(-2, 3);
-        int yRange = Random.Range(-2, 3);
+        for (int i = 0; i < 10; i++)
+        {
+            int xRange = Random.Range(-2, 3);
+            int yRange = Random.Range(-2, 3);
 
-        Vector3Int randPos = CellPos + new Vector3Int(xRange, yRange, 0);
+            Vector3Int randPos = CellPos + new Vector3Int(xRange, yRange, 0);
 
-        _destCellPos = randPos;
-        SetDestination(_destCellPos);
-        State = CreatureState.Moving;
+            if (CanGo(randPos))
+            {
+                _destCellPos = randPos;
+                SetDestination(_destCellPos);
+                State = CreatureState.Moving;
+                yield break;
+            }
 
-        yield return new WaitForSeconds(Random.Range(2, 5));
+        }
+        State = CreatureState.Idle;
+
+        //yield return new WaitForSeconds(Random.Range(2, 5));
     }
 
     public IEnumerator CoSearch()
@@ -183,15 +203,15 @@ public class MonsterController : CreatureController
                     return false;
 
                 return true;
-            });  
+            });
 
             if (foundTarget != null)
             {
-                _target = foundTarget.gameObject;  
+                _target = foundTarget.gameObject;
             }
             else
             {
-                _target = null; 
+                _target = null;
             }
 
         }
@@ -211,7 +231,7 @@ public class MonsterController : CreatureController
         List<Vector3Int> path = FindPath(CellPos, destPos);
         if (path != null && path.Count > 0)
         {
-            _pathQueue = new Queue<Vector3Int>(path); 
+            _pathQueue = new Queue<Vector3Int>(path);
             State = CreatureState.Moving;
         }
         else
@@ -231,7 +251,7 @@ public class MonsterController : CreatureController
         {
             Vector3Int current = frontier.Dequeue();
 
-            if (current == goal) 
+            if (current == goal)
                 break;
 
             // 네 방향으로 이동 (직선 방향만 고려)
@@ -265,14 +285,15 @@ public class MonsterController : CreatureController
     {
         // 직선으로 이동 가능한 네 방향 반환 (상, 하, 좌, 우)
         List<Vector3Int> neighbors = new List<Vector3Int>
-    {
-        current + new Vector3Int(1, 0, 0), // 오른쪽
-        current + new Vector3Int(-1, 0, 0), // 왼쪽
-        current + new Vector3Int(0, 1, 0), // 위쪽
-        current + new Vector3Int(0, -1, 0) // 아래쪽
-    };
+ {
+     current + new Vector3Int(1, 0, 0), // 오른쪽
+     current + new Vector3Int(-1, 0, 0), // 왼쪽
+     current + new Vector3Int(0, 1, 0), // 위쪽
+     current + new Vector3Int(0, -1, 0) // 아래쪽
+ };
 
         // 각 위치가 유효한지 확인하는 로직 추가 가능 (예: 맵 경계, 장애물 등)
+
         return neighbors;
     }
     #endregion
@@ -288,9 +309,11 @@ public class MonsterController : CreatureController
         }
         return new Vector3(Mathf.Cos(angleInDegrees * Mathf.Deg2Rad), Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0);
     }
-    /*
     private void OnDrawGizmos()
     {
+        if (_target == null)
+            return;
+
         // 시야 범위 원형 표시 (2D 환경용, X-Y 평면에서 그리기)
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(transform.position, _searchRange);
@@ -321,12 +344,22 @@ public class MonsterController : CreatureController
         // 시야각 값이 변경될 때마다 Scene 뷰를 갱신
         UnityEditor.SceneView.RepaintAll();
     }
-    */
-    protected void OnCollisionEnter2D(Collision2D collision)
+
+    protected bool CanGo(Vector3Int targetPosition)
     {
-        if (collision != null)
+
+        Vector3 direction = (targetPosition - Vector3Int.FloorToInt(transform.position));
+        Vector3 normalizedDir = direction.normalized;
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, normalizedDir, 1f, _mask);
+
+
+        if (hit.collider != null)
         {
-            Debug.Log(collision.gameObject.name);
+            Debug.Log("앞에 장애물이 있습니다: " + hit.collider.name);
+            return false;
         }
+
+        return true;
     }
 }

@@ -371,7 +371,7 @@ MonoBehaviour:
   _state: 0
   _dir: 2
   _target: {fileID: 0}
-  _viewAngle: 0
+  _viewAngle: 360
   _searchRange: 10
   _skillRange: 1
   _faceSpriteRendere: {fileID: 2073530684215571111}

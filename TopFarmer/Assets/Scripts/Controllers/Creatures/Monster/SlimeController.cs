@@ -11,6 +11,8 @@ public class SlimeController : MonsterController
     {
         base.Init();
         CellPos = GetGridPosition(transform.parent.position);
+        _searchRange = 2f;
+        _skillRange = 1f;
         //_faceSpriteRendere = transform.Find("Face").GetComponent<SpriteRenderer>();
     }
     protected override void UpdateMoving()
@@ -81,9 +83,19 @@ public class SlimeController : MonsterController
         Vector3Int moveCellDir = nextPos - CellPos;
 
         Dir = GetDirFromVec(moveCellDir);
-        CellPos = nextPos;
+        if (CanGo(nextPos))
+        {
+            CellPos = nextPos;
+        }
+        else
+        {
+            State = CreatureState.Idle;
+        }
     }
-
+    public override IEnumerator CoSkill()
+    {
+        
+    }
     #region State Controll
     protected override void UpdateAnimation()
     {
