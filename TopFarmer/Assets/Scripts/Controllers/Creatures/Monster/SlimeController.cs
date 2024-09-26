@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using UnityEditorInternal;
 using UnityEngine;
 using static Define;
 
@@ -94,7 +96,30 @@ public class SlimeController : MonsterController
     }
     public override IEnumerator CoSkill()
     {
-        
+        Vector3 targetPos = _target.transform.position;
+        Vector3 dir = _target.transform.position - transform.parent.position;
+
+        while(dir.magnitude>0.1f)
+        {
+            transform.parent.position = Vector3.MoveTowards(transform.parent.position, targetPos, _speed * Time.deltaTime);
+
+            dir = targetPos - transform.parent.position;
+
+            Collider2D hit = Physics2D.OverlapCircle(transform.parent.position, _skillRange, _mask);
+            if (hit != null && hit.gameObject.layer == (int)Layer.Player)
+            {
+                Debug.Log("공격 성공! 적이 맞았습니다: " + hit.name);
+                break;
+            }
+
+            yield return null;
+        }
+      
+
+        yield return new WaitForSeconds(2f);
+        State = CreatureState.Idle;
+        _coSkill = null;
+
     }
     #region State Controll
     protected override void UpdateAnimation()

@@ -18,10 +18,10 @@ public class MonsterController : CreatureController
     [Header("Target")]
     [SerializeField] protected GameObject _target;
     [SerializeField] float _viewAngle;
-    [SerializeField] protected float _searchRange = 10f;
-    [SerializeField] protected float _skillRange = 1.0f;
+    [SerializeField] protected float _searchRange;
+    [SerializeField] protected float _skillRange;
 
-    protected int _mask = (1 << (int)Layer.Wall);
+    protected int _mask = (1 << (int)Layer.Wall | (1 << (int)Layer.Player));
     public GameObject Target { get { return _target; } }
     public float ViewAngle { get { return _viewAngle; } }
     public float SearchRange { get { return _searchRange; } }
@@ -220,7 +220,6 @@ public class MonsterController : CreatureController
     public virtual IEnumerator CoSkill()
     {
         yield return new WaitForSeconds(0.3f);
-        Debug.Log("Skill");
         State = CreatureState.Moving;
         _coSkill = null;
     }

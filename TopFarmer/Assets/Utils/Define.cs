@@ -177,6 +177,7 @@ public class Define
    
     public enum Layer
     {
+        Player = 6,
         Wall =7,
     }
     #region State
