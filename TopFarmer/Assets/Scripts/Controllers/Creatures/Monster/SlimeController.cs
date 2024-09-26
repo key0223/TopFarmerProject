@@ -26,12 +26,10 @@ public class SlimeController : MonsterController
         Vector3 moveDir = destPos - transform.parent.position;
         float dist = moveDir.magnitude;
 
-        Dir = GetDirFromVec(moveDir);
-
         if (dist < _speed * Time.deltaTime)
         {
             transform.parent.position = destPos;
-            CellPos = _pathQueue.Dequeue();
+            //CellPos = _pathQueue.Dequeue();
 
             if (_pathQueue.Count > 0)
             {
@@ -50,6 +48,42 @@ public class SlimeController : MonsterController
             State = CreatureState.Moving;
         }
     }
+    protected override void MoveToNextPos()
+    {
+        Vector3Int destPos = _destCellPos;
+
+        if (_target != null)
+        {
+            destPos = GetGridPosition(_target.transform.position);
+
+            Vector3Int dir = destPos - CellPos;
+            if (dir.magnitude <= _skillRange && (dir.x == 0 || dir.y == 0))
+            {
+                Dir = GetDirFromVec(dir);
+                State = CreatureState.Skill;
+                _coSkill = StartCoroutine("CoSkill");
+
+                return;
+            }
+        }
+
+        SetDestination(destPos);
+
+        if (_pathQueue.Count < 2 || (_target != null && _pathQueue.Count > 10))
+        {
+            _target = null;
+            State = CreatureState.Idle;
+            return;
+        }
+
+        // 다음 목적지로 이동할 준비
+        Vector3Int nextPos = _pathQueue.Dequeue();
+        Vector3Int moveCellDir = nextPos - CellPos;
+
+        Dir = GetDirFromVec(moveCellDir);
+        CellPos = nextPos;
+    }
+
     #region State Controll
     protected override void UpdateAnimation()
     {

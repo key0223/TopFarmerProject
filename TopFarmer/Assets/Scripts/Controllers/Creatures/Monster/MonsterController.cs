@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -13,10 +14,10 @@ public class MonsterController : CreatureController
     protected Queue<Vector3Int> _pathQueue = new Queue<Vector3Int>();
 
     [Header("Target")]
-    [SerializeField] GameObject _target;
+    [SerializeField] protected GameObject _target;
     [SerializeField] float _viewAngle;
-    [SerializeField] float _searchRange = 10f;
-    [SerializeField] float _skillRange = 1.0f;
+    [SerializeField] protected float _searchRange = 10f;
+    [SerializeField] protected float _skillRange = 1.0f;
 
     public GameObject Target { get { return _target; } }
     public float ViewAngle { get { return _viewAngle; } }
@@ -39,6 +40,11 @@ public class MonsterController : CreatureController
                 StopCoroutine(_coPatrol);
                 _coPatrol = null;
             }
+            if (_coSearch != null)
+            {
+                StopCoroutine(_coSearch);
+                _coSearch = null;
+            }
         }
     }
 
@@ -49,7 +55,7 @@ public class MonsterController : CreatureController
         State = CreatureState.Idle;
         Dir = MoveDir.None;
 
-        _target = FindObjectOfType<PlayerController>().gameObject;
+        //_target = FindObjectOfType<PlayerController>().gameObject;
         // TODO : speed, 변수 초기화
          _speed = 3f;
         CellPos = GetGridPosition(transform.position);
@@ -79,6 +85,11 @@ public class MonsterController : CreatureController
         if (_coPatrol == null)
         {
             _coPatrol = StartCoroutine("CoPatrol");
+        }
+
+        if (_coSearch == null)
+        {
+            _coSearch = StartCoroutine("CoSearch");
         }
     }
     protected override void UpdateMoving()
@@ -121,8 +132,10 @@ public class MonsterController : CreatureController
 
     protected override void MoveToNextPos()
     {
-        if (_pathQueue.Count < 2 || _pathQueue.Count > 10)
+
+        if (_pathQueue.Count < 2 ||_pathQueue.Count > 10)
         {
+            _target = null;
             State = CreatureState.Idle;
             return;
         }
@@ -132,10 +145,10 @@ public class MonsterController : CreatureController
         Vector3Int moveCellDir = nextPos - CellPos;
 
         Dir = GetDirFromVec(moveCellDir);
-        _destCellPos = nextPos;
+        CellPos = nextPos;
     }
 
-    
+
     public IEnumerator CoPatrol()
     {
         int waitSeconds = Random.Range(1, 8);
@@ -148,11 +161,49 @@ public class MonsterController : CreatureController
 
         _destCellPos = randPos;
         SetDestination(_destCellPos);
-        //State = CreatureState.Moving;
+        State = CreatureState.Moving;
 
         yield return new WaitForSeconds(Random.Range(2, 5));
     }
 
+    public IEnumerator CoSearch()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1);
+
+            if (_target != null)
+                continue;
+
+            PlayerController foundTarget = FindObjectsOfType<PlayerController>().FirstOrDefault(pc =>
+            {
+                Vector3Int dir = GetGridPosition(pc.transform.position) - CellPos;
+
+                if (dir.magnitude > _searchRange)
+                    return false;
+
+                return true;
+            });  
+
+            if (foundTarget != null)
+            {
+                _target = foundTarget.gameObject;  
+            }
+            else
+            {
+                _target = null; 
+            }
+
+        }
+    }
+
+    public virtual IEnumerator CoSkill()
+    {
+        yield return new WaitForSeconds(0.3f);
+        Debug.Log("Skill");
+        State = CreatureState.Moving;
+        _coSkill = null;
+    }
     #region Path
     public void SetDestination(Vector3Int destPos)
     {
@@ -237,6 +288,7 @@ public class MonsterController : CreatureController
         }
         return new Vector3(Mathf.Cos(angleInDegrees * Mathf.Deg2Rad), Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0);
     }
+    /*
     private void OnDrawGizmos()
     {
         // 시야 범위 원형 표시 (2D 환경용, X-Y 평면에서 그리기)
@@ -269,7 +321,7 @@ public class MonsterController : CreatureController
         // 시야각 값이 변경될 때마다 Scene 뷰를 갱신
         UnityEditor.SceneView.RepaintAll();
     }
-
+    */
     protected void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision != null)
