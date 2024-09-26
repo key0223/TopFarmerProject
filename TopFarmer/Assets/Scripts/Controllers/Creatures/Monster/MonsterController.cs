@@ -269,4 +269,12 @@ public class MonsterController : CreatureController
         // 시야각 값이 변경될 때마다 Scene 뷰를 갱신
         UnityEditor.SceneView.RepaintAll();
     }
+
+    protected void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision != null)
+        {
+            Debug.Log(collision.gameObject.name);
+        }
+    }
 }

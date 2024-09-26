@@ -230,6 +230,7 @@ public class Define
        EFFECT_REAPING,
        EFFECT_WEED,
        EFFECT_LAEAVES_FALLING,
+       EFFECT_BREAKING_STONE,
     }
     
     public enum Sound
