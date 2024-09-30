@@ -27,6 +27,22 @@ namespace Data
     }
 
     [Serializable]
+    public class WeaponItemLoader : ILoader<int, ItemData>
+    {
+        public List<WeaponData> array = new List<WeaponData>();
+        public Dictionary<int, ItemData> MakeDict()
+        {
+            Dictionary<int, ItemData> dict = new Dictionary<int, ItemData>();
+
+            foreach (ItemData item in array)
+            {
+                dict.Add(item.itemId, item);
+            }
+            return dict;
+        }
+    }
+
+    [Serializable]
     public class CropLoader : ILoader<int, CropData>
     {
         public List<CropData> array = new List<CropData>();

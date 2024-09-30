@@ -17,3 +17,14 @@ public class ItemData
     public bool canBeEaten;
     public bool canBeCarried;
 }
+
+public class WeaponData : ItemData
+{
+   public string damage;
+    public float knokback;
+    public float speed;
+    public int defense;
+    public int weaponType;
+    public bool canBeLostOnDeath;
+    public string projectiles;
+}

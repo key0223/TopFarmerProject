@@ -36,9 +36,14 @@ public class Item : MonoBehaviour
                 //gameObject.name = itemData.itemName;
                 _renderer.sprite = Managers.Data.SpriteDict[itemData.itemSpritePath];
 
-                if (itemData.itemType == ItemType.ITEM_REAPABLE_SCENARY)
+                switch(itemData.itemType)
                 {
-                    Util.GetOrAddComponent<ItemNudge>(gameObject);
+                    case ItemType.ITEM_REAPABLE_SCENARY:
+                        Util.GetOrAddComponent<ItemNudge>(gameObject);
+                        break;
+                    case ItemType.ITEM_WEAPON:
+                        Weapon weapon = new Weapon(itemId);
+                        break;
                 }
             }
 

@@ -336,6 +336,20 @@
 				"canBeDropped": true,
 				"canBeEaten": false,
 				"canBeCarried": true
+			},
+			{
+				"itemId": 325,
+				"itemType": "ITEM_COMODITY",
+				"itemSpritePath": "Objects_386",
+				"itemName": "Stone",
+				"itemDescription": "A common material with many uses in crafting and building.",
+				"itemUseGridRadius": 2,
+				"itemUseRaius": 0,
+				"isStartingItem": false,
+				"canBePickedUp": true,
+				"canBeDropped": true,
+				"canBeEaten": false,
+				"canBeCarried": true
 			}
 		]
 }

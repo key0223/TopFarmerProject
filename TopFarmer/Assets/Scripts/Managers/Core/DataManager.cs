@@ -37,7 +37,8 @@ public class DataManager
         Dictionary<int,ItemData> reapableDict = LoadJson<Data.ItemLoader, int,ItemData>("ItemData_Reapable").MakeDict();
         Dictionary<int,ItemData> seedDict = LoadJson<Data.ItemLoader, int,ItemData>("ItemData_Seed").MakeDict();
         Dictionary<int,ItemData> toolDict = LoadJson<Data.ItemLoader, int,ItemData>("ItemData_Tool").MakeDict();
-        ItemDict = CombinedDict<int, ItemData>(comodityDict, reapableDict, seedDict,toolDict);
+        Dictionary<int,ItemData> weaponDict = LoadJson<Data.WeaponItemLoader, int,ItemData>("ItemData_Weapon").MakeDict();
+        ItemDict = CombinedDict<int, ItemData>(comodityDict, reapableDict, seedDict,toolDict,weaponDict);
 
         Dictionary<int, CropData> cropDict = LoadJson<Data.CropLoader, int, CropData>("ItemData_Crop").MakeDict();
         CropDict = CombinedDict<int, CropData>(cropDict);

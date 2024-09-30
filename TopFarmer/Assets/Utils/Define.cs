@@ -281,7 +281,16 @@ public class Define
         ITEM_TOOL_PICKAXE,
         ITEM_TOOL_SCYTHE,
         ITEM_TOOL_COLLECTING,
+        ITEM_WEAPON,
         COUNT,
+    }
+
+    public enum WeaponType
+    {
+        WEAPON_SWORD_STABBING,
+        WEAPON_DAGGER,
+        WEAPON_CLUB,
+        WEAPON_SWORD_SLASHING,
     }
    
    

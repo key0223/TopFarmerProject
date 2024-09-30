@@ -8,11 +8,12 @@
 				"itemName": "Parsnip Seeds",
 				"itemDescription": "Plant these in the spring. Takes 4 days to mature.",
 				"itemUseGridRadius": 2,
+				"itemUseRaius": 0,
 				"isStartingItem": false,
 				"canBePickedUp": true,
 				"canBeDropped": true,
 				"canBeEaten": false,
-				"canBeCarried2": true
+				"canBeCarried": true
 			},
 			{
 				"itemId": 202,
@@ -26,7 +27,7 @@
 				"canBePickedUp": true,
 				"canBeDropped": true,
 				"canBeEaten": false,
-				"canBeCarried2": true
+				"canBeCarried": true
 			},
 			{
 				"itemId": 203,
@@ -40,7 +41,7 @@
 				"canBePickedUp": true,
 				"canBeDropped": true,
 				"canBeEaten": false,
-				"canBeCarried2": true
+				"canBeCarried": true
 			},
 			{
 				"itemId": 204,
@@ -54,7 +55,7 @@
 				"canBePickedUp": true,
 				"canBeDropped": true,
 				"canBeEaten": false,
-				"canBeCarried2": true
+				"canBeCarried": true
 			},
 			{
 				"itemId": 205,
@@ -68,7 +69,7 @@
 				"canBePickedUp": true,
 				"canBeDropped": true,
 				"canBeEaten": false,
-				"canBeCarried2": true
+				"canBeCarried": true
 			},
 			{
 				"itemId": 206,
@@ -82,7 +83,7 @@
 				"canBePickedUp": true,
 				"canBeDropped": true,
 				"canBeEaten": false,
-				"canBeCarried2": true
+				"canBeCarried": true
 			},
 			{
 				"itemId": 207,
@@ -96,7 +97,7 @@
 				"canBePickedUp": true,
 				"canBeDropped": true,
 				"canBeEaten": false,
-				"canBeCarried2": true
+				"canBeCarried": true
 			},
 			{
 				"itemId": 208,
@@ -110,7 +111,7 @@
 				"canBePickedUp": true,
 				"canBeDropped": true,
 				"canBeEaten": false,
-				"canBeCarried2": true
+				"canBeCarried": true
 			},
 			{
 				"itemId": 209,
@@ -124,7 +125,7 @@
 				"canBePickedUp": true,
 				"canBeDropped": true,
 				"canBeEaten": false,
-				"canBeCarried2": true
+				"canBeCarried": true
 			},
 			{
 				"itemId": 210,
@@ -138,7 +139,7 @@
 				"canBePickedUp": true,
 				"canBeDropped": true,
 				"canBeEaten": false,
-				"canBeCarried2": true
+				"canBeCarried": true
 			},
 			{
 				"itemId": 211,
@@ -152,7 +153,7 @@
 				"canBePickedUp": true,
 				"canBeDropped": true,
 				"canBeEaten": false,
-				"canBeCarried2": true
+				"canBeCarried": true
 			},
 			{
 				"itemId": 212,
@@ -166,7 +167,7 @@
 				"canBePickedUp": true,
 				"canBeDropped": true,
 				"canBeEaten": false,
-				"canBeCarried2": true
+				"canBeCarried": true
 			},
 			{
 				"itemId": 213,
@@ -180,7 +181,7 @@
 				"canBePickedUp": true,
 				"canBeDropped": true,
 				"canBeEaten": false,
-				"canBeCarried2": true
+				"canBeCarried": true
 			},
 			{
 				"itemId": 214,
@@ -194,7 +195,7 @@
 				"canBePickedUp": true,
 				"canBeDropped": true,
 				"canBeEaten": false,
-				"canBeCarried2": true
+				"canBeCarried": true
 			},
 			{
 				"itemId": 215,
@@ -208,7 +209,7 @@
 				"canBePickedUp": true,
 				"canBeDropped": true,
 				"canBeEaten": false,
-				"canBeCarried2": true
+				"canBeCarried": true
 			},
 			{
 				"itemId": 216,
@@ -222,7 +223,7 @@
 				"canBePickedUp": true,
 				"canBeDropped": true,
 				"canBeEaten": false,
-				"canBeCarried2": true
+				"canBeCarried": true
 			},
 			{
 				"itemId": 217,
@@ -236,7 +237,7 @@
 				"canBePickedUp": true,
 				"canBeDropped": true,
 				"canBeEaten": false,
-				"canBeCarried2": true
+				"canBeCarried": true
 			},
 			{
 				"itemId": 218,
@@ -250,7 +251,7 @@
 				"canBePickedUp": true,
 				"canBeDropped": true,
 				"canBeEaten": false,
-				"canBeCarried2": true
+				"canBeCarried": true
 			},
 			{
 				"itemId": 219,
@@ -264,7 +265,7 @@
 				"canBePickedUp": true,
 				"canBeDropped": true,
 				"canBeEaten": false,
-				"canBeCarried2": true
+				"canBeCarried": true
 			},
 			{
 				"itemId": 220,
@@ -278,7 +279,7 @@
 				"canBePickedUp": true,
 				"canBeDropped": true,
 				"canBeEaten": false,
-				"canBeCarried2": true
+				"canBeCarried": true
 			},
 			{
 				"itemId": 221,
@@ -292,7 +293,7 @@
 				"canBePickedUp": true,
 				"canBeDropped": true,
 				"canBeEaten": false,
-				"canBeCarried2": true
+				"canBeCarried": true
 			},
 			{
 				"itemId": 222,
@@ -306,7 +307,7 @@
 				"canBePickedUp": true,
 				"canBeDropped": true,
 				"canBeEaten": false,
-				"canBeCarried2": true
+				"canBeCarried": true
 			},
 			{
 				"itemId": 223,
@@ -320,7 +321,7 @@
 				"canBePickedUp": true,
 				"canBeDropped": true,
 				"canBeEaten": false,
-				"canBeCarried2": true
+				"canBeCarried": true
 			},
 			{
 				"itemId": 224,
@@ -334,7 +335,7 @@
 				"canBePickedUp": true,
 				"canBeDropped": true,
 				"canBeEaten": false,
-				"canBeCarried2": true
+				"canBeCarried": true
 			},
 			{
 				"itemId": 225,
@@ -348,7 +349,7 @@
 				"canBePickedUp": true,
 				"canBeDropped": true,
 				"canBeEaten": false,
-				"canBeCarried2": true
+				"canBeCarried": true
 			},
 			{
 				"itemId": 226,
@@ -362,7 +363,7 @@
 				"canBePickedUp": true,
 				"canBeDropped": true,
 				"canBeEaten": false,
-				"canBeCarried2": true
+				"canBeCarried": true
 			},
 			{
 				"itemId": 227,
@@ -375,7 +376,7 @@
 				"canBePickedUp": true,
 				"canBeDropped": false,
 				"canBeEaten": false,
-				"canBeCarried2": false
+				"canBeCarried": false
 			},
 			{
 				"itemId": 228,
@@ -388,7 +389,7 @@
 				"canBePickedUp": true,
 				"canBeDropped": false,
 				"canBeEaten": false,
-				"canBeCarried2": false
+				"canBeCarried": false
 			},
 			{
 				"itemId": 229,
@@ -401,7 +402,59 @@
 				"canBePickedUp": true,
 				"canBeDropped": false,
 				"canBeEaten": false,
-				"canBeCarried2": false
+				"canBeCarried": false
+			},
+			{
+				"itemId": 230,
+				"itemType": "ITEM_SEED",
+				"itemSpritePath": "Objects_30",
+				"itemName": "Stone1 Seed",
+				"itemUseGridRadius": 0,
+				"itemUseRaius": 0,
+				"isStartingItem": false,
+				"canBePickedUp": false,
+				"canBeDropped": false,
+				"canBeEaten": false,
+				"canBeCarried": false
+			},
+			{
+				"itemId": 231,
+				"itemType": "ITEM_SEED",
+				"itemSpritePath": "Objects_36",
+				"itemName": "Stone2 Seed",
+				"itemUseGridRadius": 0,
+				"itemUseRaius": 0,
+				"isStartingItem": false,
+				"canBePickedUp": false,
+				"canBeDropped": false,
+				"canBeEaten": false,
+				"canBeCarried": false
+			},
+			{
+				"itemId": 232,
+				"itemType": "ITEM_SEED",
+				"itemSpritePath": "Objects_38",
+				"itemName": "Stone3 Seed",
+				"itemUseGridRadius": 0,
+				"itemUseRaius": 0,
+				"isStartingItem": false,
+				"canBePickedUp": false,
+				"canBeDropped": false,
+				"canBeEaten": false,
+				"canBeCarried": false
+			},
+			{
+				"itemId": 233,
+				"itemType": "ITEM_SEED",
+				"itemSpritePath": "Objects_40",
+				"itemName": "Stone4 Seed",
+				"itemUseGridRadius": 0,
+				"itemUseRaius": 0,
+				"isStartingItem": false,
+				"canBePickedUp": false,
+				"canBeDropped": false,
+				"canBeEaten": false,
+				"canBeCarried": false
 			}
 		]
 }
