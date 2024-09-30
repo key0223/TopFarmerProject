@@ -10,6 +10,18 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class MonsterController : CreatureController
 {
+    #region Monster Info
+    protected int _hp;
+    protected int _damage;
+    protected int _defense;
+    protected bool _flayable;
+    protected float _randomdurantionMovement;
+    protected Dictionary<int, float> _dropItemDict = new Dictionary<int, float>();
+    protected int _xp;
+    protected string _displayName;
+    #endregion
+
+
     protected Grid _grid;
     public Vector3Int CellPos { get; set; } = Vector3Int.zero;
     protected Vector3Int _destCellPos;
@@ -17,7 +29,7 @@ public class MonsterController : CreatureController
 
     [Header("Target")]
     [SerializeField] protected GameObject _target;
-    [SerializeField] float _viewAngle;
+    [SerializeField] protected float _viewAngle;
     [SerializeField] protected float _searchRange;
     [SerializeField] protected float _skillRange;
 
@@ -143,7 +155,7 @@ public class MonsterController : CreatureController
             return;
         }
 
-        // 다음 목적지로 이동할 준비
+        // Prepare to move to the next position
         Vector3Int nextPos = _pathQueue.Dequeue();
         Vector3Int moveCellDir = nextPos - CellPos;
 
@@ -162,7 +174,7 @@ public class MonsterController : CreatureController
 
     public IEnumerator CoPatrol()
     {
-        int waitSeconds = Random.Range(1, 8);
+        int waitSeconds = Random.Range(1, 4);
         yield return new WaitForSeconds(waitSeconds);
 
         for (int i = 0; i < 10; i++)
@@ -188,32 +200,35 @@ public class MonsterController : CreatureController
 
     public IEnumerator CoSearch()
     {
-        while (true)
+        PlayerController pc = FindObjectOfType<PlayerController>();
+
+        if (pc == null)
         {
-            yield return new WaitForSeconds(1);
+            _target = null;
+            yield break; // 코루틴 종료
+        }
 
-            if (_target != null)
-                continue;
+        if (pc != null)
+        {
+            Vector2 dirToTarget = pc.transform.position - transform.position;
 
-            PlayerController foundTarget = FindObjectsOfType<PlayerController>().FirstOrDefault(pc =>
+            Vector2 currentDir = GetVecFromDir(Dir);
+
+            if (Vector2.Angle(currentDir, dirToTarget) < _viewAngle)
             {
-                Vector3Int dir = GetGridPosition(pc.transform.position) - CellPos;
-
-                if (dir.magnitude > _searchRange)
-                    return false;
-
-                return true;
-            });
-
-            if (foundTarget != null)
-            {
-                _target = foundTarget.gameObject;
+                if (dirToTarget.magnitude <= _searchRange)
+                {
+                    _target = pc.gameObject;
+                }
+                else
+                {
+                    _target = null;
+                }
             }
             else
             {
                 _target = null;
             }
-
         }
     }
 
@@ -296,9 +311,9 @@ public class MonsterController : CreatureController
         return neighbors;
     }
     #endregion
-    public override void OnDamaged()
+    public override void OnDamaged(int damage)
     {
-        base.OnDamaged();
+        base.OnDamaged(damage);
     }
     public Vector3 DirFromAngle(float angleInDegrees, bool angleIsGlobal)
     {
@@ -306,7 +321,7 @@ public class MonsterController : CreatureController
         {
             angleInDegrees += transform.eulerAngles.z; // Z축을 기준으로 회전
         }
-        return new Vector3(Mathf.Cos(angleInDegrees * Mathf.Deg2Rad), Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0);
+        return new Vector3(Mathf.Cos(angleInDegrees * Mathf.Deg2Rad), Mathf.Sin(angleInDegrees * Mathf.Deg2Rad));
     }
     private void OnDrawGizmos()
     {
@@ -315,15 +330,16 @@ public class MonsterController : CreatureController
 
         // 시야 범위 원형 표시 (2D 환경용, X-Y 평면에서 그리기)
         Gizmos.color = Color.white;
-        Gizmos.DrawWireSphere(transform.position, _searchRange);
+        Vector3 position = new Vector3(transform.position.x, transform.position.y, 0);
+        Gizmos.DrawWireSphere(position, _searchRange);
 
         // 시야각 표시
         Vector3 viewAngleA = DirFromAngle(-_viewAngle / 2, false);  // 왼쪽 시야각
         Vector3 viewAngleB = DirFromAngle(_viewAngle / 2, false);   // 오른쪽 시야각
 
         // 시야각을 선으로 표시 (2D 평면)
-        Gizmos.DrawLine(transform.position, transform.position + viewAngleA * _searchRange);
-        Gizmos.DrawLine(transform.position, transform.position + viewAngleB * _searchRange);
+        Gizmos.DrawLine(position, transform.position + viewAngleA * _searchRange);
+        Gizmos.DrawLine(position, transform.position + viewAngleB * _searchRange);
 
         // 타겟이 보이면 빨간색으로 선을 그림
         Gizmos.color = Color.red;
@@ -355,7 +371,6 @@ public class MonsterController : CreatureController
 
         if (hit.collider != null)
         {
-            Debug.Log("앞에 장애물이 있습니다: " + hit.collider.name);
             return false;
         }
 

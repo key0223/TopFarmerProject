@@ -13,13 +13,25 @@ public class SlimeController : MonsterController
     {
         base.Init();
         CellPos = GetGridPosition(transform.parent.position);
-        _searchRange = 2f;
+
+        #region Init Stat
+        _hp = 24;
+        _damage = 5;
+        _defense = 1;
+        _searchRange = 5f;
         _skillRange = 1f;
+        _speed = 3f;
+        _randomdurantionMovement = 9;
+        //_dropItemDict = 
+        _xp = 3;
+        _displayName = "Green Slime";
+
+        #endregion
         //_faceSpriteRendere = transform.Find("Face").GetComponent<SpriteRenderer>();
     }
     protected override void UpdateMoving()
     {
-        // destPos로 이동하고 도착하면 CellPos를 갱신
+        // Move to the destPos and update CellPos upon arrival
         if (_pathQueue.Count == 0)
         {
             State = CreatureState.Idle;
@@ -39,11 +51,6 @@ public class SlimeController : MonsterController
             {
                 MoveToNextPos();
             }
-            else
-            {
-                State = CreatureState.Idle;
-                return;
-            }
         }
         else
         {
@@ -59,9 +66,9 @@ public class SlimeController : MonsterController
         if (_target != null)
         {
             destPos = GetGridPosition(_target.transform.position);
-
             Vector3Int dir = destPos - CellPos;
-            if (dir.magnitude <= _skillRange && (dir.x == 0 || dir.y == 0))
+
+            if (dir.magnitude <= _skillRange)
             {
                 Dir = GetDirFromVec(dir);
                 State = CreatureState.Skill;
@@ -80,7 +87,7 @@ public class SlimeController : MonsterController
             return;
         }
 
-        // 다음 목적지로 이동할 준비
+        // Prepare to move to the next destination
         Vector3Int nextPos = _pathQueue.Dequeue();
         Vector3Int moveCellDir = nextPos - CellPos;
 
@@ -99,7 +106,7 @@ public class SlimeController : MonsterController
         Vector3 targetPos = _target.transform.position;
         Vector3 dir = _target.transform.position - transform.parent.position;
 
-        while(dir.magnitude>0.1f)
+        while (dir.magnitude > 0.1f)
         {
             transform.parent.position = Vector3.MoveTowards(transform.parent.position, targetPos, _speed * Time.deltaTime);
 
@@ -108,16 +115,18 @@ public class SlimeController : MonsterController
             Collider2D hit = Physics2D.OverlapCircle(transform.parent.position, _skillRange, _mask);
             if (hit != null && hit.gameObject.layer == (int)Layer.Player)
             {
-                Debug.Log("공격 성공! 적이 맞았습니다: " + hit.name);
+                PlayerController pc = hit.gameObject.transform.parent.GetComponent<PlayerController>();
+                pc.OnDamaged(_damage);
+                Debug.Log("CoSkill Collider hit: " + hit.name);
                 break;
             }
 
             yield return null;
         }
-      
 
-        yield return new WaitForSeconds(2f);
-        State = CreatureState.Idle;
+
+        yield return new WaitForSeconds(3f);
+        State = CreatureState.Moving;
         _coSkill = null;
 
     }

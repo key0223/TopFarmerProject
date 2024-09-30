@@ -7,6 +7,13 @@ using static Define;
 
 public class PlayerController : CreatureController, ISaveable
 {
+    #region Player Stat
+    int _currentHp;
+    int _maxHp = 100;
+    int _currentStamina;
+    int _maxStamina = 230;
+    #endregion
+
     private static PlayerController _instance;
     public static PlayerController Instance { get { return _instance; } }
 
@@ -69,19 +76,6 @@ public class PlayerController : CreatureController, ISaveable
 
     Coroutine _coClickInput;
    
-    public MoveDir GetDirFromVec(Vector3 dir)
-    {
-        if (dir.x > 0)
-            return MoveDir.Right;
-        else if (dir.x < 0)
-            return MoveDir.Left;
-        else if (dir.y > 0)
-            return MoveDir.Up;
-        else if (dir.y < 0)
-            return MoveDir.Down;
-        else
-            return MoveDir.None;
-    }
     Vector3Int GetPlayerClickDirection(Vector3Int cursorGridPos, Vector3Int playerGridPos)
     {
         Vector3Int dir = Vector3Int.zero;
@@ -201,7 +195,9 @@ public class PlayerController : CreatureController, ISaveable
 
         _toolEffect = FindObjectOfType<ToolEffectAnimationController>();
 
-        _speed = 35f;
+        _speed = 30f;
+        _currentHp = _maxHp;
+        _currentStamina = _maxStamina;
 
     }
   
@@ -899,7 +895,17 @@ public class PlayerController : CreatureController, ISaveable
         return animationName;
     }
 
-
+    public override void OnDamaged(int damage)
+    {
+        base.OnDamaged(damage);
+        _currentHp -= damage;
+        Debug.Log($"Remain Hp  : {_currentHp}");
+        if (_currentHp <= 0)
+        {
+            _currentHp = 0;
+            Debug.Log("Player Dead");
+        }
+    }
     #region Save
     public void ISaveableRegister()
     {

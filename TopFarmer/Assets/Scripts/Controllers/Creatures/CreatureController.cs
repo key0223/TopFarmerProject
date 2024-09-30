@@ -75,7 +75,27 @@ public class CreatureController : ObjectController
         else
             return MoveDir.None;
     }
+    public Vector3 GetVecFromDir(MoveDir moveDir)
+    {
+        Vector3 currentDir = Vector3.zero;
+        switch (moveDir)
+        {
+            case MoveDir.Right:
+                currentDir = Vector2.right;  
+                break;
+            case MoveDir.Left:
+                currentDir = Vector2.left;  
+                break;
+            case MoveDir.Up:
+                currentDir = Vector2.up;    
+                break;
+            case MoveDir.Down:
+                currentDir = Vector2.down;   
+                break;
+        }
 
+        return currentDir;
+    }
     #region State Controll
     protected virtual void UpdateAnimation()
     {
@@ -246,7 +266,7 @@ public class CreatureController : ObjectController
 
     }
 
-    public virtual void OnDamaged()
+    public virtual void OnDamaged(int damage)
     {
         _repeatCount = _repeat;
         StartCoroutine(CoFlicker());
