@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static Define;
+using Random = UnityEngine.Random;
 
 public class PlayerController : CreatureController, ISaveable
 {
     #region Player Stat
-    int _currentHp;
+    float _currentHp;
     int _maxHp = 100;
     int _currentStamina;
     int _maxStamina = 230;
@@ -609,7 +610,17 @@ public class PlayerController : CreatureController, ISaveable
     public void OnMonsterTriggered(Collider2D coll)
     {
         //TODO : Decrease monster's hp;
-        Debug.Log("Monster Hit");
+        ItemData itemData = InventoryManager.Instance.GetSelectedInventoryItemData(InventoryType.INVEN_PLAYER);
+        if (itemData == null) return;
+        WeaponData data = (WeaponData)itemData;
+        MonsterController mc = coll.GetComponentInChildren<MonsterController>();
+
+        string[] damageArray = data.damage.Split(",");
+        float minDamage = float.Parse(damageArray[0]);
+        float maxDamage = float.Parse(damageArray[1]);
+        
+        float randDamage = Random.Range(minDamage, maxDamage);
+        mc.OnDamaged(randDamage,data.knokback);
     }
     #region Tool Coroutines
     void WaterGroundAtCursor(GridPropertyDetails gridPropertyDetails, Vector3Int playerDirection)
@@ -943,7 +954,7 @@ public class PlayerController : CreatureController, ISaveable
         return animationName;
     }
 
-    public override void OnDamaged(int damage)
+    public override void OnDamaged(float damage)
     {
         base.OnDamaged(damage);
         _currentHp -= damage;

@@ -11,7 +11,8 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 public class MonsterController : CreatureController
 {
     #region Monster Info
-    protected int _hp;
+    protected float _maxHp;
+    protected float _currentHp;
     protected int _damage;
     protected int _defense;
     protected bool _flayable;
@@ -41,6 +42,9 @@ public class MonsterController : CreatureController
     protected Coroutine _coSkill;
     protected Coroutine _coPatrol;
     protected Coroutine _coSearch;
+
+    protected float _knockbackDuration = 0.2f;
+    protected bool _isKnockback = false;
     public override CreatureState State
     {
         get { return _state; }
@@ -72,7 +76,9 @@ public class MonsterController : CreatureController
 
         //_target = FindObjectOfType<PlayerController>().gameObject;
         // TODO : speed, 변수 초기화
+
         _speed = 3f;
+        _currentHp = _maxHp;
         CellPos = GetGridPosition(transform.position);
     }
     protected Vector3Int GetGridPosition(Vector3 worldPosition)
@@ -238,6 +244,49 @@ public class MonsterController : CreatureController
         State = CreatureState.Moving;
         _coSkill = null;
     }
+    public override void OnDamaged(float damage,float knockbackDistance)
+    {
+        base.OnDamaged(damage,knockbackDistance);
+
+        if(!_isKnockback)
+        {
+            Vector3 knockbackDirection = (transform.position - GetVecFromDir(_lastDir)).normalized;
+            knockbackDirection.y = 0;
+
+            StartCoroutine(CoKnckback(knockbackDirection, knockbackDistance));
+        }
+
+        damage -= _defense;
+        _currentHp -= damage;
+        if (_currentHp <= 0)
+        {
+            _currentHp = 0;
+        }
+    }
+
+    public virtual IEnumerator CoKnckback(Vector3 direction, float knockbackDistance)
+    {
+        _isKnockback = true;
+
+        // 밀려나는 시간을 기준으로 이동
+        float elapsedTime = 0f;
+        Vector3 initialPosition = transform.position;
+        Vector3 targetPosition = transform.position + direction * knockbackDistance;
+
+        while (elapsedTime < _knockbackDuration)
+        {
+            // Lerp를 사용해 처음 위치에서 목표 위치로 부드럽게 이동
+            transform.position = Vector3.Lerp(initialPosition, targetPosition, elapsedTime / _knockbackDuration);
+            elapsedTime += Time.deltaTime;
+
+            yield return null;  // 다음 프레임까지 대기
+        }
+
+        // 마지막 위치를 목표 위치로 설정
+        transform.position = targetPosition;
+
+        _isKnockback = false;  // 밀려남이 끝남
+    }
     #region Path
     public void SetDestination(Vector3Int destPos)
     {
@@ -311,9 +360,22 @@ public class MonsterController : CreatureController
         return neighbors;
     }
     #endregion
-    public override void OnDamaged(int damage)
+   
+    protected bool CanGo(Vector3Int targetPosition)
     {
-        base.OnDamaged(damage);
+
+        Vector3 direction = (targetPosition - Vector3Int.FloorToInt(transform.position));
+        Vector3 normalizedDir = direction.normalized;
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, normalizedDir, 1f, _mask);
+
+
+        if (hit.collider != null)
+        {
+            return false;
+        }
+
+        return true;
     }
     public Vector3 DirFromAngle(float angleInDegrees, bool angleIsGlobal)
     {
@@ -345,7 +407,7 @@ public class MonsterController : CreatureController
         Gizmos.color = Color.red;
 
         float dist = (_target.transform.position - transform.position).magnitude;
-        if (dist<= _searchRange)
+        if (dist <= _searchRange)
         {
             Gizmos.DrawLine(transform.position, _target.transform.position);
         }
@@ -358,22 +420,5 @@ public class MonsterController : CreatureController
     {
         // 시야각 값이 변경될 때마다 Scene 뷰를 갱신
         UnityEditor.SceneView.RepaintAll();
-    }
-
-    protected bool CanGo(Vector3Int targetPosition)
-    {
-
-        Vector3 direction = (targetPosition - Vector3Int.FloorToInt(transform.position));
-        Vector3 normalizedDir = direction.normalized;
-
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, normalizedDir, 1f, _mask);
-
-
-        if (hit.collider != null)
-        {
-            return false;
-        }
-
-        return true;
     }
 }

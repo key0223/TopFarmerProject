@@ -20,7 +20,7 @@ public class ItemData
 
 public class WeaponData : ItemData
 {
-   public string damage;
+    public string damage;
     public float knokback;
     public float speed;
     public int defense;

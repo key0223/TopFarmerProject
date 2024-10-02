@@ -15,7 +15,8 @@ public class SlimeController : MonsterController
         CellPos = GetGridPosition(transform.parent.position);
 
         #region Init Stat
-        _hp = 24;
+        _maxHp = 24;
+        _currentHp = _maxHp;
         _damage = 5;
         _defense = 1;
         _searchRange = 5f;
@@ -129,6 +130,29 @@ public class SlimeController : MonsterController
         State = CreatureState.Moving;
         _coSkill = null;
 
+    }
+    public override IEnumerator CoKnckback(Vector3 direction, float knockbackDistance)
+    {
+        _isKnockback = true;
+
+        // 밀려나는 시간을 기준으로 이동
+        float elapsedTime = 0f;
+        Vector3 initialPosition = transform.parent.position;
+        Vector3 targetPosition = transform.parent.position + direction * knockbackDistance;
+
+        while (elapsedTime < _knockbackDuration)
+        {
+            // Lerp를 사용해 처음 위치에서 목표 위치로 부드럽게 이동
+            transform.parent.position = Vector3.Lerp(initialPosition, targetPosition, elapsedTime / _knockbackDuration);
+            elapsedTime += Time.deltaTime;
+
+            yield return null;  // 다음 프레임까지 대기
+        }
+
+        // 마지막 위치를 목표 위치로 설정
+        transform.parent.position = targetPosition;
+
+        _isKnockback = false;  // 밀려남이 끝남
     }
     #region State Controll
     protected override void UpdateAnimation()

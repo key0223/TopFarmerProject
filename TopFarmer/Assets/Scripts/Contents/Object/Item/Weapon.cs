@@ -7,7 +7,7 @@ public class Weapon : Item
 {
     public int MinDamage { get; private set; }
     public int MaxDamage { get; private set; }
-    public float Knokback { get; private set; }
+    public float Knockback { get; private set; }
     public float Speed { get; private set; }
     public int Defense { get; private set; }
     public WeaponType WeaponType { get; private set; }
@@ -25,7 +25,7 @@ public class Weapon : Item
         string[] damageArray = data.damage.Split(",");
         MinDamage = int.Parse(damageArray[0]);
         MaxDamage = int.Parse(damageArray[1]);
-        Knokback = data.knokback;
+        Knockback = data.knokback;
         Speed = data.speed;
         Defense = data.defense;
         WeaponType = (WeaponType)data.weaponType;

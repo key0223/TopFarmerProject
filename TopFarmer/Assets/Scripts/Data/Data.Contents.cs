@@ -36,6 +36,7 @@ namespace Data
 
             foreach (ItemData item in array)
             {
+
                 dict.Add(item.itemId, item);
             }
             return dict;
