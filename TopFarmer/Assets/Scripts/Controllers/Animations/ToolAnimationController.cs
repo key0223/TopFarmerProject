@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using UnityEngine;
 using static Define;
 
@@ -37,8 +38,17 @@ public class ToolAnimationController : MonoBehaviour
                 _sprite.flipX = false;
                 break;
             case MoveDir.Left:
-                _animator.Play($"{animationName}_RIGHT");
-                _sprite.flipX = true;
+                {
+                    if (itemType == ItemType.ITEM_WEAPON)
+                    {
+                        _animator.Play($"{animationName}_LEFT");
+                    }
+                    else
+                    {
+                        _animator.Play($"{animationName}_RIGHT");
+                    }
+                    _sprite.flipX = true;
+                }
                 break;
             case MoveDir.Right:
                 _animator.Play($"{animationName}_RIGHT");
@@ -74,9 +84,20 @@ public class ToolAnimationController : MonoBehaviour
             case ItemType.ITEM_TOOL_COLLECTING:
                 animationName = "HARVEST";
                 break;
+            case ItemType.ITEM_WEAPON:
+                animationName = "STABBING";
+                break;
 
         }
 
         return animationName;
+    }
+
+    private void OnTriggerEnter2D(Collider2D coll)
+    {
+        if(coll.gameObject.CompareTag("Monster"))
+        {
+            PlayerController.Instance.OnMonsterTriggered(coll);
+        }
     }
 }

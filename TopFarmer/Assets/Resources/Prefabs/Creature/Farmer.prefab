@@ -515,6 +515,7 @@ GameObject:
   - component: {fileID: 7483467516554285002}
   - component: {fileID: 2022457204}
   - component: {fileID: 2022457205}
+  - component: {fileID: 4424948409614415953}
   m_Layer: 0
   m_Name: Tool
   m_TagString: Untagged
@@ -622,6 +623,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a328db5273c0d49a4be785b7020f72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!70 &4424948409614415953
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7483467516554285004}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.03976556, y: 0.52669805}
+  m_Size: {x: 0.36048755, y: 0.36048758}
+  m_Direction: 0
 --- !u!1 &8636227595880145410
 GameObject:
   m_ObjectHideFlags: 0

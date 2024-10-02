@@ -74,8 +74,7 @@ public class PlayerController : CreatureController, ISaveable
     Camera _mainCamera;
     Rigidbody2D _rigid;
 
-    Coroutine _coClickInput;
-   
+    Coroutine _coSkillCooltime;
     Vector3Int GetPlayerClickDirection(Vector3Int cursorGridPos, Vector3Int playerGridPos)
     {
         Vector3Int dir = Vector3Int.zero;
@@ -222,6 +221,7 @@ public class PlayerController : CreatureController, ISaveable
     
     protected override void UpdateAnimation()
     {
+        // play body animation
         if (_state == CreatureState.Idle)
         {
            
@@ -336,7 +336,7 @@ public class PlayerController : CreatureController, ISaveable
             {
                 case MoveDir.Up:
                     _animator.Play($"{animationName}_BACK");
-                    Managers.Event.StartToolAnimation(_lastDir,itemData.itemType);
+                    Managers.Event.StartToolAnimation(_lastDir, itemData.itemType);
                     _sprite.flipX = false;
                     break;
                 case MoveDir.Down:
@@ -477,6 +477,12 @@ public class PlayerController : CreatureController, ISaveable
                 case ItemType.ITEM_TOOL_COLLECTING:
                     ProcessPlayerClickInputTool(gridPropertyDetails, itemData, playerDirection);
                     break;
+                case ItemType.ITEM_WEAPON:
+                    if(_coSkillCooltime == null)
+                    {
+                        ProcessPlayerClickInputTool(gridPropertyDetails, itemData, playerDirection);
+                    }
+                    break;
                 case ItemType.NONE:
                     break;
                 case ItemType.COUNT:
@@ -565,10 +571,47 @@ public class PlayerController : CreatureController, ISaveable
                    CollectInPlayerDirection(gridPropertyDetails,itemData,playerDirection);
                 }
                 break;
+            case ItemType.ITEM_WEAPON:
+                {
+                    UseWeapon();
+                    Managers.Event.StartToolAnimation(_lastDir, itemData.itemType);
+                }
+
+                break;
 
         }
     }
+    void UseWeapon()
+    {
+        StartCoroutine(CoUseWeapon());
+    }
+    IEnumerator CoUseWeapon()
+    {
+        PlayerInputDisabled = true;
+        _playerToolUseDisabled = true;
+        State = CreatureState.ClickInput;
 
+        yield return _useToolAnimationPause;
+
+        yield return AfterUseToolAnimationPause;
+
+        Managers.Event.StartToolAnimation(MoveDir.None, ItemType.NONE);
+        PlayerInputDisabled = false;
+        _playerToolUseDisabled = false;
+        State = CreatureState.Moving;
+        _coSkillCooltime = StartCoroutine("ColnputCoolTime", 0.2f);
+    }
+    IEnumerator ColnputCoolTime(float time)
+    {
+        yield return new WaitForSeconds(time);
+        _coSkillCooltime = null;
+    }
+    public void OnMonsterTriggered(Collider2D coll)
+    {
+        //TODO : Decrease monster's hp;
+        Debug.Log("Monster Hit");
+    }
+    #region Tool Coroutines
     void WaterGroundAtCursor(GridPropertyDetails gridPropertyDetails, Vector3Int playerDirection)
     {
         SoundManager.Instance.PlaySound(Define.Sound.SOUND_WATERING);
@@ -582,14 +625,14 @@ public class PlayerController : CreatureController, ISaveable
 
         Dir = GetDirFromVec(playerDirection);
         State = CreatureState.ClickInput;
-        
+
         Vector3 gripPos = new Vector3(gridPropertyDetails.gridX, gridPropertyDetails.gridY);
         // Tool Effect
-        _toolEffect.UpdateAnimation(Dir, ItemType.ITEM_TOOL_WATERING,gripPos);
+        _toolEffect.UpdateAnimation(Dir, ItemType.ITEM_TOOL_WATERING, gripPos);
 
         yield return _useToolAnimationPause;
 
-        if(gridPropertyDetails.daysSinceWatered == -1)
+        if (gridPropertyDetails.daysSinceWatered == -1)
         {
             gridPropertyDetails.daysSinceWatered = 0;
         }
@@ -602,7 +645,7 @@ public class PlayerController : CreatureController, ISaveable
         yield return new WaitForSeconds(_animator.GetCurrentAnimatorClipInfo(0).Length);
 
         Managers.Event.StartToolAnimation(MoveDir.None, ItemType.NONE);
-        _toolEffect.UpdateAnimation(MoveDir.None, ItemType.NONE,Vector3.zero);
+        _toolEffect.UpdateAnimation(MoveDir.None, ItemType.NONE, Vector3.zero);
 
         PlayerInputDisabled = false;
         _playerToolUseDisabled = false;
@@ -613,6 +656,7 @@ public class PlayerController : CreatureController, ISaveable
     {
         SoundManager.Instance.PlaySound(Define.Sound.SOUND_HOE);
         StartCoroutine(CoHoeGroundAtCursorRoutine(playerDirection, gridPropertyDetails));
+
     }
 
     IEnumerator CoHoeGroundAtCursorRoutine(Vector3Int playerDirection, GridPropertyDetails gridPropertyDetails)
@@ -626,7 +670,7 @@ public class PlayerController : CreatureController, ISaveable
 
         yield return _useToolAnimationPause;
 
-        if(gridPropertyDetails.daysSinceDug== -1)
+        if (gridPropertyDetails.daysSinceDug == -1)
         {
             gridPropertyDetails.daysSinceDug = 0;
         }
@@ -640,7 +684,7 @@ public class PlayerController : CreatureController, ISaveable
 
         yield return AfterUseToolAnimationPause;
 
-        yield return  new WaitForSeconds(_animator.GetCurrentAnimatorClipInfo(0).Length);
+        yield return new WaitForSeconds(_animator.GetCurrentAnimatorClipInfo(0).Length);
         Managers.Event.StartToolAnimation(MoveDir.None, ItemType.NONE);
 
         PlayerInputDisabled = false;
@@ -666,7 +710,7 @@ public class PlayerController : CreatureController, ISaveable
 
         AnimatorClipInfo[] currentClip = _animator.GetCurrentAnimatorClipInfo(0);
 
-        yield return new WaitForSeconds(currentClip[0].clip.length) ;
+        yield return new WaitForSeconds(currentClip[0].clip.length);
 
         Managers.Event.StartToolAnimation(MoveDir.None, ItemType.NONE);
 
@@ -720,10 +764,10 @@ public class PlayerController : CreatureController, ISaveable
         }
     }
 
-    void ChopInPlayerDirection(GridPropertyDetails gridPropertyDetails, ItemData itemData,Vector3Int playerDirection)
+    void ChopInPlayerDirection(GridPropertyDetails gridPropertyDetails, ItemData itemData, Vector3Int playerDirection)
     {
         SoundManager.Instance.PlaySound(Define.Sound.SOUND_AXE);
-        StartCoroutine(CoChopInPlayerDirection(gridPropertyDetails,itemData,playerDirection));
+        StartCoroutine(CoChopInPlayerDirection(gridPropertyDetails, itemData, playerDirection));
     }
     IEnumerator CoChopInPlayerDirection(GridPropertyDetails gridPropertyDetails, ItemData itemData, Vector3Int playerDirection)
     {
@@ -763,7 +807,7 @@ public class PlayerController : CreatureController, ISaveable
         Dir = GetDirFromVec(playerDirection);
         State = CreatureState.ClickInput;
 
-        ProcessCropWithEquippedItemInPlayerDirection(gridPropertyDetails,equippedItemData, playerDirection);
+        ProcessCropWithEquippedItemInPlayerDirection(gridPropertyDetails, equippedItemData, playerDirection);
 
         yield return _useToolAnimationPause;
 
@@ -783,9 +827,9 @@ public class PlayerController : CreatureController, ISaveable
     {
         Crop crop = GridPropertiesManager.Instance.GetCropObjectAtGridLocation(gridPropertyDetails);
 
-        if(crop != null)
+        if (crop != null)
         {
-            switch(itemData.itemType)
+            switch (itemData.itemType)
             {
                 case ItemType.ITEM_TOOL_AXE:
                     crop.ProcessToolAction(itemData, _lastDir);
@@ -796,6 +840,7 @@ public class PlayerController : CreatureController, ISaveable
             }
         }
     }
+    #endregion
 
     #endregion
     // Set direction
@@ -888,6 +933,9 @@ public class PlayerController : CreatureController, ISaveable
                 break;
             case ItemType.ITEM_TOOL_COLLECTING:
                 animationName = "HARVEST";
+                break;
+            case ItemType.ITEM_WEAPON:
+                animationName = "SCYTHE";
                 break;
 
         }
