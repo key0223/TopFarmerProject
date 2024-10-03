@@ -141,7 +141,16 @@ public class BugController : MonsterController
             State = CreatureState.Moving;
         }
     }
-   
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            PlayerController pc = collision.gameObject.GetComponent<PlayerController>();
+            pc.OnDamaged(_damage);
+            Debug.Log("Bug Skill");
+        }
+    }
     Vector3 GetRandomPoint()
     {
         Vector3 point = Vector3.zero;

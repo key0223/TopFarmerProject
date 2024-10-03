@@ -309,6 +309,7 @@ public class Define
     public enum MonsterType
     {
         MONSTER_SLIME,
+        MONSTER_BUG,
     }
     #endregion
 
