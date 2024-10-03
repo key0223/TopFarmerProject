@@ -15,12 +15,14 @@ public class Managers : MonoBehaviour
     EventReporter _reporter = new EventReporter();  
     QuestManager _quest = new QuestManager();
     DialogueManager _dialogue = new DialogueManager();
+    VFXManager _vfx = new VFXManager();
 
     public static EventsHandler Event { get { return Instance._event; } }
     public static PlayerInfo PlayerInfo { get { return Instance._playerInfo; } }
     public static EventReporter Reporter { get {  return Instance._reporter; } }
     public static QuestManager Quest { get {  return Instance._quest; } }
     public static DialogueManager Dialogue { get {  return Instance._dialogue; } }
+    public static VFXManager VFX { get { return Instance._vfx; } }
 
     #endregion
 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogueManager : MonoBehaviour
+public class DialogueManager
 {
     public DialogueQueue _dialougeQueue;
     public UI_Dialogue DialogueUI {  get; private set; }

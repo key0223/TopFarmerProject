@@ -276,6 +276,12 @@ public class CreatureController : ObjectController
         _repeatCount = _repeat;
         StartCoroutine(CoFlicker());
     }
+
+    public virtual void OnDead()
+    {
+        State = CreatureState.Dead;
+    }
+
     #endregion
 
     public IEnumerator CoFlicker()

@@ -308,9 +308,7 @@ public class Define
     }
     public enum MonsterType
     {
-        MONSTER_TYPE_CONTACT,
-        MONSTER_TYPE_RANGED,
-        MONSTER_TYPE_COUNTERATTACK,
+        MONSTER_SLIME,
     }
     #endregion
 

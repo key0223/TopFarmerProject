@@ -64,6 +64,7 @@ public class MonsterController : CreatureController
                 StopCoroutine(_coSearch);
                 _coSearch = null;
             }
+
         }
     }
 
@@ -151,6 +152,7 @@ public class MonsterController : CreatureController
         }
     }
 
+   
     protected override void MoveToNextPos()
     {
 
@@ -175,6 +177,32 @@ public class MonsterController : CreatureController
         {
             State = CreatureState.Idle;
         }
+    }
+    public override void OnDamaged(float damage, float knockbackDistance)
+    {
+        base.OnDamaged(damage, knockbackDistance);
+
+        if (!_isKnockback)
+        {
+            Vector3 knockbackDirection = (transform.position - GetVecFromDir(_lastDir)).normalized;
+            knockbackDirection.y = 0;
+
+            StartCoroutine(CoKnckback(knockbackDirection, knockbackDistance));
+        }
+
+        damage -= _defense;
+        _currentHp -= damage;
+        if (_currentHp <= 0)
+        {
+            _currentHp = 0;
+            OnDead();
+        }
+    }
+
+    public override void OnDead()
+    {
+        base.OnDead();
+        Managers.VFX.OnMonsterDeath(MonsterType.MONSTER_SLIME, transform.position);
     }
 
 
@@ -244,26 +272,7 @@ public class MonsterController : CreatureController
         State = CreatureState.Moving;
         _coSkill = null;
     }
-    public override void OnDamaged(float damage,float knockbackDistance)
-    {
-        base.OnDamaged(damage,knockbackDistance);
-
-        if(!_isKnockback)
-        {
-            Vector3 knockbackDirection = (transform.position - GetVecFromDir(_lastDir)).normalized;
-            knockbackDirection.y = 0;
-
-            StartCoroutine(CoKnckback(knockbackDirection, knockbackDistance));
-        }
-
-        damage -= _defense;
-        _currentHp -= damage;
-        if (_currentHp <= 0)
-        {
-            _currentHp = 0;
-        }
-    }
-
+   
     public virtual IEnumerator CoKnckback(Vector3 direction, float knockbackDistance)
     {
         _isKnockback = true;

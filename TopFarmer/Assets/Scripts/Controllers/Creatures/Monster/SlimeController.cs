@@ -60,6 +60,8 @@ public class SlimeController : MonsterController
             State = CreatureState.Moving;
         }
     }
+
+    
     protected override void MoveToNextPos()
     {
         Vector3Int destPos = _destCellPos;
@@ -102,6 +104,13 @@ public class SlimeController : MonsterController
             State = CreatureState.Idle;
         }
     }
+    public override void OnDead()
+    {
+        State = CreatureState.Dead;
+        Color monsterColor = _sprite.color;
+        Managers.VFX.OnMonsterDeath(MonsterType.MONSTER_SLIME, transform.position, monsterColor);
+    }
+   
     public override IEnumerator CoSkill()
     {
         Vector3 targetPos = _target.transform.position;

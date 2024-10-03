@@ -50,9 +50,9 @@ public class DataManager
         Dictionary<int, Data.NpcData> merchantDict = LoadJson<Data.MerchantNpcLoader, int, Data.NpcData>("NpcData_Merchant").MakeDict();
         NpcDict = CombinedDict<int, Data.NpcData>(merchantDict);
 
-        // Monster
-        Dictionary<int, Data.MonsterData> monsterDict = LoadJson<Data.MonsterLoader, int, Data.MonsterData>("MonsterData_Monster").MakeDict();
-        MonsterDict = CombinedDict(monsterDict);
+        //// Monster
+        //Dictionary<int, Data.MonsterData> monsterDict = LoadJson<Data.MonsterLoader, int, Data.MonsterData>("MonsterData_Monster").MakeDict();
+        //MonsterDict = CombinedDict(monsterDict);
 
         #region String
         Dictionary<string, Data.StringData> npcStringDict = LoadJson<Data.StringLoader, string, Data.StringData>("StringData_Npc").MakeDict();
