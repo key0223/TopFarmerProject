@@ -141,7 +141,13 @@ public class BugController : MonsterController
             State = CreatureState.Moving;
         }
     }
-
+    public override void OnDead()
+    {
+        State = CreatureState.Dead;
+        Color monsterColor = _sprite.color;
+        Managers.VFX.OnMonsterDeath(MonsterType.MONSTER_BUG, transform.position);
+        Managers.Resource.Destroy(gameObject);
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.CompareTag("Player"))

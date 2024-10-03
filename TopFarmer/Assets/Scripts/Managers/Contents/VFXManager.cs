@@ -10,11 +10,21 @@ public class VFXManager
         switch (monsterType)
         {
             case MonsterType.MONSTER_SLIME:
-                GameObject effect = Managers.Resource.Instantiate("Effect/SlimeDeathEffect");
-                effect.transform.position = position;
-                // TODO: Effect destroy
-                DestroyItSelf destroy = effect.GetOrAddComponent<DestroyItSelf>();
-                destroy.Destory(1f);
+                {
+                    GameObject effect = Managers.Resource.Instantiate("Effect/SlimeDeathEffect");
+                    effect.transform.position = position;
+                    DestroyItSelf destroy = effect.GetOrAddComponent<DestroyItSelf>();
+                    destroy.Destory(1f);
+                }
+               
+                break;
+            case MonsterType.MONSTER_BUG:
+                {
+                    GameObject effect = Managers.Resource.Instantiate("Effect/BugDeathEffect");
+                    effect.transform.position = position;
+                    DestroyItSelf destroy = effect.GetOrAddComponent<DestroyItSelf>();
+                    destroy.Destory(1f);
+                }
                 break;
         }
 
