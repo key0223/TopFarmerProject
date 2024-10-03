@@ -106,12 +106,12 @@ public class MonsterController : CreatureController
         base.UpdateIdle();
         if (_coPatrol == null)
         {
-            _coPatrol = StartCoroutine("CoPatrol");
+            _coPatrol = StartCoroutine(CoPatrol());
         }
 
         if (_coSearch == null)
         {
-            _coSearch = StartCoroutine("CoSearch");
+            _coSearch = StartCoroutine(CoSearch());
         }
     }
     protected override void UpdateMoving()
@@ -207,7 +207,7 @@ public class MonsterController : CreatureController
     }
 
 
-    public IEnumerator CoPatrol()
+    public virtual IEnumerator CoPatrol()
     {
         int waitSeconds = Random.Range(1, 4);
         yield return new WaitForSeconds(waitSeconds);
