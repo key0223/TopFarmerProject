@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngineInternal;
 
-public class ResourceManager 
+public class ResourceManager
 {
     public T Load<T> (string path) where T : Object
     {

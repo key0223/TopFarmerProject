@@ -13,7 +13,8 @@ public class VFXManager
                 GameObject effect = Managers.Resource.Instantiate("Effect/SlimeDeathEffect");
                 effect.transform.position = position;
                 // TODO: Effect destroy
-                Debug.Log("Monster Effect");
+                DestroyItSelf destroy = effect.GetOrAddComponent<DestroyItSelf>();
+                destroy.Destory(1f);
                 break;
         }
 
@@ -32,6 +33,8 @@ public class VFXManager
                 main.startColor = color;
 
                 // TODO: Effect destroy
+                DestroyItSelf destroy = effect.GetOrAddComponent<DestroyItSelf>();
+                destroy.Destory(1f);
                 break;
         }
       

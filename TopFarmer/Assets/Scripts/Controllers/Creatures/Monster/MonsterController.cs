@@ -203,6 +203,7 @@ public class MonsterController : CreatureController
     {
         base.OnDead();
         Managers.VFX.OnMonsterDeath(MonsterType.MONSTER_SLIME, transform.position);
+        Managers.Resource.Destroy(gameObject);
     }
 
 

@@ -109,6 +109,7 @@ public class SlimeController : MonsterController
         State = CreatureState.Dead;
         Color monsterColor = _sprite.color;
         Managers.VFX.OnMonsterDeath(MonsterType.MONSTER_SLIME, transform.position, monsterColor);
+        Managers.Resource.Destroy(gameObject);
     }
    
     public override IEnumerator CoSkill()
