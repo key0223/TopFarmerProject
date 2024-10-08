@@ -233,7 +233,7 @@ public class MonsterController : CreatureController
         //yield return new WaitForSeconds(Random.Range(2, 5));
     }
 
-    public IEnumerator CoSearch()
+    public virtual IEnumerator CoSearch()
     {
         PlayerController pc = FindObjectOfType<PlayerController>();
 
@@ -395,7 +395,7 @@ public class MonsterController : CreatureController
         }
         return new Vector3(Mathf.Cos(angleInDegrees * Mathf.Deg2Rad), Mathf.Sin(angleInDegrees * Mathf.Deg2Rad));
     }
-    private void OnDrawGizmos()
+    protected void OnDrawGizmos()
     {
         if (_target == null)
             return;
@@ -426,7 +426,7 @@ public class MonsterController : CreatureController
         //    Gizmos.DrawLine(transform.position, visibleTarget.position);
         //}
     }
-    private void OnValidate()
+    protected void OnValidate()
     {
         // 시야각 값이 변경될 때마다 Scene 뷰를 갱신
         UnityEditor.SceneView.RepaintAll();

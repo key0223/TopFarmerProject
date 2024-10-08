@@ -310,6 +310,7 @@ public class Define
     {
         MONSTER_SLIME,
         MONSTER_BUG,
+        MONSTER_GHOST,
     }
     #endregion
 
