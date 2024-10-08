@@ -191,7 +191,7 @@ public class SlimeController : MonsterController
         State = CreatureState.Dead;
         Color monsterColor = _sprite.color;
         Managers.VFX.OnMonsterDeath(MonsterType.MONSTER_SLIME, transform.position, monsterColor);
-        Managers.Resource.Destroy(gameObject);
+        Managers.Resource.Destroy(transform.parent.gameObject);
     }
    
     public override IEnumerator CoSkill()
@@ -223,29 +223,29 @@ public class SlimeController : MonsterController
         _coSkill = null;
 
     }
-    public override IEnumerator CoKnckback(Vector3 direction, float knockbackDistance)
+    public override IEnumerator CoKnockback(Vector3 direction)
     {
         _isKnockback = true;
 
-        // 밀려나는 시간을 기준으로 이동
+
         float elapsedTime = 0f;
-        Vector3 initialPosition = transform.parent.position;
-        Vector3 targetPosition = transform.parent.position + direction * knockbackDistance;
+        float drag = 2f; // 넉백 중 감속 비율
+        Vector3 currentVelocity = (direction * 10);
+
+
 
         while (elapsedTime < _knockbackDuration)
         {
-            // Lerp를 사용해 처음 위치에서 목표 위치로 부드럽게 이동
-            transform.parent.position = Vector3.Lerp(initialPosition, targetPosition, elapsedTime / _knockbackDuration);
-            elapsedTime += Time.deltaTime;
+            currentVelocity = Vector3.Lerp(currentVelocity, Vector3.zero, drag * Time.deltaTime);
 
-            yield return null;  // 다음 프레임까지 대기
+            // 넉백 이동 적용
+            transform.parent.position += currentVelocity * Time.deltaTime;
+
+            elapsedTime += Time.deltaTime;
+            yield return null;  // 한 프레임 대기
         }
 
-        // 마지막 위치를 목표 위치로 설정
-        transform.parent.position = targetPosition;
-
-        _isKnockback = false;  // 밀려남이 끝남
+        // 넉백이 종료되면 상태 초기화
+        _isKnockback = false;
     }
-   
-
 }

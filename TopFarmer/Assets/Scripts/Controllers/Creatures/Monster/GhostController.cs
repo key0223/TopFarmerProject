@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEditorInternal;
 using UnityEngine;
 using static Define;
@@ -111,20 +110,33 @@ public class GhostController : MonsterController
 
     protected override void UpdateMoving()
     {
-        if(_target != null)
+        if (_target != null)
         {
-            Vector3 destPos =_target.transform.position;
+            Vector3 destPos = _target.transform.position;
             Vector3 moveDir = destPos - transform.parent.position;
             float dist = moveDir.magnitude;
 
-            if (dist < _speed * Time.deltaTime)
+            // 드래그 효과를 위한 속도 변수
+            Vector3 velocity = moveDir.normalized * _speed;
+
+            //if (dist <= 2f)
+            //{
+            //    float dragFactor = Mathf.Pow(dist / 2f, 2);  // 거리가 가까울수록 부드럽게 감소
+            //    velocity *= dragFactor;
+            //}
+
+            // 목표 지점에 가까워질수록 속도 감소 (드래그 효과)
+            float dragFactor = Mathf.Clamp01(dist / (_speed * 2f));  // 거리와 속도에 따라 드래그 비율 계산
+            velocity *= dragFactor;
+
+            if (dist < velocity.magnitude * Time.deltaTime)
             {
                 transform.parent.position = destPos;
                 State = CreatureState.Idle;
             }
             else
             {
-                transform.parent.position += moveDir.normalized * _speed * Time.deltaTime;
+                transform.parent.position += velocity * Time.deltaTime;
                 Dir = GetDirFromVec(moveDir);
                 State = CreatureState.Moving;
             }
@@ -133,32 +145,21 @@ public class GhostController : MonsterController
         {
             State = CreatureState.Idle;
         }
-        
-    }
-    public override void OnDamaged(float damage, float knockbackDistance)
-    {
-        base.OnDamaged(damage, knockbackDistance);
 
-        if (!_isKnockback)
-        {
-            Vector3 knockbackDirection = (transform.position - GetVecFromDir(_lastDir)).normalized;
-            knockbackDirection.y = 0;
-
-            StartCoroutine(CoKnckback(knockbackDirection, knockbackDistance));
-        }
-
-        damage -= _defense;
-        _currentHp -= damage;
-        if (_currentHp <= 0)
-        {
-            _currentHp = 0;
-            OnDead();
-        }
     }
     public override void OnDead()
     {
         base.OnDead();
         StartCoroutine(CoDead());
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            PlayerController pc = collision.gameObject.GetComponentInParent<PlayerController>();
+            pc.OnDamaged(_damage);
+        }
     }
     public override IEnumerator CoSearch()
     {
@@ -197,13 +198,43 @@ public class GhostController : MonsterController
             }
         }
     }
+    public override IEnumerator CoKnockback(Vector3 direction )
+    {
+        _isKnockback = true;
+
+        float elapsedTime = 0f;
+        float drag = 2f; // 넉백 중 감속 비율
+        Vector3 currentVelocity = (direction * 10);
+
+
+
+        while (elapsedTime < _knockbackDuration)
+        {
+            currentVelocity = Vector3.Lerp(currentVelocity, Vector3.zero, drag * Time.deltaTime);
+
+            // 넉백 이동 적용
+            transform.parent.position += currentVelocity * Time.deltaTime;
+
+            elapsedTime += Time.deltaTime;
+            yield return null;  // 한 프레임 대기
+        }
+
+        // 넉백이 종료되면 상태 초기화
+        _isKnockback = false;
+    }
     IEnumerator CoDead()
     {
+        float remainingTime = GetRemainingAnimationTime();
+        yield return new WaitForSeconds(remainingTime);
+
         _animator.Play("DEAD");
 
-        yield return new WaitForSeconds(GetAnimationClipLenth("DEAD"));
+        yield return null;
 
-        Managers.Resource.Destroy(gameObject);
+        float clipLength = GetAnimationClipLenth("DEAD");
+        yield return new WaitForSeconds(clipLength);
+
+        Managers.Resource.Destroy(transform.parent.gameObject);
     }
 
     AnimationClip GetAnimationClip(string name)
@@ -217,21 +248,41 @@ public class GhostController : MonsterController
         }
         return null;
     }
+    float GetRemainingAnimationTime(int layerIndex = 0)
+    {
+        AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(layerIndex);
+
+        float clipLength = stateInfo.length;
+        float normalizedTime = stateInfo.normalizedTime % 1f;
+
+        // 남은 시간 계산
+        float remainingTime = clipLength * (1f - normalizedTime);
+
+        return remainingTime;
+    }
 
     float GetAnimationClipLenth(string name)
     {
         AnimationClip clip = GetAnimationClip(name);
 
-        if(clip != null)
+        if (clip != null)
         {
-            float clipLength = clip.length;
-            float clipSpeed = clip.apparentSpeed;
+            AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
+            AnimatorClipInfo[] clipInfos = _animator.GetCurrentAnimatorClipInfo(0);
 
-            float actualLength = clipLength / clipSpeed;
+            foreach (AnimatorClipInfo clipInfo in clipInfos)
+            {
+                if (clipInfo.clip == clip)
+                {
+                    float clipLength = clip.length;  
+                    float clipSpeed = stateInfo.speed * _animator.speed;  
 
-            return actualLength;
+                    float actualLength = clipLength / clipSpeed;
+
+                    return actualLength;
+                }
+            }
         }
-
         return 1;
     }
 }

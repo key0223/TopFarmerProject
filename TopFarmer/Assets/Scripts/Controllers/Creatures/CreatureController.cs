@@ -266,12 +266,18 @@ public class CreatureController : ObjectController
 
     }
 
-    public virtual void OnDamaged(float damage,float knockbackDistance)
+   
+    public virtual void OnDamaged(float damage)
     {
         _repeatCount = _repeat;
         StartCoroutine(CoFlicker());
     }
-    public virtual void OnDamaged(float damage)
+    public virtual void OnDamaged(float damage, float knockbackDistance)
+    {
+        _repeatCount = _repeat;
+        StartCoroutine(CoFlicker());
+    }
+    public virtual void OnDamaged(float damage, float knockbackDistance, Vector3 collPos)
     {
         _repeatCount = _repeat;
         StartCoroutine(CoFlicker());

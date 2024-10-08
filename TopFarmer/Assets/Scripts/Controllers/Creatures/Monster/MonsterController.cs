@@ -43,7 +43,7 @@ public class MonsterController : CreatureController
     protected Coroutine _coPatrol;
     protected Coroutine _coSearch;
 
-    protected float _knockbackDuration = 0.2f;
+    protected float _knockbackDuration = 0.5f;
     protected bool _isKnockback = false;
     public override CreatureState State
     {
@@ -178,16 +178,15 @@ public class MonsterController : CreatureController
             State = CreatureState.Idle;
         }
     }
-    public override void OnDamaged(float damage, float knockbackDistance)
+    public override void OnDamaged(float damage, float knockbackDistance, Vector3 collPos)
     {
         base.OnDamaged(damage, knockbackDistance);
 
         if (!_isKnockback)
         {
-            Vector3 knockbackDirection = (transform.position - GetVecFromDir(_lastDir)).normalized;
-            knockbackDirection.y = 0;
+            Vector3 knockbackDirection = (transform.position - collPos).normalized;
 
-            StartCoroutine(CoKnckback(knockbackDirection, knockbackDistance));
+            ApplyKnockback(knockbackDirection, knockbackDistance);
         }
 
         damage -= _defense;
@@ -202,8 +201,7 @@ public class MonsterController : CreatureController
     public override void OnDead()
     {
         base.OnDead();
-        Managers.VFX.OnMonsterDeath(MonsterType.MONSTER_SLIME, transform.position);
-        Managers.Resource.Destroy(gameObject);
+       
     }
 
 
@@ -273,29 +271,39 @@ public class MonsterController : CreatureController
         State = CreatureState.Moving;
         _coSkill = null;
     }
-   
-    public virtual IEnumerator CoKnckback(Vector3 direction, float knockbackDistance)
+    public void ApplyKnockback(Vector3 direction, float knockbackDistance)
+    {
+        if (_isKnockback)
+            return;
+
+        direction = direction.normalized * knockbackDistance;
+        StartCoroutine(CoKnockback(direction));  // 코루틴 시작
+    }
+
+    public virtual IEnumerator CoKnockback(Vector3 direction)
     {
         _isKnockback = true;
 
-        // 밀려나는 시간을 기준으로 이동
+        
         float elapsedTime = 0f;
-        Vector3 initialPosition = transform.position;
-        Vector3 targetPosition = transform.position + direction * knockbackDistance;
+        float drag = 2f; // 넉백 중 감속 비율
+        Vector3 currentVelocity = direction;
+
+       
 
         while (elapsedTime < _knockbackDuration)
         {
-            // Lerp를 사용해 처음 위치에서 목표 위치로 부드럽게 이동
-            transform.position = Vector3.Lerp(initialPosition, targetPosition, elapsedTime / _knockbackDuration);
-            elapsedTime += Time.deltaTime;
+            currentVelocity = Vector3.Lerp(currentVelocity, Vector3.zero, drag * Time.deltaTime);
 
-            yield return null;  // 다음 프레임까지 대기
+            // 넉백 이동 적용
+            transform.position += currentVelocity * Time.deltaTime;
+
+            elapsedTime += Time.deltaTime;
+            yield return null;  // 한 프레임 대기
         }
 
-        // 마지막 위치를 목표 위치로 설정
-        transform.position = targetPosition;
-
-        _isKnockback = false;  // 밀려남이 끝남
+        // 넉백이 종료되면 상태 초기화
+        _isKnockback = false;
     }
     #region Path
     public void SetDestination(Vector3Int destPos)

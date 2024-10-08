@@ -607,6 +607,8 @@ public class PlayerController : CreatureController, ISaveable
         yield return new WaitForSeconds(time);
         _coSkillCooltime = null;
     }
+
+    //It is called when a monster is hit by a weapon
     public void OnMonsterTriggered(Collider2D coll)
     {
         //TODO : Decrease monster's hp;
@@ -620,7 +622,7 @@ public class PlayerController : CreatureController, ISaveable
         float maxDamage = float.Parse(damageArray[1]);
         
         float randDamage = Random.Range(minDamage, maxDamage);
-        mc.OnDamaged(randDamage,data.knokback);
+        mc.OnDamaged(randDamage,data.knokback,transform.position);
     }
     #region Tool Coroutines
     void WaterGroundAtCursor(GridPropertyDetails gridPropertyDetails, Vector3Int playerDirection)
