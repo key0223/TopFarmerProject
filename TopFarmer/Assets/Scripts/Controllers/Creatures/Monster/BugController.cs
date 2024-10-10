@@ -37,8 +37,6 @@ public class BugController : MonsterController
         _searchRange = 0f;
         _skillRange = 1f;
         _speed = 2f;
-        _randomdurantionMovement = 9;
-        //_dropItemDict = 
         _xp = 3;
         _displayName = "Bug";
         _pointA = transform.position;
@@ -146,6 +144,7 @@ public class BugController : MonsterController
         State = CreatureState.Dead;
         Color monsterColor = _sprite.color;
         Managers.VFX.OnMonsterDeath(MonsterType.MONSTER_BUG, transform.position);
+        DropItem();
         Managers.Resource.Destroy(gameObject);
     }
     private void OnCollisionEnter2D(Collision2D collision)

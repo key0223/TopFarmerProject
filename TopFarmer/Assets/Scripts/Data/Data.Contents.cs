@@ -171,16 +171,18 @@ namespace Data
     {
         public int monsterId;
         public string name;
-        public CreatureType creatureType;
         public string prefabPath;
         public MonsterType monsterType;
-        public int level;
         public int maxHp;
-        public int attack;
-        public float speed;
-        public int skillRange;
+        public int damage;
+        public int defense;
         public int searchRange;
-        public int totalExp;
+        public int skillRange;
+        public int speed;
+        public int randomdurantionMovement;
+        public int xp;
+        public string dropItems;
+        public Dictionary<int, float> dropTable;
     }
 
     [Serializable]
@@ -193,7 +195,31 @@ namespace Data
             Dictionary<int, MonsterData> dict = new Dictionary<int, MonsterData>();
             foreach (MonsterData monster in array)
             {
-                monster.creatureType = CreatureType.CREATURE_TYPE_MONSTER;
+                monster.dropTable = new Dictionary<int, float>();
+                string[] dropParts = monster.dropItems.Split(' ');
+
+                for (int i = 0; i < dropParts.Length; i += 2)
+                {
+                    int itemId;
+                    float probability;
+
+                    // 아이템 ID 변환 처리
+                    if (!int.TryParse(dropParts[i], out itemId))
+                    {
+                        Debug.LogError($"Invalid item ID format at index {i}: {dropParts[i]}");
+                        continue;  // 유효하지 않은 경우 건너뜀
+                    }
+
+                    // 확률 변환 처리
+                    if (!float.TryParse(dropParts[i + 1], out probability))
+                    {
+                        Debug.LogError($"Invalid probability format at index {i + 1}: {dropParts[i + 1]}");
+                        continue;  // 유효하지 않은 경우 건너뜀
+                    }
+
+                    // 드랍 테이블에 추가
+                    monster.dropTable.Add(itemId, probability);
+                }
                 dict.Add(monster.monsterId, monster);
             }
             return dict;

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -10,14 +11,14 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class MonsterController : CreatureController
 {
+    MonsterStat _stat;
+
     #region Monster Info
     protected float _maxHp;
     protected float _currentHp;
     protected int _damage;
     protected int _defense;
     protected bool _flayable;
-    protected float _randomdurantionMovement;
-    protected Dictionary<int, float> _dropItemDict = new Dictionary<int, float>();
     protected int _xp;
     protected string _displayName;
     #endregion
@@ -35,10 +36,7 @@ public class MonsterController : CreatureController
     [SerializeField] protected float _skillRange;
 
     protected int _mask = (1 << (int)Layer.Wall | (1 << (int)Layer.Player));
-    public GameObject Target { get { return _target; } }
-    public float ViewAngle { get { return _viewAngle; } }
-    public float SearchRange { get { return _searchRange; } }
-
+  
     protected Coroutine _coSkill;
     protected Coroutine _coPatrol;
     protected Coroutine _coSearch;
@@ -74,6 +72,7 @@ public class MonsterController : CreatureController
         _grid = GameObject.FindObjectOfType<Grid>();
         State = CreatureState.Idle;
         Dir = MoveDir.None;
+        _stat = gameObject.GetComponent<MonsterStat>();
 
         //_target = FindObjectOfType<PlayerController>().gameObject;
         // TODO : speed, 변수 초기화
@@ -201,10 +200,62 @@ public class MonsterController : CreatureController
     public override void OnDead()
     {
         base.OnDead();
-       
     }
 
+    protected  void DropItem()
+    {
+        List<int> dropItems = GetDropItems();
 
+        foreach (int item in dropItems)
+        {
+            Vector3 spawnPosition = new Vector3(transform.position.x + Random.Range(-1f, 1f), 
+                                                transform.position.y + Random.Range(-1f, 1f), 0f);
+            SceneItemsManager.Instance.InstantiateSceneItems(item, spawnPosition);
+        }
+    }
+    protected List<int> GetDropItems()
+    {
+        List<int> dropItems = new List<int>();
+
+        int dropCount = Random.Range(1, 3);
+
+        for (int i = 0; i < dropCount; i++)
+        {
+            float randomValue = Random.Range(0f, 1f);
+            float cumulativeProbability = 0f;
+
+            foreach (var item in Managers.Data.MonsterDict[_stat.MonsterId].dropTable)
+            {
+                cumulativeProbability += item.Value;
+                if (randomValue <= cumulativeProbability)
+                {
+                    dropItems.Add(item.Key);
+                    break; 
+                }
+            }
+        }
+
+        // if dropItems is empty
+        if (dropItems.Count == 0)
+        {
+            float randomValue = Random.Range(0f, 1f);
+            float cumulativeProbability = 0f;
+
+            foreach (var item in Managers.Data.MonsterDict[_stat.MonsterId].dropTable)
+            {
+                cumulativeProbability += item.Value;
+                if (randomValue <= cumulativeProbability)
+                {
+                    dropItems.Add(item.Key);
+                    break;
+                }
+            }
+        }
+
+        return dropItems;
+    }
+
+    #region Actions
     public virtual IEnumerator CoPatrol()
     {
         int waitSeconds = Random.Range(1, 4);
@@ -284,12 +335,12 @@ public class MonsterController : CreatureController
     {
         _isKnockback = true;
 
-        
+
         float elapsedTime = 0f;
         float drag = 2f; // 넉백 중 감속 비율
         Vector3 currentVelocity = direction;
 
-       
+
 
         while (elapsedTime < _knockbackDuration)
         {
@@ -305,6 +356,8 @@ public class MonsterController : CreatureController
         // 넉백이 종료되면 상태 초기화
         _isKnockback = false;
     }
+    #endregion
+
     #region Path
     public void SetDestination(Vector3Int destPos)
     {

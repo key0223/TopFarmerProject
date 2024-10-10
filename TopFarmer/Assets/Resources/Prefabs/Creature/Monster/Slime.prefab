@@ -284,6 +284,7 @@ GameObject:
   - component: {fileID: 2073530684839892803}
   - component: {fileID: 7309319860741807484}
   - component: {fileID: 4492520274264097203}
+  - component: {fileID: 5003297638472092277}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -428,3 +429,26 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.75197357, y: 0.37147993}
   m_EdgeRadius: 0
+--- !u!114 &5003297638472092277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2073530684839892805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6bc08a25fbe0884a83aefc430fb7f13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _monsterId: 0
+  _name: 
+  _monsterType: 0
+  _maxHp: 0
+  _damage: 0
+  _defense: 0
+  _searchRange: 0
+  _skillRange: 0
+  _speed: 0
+  _xp: 0
+  _currentHp: 0

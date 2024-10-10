@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 6523164131410448653}
   - component: {fileID: 6523164131410448642}
   - component: {fileID: 7139345210184604764}
+  - component: {fileID: 1073424984676541982}
   m_Layer: 0
   m_Name: Body
   m_TagString: Monster
@@ -186,3 +187,26 @@ MonoBehaviour:
   _viewAngle: 360
   _searchRange: 0
   _skillRange: 0
+--- !u!114 &1073424984676541982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6523164131410448640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6bc08a25fbe0884a83aefc430fb7f13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _monsterId: 0
+  _name: 
+  _monsterType: 0
+  _maxHp: 0
+  _damage: 0
+  _defense: 0
+  _searchRange: 0
+  _skillRange: 0
+  _speed: 0
+  _xp: 0
+  _currentHp: 0

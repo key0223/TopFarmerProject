@@ -5,6 +5,7 @@ using UnityEditorInternal;
 using UnityEngine;
 using static Define;
 
+[RequireComponent(typeof(MonsterStat))]
 public class SlimeController : MonsterController
 {
     [SerializeField] SpriteRenderer _faceSpriteRendere;
@@ -22,7 +23,6 @@ public class SlimeController : MonsterController
         _searchRange = 5f;
         _skillRange = 1f;
         _speed = 3f;
-        _randomdurantionMovement = 9;
         //_dropItemDict = 
         _xp = 3;
         _displayName = "Green Slime";
@@ -191,6 +191,7 @@ public class SlimeController : MonsterController
         State = CreatureState.Dead;
         Color monsterColor = _sprite.color;
         Managers.VFX.OnMonsterDeath(MonsterType.MONSTER_SLIME, transform.position, monsterColor);
+        DropItem();
         Managers.Resource.Destroy(transform.parent.gameObject);
     }
    

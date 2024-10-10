@@ -10,6 +10,7 @@ TagManager:
   - GroundDecoration2
   - CropsParentTransform
   - Monster
+  - MonstersParentTransform
   layers:
   - Default
   - TransparentFX

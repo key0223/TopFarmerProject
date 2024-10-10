@@ -129,7 +129,7 @@ public class SceneItemsManager : SingletonMonobehaviour<SceneItemsManager>,ISave
 
         foreach(SceneItem sceneItem in sceneItemList)
         {
-            itemGameObject = Managers.Resource.Instantiate("Object/Item/Item");
+            itemGameObject = Managers.Resource.Instantiate("Object/Item/Item",_parentItem);
             Vector3 position = new Vector3(sceneItem.position.x, sceneItem.position.y, sceneItem.position.z);
             itemGameObject.transform.position = position;
 

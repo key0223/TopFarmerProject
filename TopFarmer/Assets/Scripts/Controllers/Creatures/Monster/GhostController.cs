@@ -37,7 +37,6 @@ public class GhostController : MonsterController
         _searchRange = 15f;
         _skillRange = 0f;
         _speed = 4f;
-        _randomdurantionMovement = 9;
         //_dropItemDict = 
         _xp = 15;
         _displayName = "Ghost";
@@ -234,6 +233,7 @@ public class GhostController : MonsterController
         float clipLength = GetAnimationClipLenth("DEAD");
         yield return new WaitForSeconds(clipLength);
 
+        DropItem();
         Managers.Resource.Destroy(transform.parent.gameObject);
     }
 
