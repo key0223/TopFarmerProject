@@ -606,6 +606,7 @@ public class GridPropertiesManager : SingletonMonobehaviour<GridPropertiesManage
         return crop;
     }
 
+    
     /// <summary>
     /// Get the _grid property details for the tile at (gridX,gridY).  If no _grid property details exist null is returned and can assume that all _grid property details values are null or false
     /// </summary>
@@ -613,7 +614,11 @@ public class GridPropertiesManager : SingletonMonobehaviour<GridPropertiesManage
     {
         return GetGridPropertyDetails(gridX, gridY, _gridPropertyDict);
     }
-    
+    public void SetGridPropertyDict(Dictionary<string, GridPropertyDetails> gridPropertyDict)
+    {
+        this._gridPropertyDict = gridPropertyDict;
+
+    }
     public void ISaveableRegister()
     {
       Managers.Save.iSaveableObjectList.Add(this);

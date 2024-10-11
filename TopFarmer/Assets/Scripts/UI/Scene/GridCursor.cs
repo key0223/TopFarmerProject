@@ -277,6 +277,32 @@ public class GridCursor : MonoBehaviour
                     }
                     return false;
                 }
+            case ItemType.ITEM_TOOL_PICKAXE:
+                {
+                    if (gridPropertyDetails.seedItemId != -1)
+                    {
+                        CropData cropData = null;
+                        if (Managers.Data.CropDict.TryGetValue(gridPropertyDetails.seedItemId, out cropData))
+                        {
+                            if (gridPropertyDetails.growthDays >= cropData.totalGrowthDays)
+                            {
+                                if (cropData.CanUseToolToHarvestCrop(itemData.itemId))
+                                {
+                                    return true;
+                                }
+                                else
+                                {
+                                    return false;
+                                }
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                    return false;
+                }
             case ItemType.ITEM_TOOL_COLLECTING:
                 {
                     if (gridPropertyDetails.seedItemId != -1)

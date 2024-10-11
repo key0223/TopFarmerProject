@@ -29,28 +29,10 @@ public class Crop : MonoBehaviour
 
         Animator animator = GetComponentInChildren<Animator>();
 
-        //switch (dir)
-        //{
-        //    case MoveDir.Up:
-        //        animator.Play($"HARVEST_CROP_BACK");
-        //        _harvestedSpriteRenderer.flipX = false;
-        //        break;
-        //    case MoveDir.Down:
-        //        animator.Play($"HARVEST_CROP_FRONT");
-        //        _harvestedSpriteRenderer.flipX = false;
-        //        break;
-        //    case MoveDir.Left:
-        //        animator.Play($"HARVEST_CROP_RIGHT");
-        //        _harvestedSpriteRenderer.flipX = true;
-        //        break;
-        //    case MoveDir.Right:
-        //        animator.Play($"HARVEST_CROP_RIGHT");
-        //        _harvestedSpriteRenderer.flipX = false;
-        //        break;
-        //    case MoveDir.None:
+        if(cropData.isHarvestEffect) 
+        {
 
-        //        break;
-        //}
+        }
         int requireHarvestAction = cropData.requireHarvestAction;
         if (requireHarvestAction == -1) return;
 
@@ -90,7 +72,6 @@ public class Crop : MonoBehaviour
                     animator.gameObject.GetComponent<SpriteRenderer>().flipX = false;
                     break;
                 case MoveDir.None:
-
                     break;
             }
         }
@@ -144,7 +125,6 @@ public class Crop : MonoBehaviour
                     _harvestedSpriteRenderer.flipX = false;
                     break;
                 case MoveDir.None:
-
                     break;
             }
         }

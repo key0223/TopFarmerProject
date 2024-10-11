@@ -218,7 +218,6 @@ public class PlayerController : CreatureController, ISaveable
             SceneControllerManager.Instance.FadeAndLoadScene(Define.Scene.Scene1_Farm.ToString(), transform.position);
         }
     }
-
     
     protected override void UpdateAnimation()
     {
@@ -472,6 +471,9 @@ public class PlayerController : CreatureController, ISaveable
                 case ItemType.ITEM_TOOL_AXE:
                     ProcessPlayerClickInputTool(gridPropertyDetails, itemData, playerDirection);
                     break;
+                case ItemType.ITEM_TOOL_PICKAXE:
+                    ProcessPlayerClickInputTool(gridPropertyDetails, itemData, playerDirection);
+                    break;
                 case ItemType.ITEM_TOOL_SCYTHE:
                     ProcessPlayerClickInputTool(gridPropertyDetails, itemData, playerDirection);
                     break;
@@ -554,6 +556,13 @@ public class PlayerController : CreatureController, ISaveable
                 if(_gridCursor.CursorPositionIsValid)
                 {
                     ChopInPlayerDirection(gridPropertyDetails,itemData, playerDirection); 
+                    Managers.Event.StartToolAnimation(_lastDir, itemData.itemType);
+                }
+                break;
+            case ItemType.ITEM_TOOL_PICKAXE:
+                if (_gridCursor.CursorPositionIsValid)
+                {
+                    BreakingInPlayerDirection(gridPropertyDetails, itemData, playerDirection);
                     Managers.Event.StartToolAnimation(_lastDir, itemData.itemType);
                 }
                 break;
@@ -671,7 +680,6 @@ public class PlayerController : CreatureController, ISaveable
         StartCoroutine(CoHoeGroundAtCursorRoutine(playerDirection, gridPropertyDetails));
 
     }
-
     IEnumerator CoHoeGroundAtCursorRoutine(Vector3Int playerDirection, GridPropertyDetails gridPropertyDetails)
     {
         PlayerInputDisabled = true;
@@ -807,6 +815,36 @@ public class PlayerController : CreatureController, ISaveable
 
     }
 
+    void BreakingInPlayerDirection(GridPropertyDetails gridPropertyDetails, ItemData itemData, Vector3Int playerDirection)
+    {
+        SoundManager.Instance.PlaySound(Define.Sound.SOUND_PICKAXE);
+        StartCoroutine(CoBreakingInPlayerDirection(gridPropertyDetails, itemData, playerDirection));
+
+    }
+    IEnumerator CoBreakingInPlayerDirection(GridPropertyDetails gridPropertyDetails, ItemData equippedItemData, Vector3Int playerDirection)
+    {
+        PlayerInputDisabled = true;
+        _playerToolUseDisabled = true;
+
+        Dir = GetDirFromVec(playerDirection);
+        State = CreatureState.ClickInput;
+
+        ProcessCropWithEquippedItemInPlayerDirection(gridPropertyDetails, equippedItemData, playerDirection);
+
+        yield return _useToolAnimationPause;
+
+        AnimatorClipInfo[] currentClip = _animator.GetCurrentAnimatorClipInfo(0);
+
+        yield return new WaitForSeconds(currentClip[0].clip.length);
+
+        Managers.Event.StartToolAnimation(MoveDir.None, ItemType.NONE);
+
+        PlayerInputDisabled = false;
+        _playerToolUseDisabled = false;
+
+        State = CreatureState.Moving;
+    }
+
     void CollectInPlayerDirection(GridPropertyDetails gridPropertyDetails, ItemData itemdata, Vector3Int playerDicrection)
     {
         SoundManager.Instance.PlaySound(Define.Sound.SOUND_COLLECTING);
@@ -845,6 +883,9 @@ public class PlayerController : CreatureController, ISaveable
             switch (itemData.itemType)
             {
                 case ItemType.ITEM_TOOL_AXE:
+                    crop.ProcessToolAction(itemData, _lastDir);
+                    break;
+                case ItemType.ITEM_TOOL_PICKAXE:
                     crop.ProcessToolAction(itemData, _lastDir);
                     break;
                 case ItemType.ITEM_TOOL_COLLECTING:
