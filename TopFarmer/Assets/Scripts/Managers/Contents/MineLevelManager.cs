@@ -90,27 +90,25 @@ public class MineLevelManager : MonoBehaviour
 
                         GameObject stone;
 
-                        int[] growthStages = cropData.GetGrowthStages();
-                        Sprite[] growthSprites = cropData.GetGrowthSprites();
-
                         int currentGrowthStage = 0;
                         int daysCounter = cropData.totalGrowthDays;
 
-                        for (int i = growthStages.Length - 1; i >= 0; i--)
+                        for (int i = cropData.growthStages.Length - 1; i >= 0; i--)
                         {
                             if (detail.growthDays >= daysCounter)
                             {
                                 currentGrowthStage = i;
                                 break;
                             }
-                            daysCounter = daysCounter - growthStages[i];
+                            daysCounter = daysCounter - cropData.growthStages[i];
                         }
 
                         Vector3 worldPosition = _groundDecoration2.CellToWorld(new Vector3Int(detail.gridX, detail.gridY, 0));
                         worldPosition = new Vector3(worldPosition.x + Define.GridCellSize / 2, worldPosition.y, worldPosition.z);
 
+                        Sprite[] sprites = cropData.GetGrowthSprites();
                         stone = Managers.Resource.Instantiate("Object/Item/StoneStandard", _cropsParentTransform.transform);
-                        stone.GetComponentInChildren<SpriteRenderer>().sprite = growthSprites[currentGrowthStage];
+                        stone.GetComponentInChildren<SpriteRenderer>().sprite = sprites[currentGrowthStage];
                         stone.transform.position = worldPosition;
                         stone.GetComponent<Crop>()._cropGridPosition = new Vector2Int(detail.gridX, detail.gridY);
                     }

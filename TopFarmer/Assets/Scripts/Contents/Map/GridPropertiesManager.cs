@@ -110,24 +110,23 @@ public class GridPropertiesManager : SingletonMonobehaviour<GridPropertiesManage
             {
                 GameObject cropObject;
 
-                int[] growthStages = cropData.GetGrowthStages();
-                Sprite[] growthSprites = cropData.GetGrowthSprites();
-
                  int currentGrowthStage = 0;
                 int daysCounter = cropData.totalGrowthDays;
 
-                for (int i = growthStages.Length -1; i>=0; i--)
+                for (int i = cropData.growthStages.Length -1; i>=0; i--)
                 {
                     if(gridPropertyDetails.growthDays>= daysCounter)
                     {
                         currentGrowthStage = i;
                         break;
                     }
-                    daysCounter = daysCounter - growthStages[i];
+                    daysCounter = daysCounter - cropData.growthStages[i];
                 }
 
                 Vector3 worldPosition = _groundDecoration2.CellToWorld(new Vector3Int(gridPropertyDetails.gridX, gridPropertyDetails.gridY, 0));
                 worldPosition = new Vector3(worldPosition.x + Define.GridCellSize / 2, worldPosition.y, worldPosition.z);
+
+                Sprite[] sprites = cropData.GetGrowthSprites();
 
                 if (currentGrowthStage == 4)
                 {
@@ -144,14 +143,14 @@ public class GridPropertiesManager : SingletonMonobehaviour<GridPropertiesManage
                             break;
                         default:
                             cropObject = Managers.Resource.Instantiate(CropStandardPrefabPath, _cropParentTransform);
-                            cropObject.GetComponentInChildren<SpriteRenderer>().sprite = growthSprites[currentGrowthStage];
+                            cropObject.GetComponentInChildren<SpriteRenderer>().sprite = sprites[currentGrowthStage];
                             break;
                     }
                 }
                 else
                 {
                     cropObject = Managers.Resource.Instantiate(CropStandardPrefabPath, _cropParentTransform);
-                    cropObject.GetComponentInChildren<SpriteRenderer>().sprite = growthSprites[currentGrowthStage];
+                    cropObject.GetComponentInChildren<SpriteRenderer>().sprite = sprites[currentGrowthStage];
                 }
 
                 cropObject.transform.position = worldPosition;

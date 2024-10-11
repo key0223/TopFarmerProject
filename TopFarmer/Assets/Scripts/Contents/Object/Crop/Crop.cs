@@ -109,11 +109,10 @@ public class Crop : MonoBehaviour
     }
     private void SpawnHarvestItems(CropData cropData)
     {
-        int[] produceItems = cropData.GetProduceItems();
 
-        for (int i = 0; i < produceItems.Length; i++)
+        for (int i = 0; i < cropData.cropProducedItemIds.Length; i++)
         {
-            if (produceItems[i] == -1)
+            if (cropData.cropProducedItemIds[i] == -1)
                 continue;
 
             int cropToProduce;
@@ -134,12 +133,12 @@ public class Crop : MonoBehaviour
 
                 if (cropData.spawnCropProduceAtPlayerPosition)
                 {
-                    InventoryManager.Instance.AddItem(Define.InventoryType.INVEN_PLAYER, produceItems[i]);
+                    InventoryManager.Instance.AddItem(Define.InventoryType.INVEN_PLAYER, cropData.cropProducedItemIds[i]);
                 }
                 else
                 {
                     spawnPosition = new Vector3(transform.position.x + Random.Range(-1f, 1f), transform.position.y + Random.Range(-1f, 1f), 0f);
-                    SceneItemsManager.Instance.InstantiateSceneItems(produceItems[i], spawnPosition);
+                    SceneItemsManager.Instance.InstantiateSceneItems(cropData.cropProducedItemIds[i], spawnPosition);
                 }
             }
         }

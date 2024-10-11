@@ -36,7 +36,6 @@ namespace Data
 
             foreach (ItemData item in array)
             {
-
                 dict.Add(item.itemId, item);
             }
             return dict;
@@ -53,6 +52,7 @@ namespace Data
 
             foreach (CropData item in array)
             {
+                item.DataInit();
                 dict.Add(item.seedId, item);
             }
             return dict;
