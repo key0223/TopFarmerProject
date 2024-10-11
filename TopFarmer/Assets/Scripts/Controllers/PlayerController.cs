@@ -802,9 +802,8 @@ public class PlayerController : CreatureController, ISaveable
 
         yield return _useToolAnimationPause;
 
-        AnimatorClipInfo[] currentClip = _animator.GetCurrentAnimatorClipInfo(0);
-
-        yield return new WaitForSeconds(currentClip[0].clip.length);
+        float remainingTime = HelperMethods.GetRemainingAnimationTime(_animator);
+        yield return new WaitForSeconds(remainingTime);
 
         Managers.Event.StartToolAnimation(MoveDir.None, ItemType.NONE);
 

@@ -5,6 +5,7 @@ using static Define;
 
 public class VFXManager
 {
+    #region Monster
     public void OnMonsterDeath(MonsterType monsterType, Vector3 position)
     {
         switch (monsterType)
@@ -16,7 +17,7 @@ public class VFXManager
                     DestroyItSelf destroy = effect.GetOrAddComponent<DestroyItSelf>();
                     destroy.Destory(1f);
                 }
-               
+
                 break;
             case MonsterType.MONSTER_BUG:
                 {
@@ -28,11 +29,11 @@ public class VFXManager
                 break;
         }
 
-
     }
-    public void OnMonsterDeath(MonsterType monsterType, Vector3 position,Color color)
+
+    public void OnMonsterDeath(MonsterType monsterType, Vector3 position, Color color)
     {
-        switch(monsterType)
+        switch (monsterType)
         {
             case MonsterType.MONSTER_SLIME:
                 GameObject effect = Managers.Resource.Instantiate("Effect/SlimeDeathEffect");
@@ -47,7 +48,29 @@ public class VFXManager
                 destroy.Destory(1f);
                 break;
         }
-      
+
 
     }
+    #endregion
+
+    #region Crop
+    public void OnHarvestCrop(HarvestEffectType effectType, Vector3 position)
+    {
+        switch (effectType)
+        {
+            case HarvestEffectType.EFFECT_BREAKING_STONE:
+                {
+                    GameObject effect = Managers.Resource.Instantiate("Effect/BreakingStone");
+                    effect.transform.position = position;
+                    DestroyItSelf destroy = effect.GetOrAddComponent<DestroyItSelf>();
+                    destroy.Destory(1f);
+                }
+                break;
+         
+        }
+
+    }
+    #endregion
+
+
 }

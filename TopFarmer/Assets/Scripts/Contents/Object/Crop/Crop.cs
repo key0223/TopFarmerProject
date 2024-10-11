@@ -29,10 +29,6 @@ public class Crop : MonoBehaviour
 
         Animator animator = GetComponentInChildren<Animator>();
 
-        if(cropData.isHarvestEffect) 
-        {
-
-        }
         int requireHarvestAction = cropData.requireHarvestAction;
         if (requireHarvestAction == -1) return;
 
@@ -40,93 +36,7 @@ public class Crop : MonoBehaviour
 
         if (_harvestActionCount >= requireHarvestAction)
         {
-            HarvestAnimation(itemData, dir, animator);
             HarvestCrop(cropData, gridPropertyDetails, animator);
-        }
-        else
-        {
-            BeforeHarvestAnimation(itemData,dir,animator);
-        }
-    }
-
-    void BeforeHarvestAnimation(ItemData itemData, MoveDir dir, Animator animator)
-    {
-        if (itemData.itemType == ItemType.ITEM_TOOL_AXE)
-        {
-            switch (dir)
-            {
-                case MoveDir.Up:
-                    animator.Play($"TREEWOBBLE_RIGHT");
-                    animator.gameObject.GetComponent<SpriteRenderer>().flipX = false;
-                    break;
-                case MoveDir.Down:
-                    animator.Play($"TREEWOBBLE_RIGHT");
-                    animator.gameObject.GetComponent<SpriteRenderer>().flipX = false;
-                    break;
-                case MoveDir.Left:
-                    animator.Play($"TREEWOBBLE_RIGHT");
-                    animator.gameObject.GetComponent<SpriteRenderer>().flipX = false;
-                    break;
-                case MoveDir.Right:
-                    animator.Play($"TREEWOBBLE_RIGHT");
-                    animator.gameObject.GetComponent<SpriteRenderer>().flipX = false;
-                    break;
-                case MoveDir.None:
-                    break;
-            }
-        }
-
-    }
-    void HarvestAnimation(ItemData itemData,MoveDir dir, Animator animator)
-    {
-        if(itemData.itemType == ItemType.ITEM_TOOL_AXE)
-        {
-            switch (dir)
-            {
-                case MoveDir.Up:
-                    animator.Play($"TREEFALLING_RIGHT");
-                    animator.gameObject.GetComponent<SpriteRenderer>().flipX = false;
-                    break;
-                case MoveDir.Down:
-                    animator.Play($"TREEFALLING_RIGHT");
-                    animator.gameObject.GetComponent<SpriteRenderer>().flipX = false;
-                    break;
-                case MoveDir.Left:
-                    animator.Play($"TREEFALLING_RIGHT");
-                    animator.gameObject.GetComponent<SpriteRenderer>().flipX = false;
-                    break;
-                case MoveDir.Right:
-                    animator.Play($"TREEFALLING_RIGHT");
-                    animator.gameObject.GetComponent<SpriteRenderer>().flipX = false;
-                    break;
-                case MoveDir.None:
-
-                    break;
-            }
-        }
-        else if(itemData.itemType == ItemType.ITEM_TOOL_COLLECTING)
-        {
-            switch (dir)
-            {
-                case MoveDir.Up:
-                    animator.Play($"HARVEST_CROP_BACK");
-                    _harvestedSpriteRenderer.flipX = false;
-                    break;
-                case MoveDir.Down:
-                    animator.Play($"HARVEST_CROP_FRONT");
-                    _harvestedSpriteRenderer.flipX = false;
-                    break;
-                case MoveDir.Left:
-                    animator.Play($"HARVEST_CROP_RIGHT");
-                    _harvestedSpriteRenderer.flipX = true;
-                    break;
-                case MoveDir.Right:
-                    animator.Play($"HARVEST_CROP_RIGHT");
-                    _harvestedSpriteRenderer.flipX = false;
-                    break;
-                case MoveDir.None:
-                    break;
-            }
         }
     }
     private void HarvestCrop(CropData cropData, GridPropertyDetails gridPropertyDetails, Animator animator)
@@ -137,14 +47,14 @@ public class Crop : MonoBehaviour
             Sprite harvestSprite = null;
             if (Managers.Data.SpriteDict.TryGetValue(cropData.harvestedSpritePath, out harvestSprite))
             {
-                if(_harvestedSpriteRenderer != null)
+                if (_harvestedSpriteRenderer != null)
                 {
                     _harvestedSpriteRenderer.sprite = harvestSprite;
                 }
             }
         }
 
-        if(cropData.harvestSound != Define.Sound.NONE)
+        if (cropData.harvestSound != Define.Sound.NONE)
         {
             SoundManager.Instance.PlaySound(cropData.harvestSound);
         }
@@ -178,22 +88,25 @@ public class Crop : MonoBehaviour
         }
         else
         {
-            HarvestAction(cropData, gridPropertyDetails,animator);
+            HarvestAction(cropData, gridPropertyDetails);
         }
     }
 
-    private void HarvestAction(CropData cropData, GridPropertyDetails gridPropertyDetails, Animator animator)
+    private void HarvestAction(CropData cropData, GridPropertyDetails gridPropertyDetails)
     {
         SpawnHarvestItems(cropData);
 
-        if(cropData.harvedtedTransformItemId >0)
+        if (cropData.harvedtedTransformItemId > 0)
         {
             CreateHarvestedTransformCrop(cropData, gridPropertyDetails);
         }
-        StartCoroutine(WaitAndDestroy(animator));
-        //Managers.Resource.Destroy(gameObject);
-    }
 
+        if(cropData.isHarvestEffect)
+        {
+            Managers.VFX.OnHarvestCrop(cropData.harvestEffectType, transform.position);
+        }
+        Managers.Resource.Destroy(gameObject);
+    }
     private void SpawnHarvestItems(CropData cropData)
     {
         int[] produceItems = cropData.GetProduceItems();
@@ -203,7 +116,17 @@ public class Crop : MonoBehaviour
             if (produceItems[i] == -1)
                 continue;
 
-            int cropToProduce = Random.Range(cropData.cropProducedMinQuantity, cropData.cropProducedMaxQuantity);
+            int cropToProduce;
+
+            if (cropData.cropProducedMinQuantity == cropData.cropProducedMaxQuantity ||
+                cropData.cropProducedMaxQuantity < cropData.cropProducedMinQuantity)
+            {
+                cropToProduce = cropData.cropProducedMinQuantity;
+            }
+            else
+            {
+                cropToProduce = Random.Range(cropData.cropProducedMinQuantity, cropData.cropProducedMaxQuantity +1);
+            }
 
             for (int j = 0; j < cropToProduce; j++)
             {
@@ -221,25 +144,6 @@ public class Crop : MonoBehaviour
             }
         }
     }
-
-    IEnumerator ProcessHarvestrActionAfterAnimation(CropData cropData, GridPropertyDetails gridPropertyDetails, Animator animator)
-    {
-
-        AnimatorClipInfo[] currentClip = animator.GetCurrentAnimatorClipInfo(0);
-
-        yield return new WaitForSeconds(currentClip[0].clip.length);
-
-
-        HarvestAction(cropData, gridPropertyDetails, animator);
-    }
-    IEnumerator WaitAndDestroy(Animator animator)
-    {
-        AnimatorClipInfo[] currentClip = animator.GetCurrentAnimatorClipInfo(0);
-
-        yield return new WaitForSeconds(currentClip[0].clip.length);
-
-        Managers.Resource.Destroy(gameObject);
-    }
     private void CreateHarvestedTransformCrop(CropData cropData, GridPropertyDetails gridPropertyDetails)
     {
         // Update crop in grid properties
@@ -254,4 +158,18 @@ public class Crop : MonoBehaviour
         GridPropertiesManager.Instance.DisplayPlantedCrop(gridPropertyDetails);
     }
 
+    IEnumerator ProcessHarvestrActionAfterAnimation(CropData cropData, GridPropertyDetails gridPropertyDetails, Animator animator)
+    {
+        if (animator != null)
+        {
+            AnimatorClipInfo[] currentClip = animator.GetCurrentAnimatorClipInfo(0);
+
+            if( currentClip.Length>0)
+            {
+                yield return new WaitForSeconds(currentClip[0].clip.length);
+            }
+        }
+
+        HarvestAction(cropData, gridPropertyDetails);
+    }
 }

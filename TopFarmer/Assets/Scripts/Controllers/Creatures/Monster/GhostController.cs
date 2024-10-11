@@ -223,66 +223,19 @@ public class GhostController : MonsterController
     }
     IEnumerator CoDead()
     {
-        float remainingTime = GetRemainingAnimationTime();
+        float remainingTime = HelperMethods.GetRemainingAnimationTime(_animator);
         yield return new WaitForSeconds(remainingTime);
 
         _animator.Play("DEAD");
 
         yield return null;
 
-        float clipLength = GetAnimationClipLenth("DEAD");
+        float clipLength = HelperMethods.GetAnimationClipLenth(_animator,"DEAD");
         yield return new WaitForSeconds(clipLength);
 
         DropItem();
         Managers.Resource.Destroy(transform.parent.gameObject);
     }
 
-    AnimationClip GetAnimationClip(string name)
-    {
-        foreach (AnimationClip clip in _animator.runtimeAnimatorController.animationClips)
-        {
-            if (clip.name == name)
-            {
-                return clip;
-            }
-        }
-        return null;
-    }
-    float GetRemainingAnimationTime(int layerIndex = 0)
-    {
-        AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(layerIndex);
-
-        float clipLength = stateInfo.length;
-        float normalizedTime = stateInfo.normalizedTime % 1f;
-
-        // 남은 시간 계산
-        float remainingTime = clipLength * (1f - normalizedTime);
-
-        return remainingTime;
-    }
-
-    float GetAnimationClipLenth(string name)
-    {
-        AnimationClip clip = GetAnimationClip(name);
-
-        if (clip != null)
-        {
-            AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
-            AnimatorClipInfo[] clipInfos = _animator.GetCurrentAnimatorClipInfo(0);
-
-            foreach (AnimatorClipInfo clipInfo in clipInfos)
-            {
-                if (clipInfo.clip == clip)
-                {
-                    float clipLength = clip.length;  
-                    float clipSpeed = stateInfo.speed * _animator.speed;  
-
-                    float actualLength = clipLength / clipSpeed;
-
-                    return actualLength;
-                }
-            }
-        }
-        return 1;
-    }
+   
 }
