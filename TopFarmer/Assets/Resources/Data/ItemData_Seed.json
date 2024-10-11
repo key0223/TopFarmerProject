@@ -455,6 +455,45 @@
 				"canBeDropped": false,
 				"canBeEaten": false,
 				"canBeCarried": false
+			},
+			{
+				"itemId": 234,
+				"itemType": "ITEM_SEED",
+				"itemSpritePath": "Objects_747",
+				"itemName": "Copper Node",
+				"itemUseGridRadius": 0,
+				"itemUseRaius": 0,
+				"isStartingItem": false,
+				"canBePickedUp": false,
+				"canBeDropped": false,
+				"canBeEaten": false,
+				"canBeCarried": false
+			},
+			{
+				"itemId": 235,
+				"itemType": "ITEM_SEED",
+				"itemSpritePath": "Objects_287",
+				"itemName": "Iron Node",
+				"itemUseGridRadius": 0,
+				"itemUseRaius": 0,
+				"isStartingItem": false,
+				"canBePickedUp": false,
+				"canBeDropped": false,
+				"canBeEaten": false,
+				"canBeCarried": false
+			},
+			{
+				"itemId": 236,
+				"itemType": "ITEM_SEED",
+				"itemSpritePath": "Objects_760",
+				"itemName": "Gold Node",
+				"itemUseGridRadius": 0,
+				"itemUseRaius": 0,
+				"isStartingItem": false,
+				"canBePickedUp": false,
+				"canBeDropped": false,
+				"canBeEaten": false,
+				"canBeCarried": false
 			}
 		]
 }

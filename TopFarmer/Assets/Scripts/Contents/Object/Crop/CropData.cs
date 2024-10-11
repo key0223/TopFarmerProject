@@ -86,7 +86,7 @@ public class CropData
         }
         else 
         {
-            return growthStageSprites; 
+            return growthStageSprites;
         }
        
     }

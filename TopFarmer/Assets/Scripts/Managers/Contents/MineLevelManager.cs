@@ -1,9 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using static Define;
 
+[System.Serializable]
+public class StoneProbability
+{
+    public int _stoneId;
+    public float _probability;
+}
 public class MineLevelManager : MonoBehaviour
 {
     [SerializeField] SO_GridProperties _soGridProperty;
@@ -12,7 +19,8 @@ public class MineLevelManager : MonoBehaviour
     GameObject _cropsParentTransform;
     Tilemap _groundDecoration2;
 
-
+    [SerializeField] List<StoneProbability> _stoneProbabilities;
+    float _totalProbability;
     private void Awake()
     {
         InitialiseGridProperties();
@@ -22,6 +30,7 @@ public class MineLevelManager : MonoBehaviour
 
     private void Start()
     {
+        _totalProbability = CalculateTotalProbability();
         SpwanStones();
     }
     void InitialiseGridProperties()
@@ -30,7 +39,14 @@ public class MineLevelManager : MonoBehaviour
 
         foreach (GridProperty gridProperty in _soGridProperty.gridPropertyList)
         {
-            GridPropertyDetails gridPropertyDetails = new GridPropertyDetails();
+            GridPropertyDetails gridPropertyDetails;
+
+            gridPropertyDetails = GridPropertiesManager.Instance.GetGridPropertyDetails(gridProperty.gridCoordinate.x, gridProperty.gridCoordinate.y, gridPropertyDict);
+
+            if(gridPropertyDetails == null)
+            {
+                gridPropertyDetails = new GridPropertyDetails();
+            }
 
             switch(gridProperty.gridBoolProperty)
             {
@@ -61,12 +77,23 @@ public class MineLevelManager : MonoBehaviour
                     break;
             }
             GridPropertiesManager.Instance.SetGridPropertyDetails(gridProperty.gridCoordinate.x, gridProperty.gridCoordinate.y, gridPropertyDetails, gridPropertyDict);
-            _gridPropertyDict = gridPropertyDict;
-
-            GridPropertiesManager.Instance.SetGridPropertyDict(_gridPropertyDict);
         }
+        _gridPropertyDict = gridPropertyDict;
+        GridPropertiesManager.Instance.SetGridPropertyDict(_gridPropertyDict);
     }
 
+    [ContextMenu("Respwan")]
+    public void ReSpwan()
+    {
+        for (int i = _cropsParentTransform.transform.childCount - 1; i >= 0; i--)
+        {
+            // 자식 오브젝트를 삭제
+            GameObject child = _cropsParentTransform.transform.GetChild(i).gameObject;
+            Destroy(child);
+        }
+
+        SpwanStones();
+    }
     void SpwanStones()
     {
         foreach(var pair in _gridPropertyDict)
@@ -77,9 +104,9 @@ public class MineLevelManager : MonoBehaviour
             {
                 float randomValue = Random.Range(0f,1f);
 
-                if(randomValue <=0.3f) // //30% 확률로 생성
+                if(randomValue <=0.7f) // 60% 확률로 생성
                 {
-                    int randStone = Random.Range(230, 234);
+                    int randStone = GetRandomStone();
 
                     CropData cropData = null;
 
@@ -90,18 +117,8 @@ public class MineLevelManager : MonoBehaviour
 
                         GameObject stone;
 
-                        int currentGrowthStage = 0;
-                        int daysCounter = cropData.totalGrowthDays;
+                        int currentGrowthStage = CalculateCurrentGrowthStage(cropData, detail.growthDays);
 
-                        for (int i = cropData.growthStages.Length - 1; i >= 0; i--)
-                        {
-                            if (detail.growthDays >= daysCounter)
-                            {
-                                currentGrowthStage = i;
-                                break;
-                            }
-                            daysCounter = daysCounter - cropData.growthStages[i];
-                        }
 
                         Vector3 worldPosition = _groundDecoration2.CellToWorld(new Vector3Int(detail.gridX, detail.gridY, 0));
                         worldPosition = new Vector3(worldPosition.x + Define.GridCellSize / 2, worldPosition.y, worldPosition.z);
@@ -113,12 +130,52 @@ public class MineLevelManager : MonoBehaviour
                         stone.GetComponent<Crop>()._cropGridPosition = new Vector2Int(detail.gridX, detail.gridY);
                     }
                 }
-               
-
-                // 돌 프리팹을 해당 위치에 생성
-                
-             
             }
         }
     }
+
+    int CalculateCurrentGrowthStage(CropData cropData, int growthDays)
+    {
+        int currentGrowthStage = 0;
+        int daysCounter = cropData.totalGrowthDays;
+
+        for (int i = cropData.growthStages.Length - 1; i >= 0; i--)
+        {
+            if (growthDays >= daysCounter)
+            {
+                currentGrowthStage = i;
+                break;
+            }
+            daysCounter -= cropData.growthStages[i];
+        }
+
+        return currentGrowthStage;
+    }
+    int GetRandomStone()
+    {
+        float randomValue = Random.Range(0f, _totalProbability);
+        float cumulativeProbability = 0f;
+
+        foreach (var stoneProb in _stoneProbabilities)
+        {
+            cumulativeProbability += stoneProb._probability;
+
+            if (randomValue <= cumulativeProbability)
+            {
+                return stoneProb._stoneId;
+            }
+        }
+
+        return _stoneProbabilities[0]._stoneId;
+    }
+    float CalculateTotalProbability()
+    {
+        float total = 0f;
+        foreach (var stoneProb in _stoneProbabilities)
+        {
+            total += stoneProb._probability;
+        }
+        return total;
+    }
+   
 }
