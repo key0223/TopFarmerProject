@@ -9,11 +9,12 @@ using static Define;
 public class SlimeController : MonsterController
 {
     [SerializeField] SpriteRenderer _faceSpriteRendere;
-
+    Rigidbody2D _rigid;
     protected override void Init()
     {
         base.Init();
         CellPos = GetGridPosition(transform.parent.position);
+        _rigid = GetComponentInParent<Rigidbody2D>();
 
         #region Init Stat
         _maxHp = 24;
@@ -29,6 +30,7 @@ public class SlimeController : MonsterController
 
         #endregion
     }
+
     #region State Controll
     protected override void UpdateAnimation()
     {
@@ -115,77 +117,32 @@ public class SlimeController : MonsterController
     protected override void UpdateMoving()
     {
         // Move to the destPos and update CellPos upon arrival
-        if (_pathQueue.Count == 0)
+        if (_target == null)
         {
             State = CreatureState.Idle;
             return;
         }
 
-        Vector3 destPos = GetWorldPosition(CellPos);
+
+        Vector3 destPos = _target.transform.position;
         Vector3 moveDir = destPos - transform.parent.position;
         float dist = moveDir.magnitude;
 
-        if (dist < _speed * Time.deltaTime)
+        if (moveDir.magnitude <= _skillRange)
         {
-            transform.parent.position = destPos;
-            //CellPos = _pathQueue.Dequeue();
-
-            if (_pathQueue.Count > 0)
-            {
-                MoveToNextPos();
-            }
+            State = CreatureState.Skill;
+            _coSkill = StartCoroutine(CoSkill()); // 스킬 발동
         }
         else
         {
-            transform.parent.position += moveDir.normalized * _speed * Time.deltaTime;
+            //transform.parent.position += moveDir.normalized * _speed * Time.deltaTime;
+            _rigid.MovePosition(_rigid.position + (Vector2)moveDir * _speed * Time.deltaTime);
             Dir = GetDirFromVec(moveDir);
             State = CreatureState.Moving;
         }
+
     }
 
-    
-    protected override void MoveToNextPos()
-    {
-        Vector3Int destPos = _destCellPos;
-
-        if (_target != null)
-        {
-            destPos = GetGridPosition(_target.transform.position);
-            Vector3Int dir = destPos - CellPos;
-
-            if (dir.magnitude <= _skillRange)
-            {
-                Dir = GetDirFromVec(dir);
-                State = CreatureState.Skill;
-                _coSkill = StartCoroutine("CoSkill");
-
-                return;
-            }
-        }
-
-        SetDestination(destPos);
-
-        if (_pathQueue.Count < 2 || (_target != null && _pathQueue.Count > 10))
-        {
-            _target = null;
-            State = CreatureState.Idle;
-            return;
-        }
-
-        // Prepare to move to the next destination
-        Vector3Int nextPos = _pathQueue.Dequeue();
-        Vector3Int moveCellDir = nextPos - CellPos;
-
-        Dir = GetDirFromVec(moveCellDir);
-        if (CanGo(nextPos))
-        {
-            CellPos = nextPos;
-        }
-        else
-        {
-            State = CreatureState.Idle;
-        }
-    }
     public override void OnDead()
     {
         State = CreatureState.Dead;
@@ -194,19 +151,49 @@ public class SlimeController : MonsterController
         DropItem();
         Managers.Resource.Destroy(transform.parent.gameObject);
     }
-   
+
+    public override IEnumerator CoSearch()
+    {
+        PlayerController pc = FindObjectOfType<PlayerController>();
+
+        if (pc == null)
+        {
+            _target = null;
+            yield break; // 코루틴 종료
+        }
+
+        _target = pc.gameObject; // 타겟을 캐싱
+
+        if (_target != null)
+        {
+            Vector2 dirToTarget = (Vector2)_target.transform.position - _rigid.position;
+
+            Vector2 currentDir = GetVecFromDir(Dir);
+
+            if (Vector2.Angle(currentDir, dirToTarget) < _viewAngle && dirToTarget.magnitude <= _searchRange)
+            {
+                _target = pc.gameObject;
+            }
+            else
+            {
+                // 시야각을 벗어나면 초기화
+                _target = null;
+            }
+        }
+    }
     public override IEnumerator CoSkill()
     {
         Vector3 targetPos = _target.transform.position;
-        Vector3 dir = _target.transform.position - transform.parent.position;
+        Vector3 dir = _target.transform.position - (Vector3)_rigid.position;
 
         while (dir.magnitude > 0.1f)
         {
-            transform.parent.position = Vector3.MoveTowards(transform.parent.position, targetPos, _speed * Time.deltaTime);
+            Vector2 newPosition = Vector2.MoveTowards(_rigid.position, targetPos, _speed * Time.deltaTime);
+            _rigid.MovePosition(newPosition);
 
-            dir = targetPos - transform.parent.position;
+            dir = targetPos - -(Vector3)_rigid.position;
 
-            Collider2D hit = Physics2D.OverlapCircle(transform.parent.position, _skillRange, _mask);
+            Collider2D hit = Physics2D.OverlapCircle(_rigid.position, _skillRange, _mask);
             if (hit != null && hit.gameObject.layer == (int)Layer.Player)
             {
                 PlayerController pc = hit.gameObject.transform.parent.GetComponent<PlayerController>();
@@ -228,19 +215,18 @@ public class SlimeController : MonsterController
     {
         _isKnockback = true;
 
-
         float elapsedTime = 0f;
         float drag = 2f; // 넉백 중 감속 비율
         Vector3 currentVelocity = (direction * 10);
-
-
 
         while (elapsedTime < _knockbackDuration)
         {
             currentVelocity = Vector3.Lerp(currentVelocity, Vector3.zero, drag * Time.deltaTime);
 
             // 넉백 이동 적용
-            transform.parent.position += currentVelocity * Time.deltaTime;
+            Vector2 newPosition = _rigid.position + (Vector2)(currentVelocity * Time.deltaTime);
+            _rigid.MovePosition(newPosition);
+
 
             elapsedTime += Time.deltaTime;
             yield return null;  // 한 프레임 대기
@@ -248,5 +234,42 @@ public class SlimeController : MonsterController
 
         // 넉백이 종료되면 상태 초기화
         _isKnockback = false;
+    }
+    protected void OnDrawGizmos()
+    {
+        if (_target == null)
+            return;
+
+        // 시야 범위 원형 표시 (2D 환경용, X-Y 평면에서 그리기)
+        Gizmos.color = Color.white;
+        Vector3 position = new Vector3(transform.position.x, transform.position.y, 0);
+        Gizmos.DrawWireSphere(position, _searchRange);
+
+        // 시야각 표시
+        Vector3 viewAngleA = DirFromAngle(-_viewAngle / 2, false);  // 왼쪽 시야각
+        Vector3 viewAngleB = DirFromAngle(_viewAngle / 2, false);   // 오른쪽 시야각
+
+        // 시야각을 선으로 표시 (2D 평면)
+        Gizmos.DrawLine(position, _rigid.position + (Vector2)viewAngleA * _searchRange);
+        Gizmos.DrawLine(position, _rigid.position + (Vector2)viewAngleB * _searchRange);
+
+        // 타겟이 보이면 빨간색으로 선을 그림
+        Gizmos.color = Color.red;
+
+        Vector3 dir = (_target.transform.position - (Vector3)_rigid.position).normalized;
+        float dist = (_target.transform.position - (Vector3)_rigid.position).magnitude;
+        if (dist <= _searchRange && Vector3.Angle(GetVecFromDir(Dir), dir) < _viewAngle / 2)
+        {
+            Gizmos.DrawLine(_rigid.position, _target.transform.position);
+        }
+        //foreach (Transform visibleTarget in visibleTargets)
+        //{
+        //    Gizmos.DrawLine(transform.position, visibleTarget.position);
+        //}
+    }
+    protected void OnValidate()
+    {
+        // 시야각 값이 변경될 때마다 Scene 뷰를 갱신
+        UnityEditor.SceneView.RepaintAll();
     }
 }

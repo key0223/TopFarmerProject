@@ -81,6 +81,7 @@ public class MonsterController : CreatureController
         _currentHp = _maxHp;
         CellPos = GetGridPosition(transform.position);
     }
+   
     protected Vector3Int GetGridPosition(Vector3 worldPosition)
     {
         if (_grid != null)
@@ -432,13 +433,13 @@ public class MonsterController : CreatureController
     }
     #endregion
    
-    protected bool CanGo(Vector3Int targetPosition)
+    protected virtual bool CanGo(Vector3Int targetPosition)
     {
 
         Vector3 direction = (targetPosition - Vector3Int.FloorToInt(transform.position));
-        Vector3 normalizedDir = direction.normalized;
+        float distanceToTarget = direction.magnitude;
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, normalizedDir, 1f, _mask);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction.normalized, distanceToTarget, _mask);
 
 
         if (hit.collider != null)
@@ -456,40 +457,40 @@ public class MonsterController : CreatureController
         }
         return new Vector3(Mathf.Cos(angleInDegrees * Mathf.Deg2Rad), Mathf.Sin(angleInDegrees * Mathf.Deg2Rad));
     }
-    protected void OnDrawGizmos()
-    {
-        if (_target == null)
-            return;
+    //protected void OnDrawGizmos()
+    //{
+    //    if (_target == null)
+    //        return;
 
-        // 시야 범위 원형 표시 (2D 환경용, X-Y 평면에서 그리기)
-        Gizmos.color = Color.white;
-        Vector3 position = new Vector3(transform.position.x, transform.position.y, 0);
-        Gizmos.DrawWireSphere(position, _searchRange);
+    //    // 시야 범위 원형 표시 (2D 환경용, X-Y 평면에서 그리기)
+    //    Gizmos.color = Color.white;
+    //    Vector3 position = new Vector3(transform.position.x, transform.position.y, 0);
+    //    Gizmos.DrawWireSphere(position, _searchRange);
 
-        // 시야각 표시
-        Vector3 viewAngleA = DirFromAngle(-_viewAngle / 2, false);  // 왼쪽 시야각
-        Vector3 viewAngleB = DirFromAngle(_viewAngle / 2, false);   // 오른쪽 시야각
+    //    // 시야각 표시
+    //    Vector3 viewAngleA = DirFromAngle(-_viewAngle / 2, false);  // 왼쪽 시야각
+    //    Vector3 viewAngleB = DirFromAngle(_viewAngle / 2, false);   // 오른쪽 시야각
 
-        // 시야각을 선으로 표시 (2D 평면)
-        Gizmos.DrawLine(position, transform.position + viewAngleA * _searchRange);
-        Gizmos.DrawLine(position, transform.position + viewAngleB * _searchRange);
+    //    // 시야각을 선으로 표시 (2D 평면)
+    //    Gizmos.DrawLine(position, transform.position + viewAngleA * _searchRange);
+    //    Gizmos.DrawLine(position, transform.position + viewAngleB * _searchRange);
 
-        // 타겟이 보이면 빨간색으로 선을 그림
-        Gizmos.color = Color.red;
+    //    // 타겟이 보이면 빨간색으로 선을 그림
+    //    Gizmos.color = Color.red;
 
-        float dist = (_target.transform.position - transform.position).magnitude;
-        if (dist <= _searchRange)
-        {
-            Gizmos.DrawLine(transform.position, _target.transform.position);
-        }
-        //foreach (Transform visibleTarget in visibleTargets)
-        //{
-        //    Gizmos.DrawLine(transform.position, visibleTarget.position);
-        //}
-    }
-    protected void OnValidate()
-    {
-        // 시야각 값이 변경될 때마다 Scene 뷰를 갱신
-        UnityEditor.SceneView.RepaintAll();
-    }
+    //    float dist = (_target.transform.position - transform.position).magnitude;
+    //    if (dist <= _searchRange)
+    //    {
+    //        Gizmos.DrawLine(transform.position, _target.transform.position);
+    //    }
+    //    //foreach (Transform visibleTarget in visibleTargets)
+    //    //{
+    //    //    Gizmos.DrawLine(transform.position, visibleTarget.position);
+    //    //}
+    //}
+    //protected void OnValidate()
+    //{
+    //    // 시야각 값이 변경될 때마다 Scene 뷰를 갱신
+    //    UnityEditor.SceneView.RepaintAll();
+    //}
 }

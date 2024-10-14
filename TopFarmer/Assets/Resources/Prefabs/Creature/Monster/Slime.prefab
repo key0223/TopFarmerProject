@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2073530682919301069}
   - component: {fileID: 1015055358753065513}
-  m_Layer: 0
+  - component: {fileID: 8839118220447692832}
+  m_Layer: 8
   m_Name: Slime
   m_TagString: Monster
   m_Icon: {fileID: 0}
@@ -43,10 +44,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.003972605, y: -0.24431452}
+  m_Offset: {x: -0.00397259, y: -0.28977722}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -57,8 +58,29 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.618631, y: 0.51137096}
+  m_Size: {x: 0.618631, y: 0.6744369}
   m_EdgeRadius: 0
+--- !u!50 &8839118220447692832
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2073530682919301068}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 6200000, guid: 54478366844d3bf4f96ae7653c20bc6b, type: 2}
+  m_Interpolate: 1
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!1 &2073530684119229890
 GameObject:
   m_ObjectHideFlags: 0
@@ -70,7 +92,7 @@ GameObject:
   - component: {fileID: 2073530684119229891}
   - component: {fileID: 2073530684119229889}
   - component: {fileID: 2073530684119229888}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +198,7 @@ GameObject:
   - component: {fileID: 2073530684215571097}
   - component: {fileID: 2073530684215571111}
   - component: {fileID: 2073530684215571110}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -283,9 +305,9 @@ GameObject:
   - component: {fileID: 2073530684839892800}
   - component: {fileID: 2073530684839892803}
   - component: {fileID: 7309319860741807484}
-  - component: {fileID: 4492520274264097203}
   - component: {fileID: 5003297638472092277}
-  m_Layer: 0
+  - component: {fileID: 6659787833973782551}
+  m_Layer: 8
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -403,32 +425,6 @@ MonoBehaviour:
   _searchRange: 10
   _skillRange: 1
   _faceSpriteRendere: {fileID: 2073530684215571111}
---- !u!61 &4492520274264097203
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2073530684839892805}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.000000029802322, y: -0.44851437}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1.5}
-    newSize: {x: 1, y: 1.5}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.75197357, y: 0.37147993}
-  m_EdgeRadius: 0
 --- !u!114 &5003297638472092277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -452,3 +448,29 @@ MonoBehaviour:
   _speed: 0
   _xp: 0
   _currentHp: 0
+--- !u!61 &6659787833973782551
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2073530684839892805}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.010159582, y: -0.3428883}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1.5}
+    newSize: {x: 1, y: 1.5}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.4208998, y: 0.5297531}
+  m_EdgeRadius: 0
