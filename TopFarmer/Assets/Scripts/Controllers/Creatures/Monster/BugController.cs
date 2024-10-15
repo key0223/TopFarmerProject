@@ -141,7 +141,7 @@ public class BugController : MonsterController
     }
     public override void OnDead()
     {
-        State = CreatureState.Dead;
+        base.OnDead();
         Color monsterColor = _sprite.color;
         Managers.VFX.OnMonsterDeath(MonsterType.MONSTER_BUG, transform.position);
         DropItem();

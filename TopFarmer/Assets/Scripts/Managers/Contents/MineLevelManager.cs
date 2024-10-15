@@ -161,6 +161,9 @@ public class MineLevelManager : MonoBehaviour
                     GameObject monster = Managers.Resource.Instantiate("Creature/Monster/Slime", _monstersParentTransform.transform);
                     monster.transform.position = worldPosition;
 
+                    MonsterStat monsterStat = monster.GetComponentInChildren<MonsterStat>();
+                    monsterStat.SetStat(801);
+
                     // 몬스터 위치 로그 출력 (디버깅용)
                     Debug.Log($"Monster spawned at: {position}");
                 }    

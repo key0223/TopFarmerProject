@@ -80,7 +80,7 @@ public class Quest
         int randomQuestType = Random.Range(2, 5);
         Quest quest = null;
 
-        int testMakeQuestIndex = 4;
+        int testMakeQuestIndex = 3;
 
         switch ((QuestType)testMakeQuestIndex)
         {
@@ -91,7 +91,7 @@ public class Quest
                 quest = new ItemDeliveryQuest();
                 break;
             case QuestType.Monster:
-                //quest = new MonsterQuest(questId);
+                quest = new MonsterQuest();
                 break;
             case QuestType.Socialize:
                 quest = new SocializeQuest();

@@ -15,6 +15,9 @@ public class UI_MailBox : MonoBehaviour
     }
     private void OnEnable()
     {
+        if (_mailBox == null)
+            return;
+
         _currentMail = _mailBox.GetMail();
         _contentText.text = _currentMail.Content;
     }

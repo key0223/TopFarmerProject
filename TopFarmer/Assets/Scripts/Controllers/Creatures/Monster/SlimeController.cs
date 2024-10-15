@@ -145,7 +145,7 @@ public class SlimeController : MonsterController
 
     public override void OnDead()
     {
-        State = CreatureState.Dead;
+        base.OnDead();
         Color monsterColor = _sprite.color;
         Managers.VFX.OnMonsterDeath(MonsterType.MONSTER_SLIME, transform.position, monsterColor);
         DropItem();

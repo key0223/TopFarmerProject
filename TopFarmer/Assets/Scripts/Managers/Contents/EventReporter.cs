@@ -8,6 +8,7 @@ public class EventReporter
 {
     public event Action<string, ItemData> ItemDeliveredEvent;
     public event Action<string> SocializeEvent;
+    public event Action<int> MonsterKilledEvent;
    public void ReportItemPurchased(ItemData item, int quantity)
     {
         QuestType questType = QuestType.Resource;
@@ -25,5 +26,9 @@ public class EventReporter
     public void ConversationNPC(string npcName)
     {
         SocializeEvent?.Invoke(npcName);
+    }
+    public void MonsterKilled(int monsterId)
+    {
+        MonsterKilledEvent?.Invoke(monsterId);
     }
 }

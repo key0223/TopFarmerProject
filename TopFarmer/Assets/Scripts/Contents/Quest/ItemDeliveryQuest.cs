@@ -39,6 +39,7 @@ public class ItemDeliveryQuest : Quest
         TargetName = "Abigail";
         int randDescriptionIndex = Random.Range(0, 4);
 
+        // it devided by target Item Id 
         switch (randDescriptionIndex)
         {
             case 0:

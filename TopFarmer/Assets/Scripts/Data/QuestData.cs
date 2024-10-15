@@ -31,6 +31,7 @@ public class MonsterQuestData : QuestData
 {
     public string target;
     public string targetName;
+    public int targetMonsterId;
     public int targetQuantity;
 }
 public class SocializeQuestData : QuestData

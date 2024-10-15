@@ -42,6 +42,7 @@ public class DeliverObjective : Objective
         if(CurrentSuccess >= SuccessToComplete)
         {
             ObjectiveState = Define.ObjectiveState.Complete;
+            Managers.Reporter.ItemDeliveredEvent -= OnItemDelivered;
             Managers.Dialogue.MakeDialogueQueue(Owner.ReactionText);
         }
 

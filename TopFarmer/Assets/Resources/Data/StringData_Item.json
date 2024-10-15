@@ -467,6 +467,18 @@
 			{
 				"stringId": "itemDesc(5309)",
 				"ko": "천천히 구워내 고구마 본연의 단맛을 극대화한 군고구마입니다. 겉은 바삭하고 속은 달콤하고 부드러워, 추운 날씨에 특히 좋습니다."
+			},
+			{
+				"stringId": "monsterName(801)",
+				"ko": "초록 슬라임"
+			},
+			{
+				"stringId": "monsterName(802)",
+				"ko": "벌레"
+			},
+			{
+				"stringId": "monsterName(803)",
+				"ko": "유령"
 			}
 		]
 }

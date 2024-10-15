@@ -201,6 +201,7 @@ public class MonsterController : CreatureController
     public override void OnDead()
     {
         base.OnDead();
+        Managers.Reporter.MonsterKilled(_stat.MonsterId);
     }
 
     protected  void DropItem()

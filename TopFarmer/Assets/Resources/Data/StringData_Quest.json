@@ -279,7 +279,7 @@
 			},
 			{
 				"stringId": "SlayMonsterQuest4",
-				"ko": "아, {0}! 우리 슬라임 문제를 자네가 해결해줬구먼? 고맙네! 너무 애먹진 않았기를 바라네..."
+				"ko": "아! 우리 슬라임 문제를 자네가 해결해줬구먼? 고맙네! 너무 애먹진 않았기를 바라네..."
 			},
 			{
 				"stringId": "SlayMonsterQuest5",
@@ -324,6 +324,22 @@
 			{
 				"stringId": "SlayMonsterQuest15",
 				"ko": "{0}/{1} {2} 처치함"
+			},
+			{
+				"stringId": "SlayMonsterQuest16",
+				"ko": "{0}(이)라 불리는 몬스터가 원소의 균형을 혼란에 빠트리고 있네. 이 {2} {1}마리 처치할 모험가를 찾고 있네.  -엠 라스모디우스, 마법사,"
+			},
+			{
+				"stringId": "SlayMonsterQuest17",
+				"ko": "야수를"
+			},
+			{
+				"stringId": "SlayMonsterQuest18",
+				"ko": "마귀를"
+			},
+			{
+				"stringId": "SlayMonsterQuest19",
+				"ko": "괴생명체를"
 			},
 			{
 				"stringId": "SocializeQuest1",

@@ -42,9 +42,6 @@ public class MailBox : MonoBehaviour
 
     void GetQuestMails()
     {
-
-        
-
         _isLoaded = true;
     }
 

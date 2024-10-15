@@ -32,10 +32,9 @@ public class Objective
             case QuestType.ItemDelivery:
 
                 objective = new DeliverObjective(quest);
-
                 break;
             case QuestType.Monster:
-                //quest = new MonsterQuest(questId);
+                objective = new MonsterObjective(quest);
                 break;
             case QuestType.Socialize:
                 objective = new SocializeObjective(quest);

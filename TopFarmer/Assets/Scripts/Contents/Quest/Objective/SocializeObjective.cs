@@ -37,6 +37,7 @@ public class SocializeObjective : Objective
         if (CurrentSuccess >= SuccessToComplete)
         {
             ObjectiveState = Define.ObjectiveState.Complete;
+            Managers.Reporter.SocializeEvent -= OnConversationEnded;
         }
 
     }
