@@ -35,6 +35,10 @@ public class SceneItemsManager : SingletonMonobehaviour<SceneItemsManager>,ISave
         ISaveableDeregister();
         Managers.Event.AfterSceneLoadEvent -= AfterSceneLoad;
     }
+    public void SetItemParent()
+    {
+        AfterSceneLoad();
+    }
     void AfterSceneLoad()
     {
         _parentItem = GameObject.FindGameObjectWithTag(Tags.ItemsParentTransform).transform;

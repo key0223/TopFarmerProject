@@ -85,6 +85,7 @@ public class MineLevelManager : MonoBehaviour
         }
         _gridPropertyDict = gridPropertyDict;
         GridPropertiesManager.Instance.SetGridPropertyDict(_gridPropertyDict);
+        SceneItemsManager.Instance.SetItemParent();
     }
 
     [ContextMenu("Respwan")]
