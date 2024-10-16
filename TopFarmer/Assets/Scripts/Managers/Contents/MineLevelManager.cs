@@ -157,16 +157,12 @@ public class MineLevelManager : MonoBehaviour
 
                 if (randomValue <= _randomSpwanValue)
                 {
-                    // 몬스터 생성 로직
                     Vector3 worldPosition = _groundDecoration2.CellToWorld(new Vector3Int(detail.gridX, detail.gridY, 0));
                     GameObject monster = Managers.Resource.Instantiate("Creature/Monster/Slime", _monstersParentTransform.transform);
                     monster.transform.position = worldPosition;
 
                     MonsterStat monsterStat = monster.GetComponentInChildren<MonsterStat>();
                     monsterStat.SetStat(801);
-
-                    // 몬스터 위치 로그 출력 (디버깅용)
-                    Debug.Log($"Monster spawned at: {position}");
                 }    
             }
         }
@@ -214,5 +210,32 @@ public class MineLevelManager : MonoBehaviour
         }
         return total;
     }
-   
+
+    void ClearCrops()
+    {
+        for (int i = _cropsParentTransform.transform.childCount - 1; i >= 0; i--)
+        {
+            // 자식 오브젝트를 삭제
+            GameObject child = _cropsParentTransform.transform.GetChild(i).gameObject;
+            Managers.Resource.Destroy(child);
+        }
+
+    }
+
+    void ClearItems()
+    {
+        GameObject itemParent = GameObject.FindGameObjectWithTag("ItemsParentTransform");
+        for (int i = itemParent.transform.childCount - 1; i >= 0; i--)
+        {
+            // 자식 오브젝트를 삭제
+            GameObject child = itemParent.transform.GetChild(i).gameObject;
+            Managers.Resource.Destroy(child);
+        }
+    }
+
+    public void ClearLevel()
+    {
+        ClearCrops();
+        ClearItems();
+    }
 }

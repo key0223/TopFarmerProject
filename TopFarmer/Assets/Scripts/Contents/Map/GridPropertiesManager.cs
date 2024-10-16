@@ -605,7 +605,21 @@ public class GridPropertiesManager : SingletonMonobehaviour<GridPropertiesManage
         return crop;
     }
 
-    
+    public void LoadGridPropertyDictForCurrentScene()
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+
+        if (GameObjectSave.sceneData.TryGetValue(currentSceneName, out SceneSave sceneSave))
+        {
+            if (sceneSave._griPropertyDetailDict != null)
+            {
+                _gridPropertyDict = sceneSave._griPropertyDetailDict;
+             
+            }
+        }
+        
+    }
+
     /// <summary>
     /// Get the _grid property details for the tile at (gridX,gridY).  If no _grid property details exist null is returned and can assume that all _grid property details values are null or false
     /// </summary>

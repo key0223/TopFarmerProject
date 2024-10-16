@@ -106,7 +106,7 @@ public class Crop : MonoBehaviour
             Managers.VFX.OnHarvestCrop(cropData.harvestEffectType, transform.position);
         }
         Managers.Resource.Destroy(gameObject);
-    }
+   }
     private void SpawnHarvestItems(CropData cropData)
     {
 

@@ -46,8 +46,9 @@ public class ToolAnimationController : MonoBehaviour
                     else
                     {
                         _animator.Play($"{animationName}_RIGHT");
+                        _sprite.flipX = true;
                     }
-                    _sprite.flipX = true;
+                    
                 }
                 break;
             case MoveDir.Right:
