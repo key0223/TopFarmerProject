@@ -163,6 +163,28 @@ public class TimeManager :SingletonMonobehaviour<TimeManager>, ISaveable
         }
     }
 
+    public string GetCurrentSeasonString()
+    {
+        string seasonStr = "";
+        switch(GameSeason)
+        {
+            case Season.SPRING:
+                seasonStr = "spring";
+                break;
+            case Season.SUMMER:
+                seasonStr = "summer";
+                break;
+            case Season.AUTUMN:
+                seasonStr = "autumn";
+                break;
+            case Season.WINTER:
+                seasonStr = "winter";
+                break;
+        }
+
+        return seasonStr;
+    }
+
     public TimeSpan GetGameTime()
     {
         TimeSpan gameTime = new TimeSpan(GameHour, GameMinute, GameSecond);

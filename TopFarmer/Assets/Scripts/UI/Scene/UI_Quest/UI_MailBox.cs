@@ -21,7 +21,9 @@ public class UI_MailBox : MonoBehaviour
         _currentMail = _mailBox.GetMail();
         _contentText.text = _currentMail.Content;
     }
-
+    void ShowMail()
+    { 
+    }
     void OnCloseButtonClicked()
     {
         switch(_currentMail.MailType)
