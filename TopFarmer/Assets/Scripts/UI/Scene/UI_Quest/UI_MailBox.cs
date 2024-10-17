@@ -18,27 +18,48 @@ public class UI_MailBox : MonoBehaviour
         if (_mailBox == null)
             return;
 
-        _currentMail = _mailBox.GetMail();
-        _contentText.text = _currentMail.Content;
+        string mailId = Managers.Mail.DequeueMail();
+        if(mailId == null)
+        {
+            _contentText.text = "받은 편지가 없습니다.";
+        }
+        else
+        {
+            ShowMail(mailId);
+        }
     }
-    void ShowMail()
-    { 
+    void ShowMail(string mailId)
+    {
+        string mail = Managers.Data.StringDict[mailId].ko;
+        int index = mail.IndexOf("[#]");
+        if (index != -1)
+        {
+            mail = mail.Substring(0, index);
+        }
+        mail = mail.Replace("@", PlayerController.Instance.FarmerName);
+
+
+        if(mail.Contains("%item"))
+        {
+            string oldValue = mail.Substring(mail.IndexOf("%item"), mail.IndexOf("%%") + 2 - mail.IndexOf("%item"));
+            string[] strArray1 = oldValue.Split(' ');
+            mail = mail.Replace(oldValue, "");
+            mail = mail.Replace("^", "\n");
+            _contentText.text = mail;
+
+            if (strArray1[1].Equals("object"))
+            {
+                int maxValue = strArray1.Length - 1;
+                int num =Random.Range(3, maxValue);
+                int itemId = num - num % 2;
+
+                // TODO : Add to inventory
+            }
+        }
+
     }
     void OnCloseButtonClicked()
     {
-        switch(_currentMail.MailType)
-        {
-            case MailType.Quest:
-
-                QuestMailItem questMail = _currentMail as QuestMailItem;
-               
-
-                break;
-            case MailType.Reward:
-                break;
-        }
-
-        _mailBox._uiTrigger.GetComponent<UI_Interactor>().ToggleUI(PlayerController.Instance);
         gameObject.SetActive(false); 
     }
 }

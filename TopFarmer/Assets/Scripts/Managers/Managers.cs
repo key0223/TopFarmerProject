@@ -16,6 +16,7 @@ public class Managers : MonoBehaviour
     QuestManager _quest = new QuestManager();
     DialogueManager _dialogue = new DialogueManager();
     VFXManager _vfx = new VFXManager();
+    MailManager _mail = new MailManager();
 
     public static EventsHandler Event { get { return Instance._event; } }
     public static PlayerInfo PlayerInfo { get { return Instance._playerInfo; } }
@@ -23,6 +24,7 @@ public class Managers : MonoBehaviour
     public static QuestManager Quest { get {  return Instance._quest; } }
     public static DialogueManager Dialogue { get {  return Instance._dialogue; } }
     public static VFXManager VFX { get { return Instance._vfx; } }
+    public static MailManager Mail { get {  return Instance._mail; } }
 
     #endregion
 
@@ -77,6 +79,7 @@ public class Managers : MonoBehaviour
             instance._pool.Init();
             instance._save.Init();
             instance._playerInfo.Init();
+            instance._mail.Init();
             //instance._time.Init();
         }
     }
@@ -91,6 +94,7 @@ public class Managers : MonoBehaviour
         Scene.Clear();
         //UI.Clear();
         Pool.Clear();
+        Managers.Clear();
         //Inven.Clear();
     }
 }
