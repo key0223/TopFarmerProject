@@ -27,7 +27,7 @@ public class MailManager
         if(_mailBox.Count > 0)
         {
             mailId = _mailBox.Dequeue();
-            _mailReceived.Enqueue(mailId);
+            _mailReceived.Enqueue(mailId); // 메일을 받음 처리합니다.
             Managers.Event.UpdateMailBox();
             return mailId;
         }

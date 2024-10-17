@@ -26,14 +26,29 @@ public class MonsterQuest : Quest
 
         MonsterQuestData data = (MonsterQuestData)questData;
 
+        QuestType = QuestType.Monster;
+        QuestTitle = data.questTitle;
         TargetName = data.targetName;
         TargetMonsterId = data.targetMonsterId;
         TargetQuantity = data.targetQuantity;
+        TargetMonsterName = Managers.Data.StringDict[$"monsterName({TargetMonsterId})"].ko;
+
+        QuestDescription = data.questDescription;
+        QuestObjective = string.Format("{0} {1}마리 처치하기.", TargetMonsterName, TargetQuantity);
+        NextQuest = data.nextQuest;
+        ItemReward = data.itemReward;
+        MoneyReward = data.moneyReward;
+        Cancellable = data.cancellable;
+        ReactionText = data.reactionText;
+
+        Objective = Objective.MakeObjective(this);
+        Objective.OnStateChanged += CheckObjectiveComplete;
+
     }
 
     public MonsterQuest()
     {
-        QuestType = Define.QuestType.Monster;
+        QuestType = QuestType.Monster;
         QuestTitle = Managers.Data.StringDict[_questStringId + 1.ToString()].ko;
         TargetName = "Abigail";
         

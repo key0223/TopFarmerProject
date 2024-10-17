@@ -13,6 +13,7 @@ public class UI_MailBox : MonoBehaviour
     int _receiveItemId;
     int _receiveItemQuantity;
     int _receiveMoney;
+    int _questId;
     private void Start()
     {
         _closeButton.onClick.AddListener(() => OnCloseButtonClicked());
@@ -80,6 +81,18 @@ public class UI_MailBox : MonoBehaviour
                 _receiveItemImage.sprite = Managers.Resource.Load<Sprite>("Textures/UI/Money");
                 _receiveItemGO.SetActive(true);
             }
+            else if(strArray1[1].Equals("quest"))
+            {
+                _questId = int.Parse(strArray1[2].Replace("%%", ""));
+
+                if (!Managers.Mail._mailReceived.Contains(_questId.ToString()))
+                {
+                    // Add quest
+                    Quest newQuest = Quest.MakeQuest(_questId);
+                    Managers.Quest.AcceptQuest(newQuest);
+                }    
+
+            }
         }
 
     }
@@ -102,6 +115,7 @@ public class UI_MailBox : MonoBehaviour
         _receiveItemGO.SetActive(false);
 
         _receiveMoney = -1;
+        _questId = -1;
 
     }
 

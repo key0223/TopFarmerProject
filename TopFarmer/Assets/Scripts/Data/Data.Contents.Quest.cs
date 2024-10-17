@@ -70,7 +70,7 @@ namespace Data
                 {
                     string[] targetArray = item.target.Split(' ');
 
-                    item.targetName = targetArray[0];
+                    item.targetMonsterId = Convert.ToInt32( targetArray[0]);
                     item.targetQuantity = Convert.ToInt32(targetArray[1]);
                 }
                 dict.Add(item.questId, item);
