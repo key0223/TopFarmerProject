@@ -1,62 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class MailBox : MonoBehaviour
 {
-    Queue<IMailItem> _mails = new Queue<IMailItem>();
-    public Queue<IMailItem> Mails { get { return _mails; } }
-
-    public GameObject _uiTrigger;
     [SerializeField] GameObject _exclamationMark;
-
-    bool _isLoaded = false;
-    private void Start()
-    {
-        ClearQueue();
-        GetQuestMails();
-    }
 
     private void OnEnable()
     {
-        if(!_isLoaded)
+        Managers.Event.UpdateMailBoxEvent -= UpdateExclamationMark;
+        Managers.Event.UpdateMailBoxEvent += UpdateExclamationMark;
+    }
+    private void OnDisable()
+    {
+        Managers.Event.UpdateMailBoxEvent -= UpdateExclamationMark;
+    }
+    void UpdateExclamationMark()
+    {
+        if (Managers.Mail._mailBox.Count > 0)
         {
-            GetQuestMails();
+            _exclamationMark.SetActive(true);  // 마크 활성화
+        }
+        else
+        {
+            _exclamationMark.SetActive(false);  // 마크 비활성화
         }
     }
-    public void AddToMailBox(IMailItem mail)
-    {
-        _mails.Enqueue(mail);
-        UpdateExclamiationMark();
-    }
-    public IMailItem GetMail()
-    {
-        IMailItem mail = null;
-        if ( _mails.Count>0)
-        {
-            mail = _mails.Dequeue();
-        }
-        UpdateExclamiationMark();
-        return mail;
-    }
 
-    void GetQuestMails()
-    {
-        _isLoaded = true;
-    }
+   
 
-    void UpdateExclamiationMark()
-    {
-        _exclamationMark.SetActive(_mails.Count > 0);
-        //uiTrigger.SetActive(_mails.Count > 0);
-        Debug.Log(_mails.Count.ToString());
-    }
-
-    void ClearQueue()
-    {
-        _mails.Clear();
-        _isLoaded = false;
-    }
+    //TODO: OnClick Method 
 
     [ContextMenu("Make Daily Quest")]
     void MakeDailyQuest()
