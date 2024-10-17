@@ -8,11 +8,32 @@ public class MailManager
     public Queue<string> _mailBox = new Queue<string>();
     public Queue<string> _mailForTomorrow = new Queue<string>();
 
+    public void Init()
+    {
+        Managers.Event.DayPassedRegistered += OnNewDay;
+    }
     public bool HasOrWillReceiveMail(string mailId)
     {
         return _mailReceived.Contains(mailId) || _mailBox.Contains(mailId) || _mailForTomorrow.Contains(mailId);
     }
+    public void EnqueueMail(string mailId)
+    {
+        _mailBox.Enqueue(mailId);
+        Managers.Event.UpdateMailBox();
+    }
+    public string DequeueMail()
+    {
+        string mailId = "";
+        if(_mailBox.Count > 0)
+        {
+            mailId = _mailBox.Dequeue();
+            _mailReceived.Enqueue(mailId);
+            Managers.Event.UpdateMailBox();
+            return mailId;
+        }
 
+        return null;
+    }
     public void OnNewDay()
     {
         string mailId1 = TimeManager.Instance.GetCurrentSeasonString() + "_" +
@@ -24,12 +45,17 @@ public class MailManager
 
         if (Managers.Data.StringDict.ContainsKey(mailId1))
         {
-            _mailBox.Enqueue(mailId1);
+            EnqueueMail(mailId1);
         }
         else if (Managers.Data.StringDict.ContainsKey (mailId2))
         {
-            _mailBox.Enqueue(mailId2);
+            EnqueueMail(mailId2);
         }
        
+    }
+
+    public void Clear()
+    {
+        Managers.Event.DayPassedRegistered -= OnNewDay;
     }
 }
