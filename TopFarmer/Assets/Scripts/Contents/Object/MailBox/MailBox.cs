@@ -7,6 +7,9 @@ public class MailBox : MonoBehaviour
 {
     [SerializeField] GameObject _exclamationMark;
 
+    [Header("Test")]
+    [SerializeField] string _testMailStringId;
+
     private void OnEnable()
     {
         Managers.Event.UpdateMailBoxEvent -= UpdateExclamationMark;
@@ -37,5 +40,13 @@ public class MailBox : MonoBehaviour
     {
         Quest newDailyQuest = Quest.MakeQuest();
         Managers.Quest.AcceptQuest(newDailyQuest);
+    }
+    [ContextMenu("Add Mail")]
+    public void AddMail()
+    {
+        if(Managers.Data.StringDict.ContainsKey(_testMailStringId))
+        {
+            Managers.Mail.EnqueueMail(_testMailStringId);
+        }
     }
 }

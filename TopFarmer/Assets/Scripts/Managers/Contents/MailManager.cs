@@ -58,4 +58,6 @@ public class MailManager
     {
         Managers.Event.DayPassedRegistered -= OnNewDay;
     }
+    
+
 }

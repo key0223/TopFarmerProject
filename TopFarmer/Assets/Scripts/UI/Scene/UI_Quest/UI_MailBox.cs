@@ -12,6 +12,7 @@ public class UI_MailBox : MonoBehaviour
 
     int _receiveItemId;
     int _receiveItemQuantity;
+    int _receiveMoney;
     private void Start()
     {
         _closeButton.onClick.AddListener(() => OnCloseButtonClicked());
@@ -70,6 +71,15 @@ public class UI_MailBox : MonoBehaviour
                 }
                 // TODO : Add to inventory
             }
+            else if (strArray1[1].Equals("money"))
+            {
+                int num1 = strArray1.Length > 4 ? Random.Range(int.Parse(strArray1[2]),int.Parse(strArray1[3])) : int.Parse(strArray1[2]);
+                int num2 = num1 - num1 % 10; // 10의 배수로 맞춤
+
+                _receiveMoney = num2;
+                _receiveItemImage.sprite = Managers.Resource.Load<Sprite>("Textures/UI/Money");
+                _receiveItemGO.SetActive(true);
+            }
         }
 
     }
@@ -79,18 +89,25 @@ public class UI_MailBox : MonoBehaviour
         if(_receiveItemId >0)
         {
             InventoryManager.Instance.AddItem(InventoryType.INVEN_PLAYER, _receiveItemId);
-            _receiveItemImage.sprite = null;
-            _receiveItemQuantityText.text = "";
-            _receiveItemId = -1;
-            _receiveItemQuantity = -1;
-            _receiveItemGO.SetActive(false);
-
         }
+        if(_receiveMoney>0)
+        {
+            PlayerController.Instance.PlayerCoin += _receiveMoney;
+        }
+
+        _receiveItemImage.sprite = null;
+        _receiveItemQuantityText.text = "";
+        _receiveItemId = -1;
+        _receiveItemQuantity = -1;
+        _receiveItemGO.SetActive(false);
+
+        _receiveMoney = -1;
 
     }
 
     void OnCloseButtonClicked()
     {
+        OnUIClose();
         gameObject.SetActive(false); 
     }
 }
