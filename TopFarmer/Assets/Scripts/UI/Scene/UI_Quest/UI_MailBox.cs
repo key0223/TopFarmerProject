@@ -5,19 +5,19 @@ using static Define;
 public class UI_MailBox : MonoBehaviour
 {
     [SerializeField] Text _contentText;
-    [SerializeField] MailBox _mailBox;
     [SerializeField] Button _closeButton;
-    IMailItem _currentMail;
+    [SerializeField] GameObject _receiveItemGO;
+    [SerializeField] Image _receiveItemImage;
+    [SerializeField] Text _receiveItemQuantityText;
 
+    int _receiveItemId;
+    int _receiveItemQuantity;
     private void Start()
     {
         _closeButton.onClick.AddListener(() => OnCloseButtonClicked());
     }
     private void OnEnable()
     {
-        if (_mailBox == null)
-            return;
-
         string mailId = Managers.Mail.DequeueMail();
         if(mailId == null)
         {
@@ -27,6 +27,10 @@ public class UI_MailBox : MonoBehaviour
         {
             ShowMail(mailId);
         }
+    }
+    private void OnDisable()
+    {
+        OnUIClose();
     }
     void ShowMail(string mailId)
     {
@@ -51,13 +55,40 @@ public class UI_MailBox : MonoBehaviour
             {
                 int maxValue = strArray1.Length - 1;
                 int num =Random.Range(3, maxValue);
-                int itemId = num - num % 2;
+                int itemIdIndex = num - num % 2;
 
+                _receiveItemId = int.Parse(strArray1[itemIdIndex]);
+                _receiveItemQuantity = int.Parse(strArray1[itemIdIndex + 1]);
+
+                ItemData itemData = Managers.Data.GetItemData(_receiveItemId);
+
+                if(itemData != null)
+                {
+                    _receiveItemImage.sprite = Managers.Data.SpriteDict[itemData.itemSpritePath];
+                    _receiveItemQuantityText.text = _receiveItemQuantity.ToString();
+                    _receiveItemGO.SetActive(true);
+                }
                 // TODO : Add to inventory
             }
         }
 
     }
+
+    void OnUIClose()
+    { 
+        if(_receiveItemId >0)
+        {
+            InventoryManager.Instance.AddItem(InventoryType.INVEN_PLAYER, _receiveItemId);
+            _receiveItemImage.sprite = null;
+            _receiveItemQuantityText.text = "";
+            _receiveItemId = -1;
+            _receiveItemQuantity = -1;
+            _receiveItemGO.SetActive(false);
+
+        }
+
+    }
+
     void OnCloseButtonClicked()
     {
         gameObject.SetActive(false); 
