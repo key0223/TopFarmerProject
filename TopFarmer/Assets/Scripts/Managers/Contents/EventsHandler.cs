@@ -15,7 +15,7 @@ public class EventsHandler
     public event Action<MoveDir, ItemType> ToolAnimationEvent;
     public event Action RemoveSelectedItemFromInventoryEvent;
 
-
+    public event Action UpdateMailBoxEvent;
 
     #region Time Event
     public event Action MinutePassedRegisterd;
@@ -59,6 +59,10 @@ public class EventsHandler
         RemoveSelectedItemFromInventoryEvent?.Invoke();
     }
 
+    public void UpdateMailBox()
+    {
+        UpdateMailBoxEvent?.Invoke();
+    }
     #region Time Events
     public void CallMinutePassedEvent()
     {
