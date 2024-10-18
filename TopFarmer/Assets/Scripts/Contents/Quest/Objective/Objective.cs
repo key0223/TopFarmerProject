@@ -132,4 +132,31 @@ public class Objective
 
         return false;
     }
+
+    public ObjectiveSave SaveObjective()
+    {
+        return new ObjectiveSave
+        {
+            ownerQuestId = Owner.QuestId,
+            objectiveType = ObjectiveType,
+            objectiveDescription = ObjectiveDescription,
+            successToComplete = SuccessToComplete,
+            currentSuccess = CurrentSuccess,
+            objectiveState = ObjectiveState,
+        };
+    }
+
+    public static Objective LoadObjective(ObjectiveSave objectiveSave ,Quest quest)
+    {
+
+        Objective objective = Objective.MakeObjective(quest);
+
+        objective.ObjectiveType = objectiveSave.objectiveType;
+        objective.ObjectiveDescription = objectiveSave.objectiveDescription;
+        objective.SuccessToComplete = objectiveSave.successToComplete;
+        objective.CurrentSuccess = objectiveSave.currentSuccess;
+        objective.ObjectiveState = objectiveSave.objectiveState;
+
+        return objective;
+    }
 }

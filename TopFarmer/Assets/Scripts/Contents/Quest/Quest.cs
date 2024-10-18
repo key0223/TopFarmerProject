@@ -7,7 +7,7 @@ public class Quest
     public delegate void CompletedHandler(Quest quest);
     public event CompletedHandler onCompleted;
 
-    public int QuestId { get; private set; }
+    public int QuestId { get; protected set; }
     public QuestType QuestType { get; protected set; }
     public string QuestTitle { get; protected set; }
     public string QuestDescription { get; protected set; }
@@ -137,4 +137,75 @@ public class Quest
         PlayerController.Instance.PlayerCoin += MoneyReward;
     }
     
+    public virtual QuestSave SaveQuest()
+    {
+        QuestSave questSave = new QuestSave()
+        {
+            questId = QuestId,
+            questType = QuestType,
+            questTitle = QuestTitle,
+            questDescription = QuestDescription,
+            questObjective = QuestObjective,
+            nextQuest = NextQuest,
+            itemReward = ItemReward,
+            moneyReward = MoneyReward,
+            cancellable = Cancellable,
+            reactionText = ReactionText,
+            dailyQuest = DailyQuest,
+            questState = QuestState,
+            objective = Objective.SaveObjective(),
+
+        };
+        return questSave;
+    }
+
+    public static Quest LoadQuest(QuestSave questSave)
+    {
+        Quest quest = null;
+
+        if(questSave.dailyQuest)
+        {
+            quest = Quest.MakeQuest();
+        }
+        else
+        {
+            quest = MakeQuest(questSave.questId);
+
+        }
+
+        if (quest == null)
+            return null;
+
+        // QuestSave의 데이터를 덮어씌움
+        quest.QuestTitle = questSave.questTitle;
+        quest.QuestType = questSave.questType;
+        quest.QuestDescription = questSave.questDescription;
+        quest.QuestObjective = questSave.questObjective;
+        quest.NextQuest = questSave.nextQuest;
+        quest.ItemReward = questSave.itemReward;
+        quest.MoneyReward = questSave.moneyReward;
+        quest.Cancellable = questSave.cancellable;
+        quest.ReactionText = questSave.reactionText;
+        quest.DailyQuest = questSave.dailyQuest;
+        quest.QuestState = questSave.questState;
+
+        // Objective 로드
+        if (questSave.objective != null)
+        {
+            quest.Objective = Objective.LoadObjective(questSave.objective, quest);
+        }
+
+       if(quest is MonsterQuest monsterQuest)
+        {
+            MonsterQuestSave monsterQuestSave = JsonUtility.FromJson<MonsterQuestSave>(questSave.subClassData);
+            monsterQuest.TargetName = monsterQuestSave.targetName;
+            monsterQuest.TargetMonsterId = monsterQuestSave.targetMonsterId;
+            monsterQuest.TargetMonsterName = monsterQuestSave.targetMonsterName;
+            monsterQuest.TargetQuantity = monsterQuestSave.targetQuantity;
+        }
+
+        return quest;
+
+
+    }
 }

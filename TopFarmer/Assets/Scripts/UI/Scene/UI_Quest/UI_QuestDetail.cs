@@ -78,7 +78,7 @@ public class UI_QuestDetail : MonoBehaviour
 
     void SetReward(Quest quest)
     {
-        if(quest.MoneyReward!=0)
+        if(quest.MoneyReward>0)
         {
             _iconImage.sprite = Managers.Resource.Load<Sprite>("Textures/UI/Money");
 

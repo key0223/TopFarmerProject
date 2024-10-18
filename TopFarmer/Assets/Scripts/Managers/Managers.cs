@@ -80,6 +80,7 @@ public class Managers : MonoBehaviour
             instance._save.Init();
             instance._playerInfo.Init();
             instance._mail.Init();
+            instance._quest.Init();
             //instance._time.Init();
         }
     }
@@ -94,6 +95,7 @@ public class Managers : MonoBehaviour
         Scene.Clear();
         //UI.Clear();
         Pool.Clear();
+        Quest.Clear();
         Managers.Clear();
         //Inven.Clear();
     }
