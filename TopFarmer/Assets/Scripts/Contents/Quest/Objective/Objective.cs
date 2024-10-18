@@ -65,6 +65,7 @@ public class Objective
             if(_currentSuccess != prevSuccess)
             {
                 _objectiveState = _currentSuccess == SuccessToComplete ? ObjectiveState.Complete : ObjectiveState.Running;
+                Debug.Log($"Objective Progress Updated: {prevSuccess} -> {_currentSuccess}, State: {_objectiveState}");
                 OnSuccessChanged?.Invoke(this,_currentSuccess, prevSuccess); // ¹Ù²ï °ª º¸°í
 
             }

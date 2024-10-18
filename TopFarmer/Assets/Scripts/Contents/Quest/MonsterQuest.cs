@@ -130,7 +130,7 @@ public class MonsterQuest : Quest
 
     string GetReactionText(int monsterId)
     {
-        if (monsterId <= 0)
+        if (QuestId <= 0)
             return null;
 
         string reactionText = "";
@@ -172,51 +172,51 @@ public class MonsterQuest : Quest
         return questSave;
     }
 
-    public static MonsterQuest LoadQuest(QuestSave questSave)
-    {
-        MonsterQuest monsterQuest = new MonsterQuest();
+    //public static MonsterQuest LoadQuest(QuestSave questSave)
+    //{
+    //    MonsterQuest monsterQuest = new MonsterQuest();
 
-        if (questSave.dailyQuest)
-        {
-            monsterQuest = (MonsterQuest)MakeQuest();
-        }
-        else
-        {
-            monsterQuest = (MonsterQuest)MakeQuest(questSave.questId);
+    //    if (questSave.dailyQuest)
+    //    {
+    //        monsterQuest = (MonsterQuest)MakeQuest();
+    //    }
+    //    else
+    //    {
+    //        monsterQuest = (MonsterQuest)MakeQuest(questSave.questId);
 
-        }
+    //    }
 
-        if (monsterQuest == null)
-            return null;
+    //    if (monsterQuest == null)
+    //        return null;
 
-        // QuestSave의 데이터를 덮어씌움
-        monsterQuest.QuestTitle = questSave.questTitle;
-        monsterQuest.QuestDescription = questSave.questDescription;
-        monsterQuest.QuestObjective = questSave.questObjective;
-        monsterQuest.NextQuest = questSave.nextQuest;
-        monsterQuest.ItemReward = questSave.itemReward;
-        monsterQuest.MoneyReward = questSave.moneyReward;
-        monsterQuest.Cancellable = questSave.cancellable;
-        monsterQuest.ReactionText = questSave.reactionText;
-        monsterQuest.DailyQuest = questSave.dailyQuest;
-        monsterQuest.QuestState = questSave.questState;
+    //    // QuestSave의 데이터를 덮어씌움
+    //    monsterQuest.QuestTitle = questSave.questTitle;
+    //    monsterQuest.QuestDescription = questSave.questDescription;
+    //    monsterQuest.QuestObjective = questSave.questObjective;
+    //    monsterQuest.NextQuest = questSave.nextQuest;
+    //    monsterQuest.ItemReward = questSave.itemReward;
+    //    monsterQuest.MoneyReward = questSave.moneyReward;
+    //    monsterQuest.Cancellable = questSave.cancellable;
+    //    monsterQuest.ReactionText = questSave.reactionText;
+    //    monsterQuest.DailyQuest = questSave.dailyQuest;
+    //    monsterQuest.QuestState = questSave.questState;
 
-        // Objective 로드
-        if (questSave.objective != null)
-        {
-            monsterQuest.Objective = Objective.LoadObjective(questSave.objective, monsterQuest);
-        }
+    //    // Objective 로드
+    //    if (questSave.objective != null)
+    //    {
+    //        monsterQuest.Objective = Objective.LoadObjective(questSave.objective, monsterQuest);
+    //    }
 
-        MonsterQuestSave monsterQuestSave = JsonUtility.FromJson<MonsterQuestSave>(questSave.subClassData);
-        monsterQuest.TargetName = monsterQuestSave.targetName;
-        monsterQuest.TargetMonsterId = monsterQuestSave.targetMonsterId;
-        monsterQuest.TargetMonsterName = monsterQuestSave.targetMonsterName;
-        monsterQuest.TargetQuantity = monsterQuestSave.targetQuantity;
+    //    MonsterQuestSave monsterQuestSave = JsonUtility.FromJson<MonsterQuestSave>(questSave.subClassData);
+    //    monsterQuest.TargetName = monsterQuestSave.targetName;
+    //    monsterQuest.TargetMonsterId = monsterQuestSave.targetMonsterId;
+    //    monsterQuest.TargetMonsterName = monsterQuestSave.targetMonsterName;
+    //    monsterQuest.TargetQuantity = monsterQuestSave.targetQuantity;
 
-        return monsterQuest;
+    //    return monsterQuest;
 
 
-    }
+    //}
 
 
 }

@@ -202,6 +202,9 @@ public class Quest
             monsterQuest.TargetMonsterId = monsterQuestSave.targetMonsterId;
             monsterQuest.TargetMonsterName = monsterQuestSave.targetMonsterName;
             monsterQuest.TargetQuantity = monsterQuestSave.targetQuantity;
+
+            MonsterObjective monsterObjective = (MonsterObjective)monsterQuest.Objective;
+            monsterObjective.Start();
         }
 
         return quest;
