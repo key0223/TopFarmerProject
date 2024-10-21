@@ -75,12 +75,41 @@ public class Quest
         return quest;
     }
 
+    public static Quest MakeQuest(QuestType questType)
+    {
+        Quest quest = null;
+
+        switch (questType)
+        {
+            case QuestType.Basic:
+                quest = new Quest();
+                break;
+            case QuestType.ItemDelivery:
+                quest = new ItemDeliveryQuest();
+                break;
+            case QuestType.Monster:
+                quest = new MonsterQuest();
+                break;
+            case QuestType.Socialize:
+                quest = new SocializeQuest();
+                break;
+            case QuestType.Location:
+                //quest = new LocationQuest(questId);
+                break;
+            case QuestType.Harvest:
+                //quest = new LocationQuest(questId);
+                break;
+        }
+
+        quest.DailyQuest = true;
+        return quest;
+    }
     public static Quest MakeQuest()
     {
         int randomQuestType = Random.Range(2, 5);
         Quest quest = null;
 
-        int testMakeQuestIndex = 3;
+        int testMakeQuestIndex = 2;
 
         switch ((QuestType)testMakeQuestIndex)
         {
@@ -162,10 +191,9 @@ public class Quest
     public static Quest LoadQuest(QuestSave questSave)
     {
         Quest quest = null;
-
         if(questSave.dailyQuest)
         {
-            quest = Quest.MakeQuest();
+            quest = Quest.MakeQuest(questSave.questType);
         }
         else
         {
