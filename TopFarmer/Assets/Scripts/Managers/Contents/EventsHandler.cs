@@ -9,7 +9,7 @@ public class EventsHandler
 
     public event Action<InventoryType, List<InventoryItem>> UpdateInventoryEvent;
     public event Action UpdatePlayerCoinEvent;
-
+    public event Action UpdateHpBarEvent;
     public event Action InstantiateCropPrefabsEvent;
     public event Action DropSelectedItemEvent;
     public event Action<MoveDir, ItemType> ToolAnimationEvent;
@@ -39,6 +39,10 @@ public class EventsHandler
     public void UpdateCoin()
     {
         UpdatePlayerCoinEvent?.Invoke();
+    }
+    public void UpdateHpBar()
+    {
+        UpdateHpBarEvent?.Invoke();
     }
     public void InstantiateCrops()
     {

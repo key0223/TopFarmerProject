@@ -1,19 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HpBar : MonoBehaviour
 {
-    Transform _hpBar = null;
+    public Image _hpBarImage;
 
-    private void Awake()
+    private void Start()
     {
-        _hpBar = transform.Find("HpBar").GetComponent<Transform>();
-
+        UpdateHpbar();
     }
-    public void SetHpBar(float ratio)
+    private void OnEnable()
     {
-        ratio = Mathf.Clamp(ratio, 0, 1);
-        _hpBar.localScale = new Vector3(ratio, 1.0f, 1.0f);
+        Managers.Event.UpdateHpBarEvent -= UpdateHpbar;
+        Managers.Event.UpdateHpBarEvent += UpdateHpbar;
+    }
+    private void OnDisable()
+    {
+        Managers.Event.UpdateHpBarEvent -= UpdateHpbar;
+    }
+    void UpdateHpbar()
+    {
+        float hpRatio = PlayerController.Instance.CurrentHp / PlayerController.Instance.MaxHp;
+        _hpBarImage.fillAmount = hpRatio;
+
+        // 체력 비율에 따라 색상 변화
+        _hpBarImage.color = GetHpColor(hpRatio);
+    }
+    Color GetHpColor(float ratio)
+    {
+        if (ratio > 0.5f)
+        {
+            return Color.Lerp(Color.yellow, Color.green, (ratio - 0.5f) * 2);
+        }
+        else
+        {
+            return Color.Lerp(Color.red, Color.yellow, ratio * 2);
+        }
     }
 }

@@ -506,6 +506,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _exclamationMark: {fileID: 1484379916}
+  _testMailStringId: 
 --- !u!1 &314598700
 GameObject:
   m_ObjectHideFlags: 0

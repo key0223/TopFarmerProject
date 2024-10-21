@@ -13,6 +13,15 @@ public class PlayerController : CreatureController, ISaveable
     int _maxHp = 100;
     int _currentStamina;
     int _maxStamina = 230;
+
+    public float CurrentHp
+    {
+        get { return _currentHp; }
+    }
+    public float MaxHp
+    {
+        get { return _maxHp; }
+    }
     #endregion
 
     private static PlayerController _instance;
@@ -1006,6 +1015,8 @@ public class PlayerController : CreatureController, ISaveable
             _currentHp = 0;
             Debug.Log("Player Dead");
         }
+
+        Managers.Event.UpdateHpBar();
     }
     #region Save
     public void ISaveableRegister()
