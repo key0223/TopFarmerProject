@@ -10,6 +10,10 @@ public class MailBox : MonoBehaviour
     [Header("Test")]
     [SerializeField] string _testMailStringId;
 
+    private void Start()
+    {
+        UpdateExclamationMark();
+    }
     private void OnEnable()
     {
         Managers.Event.UpdateMailBoxEvent -= UpdateExclamationMark;

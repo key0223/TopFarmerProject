@@ -86,18 +86,14 @@ public class InventoryManager :SingletonMonobehaviour<InventoryManager>, ISaveab
 
         if (itemPos != -1)
         {
-            //Debug.Log($"Item found at position: {itemPos}, updating quantity.");
             AddItemAtPosition(inventory, itemId, itemPos);
         }
         else
         {
-            //Debug.Log("Item not found, adding new item.");
             AddItemAtPosition(inventory, itemId);
         }
 
         Managers.Event.UpdateInventory(invenType, inventory);
-
-        //AddItem(invenType, itemId);
     }
 
     public void AddItem(InventoryType invenType, int itemId)

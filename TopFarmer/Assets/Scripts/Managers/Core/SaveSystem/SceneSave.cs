@@ -20,4 +20,8 @@ public class SceneSave
 
     // Quest
     public List<QuestSave> _activeQuests;
+
+    // Mails
+    public Dictionary<string, string[]> _mails;
+
 }

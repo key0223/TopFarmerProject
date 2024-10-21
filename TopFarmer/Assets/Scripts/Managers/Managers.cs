@@ -96,6 +96,7 @@ public class Managers : MonoBehaviour
         //UI.Clear();
         Pool.Clear();
         Quest.Clear();
+        Mail.Clear();
         Managers.Clear();
         //Inven.Clear();
     }
