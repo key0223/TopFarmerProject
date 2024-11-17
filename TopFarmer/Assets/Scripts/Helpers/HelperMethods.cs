@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Define;
 
 public static class HelperMethods 
 {
@@ -144,6 +145,39 @@ public static class HelperMethods
             }
         }
         return 1;
+    }
+
+   public static string GetToolAnimationName(ItemType itemType)
+    {
+        string animationName = "";
+
+        switch (itemType)
+        {
+            case ItemType.ITEM_TOOL_WATERING:
+                animationName = "WATERING";
+                break;
+            case ItemType.ITEM_TOOL_HOEING:
+                animationName = "BREAKING";
+                break;
+            case ItemType.ITEM_TOOL_AXE:
+                animationName = "BREAKING";
+                break;
+            case ItemType.ITEM_TOOL_PICKAXE:
+                animationName = "BREAKING";
+                break;
+            case ItemType.ITEM_TOOL_SCYTHE:
+                animationName = "SCYTHE";
+                break;
+            case ItemType.ITEM_TOOL_COLLECTING:
+                animationName = "HARVEST";
+                break;
+            case ItemType.ITEM_WEAPON:
+                animationName = "SCYTHE";
+                break;
+
+        }
+
+        return animationName;
     }
     #endregion
 }

@@ -79,7 +79,8 @@ crashlytics-build.properties
 /TopFarmer/Assets/Resources/Tilemap
 /TopFarmer/Assets/Resources/Sounds
 /TopFarmer/Assets/Resources/Textures
-
+PaperDoll.cs
+PaperDoll_Inspector.cs
 # Except
 !/TopFarmerWebServer/TopFarmerWebServer/TopFarmerWebServer/*.csproj
 !/TopFarmerWebServer/TopFarmerWebServer/TopFarmerWebServer/*.user

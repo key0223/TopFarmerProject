@@ -284,7 +284,14 @@ public class Define
         ITEM_WEAPON,
         COUNT,
     }
-
+    public enum ItemTypeTest
+    {
+        None,
+        HeavyTool,
+        Scythe,
+        Melee,
+        WateringCan,
+    }
     public enum WeaponType
     {
         WEAPON_SWORD_STABBING,

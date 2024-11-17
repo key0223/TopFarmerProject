@@ -144,18 +144,6 @@ public class UI_InventorySlot : UI_Base, IBeginDragHandler, IDragHandler, IEndDr
 
         // Set item selected in inventory
         InventoryManager.Instance.SetSelectedInventoryItem(InventoryType.INVEN_PLAYER, _itemData.itemId);
-
-
-        if (_itemData.canBeCarried == true)
-        {
-            // Show player carrying item
-            PlayerController.Instance.ShowCarriedItem(_itemData.itemId);
-        }
-        else
-        {
-            // Show player carrying nothing
-            PlayerController.Instance.ClearCarriedItem();
-        }
     }
 
     public void ClearSelectedItem()

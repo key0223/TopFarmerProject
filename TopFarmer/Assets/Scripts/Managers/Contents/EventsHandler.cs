@@ -6,6 +6,16 @@ using static Define;
 
 public class EventsHandler 
 {
+    #region Movement
+    public delegate void MovementDelegate(CreatureState state, MoveDir dir, MoveDir lastDir, string itemType);
+
+    public event MovementDelegate MovementEvent;
+    public void CallMovementEvent(CreatureState state, MoveDir dir, MoveDir lastDir, string itemType)
+    {
+        if (MovementEvent != null)
+            MovementEvent(state, dir, lastDir, itemType);
+    }
+    #endregion
 
     public event Action<InventoryType, List<InventoryItem>> UpdateInventoryEvent;
     public event Action UpdatePlayerCoinEvent;

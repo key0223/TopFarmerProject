@@ -31,15 +31,15 @@ public class PlayerController : CreatureController, ISaveable
     public int PlayerCoin
     {
         get { return _playerCoin; }
-        set 
-        { 
+        set
+        {
             _playerCoin = value;
             Managers.Event.UpdateCoin();
         }
 
     }
 
-    public string FarmerName { get;set; }
+    public string FarmerName { get; set; }
     public string FarmName { get; set; }
 
     GridCursor _gridCursor;
@@ -52,29 +52,17 @@ public class PlayerController : CreatureController, ISaveable
     float _inputY;
     WaitForSeconds _afterUseToolAnimationPause;
     WaitForSeconds _useToolAnimationPause;
+    string _currentItemTypeString;
 
-    bool _isCarrying = false;
     [SerializeField]
     bool _playerInputDisabled = false;
     bool _playerToolUseDisabled = false;
 
     ToolEffectAnimationController _toolEffect;
     public bool PlayerInputDisabled { get { return _playerInputDisabled; } set { _playerInputDisabled = value; } }
-    public bool IsCarraying
-    {
-        get { return _isCarrying; }
-        set
-        {
-            if (_isCarrying == value)
-                return;
-
-            _isCarrying = value;
-            UpdateAnimation();
-        }
-    }
 
     string _iSaveableUniqueID;
-    public string ISaveableUniqueID { get { return _iSaveableUniqueID; }set { _iSaveableUniqueID = value; } }
+    public string ISaveableUniqueID { get { return _iSaveableUniqueID; } set { _iSaveableUniqueID = value; } }
     GameObjectSave _gameObjectSave;
     public GameObjectSave GameObjectSave { get { return _gameObjectSave; } set { _gameObjectSave = value; } }
 
@@ -85,6 +73,36 @@ public class PlayerController : CreatureController, ISaveable
     Rigidbody2D _rigid;
 
     Coroutine _coSkillCooltime;
+    public override CreatureState State
+    {
+        get { return _state; }
+        set
+        {
+            if (_state == value)
+                return;
+
+            _state = value;
+            UpdateAnimation();
+            Managers.Event.CallMovementEvent(_state, _dir, _lastDir, _currentItemTypeString);
+        }
+    }
+    public override MoveDir Dir
+    {
+        get { return _dir; }
+        set
+        {
+            if (_dir == value)
+                return;
+
+            _dir = value;
+            if (value != MoveDir.None)
+                _lastDir = value;
+
+            UpdateAnimation();
+            Managers.Event.CallMovementEvent(_state, _dir, _lastDir, _currentItemTypeString);
+        }
+    }
+
     Vector3Int GetPlayerClickDirection(Vector3Int cursorGridPos, Vector3Int playerGridPos)
     {
         Vector3Int dir = Vector3Int.zero;
@@ -116,7 +134,7 @@ public class PlayerController : CreatureController, ISaveable
     }
     public Vector3 GetPlayerCenterPosition()
     {
-        return new Vector3(transform.position.x, transform.position.y +Define.PlayerCenterYOffset, transform.position.z);
+        return new Vector3(transform.position.x, transform.position.y + Define.PlayerCenterYOffset, transform.position.z);
     }
     private Vector3Int GetPlayerDirection(Vector3 cursorPosition, Vector3 playerPosition)
     {
@@ -209,15 +227,15 @@ public class PlayerController : CreatureController, ISaveable
         _currentStamina = _maxStamina;
 
     }
-  
+
     private void PlayerTestInput()
     {
-        if(Input.GetKey(KeyCode.T))
+        if (Input.GetKey(KeyCode.T))
         {
             TimeManager.Instance.TestAdvancedMinute();
         }
 
-        if(Input.GetKey(KeyCode.G))
+        if (Input.GetKey(KeyCode.G))
         {
             TimeManager.Instance.TestAdvancedDay();
         }
@@ -227,140 +245,52 @@ public class PlayerController : CreatureController, ISaveable
             SceneControllerManager.Instance.FadeAndLoadScene(Define.Scene.Scene1_Farm.ToString(), transform.position);
         }
     }
-    
+
     protected override void UpdateAnimation()
     {
         // play body animation
         if (_state == CreatureState.Idle)
         {
-           
-            if (_isCarrying)
-            {
-                switch (_lastDir)
-                {
-                    case MoveDir.Up:
-                        _animator.Play("IDLE_CARRIED_BACK");
-                        _sprite.flipX = false;
-                        break;
-                    case MoveDir.Down:
-                        _animator.Play("IDLE_CARRIED_FRONT");
-                        _sprite.flipX = false;
-                        break;
-                    case MoveDir.Left:
-                        _animator.Play("IDLE_CARRIED_RIGHT");
-                        _sprite.flipX = true;
-                        break;
-                    case MoveDir.Right:
-                        _animator.Play("IDLE_CARRIED_RIGHT");
-                        _sprite.flipX = false;
-                        break;
-                }
-            }
-            else
-            {
-                switch (_lastDir)
-                {
-                    case MoveDir.Up:
-                        _animator.Play("IDLE_BACK");
-                        _sprite.flipX = false;
-                        break;
-                    case MoveDir.Down:
-                        _animator.Play("IDLE_FRONT");
-                        _sprite.flipX = false;
-                        break;
-                    case MoveDir.Left:
-                        _animator.Play("IDLE_RIGHT");
-                        _sprite.flipX = true;
-                        break;
-                    case MoveDir.Right:
-                        _animator.Play("IDLE_RIGHT");
-                        _sprite.flipX = false;
-                        break;
-                }
-            }
-           
-        }
-        else if (_state == CreatureState.Moving)
-        {
-            if(_isCarrying)
-            {
-                switch (_dir)
-                {
-                    case MoveDir.Up:
-                        _animator.Play("RUN_CARRIED_BACK");
-                        _sprite.flipX = false;
-                        break;
-                    case MoveDir.Down:
-                        _animator.Play("RUN_CARRIED_FRONT");
-                        _sprite.flipX = false;
-                        break;
-                    case MoveDir.Left:
-                        _animator.Play("RUN_CARRIED_RIGHT");
-                        _sprite.flipX = true;
-                        break;
-                    case MoveDir.Right:
-                        _animator.Play("RUN_CARRIED_RIGHT");
-                        _sprite.flipX = false;
-                        break;
-                    case MoveDir.None:
-
-                        break;
-                }
-            }
-            else
-            {
-                switch (_dir)
-                {
-                    case MoveDir.Up:
-                        _animator.Play("RUN_BACK");
-                        _sprite.flipX = false;
-                        break;
-                    case MoveDir.Down:
-                        _animator.Play("RUN_FRONT");
-                        _sprite.flipX = false;
-                        break;
-                    case MoveDir.Left:
-                        _animator.Play("RUN_RIGHT");
-                        _sprite.flipX = true;
-                        break;
-                    case MoveDir.Right:
-                        _animator.Play("RUN_RIGHT");
-                        _sprite.flipX = false;
-                        break;
-                    case MoveDir.None:
-
-                        break;
-                }
-            }
-           
-        }
-        else if (_state == CreatureState.ClickInput)
-        {
-            ItemData itemData = InventoryManager.Instance.GetSelectedInventoryItemData(InventoryType.INVEN_PLAYER);
-            if (itemData == null) return;
-            string animationName = GetToolAnimationName(itemData.itemType);
-            if (animationName == "") return;
-
             switch (_lastDir)
             {
                 case MoveDir.Up:
-                    _animator.Play($"{animationName}_BACK");
-                    Managers.Event.StartToolAnimation(_lastDir, itemData.itemType);
+                    _animator.Play("IDLE_BACK");
                     _sprite.flipX = false;
                     break;
                 case MoveDir.Down:
-                    _animator.Play($"{animationName}_FRONT");
-                    Managers.Event.StartToolAnimation(_lastDir, itemData.itemType);
+                    _animator.Play("IDLE_FRONT");
                     _sprite.flipX = false;
                     break;
                 case MoveDir.Left:
-                    _animator.Play($"{animationName}_RIGHT");
-                    Managers.Event.StartToolAnimation(_lastDir, itemData.itemType);
+                    _animator.Play("IDLE_RIGHT");
                     _sprite.flipX = true;
                     break;
                 case MoveDir.Right:
-                    _animator.Play($"{animationName}_RIGHT");
-                    Managers.Event.StartToolAnimation(_lastDir, itemData.itemType);
+                    _animator.Play("IDLE_RIGHT");
+                    _sprite.flipX = false;
+                    break;
+            }
+
+        }
+        else if (_state == CreatureState.Moving)
+        {
+
+            switch (_dir)
+            {
+                case MoveDir.Up:
+                    _animator.Play("RUN_BACK");
+                    _sprite.flipX = false;
+                    break;
+                case MoveDir.Down:
+                    _animator.Play("RUN_FRONT");
+                    _sprite.flipX = false;
+                    break;
+                case MoveDir.Left:
+                    _animator.Play("RUN_RIGHT");
+                    _sprite.flipX = true;
+                    break;
+                case MoveDir.Right:
+                    _animator.Play("RUN_RIGHT");
                     _sprite.flipX = false;
                     break;
                 case MoveDir.None:
@@ -368,6 +298,43 @@ public class PlayerController : CreatureController, ISaveable
                     break;
             }
         }
+        else if (_state == CreatureState.ClickInput)
+        {
+            ItemData itemData = InventoryManager.Instance.GetSelectedInventoryItemData(InventoryType.INVEN_PLAYER);
+            if (itemData == null) return;
+            string animationName = GetToolAnimationName(itemData.itemType);
+            if (animationName == "") return;
+            _currentItemTypeString = animationName;
+
+            switch (_lastDir)
+            {
+                case MoveDir.Up:
+                    _animator.Play($"{animationName}_BACK");
+                    //Managers.Event.StartToolAnimation(_lastDir, itemData.itemType);
+                    _sprite.flipX = false;
+                    break;
+                case MoveDir.Down:
+                    _animator.Play($"{animationName}_FRONT");
+                    //Managers.Event.StartToolAnimation(_lastDir, itemData.itemType);
+                    _sprite.flipX = false;
+                    break;
+                case MoveDir.Left:
+                    _animator.Play($"{animationName}_RIGHT");
+                    //Managers.Event.StartToolAnimation(_lastDir, itemData.itemType);
+                    _sprite.flipX = true;
+                    break;
+                case MoveDir.Right:
+                    _animator.Play($"{animationName}_RIGHT");
+                    //Managers.Event.StartToolAnimation(_lastDir, itemData.itemType);
+                    _sprite.flipX = false;
+                    break;
+                case MoveDir.None:
+
+                    break;
+            }
+            StartCoroutine(CoStateChanger());
+        }
+        Managers.Event.CallMovementEvent(_state, _dir, _lastDir, _currentItemTypeString);
     }
     protected override void UpdateController()
     {
@@ -391,11 +358,35 @@ public class PlayerController : CreatureController, ISaveable
             State = CreatureState.Moving;
         }
     }
+    protected override void UpdateMoving()
+    {
+        State = CreatureState.Moving;
+        Vector2 move = new Vector3(_inputX * _speed, _inputY * _speed) * Time.deltaTime;
+        _rigid.MovePosition(_rigid.position + move);
+
+        if (Dir == MoveDir.None)
+        {
+            State = CreatureState.Idle;
+        }
+    }
+    void GetDirInput()
+    {
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
+        Vector2 input = new Vector2(horizontal, vertical).normalized;
+
+        Dir = GetDirFromVec(input);
+        _inputX = input.x;
+        _inputY = input.y;
+        State = (_inputX != 0 || _inputY != 0) ? CreatureState.Moving : CreatureState.Idle;
+
+    }
 
     #region Click
     void ClickInput()
     {
-        if(!_playerInputDisabled)
+        // 플레이어의 입력이 활성화 된 경우
+        if (!_playerInputDisabled)
         {
             if (Input.GetMouseButton(0))
             {
@@ -413,12 +404,12 @@ public class PlayerController : CreatureController, ISaveable
                 RaycastHit2D hit = Physics2D.Raycast(mouseWorldPosition, Vector2.zero, 100.0f);
 
 
-                if (hit.collider !=null )
+                if (hit.collider != null)
                 {
                     Debug.DrawLine(transform.position, hit.transform.position, Color.blue, 0.1f);
                     float distance = (hit.transform.position - transform.position).magnitude;
 
-                    if(distance <= 2)
+                    if (distance <= 2)
                     {
                         if (_cursorController.CursorType == CursorType.Gift)
                         {
@@ -432,17 +423,17 @@ public class PlayerController : CreatureController, ISaveable
                                 Managers.Reporter.ConversationNPC(hit.transform.name);
                             }
                         }
-                        else if(_cursorController.CursorType == CursorType.Quest)
+                        else if (_cursorController.CursorType == CursorType.Quest)
                         {
-                            Managers.Reporter.ItemDelivered(hit.transform.name,InventoryManager.Instance.GetSelectedInventoryItemData(InventoryType.INVEN_PLAYER));
+                            Managers.Reporter.ItemDelivered(hit.transform.name, InventoryManager.Instance.GetSelectedInventoryItemData(InventoryType.INVEN_PLAYER));
                         }
                         Debug.Log("Target in position");
                     }
                 }
             }
-          
+
         }
-        
+
     }
 
     void ProcessPlayerClickInput(Vector3Int cursorGridPos, Vector3Int playerGridPos)
@@ -455,14 +446,14 @@ public class PlayerController : CreatureController, ISaveable
 
         ItemData itemData = InventoryManager.Instance.GetSelectedInventoryItemData(InventoryType.INVEN_PLAYER);
 
-        if(itemData != null)
+        if (itemData != null)
         {
-            switch(itemData.itemType)
+            switch (itemData.itemType)
             {
                 case ItemType.ITEM_SEED:
-                    if(Input.GetMouseButtonDown(0))
+                    if (Input.GetMouseButtonDown(0))
                     {
-                        ProcessClickInputSeed(gridPropertyDetails,itemData);
+                        ProcessClickInputSeed(gridPropertyDetails, itemData);
                     }
                     break;
                 case ItemType.ITEM_COMODITY:
@@ -475,7 +466,7 @@ public class PlayerController : CreatureController, ISaveable
                     ProcessPlayerClickInputTool(gridPropertyDetails, itemData, playerDirection);
                     break;
                 case ItemType.ITEM_TOOL_HOEING:
-                     ProcessPlayerClickInputTool(gridPropertyDetails,itemData,playerDirection);
+                    ProcessPlayerClickInputTool(gridPropertyDetails, itemData, playerDirection);
                     break;
                 case ItemType.ITEM_TOOL_AXE:
                     ProcessPlayerClickInputTool(gridPropertyDetails, itemData, playerDirection);
@@ -490,7 +481,7 @@ public class PlayerController : CreatureController, ISaveable
                     ProcessPlayerClickInputTool(gridPropertyDetails, itemData, playerDirection);
                     break;
                 case ItemType.ITEM_WEAPON:
-                    if(_coSkillCooltime == null)
+                    if (_coSkillCooltime == null)
                     {
                         ProcessPlayerClickInputTool(gridPropertyDetails, itemData, playerDirection);
                     }
@@ -506,14 +497,14 @@ public class PlayerController : CreatureController, ISaveable
         }
     }
 
-   
+
     void ProcessClickInputSeed(GridPropertyDetails gridPropertyDetails, ItemData itemData)
     {
-        if(itemData.canBeDropped && _gridCursor.CursorPositionIsValid && gridPropertyDetails.daysSinceDug >-1 && gridPropertyDetails.seedItemId == -1)
+        if (itemData.canBeDropped && _gridCursor.CursorPositionIsValid && gridPropertyDetails.daysSinceDug > -1 && gridPropertyDetails.seedItemId == -1)
         {
             PlantSeedAtCursor(gridPropertyDetails, itemData);
         }
-        else if(itemData.canBeDropped && _gridCursor.CursorPositionIsValid)
+        else if (itemData.canBeDropped && _gridCursor.CursorPositionIsValid)
         {
             Managers.Event.DropSelectedItem();
         }
@@ -522,7 +513,7 @@ public class PlayerController : CreatureController, ISaveable
     private void PlantSeedAtCursor(GridPropertyDetails gridPropertyDetails, ItemData itemData)
     {
         CropData cropData = null;
-        if(Managers.Data.CropDict.TryGetValue(itemData.itemId, out cropData))
+        if (Managers.Data.CropDict.TryGetValue(itemData.itemId, out cropData))
         {
             gridPropertyDetails.seedItemId = itemData.itemId;
             gridPropertyDetails.growthDays = 0;
@@ -545,26 +536,26 @@ public class PlayerController : CreatureController, ISaveable
 
     void ProcessPlayerClickInputTool(GridPropertyDetails gridPropertyDetails, ItemData itemData, Vector3Int playerDirection)
     {
-        switch(itemData.itemType)
+        switch (itemData.itemType)
         {
             case ItemType.ITEM_TOOL_WATERING:
-                if(_gridCursor.CursorPositionIsValid)
+                if (_gridCursor.CursorPositionIsValid)
                 {
-                    WaterGroundAtCursor(gridPropertyDetails,playerDirection);
+                    WaterGroundAtCursor(gridPropertyDetails, playerDirection);
                     Managers.Event.StartToolAnimation(_lastDir, itemData.itemType);
                 }
                 break;
             case ItemType.ITEM_TOOL_HOEING:
-                if(_gridCursor.CursorPositionIsValid)
+                if (_gridCursor.CursorPositionIsValid)
                 {
                     HoeGroundAtCursor(gridPropertyDetails, playerDirection);
                     Managers.Event.StartToolAnimation(_lastDir, itemData.itemType);
                 }
                 break;
             case ItemType.ITEM_TOOL_AXE:
-                if(_gridCursor.CursorPositionIsValid)
+                if (_gridCursor.CursorPositionIsValid)
                 {
-                    ChopInPlayerDirection(gridPropertyDetails,itemData, playerDirection); 
+                    ChopInPlayerDirection(gridPropertyDetails, itemData, playerDirection);
                     Managers.Event.StartToolAnimation(_lastDir, itemData.itemType);
                 }
                 break;
@@ -576,10 +567,10 @@ public class PlayerController : CreatureController, ISaveable
                 }
                 break;
             case ItemType.ITEM_TOOL_SCYTHE:
-                if(_cursor.CursorPositionIsValid)
+                if (_cursor.CursorPositionIsValid)
                 {
                     playerDirection = GetPlayerDirection(_cursor.GetWorldPositionForCursor(), GetPlayerCenterPosition());
-                    ReapInPlayerDirectionAtCursor(itemData,playerDirection);
+                    ReapInPlayerDirectionAtCursor(itemData, playerDirection);
                     Managers.Event.StartToolAnimation(_lastDir, itemData.itemType);
                 }
                 break;
@@ -587,7 +578,7 @@ public class PlayerController : CreatureController, ISaveable
             case ItemType.ITEM_TOOL_COLLECTING:
                 if (_gridCursor.CursorPositionIsValid)
                 {
-                   CollectInPlayerDirection(gridPropertyDetails,itemData,playerDirection);
+                    CollectInPlayerDirection(gridPropertyDetails, itemData, playerDirection);
                 }
                 break;
             case ItemType.ITEM_WEAPON:
@@ -638,9 +629,9 @@ public class PlayerController : CreatureController, ISaveable
         string[] damageArray = data.damage.Split(",");
         float minDamage = float.Parse(damageArray[0]);
         float maxDamage = float.Parse(damageArray[1]);
-        
+
         float randDamage = Random.Range(minDamage, maxDamage);
-        mc.OnDamaged(randDamage,data.knokback,transform.position);
+        mc.OnDamaged(randDamage, data.knokback, transform.position);
     }
     #region Tool Coroutines
     void WaterGroundAtCursor(GridPropertyDetails gridPropertyDetails, Vector3Int playerDirection)
@@ -906,50 +897,9 @@ public class PlayerController : CreatureController, ISaveable
 
     #endregion
     // Set direction
-    void GetDirInput()
-    {
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
-        Vector2 input = new Vector2(horizontal, vertical).normalized;
+   
 
-        Dir = GetDirFromVec(input);
-        _inputX = input.x;
-        _inputY = input.y;
-        State = (_inputX != 0 || _inputY != 0) ? CreatureState.Moving : CreatureState.Idle;
-
-    }
-
-    protected override void UpdateMoving()
-    {
-        State = CreatureState.Moving;
-        Vector2 move = new Vector3(_inputX * _speed, _inputY * _speed) * Time.deltaTime;
-        _rigid.MovePosition(_rigid.position + move);
-    }
-
-    public void ShowCarriedItem(int itemId)
-    {
-        ItemData itemData = null;
-        if(Managers.Data.ItemDict.TryGetValue(itemId, out itemData))
-        {
-            _equippedItemSpriteRenderer.sprite = Managers.Data.SpriteDict[itemData.itemSpritePath];
-            _equippedItemSpriteRenderer.color = new Color(1f, 1f, 1f, 1f);
-
-            IsCarraying = true;
-        }
-    }
-    public void ClearCarriedItem()
-    {
-        _equippedItemSpriteRenderer.sprite = null;
-        _equippedItemSpriteRenderer.color = new Color(1f, 1f, 1f, 0f);
-
-        _isCarrying = false;
-    }
-    private void ResetAnimationTriggers()
-    {
-        _isCarrying = false;
-        _dir = MoveDir.None;
-        _state = CreatureState.Idle;
-    }
+   
     private void ResetMovement()
     {
         _inputX = 0;
@@ -982,13 +932,13 @@ public class PlayerController : CreatureController, ISaveable
                 animationName = "WATERING";
                 break;
             case ItemType.ITEM_TOOL_HOEING:
-                animationName = "BREAKING";
+                animationName = "HEAVYTOOLS";
                 break;
             case ItemType.ITEM_TOOL_AXE:
-                animationName = "BREAKING";
+                animationName = "HEAVYTOOLS";
                 break;
             case ItemType.ITEM_TOOL_PICKAXE:
-                animationName = "BREAKING";
+                animationName = "HEAVYTOOLS";
                 break;
             case ItemType.ITEM_TOOL_SCYTHE:
                 animationName = "SCYTHE";
@@ -1018,15 +968,26 @@ public class PlayerController : CreatureController, ISaveable
 
         Managers.Event.UpdateHpBar();
     }
+
+    IEnumerator CoStateChanger()
+    {
+        float beforeRemainingTime = HelperMethods.GetRemainingAnimationTime(_animator);
+        yield return new WaitForSeconds(beforeRemainingTime);
+
+        float afterRemainingTime = HelperMethods.GetRemainingAnimationTime(_animator);
+        yield return new WaitForSeconds(afterRemainingTime);
+        State = CreatureState.Idle;
+
+    }
     #region Save
     public void ISaveableRegister()
     {
-       Managers.Save.iSaveableObjectList.Add(this);
+        Managers.Save.iSaveableObjectList.Add(this);
     }
 
     public void ISaveableDeregister()
     {
-       Managers.Save.iSaveableObjectList.Remove(this);
+        Managers.Save.iSaveableObjectList.Remove(this);
     }
 
     public GameObjectSave ISaveableSave()
@@ -1037,12 +998,12 @@ public class PlayerController : CreatureController, ISaveable
         sceneSave._vector3Dictionary = new Dictionary<string, Vector3Serializable>();
         sceneSave._stringDictionary = new Dictionary<string, string>();
 
-        Vector3Serializable vector3Serializable = new Vector3Serializable(transform.position.x,transform.position.y,transform.position.z);
+        Vector3Serializable vector3Serializable = new Vector3Serializable(transform.position.x, transform.position.y, transform.position.z);
         sceneSave._vector3Dictionary.Add("playerPosition", vector3Serializable);
-        sceneSave._stringDictionary.Add("currentScene",SceneManager.GetActiveScene().name);
+        sceneSave._stringDictionary.Add("currentScene", SceneManager.GetActiveScene().name);
         sceneSave._stringDictionary.Add("playerDirection", Dir.ToString());
 
-        GameObjectSave.sceneData.Add(PersistentScene,sceneSave);
+        GameObjectSave.sceneData.Add(PersistentScene, sceneSave);
 
         return GameObjectSave;
     }
@@ -1064,11 +1025,9 @@ public class PlayerController : CreatureController, ISaveable
                     }
                     else
                     {
-                        transform.position = new Vector3(0, 6f,0f);
+                        transform.position = new Vector3(0, 6f, 0f);
                     }
                 }
-
-
 
                 // Get String dictionary
                 if (sceneSave._stringDictionary != null)

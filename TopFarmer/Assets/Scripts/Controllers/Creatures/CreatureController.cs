@@ -33,7 +33,7 @@ public class CreatureController : ObjectController
     protected MoveDir _lastDir = MoveDir.Down;
     [SerializeField]
     protected MoveDir _dir = MoveDir.Down;
-    public MoveDir Dir
+    public virtual MoveDir Dir
     {
         get { return _dir; }
         set

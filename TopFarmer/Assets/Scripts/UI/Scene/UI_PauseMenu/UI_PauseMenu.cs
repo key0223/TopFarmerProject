@@ -87,6 +87,7 @@ public class UI_PauseMenu : MonoBehaviour
         ColorBlock colors = button.colors;
         colors.normalColor = colors.pressedColor;
         button.colors = colors;
+
     }
     void SetButtonColorToInactive(Button button)
     {

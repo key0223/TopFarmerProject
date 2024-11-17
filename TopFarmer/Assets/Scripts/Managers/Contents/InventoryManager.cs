@@ -378,10 +378,6 @@ public class InventoryManager :SingletonMonobehaviour<InventoryManager>, ISaveab
                     {
                         Managers.Event.UpdateInventory((InventoryType)i, _inventoryLists[i]);
                     }
-
-                    // Clear any items player was carrying
-                    PlayerController.Instance.ClearCarriedItem();
-
                     // Clear any highlights on inventory bar
                     _inventoryBar.ClearHighlightedOnInventorySlots();
                 }
